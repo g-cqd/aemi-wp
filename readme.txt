@@ -6,8 +6,8 @@ Contributors: Guizillanet
 Requires at least: 4.9
 Tested up to: 5.0
 Requires PHP: 7.2
-Version: 1.000
-Stable Tag: 1.000
+Version: 1.1.0
+Stable Tag: 1.1.0
 License: MIT
 License URI: https://opensource.org/licenses/mit-license.php
 Tags: white, responsive-layout, one-column, custom-background, custom-menu, featured-image-header, featured-images, full-width-template, sticky-post, threaded-comments, photoblogging
