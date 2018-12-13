@@ -83,7 +83,7 @@ if ( ! function_exists( 'aemi_setup' ) )
 			'header-text' => array(),
 		) );
 
-		/*add_editor_style( array( 'assets/editor-style.css' ) );*/
+		add_editor_style( array( 'assets/editor-style.css' ) );
 
 		$starter_content = apply_filters( 'aemi_starter_content', array(
 			'widgets' => array(

@@ -2,15 +2,15 @@
 
 
 
-Contributors: Guizillanet
-Requires at least: 4.9
-Tested up to: 5.0
-Requires PHP: 7.2
-Version: 1.1.0
-Stable Tag: 1.1.0
-License: MIT
-License URI: https://opensource.org/licenses/mit-license.php
-Tags: white, responsive-layout, one-column, custom-background, custom-menu, featured-image-header, featured-images, full-width-template, sticky-post, threaded-comments, photoblogging
+* Contributors: Guizillanet
+* Requires at least: 4.9
+* Tested up to: 5.0
+* Requires PHP: 7.2
+* Version: 1.1.1
+* Stable Tag: trunk
+* License: MIT
+* License URI: https://opensource.org/licenses/mit-license.php
+* Tags: white, responsive-layout, one-column, custom-background, custom-menu, featured-image-header, featured-images, full-width-template, sticky-post, threaded-comments, photoblogging
 
 
 
@@ -31,11 +31,13 @@ aemi is designed to be an aesthetic minimalist WordPress theme. It provides a hi
 ## Copyright
 
 aemi WordPress Theme, Copyright 2018 Guillaume COQUARD
+
 aemi is distributed under the terms of the MIT License.
 
-MIT License
 
-Copyright © 2018 Guillaume COQUARD
+### MIT License
+
+### Copyright © 2018 Guillaume COQUARD
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -57,18 +59,21 @@ SOFTWARE.
 
 
 
-aemi uses the following third-party resources:
+### aemi uses the following third-party resources:
 
 Inter UI Typeface
 License: SIL Open Font License 1.1
 Source: https://rsms.me/inter/
 
+
 Hack Typeface
 License: © 2018 Source Foundry Authors. MIT License
 Source: https://github.com/source-foundry/Hack
 
+
 Bundled screenshot.jpg
 License: Copyright © 2018 Guillaume COQUARD, All Rights Reserved.
+
 
 Bundled Images in screenshot.jpg
 License: Copyright © 2018 Guillaume COQUARD, All Rights Reserved.
