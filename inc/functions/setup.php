@@ -24,34 +24,13 @@ if ( ! function_exists( 'aemi_setup' ) )
 		add_image_size( 'aemi-logo', 92, 276, false );
 		register_nav_menus(
 			array(
-				'header-menu' => _x( 'Header Menu', 'header menu','aemi' ),
-				'social-menu' => _x( 'Social Menu', 'social menu','aemi' ),
-				'footer-menu' => _x( 'Footer Menu', 'footer menu','aemi' ),
+				'header-menu' => _x( 'Header Menu', 'header menu', 'aemi' ),
+				'social-menu' => _x( 'Social Menu', 'social menu', 'aemi' ),
+				'footer-menu' => _x( 'Footer Menu', 'footer menu', 'aemi' ),
 			)
 		);
 
 		add_theme_support( 'html5' );
-		add_theme_support( 'html5', array(
-			'search-form',
-			'comment-form',
-			'comment-list',
-			'gallery',
-			'caption',
-		) );
-
-		/*
-		add_theme_support( 'post-formats', array(
-			'aside',
-			'image',
-			'video',
-			'quote',
-			'link',
-			'gallery',
-			'status',
-			'audio',
-			'chat',
-		) );
-		*/
 
 		add_theme_support( 'custom-background', apply_filters( 'aemi_custom_background_args', array(
 			'default-color' => 'ffffff',
@@ -111,18 +90,6 @@ function aemi_tagcount_filter ( $variable )
 add_filter( 'wp_tag_cloud', 'aemi_tagcount_filter' );
 
 
-
-/*function aemi_search_form( $form )
-{
-	$form = '<form role="search" method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '" >
-	<label class="screen-reader-text" for="search">' . _x( 'Search Form', 'search screen-reader label', 'aemi' ) . '</label>
-	<input type="search" value="' . get_search_query() . '" name="s" id="s" placeholder="' . esc_attr_x( 'Search', 'search placeholder','aemi' ) . '" />'
-	. '<input type="submit" id="searchsubmit" value="' . esc_attr_x( 'Search', 'search input value', 'aemi' ) . '" />
-	</form>';
-	return $form;
-}
-add_filter( 'get_search_form', 'aemi_search_form' );*/
-
 if ( ! function_exists( 'aemi_pingback_header' ) )
 {
 	function aemi_pingback_header()
@@ -144,7 +111,7 @@ if ( ! function_exists( 'aemi_widgets_init' ) )
 		register_sidebar( array (
 			'name' => __( 'Header Widget Area', 'aemi' ),
 			'id' => 'header-widget-area',
-			'description' => 'Add widgets in this area to display them on header area.',
+			'description' => __( 'Add widgets in this area to display them on header area.', 'aemi' ),
 			'before_widget' => '<div id="w-%1$s" class="w-cont %2$s">',
 			'after_widget' => '</div>',
 			'before_title' => '<h6 class="widget-title">',
@@ -153,7 +120,7 @@ if ( ! function_exists( 'aemi_widgets_init' ) )
 		register_sidebar( array (
 			'name' => __( 'Sidebar Widget Area', 'aemi' ),
 			'id' => 'sidebar-widget-area',
-			'description' => 'Add widgets in this area to display them on sidebar area.',
+			'description' => __( 'Add widgets in this area to display them on sidebar area.', 'aemi' ),
 			'before_widget' => '<div id="w-%1$s" class="w-cont %2$s">',
 			'after_widget' => '</div>',
 			'before_title' => '<h6 class="widget-title">',
@@ -162,7 +129,7 @@ if ( ! function_exists( 'aemi_widgets_init' ) )
 		register_sidebar( array (
 			'name' => __( 'Footer Widget Area', 'aemi' ),
 			'id' => 'footer-widget-area',
-			'description' => 'Add widgets in this area to display them on footer area.',
+			'description' => __( 'Add widgets in this area to display them on footer area.', 'aemi' ),
 			'before_widget' => '<div id="w-%1$s" class="w-cont %2$s">',
 			'after_widget' => '</div>',
 			'before_title' => '<h6 class="widget-title">',
@@ -176,9 +143,9 @@ if ( ! function_exists( 'aemi_scripts' ) )
 {
 	function aemi_scripts()
 	{
-		wp_enqueue_style( 'style', get_stylesheet_uri() );
-		wp_enqueue_style( 'font', get_template_directory_uri() . '/assets/css/fonts.css' );
-		wp_enqueue_script ( 'aemi', get_template_directory_uri() . '/assets/js/aemi.js' );
+		wp_enqueue_style( 'aemi-style', get_stylesheet_uri() );
+		wp_enqueue_style( 'aemi-font', get_template_directory_uri() . '/assets/css/fonts.css' );
+		wp_enqueue_script ( 'aemi-script', get_template_directory_uri() . '/assets/js/aemi.js' );
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
 		}
@@ -189,6 +156,6 @@ if ( ! function_exists( 'aemi_ie_scripts') )
 {
 	function aemi_ie_scripts()
 	{
-		wp_enqueue_style( 'ie-style', get_template_directory_uri() . '/assets/css/ie_style.css' );
+		wp_enqueue_style( 'aemi-ie-style', get_template_directory_uri() . '/assets/css/ie_style.css' );
 	}
 }

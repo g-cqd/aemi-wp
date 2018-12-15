@@ -1,11 +1,11 @@
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>><?php
 
-	<?php do_action( 'aemi_page' ); ?>
+	do_action( 'aemi_page' );
 
-	<div class="post-footer">
+	?><div class="post-footer"><?php
 
-		<?php do_action( 'aemi_page_after' ); ?>
+		do_action( 'aemi_page_after' );
 
-	</div>
+	?></div>
 
 </article>

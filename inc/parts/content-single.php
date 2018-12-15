@@ -1,11 +1,11 @@
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope="" itemtype="http://schema.org/BlogPosting">
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope="" itemtype="http://schema.org/BlogPosting"><?php
 
-	<?php do_action( 'aemi_single_post' ); ?>
+	do_action( 'aemi_single_post' );
 
-	<div class="post-footer">
+	?><div class="post-footer"><?php
 
-		<?php do_action( 'aemi_single_post_after' ); ?>
+		do_action( 'aemi_single_post_after' );
 
-	</div>
+	?></div>
 
 </article>

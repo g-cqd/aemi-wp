@@ -14,23 +14,23 @@ if ( ! function_exists( 'aemi_featured_image' ) )
 {
 	function aemi_featured_image()
 	{
-		if ( has_post_thumbnail() ) { ?>
+		if ( has_post_thumbnail() ) {
 
-			<div class="post-attachment">
+			?><div class="post-attachment"><?php
 
-				<?php if ( ! is_singular() ) { ?>
-
-					<a href="<?php the_permalink(); ?>" rel="bookmark"><?php aemi_post_thumbnail( 'aemi-content' ); ?></a>
-
-				<?php } else {
+				if ( ! is_singular() ) {
+					
+					?><a href="<?php the_permalink(); ?>" rel="bookmark"><?php aemi_post_thumbnail( 'aemi-content' ); ?></a><?php
+				}
+				else
+				{
 
 					/* aemi_post_thumbnail( 'aemi-large' ); */
 
-				} ?>
+				} 
 
-			</div>
-
-		<?php }
+			?></div><?php
+		}
 	}
 }
 
@@ -38,41 +38,37 @@ if ( ! function_exists( 'aemi_featured_image' ) )
 if ( ! function_exists( 'aemi_posted_info' ) )
 {
 	function aemi_posted_info()
-	{ ?>
-		<div class="post-details">
+	{ 
+		?><div class="post-details">
 			<div class="post-date"><?php the_time( 'j F Y' ); ?></div>
 			<div class="post-mod"><?php the_modified_time( 'j F Y - G:i'); ?></div>
 			<div class="post-author"><?php the_author_posts_link(); ?></div>
-		</div>
-	<?php }
+		</div><?php
+	}
 }
 
 
 if ( ! function_exists( 'aemi_post_meta_header' ) )
 {
 	function aemi_post_meta_header()
-	{ ?>
-		<div class="post-meta">
-
-			<?php
+	{ 
+		?><div class="post-meta"><?php
 
 			aemi_posted_info();
 
 			if ( 'post' === get_post_type() && is_singular() ) {
 
-				if ( get_the_category_list() ) { ?>
+				if ( get_the_category_list() ) {
 
-					<div class="post-cats"><?php the_category( ' + ' ); ?></div>
+					?><div class="post-cats"><?php the_category( ' + ' ); ?></div><?php
 
-				<?php }
+				}
 
 			}
 
-			edit_post_link( esc_html_x( 'Edit', 'edit text', 'aemi' ), '<div class="post-edit">', '</div>' ); ?>
+			edit_post_link( esc_html_x( 'Edit', 'edit text', 'aemi' ), '<div class="post-edit">', '</div>' );
 
-		</div>
-
-		<?php
+			?></div><?php
 	}
 }
 
@@ -81,9 +77,9 @@ if ( ! function_exists( 'aemi_post_meta_footer' ) )
 	function aemi_post_meta_footer()
 	{ 
 		
-		global $post; ?>
+		global $post;
 
-		<div class="post-meta"><?php
+		?><div class="post-meta"><?php
 
 		if ( is_singular() )
 		{
@@ -100,8 +96,7 @@ if ( ! function_exists( 'aemi_post_meta_footer' ) )
 			}
 		}
 
-		?></div>
-
-		<?php
+		?></div><?php
+		
 	}
 }

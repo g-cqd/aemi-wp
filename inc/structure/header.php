@@ -3,9 +3,9 @@
 
 if ( ! function_exists( 'aemi_header_menu' ) ) {
 
-	function aemi_header_menu() { ?>
+	function aemi_header_menu() {
 
-		<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'aemi' ); ?></a>
+		?><a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'aemi' ); ?></a>
 
 		<nav id="header-menu" role="navigation">
 
@@ -17,9 +17,8 @@ if ( ! function_exists( 'aemi_header_menu' ) ) {
 				</div>
 			</div>
 
-			<div id="header-menu-wrap" class="wrap">
-
-				<?php
+			<div id="header-menu-wrap" class="wrap"><?php
+				
 				if ( has_nav_menu( 'header-menu' ) ) {
 					wp_nav_menu( array(
 						'theme_location' => 'header-menu',
@@ -34,75 +33,68 @@ if ( ! function_exists( 'aemi_header_menu' ) ) {
 							'container_class' => 'header-section'
 						) );
 				}
-				?>
 				
-				<div id="header-settings" class="header-section">
+				?><div id="header-settings" class="header-section">
 					<div>
 						<a id="darkmode" href="javascript:void(0);"><span class="off"><?php echo esc_html_x( 'Light','light mode text','aemi' ); ?></span><span class="on"><?php echo esc_html_x( 'Dark','dark mode text','aemi' ); ?></span></a>
 					</div>
-				</div>
+				</div><?php
 
-				<?php if ( is_active_sidebar( 'header-widget-area' ) ) { ?>
-
-					<div id="toggle-header-widget" class="toggle">
+				if ( is_active_sidebar( 'header-widget-area' ) )
+				{
+					?><div id="toggle-header-widget" class="toggle">
 						<div id="toggle-widget-element">
 							<span></span>
 							<span></span>
 						</div>
 					</div>
 
-					<div id="header-widgets"  class="header-section">
+					<div id="header-widgets"  class="header-section"><?php
 
-						<?php dynamic_sidebar( 'header-widget-area' ); ?>
+						dynamic_sidebar( 'header-widget-area' );
 
-					</div>
+					?></div><?php
 
-					<?php
-				} ?>
+				}
 
-			</div>
+		?></div>
 
-		</nav>
+		</nav><?php
 
-		<?php
 	}
 }
 
 
 
-if ( ! function_exists( 'aemi_header_branding' ) ) {
+if ( ! function_exists( 'aemi_header_branding' ) )
+{
+	function aemi_header_branding()
+	{
+		?><div id="branding"><?php
 
-	function aemi_header_branding() { ?>
+		if ( has_custom_logo() )
+		{
+			?><div id="logo"><?php
 
-		<div id="branding">
+				if ( function_exists( 'the_custom_logo' ) ) { the_custom_logo(); }
 
-			<?php if ( has_custom_logo() ) { ?>
+			?></div><?php
 
-				<div id="logo">
-
-					<?php if ( function_exists( 'the_custom_logo' ) ) { the_custom_logo(); } ?>
-
-				</div>
-
-				<?php
-
-			} else if ( function_exists( 'jetpack_has_site_logo' ) && jetpack_has_site_logo() ) {
-
+		} else if ( function_exists( 'jetpack_has_site_logo' ) && jetpack_has_site_logo() )
+		{
 				jetpack_the_site_logo();
-
-			} else { ?>
-
-				<h1 id="site-title" class="site-title">
+		}
+		else
+		{
+			?><h1 id="site-title" class="site-title">
 
 					<a href="<?php echo esc_url( home_url() ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" rel="home">
 						<?php echo esc_html( get_bloginfo( 'name' ) ); ?>
 					</a>
 
-				</h1>
+				</h1><?php
+			}
 
-			<?php } ?>
-
-		</div>
-
-	<?php }
+		?></div><?php
+	}
 }

@@ -2,33 +2,36 @@
 
 	<div class="post-header">
 
-		<h1 class="post-title">
+		<h1 class="post-title"><?php
 
-			<?php esc_html_e( 'Nothing Found', 'aemi' ); ?>
+			esc_html_e( 'Nothing Found', 'aemi' );
 
-		</h1>
+		?></h1>
 
 	</div>
 
-	<div class="post-content">
+	<div class="post-content"><?php
 
-		<?php if ( is_home() && current_user_can( 'publish_posts' ) ) { ?>
+		if ( is_home() && current_user_can( 'publish_posts' ) )
+		{
+			?><p><?php printf( wp_kses( __( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'aemi' ), array( 'a' => array( 'href' => array() ) ) ), esc_url( admin_url( 'post-new.php' ) ) ); ?></p><?php
 
-			<p><?php printf( wp_kses( __( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'aemi' ), array( 'a' => array( 'href' => array() ) ) ), esc_url( admin_url( 'post-new.php' ) ) ); ?></p>
+		}
+		else if ( is_search() )
+		{
 
-		<?php } else if ( is_search() ) { ?>
+			?><p><?php esc_html_e( 'Sorry, nothing matched your search. Please try again.', 'aemi' ); ?></p><?php
 
-			<p><?php esc_html_e( 'Sorry, nothing matched your search. Please try again.', 'aemi' ); ?></p>
+			get_search_form();
+		
+		} 
+		else
+		{ 
+		 	?><p><?php esc_html_e( 'Nothing found for the requested page. Try a search instead?', 'aemi' ); ?></p><?php
 
-			<?php get_search_form(); ?>
+			get_search_form(); 
 
-		<?php } else { ?>
-
-			<p><?php esc_html_e( 'Nothing found for the requested page. Try a search instead?', 'aemi' ); ?></p>
-
-			<?php get_search_form(); ?>
-
-		<?php } ?>
+		} ?>
 
 	</div>
 

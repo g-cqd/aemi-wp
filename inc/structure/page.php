@@ -3,61 +3,47 @@
 if ( ! function_exists( 'aemi_page_header' ) )
 {
 	function aemi_page_header()
-	{ ?>
+	{
 
-		<div class="post-header">
+		?><div class="post-header"><?php
 
-			<?php aemi_featured_image();
+			aemi_featured_image();
 
 			if ( ! is_front_page() ) {
 
-				?>
+				?><div class="post-info"><?php
 
-				<div class="post-info">
+					the_title( '<h1 class="post-title" itemprop="name">', '</h1>' );
 
-					<?php the_title( '<h1 class="post-title" itemprop="name">', '</h1>' );
+					aemi_post_meta_header();
 
-					aemi_post_meta_header(); ?>
-
-				</div>
-
-				<?php
+				?></div><?php
 
 			}
 
-			?>
+		?></div><?php
 
-		</div>
-
-		<?php
 	}
 }
 
 if ( ! function_exists( 'aemi_page_content' ) )
 {
 	function aemi_page_content()
-	{ ?>
-
-		<div class="post-content" itemprop="mainContentOfPage">
-
-			<?php
+	{
+		?><div class="post-content" itemprop="mainContentOfPage"><?php
 
 			the_content();
 
-			wp_link_pages(array(
-				'before'    => '<div id="post-pagination" class="pagination"><div class="button">',
+			wp_link_pages( array(
+				'before'    => '<div id="post-pagination" class="pagination"><div class="nav-previous">',
 				'after'     => '</div></div>',
 				'next_or_number' => 'next',
-				'nextpagelink' => esc_html_x( 'next page', 'next page post pagination', 'aemi' ) . ' &rarr;',
-				'previouspagelink' => '&larr; ' . esc_html_x( 'previous page', 'previous page post pagination', 'aemi' ),
-				'separator' => '</div><div class="button">'
+				'nextpagelink' => esc_html( sprintf( '%s &rarr;', __( 'next page', 'aemi' ) ) ),
+				'previouspagelink' => esc_html( sprintf( '&larr; %s', __( 'previous page', 'aemi' ) ) ),
+				'separator' => '</div><div class="nav-next">'
 			) );
 
-			?>
-
-		</div>
-
-		<?php
+		?></div><?php
 
 	}
 }
