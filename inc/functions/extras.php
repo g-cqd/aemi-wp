@@ -80,7 +80,7 @@ function aemi_optimize_scripts( $tag, $handle )
 	{
 		if ( $aemi_script === $handle )
 		{
-			return str_replace( 'src', 'defer src', $tag );
+			return str_replace( ' src', ' async="async" defer="defer" src', $tag );
 		}
 	}
 	return $tag;

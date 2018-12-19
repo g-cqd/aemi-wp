@@ -20,7 +20,18 @@ if ( ! function_exists( 'aemi_featured_image' ) )
 
 				if ( ! is_singular() ) {
 					
-					?><a href="<?php the_permalink(); ?>" rel="bookmark"><?php aemi_post_thumbnail( 'aemi-content' ); ?></a><?php
+					?><a href="<?php the_permalink(); ?>" rel="bookmark"><?php
+					
+					if ( is_sticky() )
+					{
+						aemi_post_thumbnail( 'aemi-mid' );
+					}
+					else
+					{
+						aemi_post_thumbnail( 'aemi-small' );
+					}
+
+					?></a><?php
 				}
 				else
 				{
