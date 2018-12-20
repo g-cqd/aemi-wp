@@ -73,14 +73,14 @@ add_filter( 'style_loader_src', 'aemi_remove_script_version', 15, 1 );
 
 function aemi_optimize_scripts( $tag, $handle )
 {
-	$scripts_to_optimize = array(
-		'aemi'
+	$scripts = array(
+		'aemi-script'
 	);
-	foreach( $scripts_to_optimize as $aemi_script )
+	foreach( $scripts as $script )
 	{
-		if ( $aemi_script === $handle )
+		if ( $script === $handle )
 		{
-			return str_replace( ' src', ' async="async" defer="defer" src', $tag );
+			return str_replace( ' src', ' defer src', $tag );
 		}
 	}
 	return $tag;

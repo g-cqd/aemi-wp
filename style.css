@@ -4,7 +4,7 @@ Theme URI: https://github.com/originecode/aemi/
 Author: Guillaume COQUARD
 Author URI: https://www.originecode.fr/
 Description: aemi is designed to be an aesthetic minimalist wordpress theme. It provides a highly legible, clean, clear and really minimalist theme.
-Version: 1.1.3
+Version: 1.1.4
 License: MIT
 License URI: https://opensource.org/licenses/mit-license.php
 Text Domain: aemi
@@ -34,15 +34,6 @@ Tags: one-column, custom-background, custom-menu, featured-image-header, feature
 	/* Initialization */
 
 	--default-font: -apple-system,BlinkMacSystemFont,"Inter UI","Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-
-	font-family: var(--default-font);
-	font-size: 12pt;
-	-webkit-font-smoothing: auto;
-	-moz-osx-font-smoothing: auto;
-	-webkit-text-size-adjust: 100%;
-	-ms-text-size-adjust: 100%;
-	font-smooth: auto;
-	text-rendering: geometricPrecision;
 }
 .no-overflow {
 	overflow: hidden;
@@ -107,16 +98,21 @@ Tags: one-column, custom-background, custom-menu, featured-image-header, feature
 --------------------------------------------------------------*/
 html {
 	box-sizing: border-box;
-	line-height: 1.2;
+	font-family: var(--default-font);
+	font-size: 12pt;
+	font-smooth: auto;
+	-webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+	line-height: 1.15;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+	text-rendering: optimizeLegibility;
 }
-* > * { /* FONDAMENTAL */
+* > * {
 	box-sizing: border-box;
 }
 body {
 	margin: 0;
-	line-height: 1.2;
-	background-color: var(--aemi-000);
-	color: var(--aemi-text);
 }
 body.darkui {
 	--aemi-999: rgb( 255, 255, 255 );

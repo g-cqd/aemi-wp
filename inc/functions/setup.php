@@ -145,7 +145,10 @@ if ( ! function_exists( 'aemi_scripts' ) )
 	{
 		wp_enqueue_style( 'aemi-style', get_stylesheet_uri() );
 		wp_enqueue_style( 'aemi-font', get_template_directory_uri() . '/assets/css/fonts.css' );
-		wp_enqueue_script ( 'aemi-script', get_template_directory_uri() . '/assets/js/aemi.js' );
+
+		wp_register_script( 'aemi-script', get_template_directory_uri() . '/assets/js/aemi.js', '', '', true );
+		wp_enqueue_script ( 'aemi-script' );
+
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
 		}
