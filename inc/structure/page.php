@@ -5,11 +5,11 @@ if ( ! function_exists( 'aemi_page_header' ) )
 	function aemi_page_header()
 	{
 
-		?><div class="post-header"><?php
+		if ( ! is_front_page() ) { ?>
+
+			<div class="post-header"><?php
 
 			aemi_featured_image();
-
-			if ( ! is_front_page() ) {
 
 				?><div class="post-info"><?php
 
@@ -17,11 +17,11 @@ if ( ! function_exists( 'aemi_page_header' ) )
 
 					aemi_post_meta_header();
 
-				?></div><?php
+				?></div>
 
-			}
+			</div><?php
 
-		?></div><?php
+		}
 
 	}
 }

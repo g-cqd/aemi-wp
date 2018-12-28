@@ -5,7 +5,7 @@ function aemi_jetpack_setup()
 	add_theme_support( 'infinite-scroll', array(
 		'type'      => 'click',
 		'container' => 'content',
-		'render'    => '_infinite_scroll_render',
+		'render'    => 'aemi_infinite_scroll_render',
 		'footer'    => 'page',
 		'footer_widgets' => 'footer-1'
 	) );
