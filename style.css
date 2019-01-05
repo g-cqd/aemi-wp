@@ -4,7 +4,7 @@ Theme URI: https://github.com/originecode/aemi/
 Author: Guillaume COQUARD
 Author URI: https://www.originecode.fr/
 Description: aemi is designed to be an aesthetic minimalist wordpress theme. It provides a highly legible, clean, clear and really minimalist theme.
-Version: 1.1.5
+Version: 1.1.6
 License: MIT
 License URI: https://opensource.org/licenses/mit-license.php
 Text Domain: aemi
@@ -752,8 +752,8 @@ body.darkui .header-section:hover { /* var to ie */
 	width: auto;
 }
 body.darkui #logo img {
-	-webkit-filter: drop-shadow(0px 0px 5px white);
-	filter: drop-shadow(0px 0px 5px white);
+	-webkit-filter: invert(100%);
+	filter: invert(100%);
 }
 /*--------------------------------------------------------------
 # Header Widgets
@@ -948,7 +948,8 @@ body.multi #content > *:not(#post-lead) {
 }
 body.multi #content > .sticky,
 body.multi #content > #post-lead,
-body.multi #content > #pagination {
+body.multi #content > .pagination,
+body.multi #content > #infinite-handle {
 	flex: 1 1 100% !important;
 }
 #post-lead {
@@ -1279,6 +1280,7 @@ body.darkui .w-cont:not(:last-child)::after { /* var to ie */
 	position: relative;
 }
 img,
+figure img,
 img[class*="wp-image"],
 .wp-caption img,
 .wp-caption img[class*="wp-image"],
@@ -1745,54 +1747,62 @@ body.darkui .widget_calendar td a::before {
 	background-color: grey !important;
 }
 /*--------------------------------------------------------------
-# Pagination + Navigation
+# Pagination + Navigation + Jetpack Scroll
 --------------------------------------------------------------*/
-#post-pagination {
+.pagination,
+#infinite-handle {
 	position: relative;
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: space-between;
 	margin: 4.875em 0 0;
-	padding: 1.25em;
+	padding: 1.25em 0;
 	width: 100%;
 	border-radius: 10pt;
-	background-color: var(--aemi-004);
 }
-body.darkui #post-pagination {
-	background-color: var(--aemi-009);
+.pagination {
+	flex: 1 1 100%;
+	flex-wrap: wrap;
 }
-#post-pagination .nav-previous,
-#post-pagination .nav-next {
-	margin: 0;
-	padding: 0;
+#post-pagination a:only-child {
+	flex: 1 1 100%;
 }
-#post-pagination .nav-next:only-child {
+.pagination > *:first-child:not(:only-child) {
+	margin-bottom: 2em;
+	padding-right: 2em;
+}
+.pagination a .nav-previous,
+.pagination a .nav-next,
+.pagination .nav-next a,
+.pagination .nav-previous a,
+#infinite-handle span {
+	display: flex;
+	flex-flow: column nowrap;
+	flex: 1 1 100%;
+}
+.pagination > .nav-next,
+.pagination .nav-next:only-child a {
 	margin-left: auto;
 	margin-right: 0;
 }
-.pagination .nav-next a, .pagination .nav-previous a {
-	display: flex;
-	flex-flow: column nowrap;
-	width: 100%;
-}
-.pagination .nav-next a {
+a .nav-next,
+.nav-next a {
 	justify-content: flex-end;
 	text-align: right;
 }
-.pagination .nav-previous a {
+a .nav-previous,
+.nav-previous a {
 	justify-content: flex-start;
-}
-.pagination .nav-previous:not(:only-child) {
-	margin-bottom: 3em;
+	text-align: left;
 }
 .nav-arrow {
 	font-weight: 400;
 }
-.global {
+#site-navigation {
 	padding-top: 4.875em;
 }
-.global.pagination .nav-next a,
-.global.pagination .nav-previous a {
+#site-navigation .nav-next a,
+#site-navigation .nav-previous a {
 	display: block;
 	width: auto;
 }
@@ -1801,28 +1811,23 @@ body.darkui #post-pagination {
 	font-size: 2.5em;
 	font-weight: 700;
 }
-.global .nav-title {
-	padding: .25em .5em;
-	width: auto;
-	border-radius: 10pt;
-	font-size: 1.75em;
-	background-color: var(--aemi-009);
-	color: var(--aemi-099);
-	transition-duration: .3s;
-	transition-property: color;
-	transition-timing-function: ease;
-}
-.global .nav-title:hover {
-	color: var(--aemi-text);
-	transition-duration: .3s;
-	transition-property: color;
-	transition-timing-function: ease;
-}
 .nav-previous .meta-nav {
 	padding-right: .3em;
 }
 .nav-next .meta-nav {
 	padding-left: .3em;
+}
+body.infinite-scroll #site-navigation {
+	display: none;
+}
+#infinite-handle span,
+#infinite-handle span button {
+	background: none !important;
+	color: inherit !important;
+	cursor: inherit !important;
+	font-size: inherit !important;
+	font-weight: bold;
+	padding: initial !important;
 }
 /*--------------------------------------------------------------
 # Footer
@@ -2013,8 +2018,6 @@ input[type="reset"]:focus,
 body.darkui input[type="reset"]:focus,
 input[type="reset"]:active,
 body.darkui input[type="reset"]:active,
-input[type="search"]:active,
-body.darkui input[type="search"]:active,
 button:focus,
 body.darkui button:focus,
 button:active,
@@ -2298,7 +2301,8 @@ progress {
 	}
 }
 @media (max-width: 667px) {
-	.wp-block-gallery, .gallery {
+	.wp-block-gallery,
+	.gallery {
 		grid-template-columns: 1fr !important;
 	}
 }

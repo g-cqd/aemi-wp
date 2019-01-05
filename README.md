@@ -2,11 +2,11 @@
 
 
 
-* Contributors: g.cqd
+* Contributors: @guizillanet
 * Requires at least: 4.9
 * Tested up to: 5.0
 * Requires PHP: 7.2
-* Version: 1.1.3
+* Version: 1.1.6
 * Stable Tag: trunk
 * License: MIT
 * License URI: https://opensource.org/licenses/mit-license.php
@@ -28,9 +28,9 @@ aemi is designed to be an aesthetic minimalist WordPress theme. It provides a hi
 
 
 
-## Copyright
+## Copyright & Licence
 
-aemi WordPress Theme, Copyright 2018 Guillaume COQUARD
+aemi WordPress Theme, Copyright 2018 Guillaume COQUARD.
 
 aemi is distributed under the terms of the MIT License.
 
@@ -61,29 +61,31 @@ SOFTWARE.
 
 ### aemi uses the following third-party resources:
 
-Inter UI Typeface
+Inter UI Typeface, Copyright (c) 2016-2018 The Inter UI Project Authors
 License: SIL Open Font License 1.1
 Source: https://rsms.me/inter/
 
 
-Hack Typeface
-License: © 2018 Source Foundry Authors. MIT License
+Hack Typeface, Copyright (c) 2018 Source Foundry Authors
+License: MIT
 Source: https://github.com/source-foundry/Hack
 
 
-Bundled screenshot.jpg
-License: Copyright © 2018 Guillaume COQUARD, All Rights Reserved.
+Bundled screenshot.jpg, Copyright (c) 2018 Guillaume COQUARD
+License: CC0 1.0 Universal (CC0 1.0)
+Source: https://github.com/originecode/aemi
 
 
-Bundled Images in screenshot.jpg
-License: Copyright © 2018 Guillaume COQUARD, All Rights Reserved.
-
+Bundled Images in screenshot.jpg, Copyright (c) 2018 Guillaume COQUARD
+License: CC0 1.0 Universal (CC0 1.0)
+Source: https://github.com/originecode/aemi
 
 
 ## Changelog
 
-### 1.000
 
-* Released: Never
-
-Initial release
+1.1.6 :
+	- Fixed: search input active style
+	- Fixed: Jetpack Infinite Loading
+	- Improved: post pagination, post navigation, site navigation
+	- Improved: Logo rendering in dark mode

@@ -7,7 +7,7 @@ if ( ! function_exists( 'aemi_post_header' ) )
 
 		?><div class="post-header"><?php
 
-		aemi_featured_image();
+			aemi_featured_image();
 
 			?><div class="post-info"><?php
 
@@ -36,14 +36,7 @@ if ( ! function_exists( 'aemi_post_content' ) )
 
 			the_content();
 
-			wp_link_pages( array(
-				'before'    => '<div id="post-pagination" class="pagination"><div class="nav-previous">',
-				'after'     => '</div></div>',
-				'next_or_number' => 'next',
-				'nextpagelink' => esc_html( sprintf( '%s &rarr;', __( 'next page', 'aemi' ) ) ),
-				'previouspagelink' => esc_html( sprintf( '&larr; %s', __( 'previous page', 'aemi' ) ) ),
-				'separator' => '</div><div class="nav-next">'
-			) );
+			aemi_page_navigation();
 
 		?></div><?php
 	}

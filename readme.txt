@@ -2,11 +2,11 @@
 
 
 
-* Contributors: g.cqd
+* Contributors: @guizillanet
 * Requires at least: 4.9
 * Tested up to: 5.0
 * Requires PHP: 7.2
-* Version: 1.1.5
+* Version: 1.1.6
 * Stable Tag: trunk
 * License: MIT
 * License URI: https://opensource.org/licenses/mit-license.php
@@ -79,3 +79,13 @@ Source: https://github.com/originecode/aemi
 Bundled Images in screenshot.jpg, Copyright (c) 2018 Guillaume COQUARD
 License: CC0 1.0 Universal (CC0 1.0)
 Source: https://github.com/originecode/aemi
+
+
+## Changelog
+
+
+1.1.6 :
+	- Fixed: search input active style
+	- Fixed: Jetpack Infinite Loading
+	- Improved: post pagination, post navigation, site navigation
+	- Improved: Logo rendering in dark mode

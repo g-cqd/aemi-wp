@@ -8,7 +8,7 @@ if ( ! function_exists( 'aemi_posts_pagination' ) )
 
 		if ( $wp_query->max_num_pages > 1 ) {
 
-			?><nav id="pagination" class="pagination global" role="navigation"><?php
+			?><nav id="site-navigation" class="pagination" role="navigation"><?php
 
 			if ( get_next_posts_link() ) {
 
@@ -43,7 +43,7 @@ if ( ! function_exists( 'aemi_post_navigation' ) )
 	function aemi_post_navigation()
 	{
 		
-		?><nav id="pagination" class="pagination" role="navigation"><?php
+		?><nav id="post-navigation" class="pagination" role="navigation"><?php
 
 			previous_post_link('<div class="nav-previous">%link</div>', '<span class="nav-arrow">&larr; ' . _x( 'older', 'older post link', 'aemi' ) . '</span><span class="nav-title">%title</span>');
 
@@ -53,4 +53,20 @@ if ( ! function_exists( 'aemi_post_navigation' ) )
 	
 	}
 
+}
+
+
+
+if ( ! function_exists( 'aemi_page_navigation' ) )
+{
+	function aemi_page_navigation()
+	{
+		wp_link_pages( array(
+				'before'    => '<div id="post-pagination" class="pagination" role="navigation">',
+				'after'     => '</div>',
+				'next_or_number' => 'next',
+				'nextpagelink' => '<span class="nav-next">' . esc_html( sprintf( '%s &rarr;', __( 'next page', 'aemi' ) ) ) . '</span>',
+				'previouspagelink' => '<span class="nav-previous">' . esc_html( sprintf( '&larr; %s', __( 'previous page', 'aemi' ) ) ) . '</span>'
+			) );
+	}
 }
