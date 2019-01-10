@@ -4,7 +4,7 @@ Theme URI: https://github.com/originecode/aemi/
 Author: Guillaume COQUARD
 Author URI: https://www.originecode.fr/
 Description: aemi is designed to be an aesthetic minimalist wordpress theme. It provides a highly legible, clean, clear and really minimalist theme.
-Version: 1.1.6
+Version: 1.1.7
 License: MIT
 License URI: https://opensource.org/licenses/mit-license.php
 Text Domain: aemi
@@ -29,11 +29,12 @@ Tags: one-column, custom-background, custom-menu, featured-image-header, feature
 	--aemi-0008: rgba( 255, 255, 255, .8 );
 	--aemi-0003: rgba( 255, 255, 255, .3 );
 	--aemi-text:  var(--aemi-999);
-	--a-link:	  var(--aemi-9994);
+	--a-link: var(--aemi-9994);
+
 
 	/* Initialization */
 
-	--default-font: -apple-system,BlinkMacSystemFont,"Inter UI","Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+	--default-font: "Inter UI",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
 }
 .no-overflow {
 	overflow: hidden;
@@ -74,7 +75,7 @@ Tags: one-column, custom-background, custom-menu, featured-image-header, feature
 	text-align: initial;
 }
 .screen-reader-text {
-	clip: rect(1px, 1px, 1px, 1px);
+	clip: rect(0px, 0px, 0px, 0px);
 	height: 1px;
 	overflow: hidden;
 	position: absolute !important;
@@ -145,7 +146,7 @@ body.darkui {
 	--aemi-0008: rgba( 0, 0, 0, .8 );
 	--aemi-0003: rgba( 0, 0, 0, .3 );
 	--aemi-text: var(--aemi-999);
-	--a-link:	  var(--aemi-9994);
+	--a-link: var(--aemi-9994);
 
 	background-color: var(--aemi-000);
 	color: var(--aemi-text);
@@ -185,9 +186,9 @@ hr.wp-block-separator:not(.is-style-wide):not(.is-style-dots) {
 	width: 3em;
 }
 hr.wp-block-separator.is-style-dots::before {
-	padding: 0 0 0 1em !important;
+	padding: 0 0 0 .5em !important;
 	font-size: 3em !important;
-	letter-spacing: 1em !important;
+	letter-spacing: .5em !important;
 	color: var(--aemi-009) !important;
 }
 body.darkui hr.is-style-dots::before { /* var to ie */
@@ -211,6 +212,18 @@ a:active { /* var to ie */
 a:hover { /* var to ie */
 	color: var(--a-link);
 	transition-property: color;
+	transition-duration: .3s;
+	transition-timing-function: ease;
+}
+a img {
+	opacity: 1;
+	transition-property: opacity;
+	transition-duration: .3s;
+	transition-timing-function: ease;
+}
+a img:hover {
+	opacity: .7;
+	transition-property: opacity;
 	transition-duration: .3s;
 	transition-timing-function: ease;
 }
@@ -294,6 +307,7 @@ sup {
 }
 figure,
 figcaption {
+	position: relative;
 	margin: 0 1.25em;
 	padding: 0;
 	height: auto;
@@ -725,9 +739,6 @@ body.darkui .header-section:hover { /* var to ie */
 	transition-duration: .3s;
 	transition-timing-function: ease;
 }
-#header-social:empty {
-	display: none;
-}
 /*--------------------------------------------------------------
 # Branding
 --------------------------------------------------------------*/
@@ -772,9 +783,7 @@ body.darkui #logo img {
 	justify-content: center;
 	margin: auto;
 	width: 0;
-	transition-property: transform;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition: .3s transform ease;
 }
 #toggle-widget-element::before { /* var to ie */
 	position: absolute;
@@ -803,9 +812,7 @@ body.darkui #toggle-widget-element::before { /* var to ie */
 }
 #toggle-header-widget.toggled #toggle-widget-element {
 	transform: rotate( 45deg );
-	transition-property: transform;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition: .3s transform ease;
 }
 #toggle-header-widget.toggled #toggle-widget-element::before {
 	transform: rotate( -45deg );
@@ -820,22 +827,16 @@ body.darkui #toggle-widget-element::before { /* var to ie */
 	width: 1.5em;
 	border-radius: 1pt;
 	background-color: var(--aemi-094);
-	transition-property: background-color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition: .3s background-color ease;
 }
 #toggle-header-widget.toggled span { /* var to ie */
 	background-color: var(--aemi-text);
-	transition-property: background-color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition: .3s background-color ease;
 }
 #toggle-header-widget:hover span,
 #toggle-header-widget.toggled:hover span { /* var to ie */
 	background-color: var(--aemi-099);
-	transition-property: background-color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition: .3s background-color ease;
 }
 #toggle-header-widget span:not(:first-child) {
 	transform: rotate(90deg);
@@ -879,16 +880,12 @@ body.darkui #darkmode::before {
 body:not(.darkui) #darkmode::before { /* var to ie */
 	left: 0;
 	background-color: var(--aemi-text);
-	transition-property: left;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition: .3s left ease;
 }
 body.darkui #darkmode::before { /* var to ie */
 	left: 50%;
 	background-color: var(--aemi-text);
-	transition-property: left;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition: .3s left ease;
 }
 #darkmode .on, #darkmode .off {
 	display: inline-block;
@@ -948,7 +945,6 @@ body.multi #content > *:not(#post-lead) {
 }
 body.multi #content > .sticky,
 body.multi #content > #post-lead,
-body.multi #content > .pagination,
 body.multi #content > #infinite-handle {
 	flex: 1 1 100% !important;
 }
@@ -969,38 +965,19 @@ body.multi #content > #infinite-handle {
 	width: 100%;
 	border-radius: 10pt;
 	box-shadow: 0 10px 30px -3px rgba(0,0,0,.09);
-	transition-property: box-shadow;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition: .3s box-shadow ease;
 }
 body.multi .post-header:hover {
 	box-shadow: 0 5px 20px 2px rgba(0,0,0,.125);
-	transition-property: box-shadow;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition: .3s box-shadow ease;
 }
 body.darkui .post-header { /* var to ie */
 	background-color: var(--aemi-009);
-	transition-property: background-color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition: .3s background-color ease;
 }
 body.darkui.multi .post-header:hover { /* var to ie */
 	background-color: var(--aemi-004);
-	transition-property: background-color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
-}
-.post-header img {
-	transition-property: opacity;
-	transition-duration: .3s;
-	transition-timing-function: ease;
-}
-body.multi .post-header:hover img {
-	opacity: .7;
-	transition-property: opacity;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition: .3s background-color ease;
 }
 body.singular .post-header {
 	margin: 0 auto 4.875em;
@@ -1090,16 +1067,12 @@ body.logged-in.edit-able .post-cats {
 body.darkui .post-author a,
 body.darkui .post-edit a { /* var to ie */
 	background-color: var(--aemi-044);
-	transition-property: background-color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition: .3s background-color ease;
 }
 body.darkui.multi .post-header:hover .post-author a,
 body.darkui.multi .post-header:hover .post-edit a { /* var to ie */
 	background-color: var(--aemi-009);
-	transition-property: background-color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition: .3s background-color ease;
 }
 .post-edit {
 	position: absolute;
@@ -1194,7 +1167,8 @@ body.darkui.multi .post-header:hover .post-edit a { /* var to ie */
 .archive-type,
 .archive-details,
 .post-summary,
-.post-content {
+.post-content,
+.comment-content {
 	margin: 0 auto;
 	width: 100%;
 	font-size: 1.125em;
@@ -1291,6 +1265,7 @@ img[class*="wp-image"],
 .wp-block-image.is-cropped img,
 .wp-block-image.is-cropped img[class*="wp-image"] {
 	position: relative;
+	border: 0;
 	font-size: initial;
 }
 .wp-block-image.alignleft,
@@ -1334,7 +1309,7 @@ img[class*="wp-image"],
 # Galleries
 --------------------------------------------------------------*/
 .wp-block-gallery,
-.gallery:not(article) {
+div.gallery {
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
@@ -1343,52 +1318,52 @@ img[class*="wp-image"],
 	width: auto;
 }
 .wp-block-gallery > *,
-.gallery:not(article) > * {
+div.gallery > * {
 	margin-right: 1.25em;
 }
 .wp-block-gallery.columns-1 > *,
-.gallery:not(article).gallery-columns-1 > * {
+div.gallery.gallery-columns-1 > * {
 	flex: 1 0 100%;
 }
 .wp-block-gallery.columns-2 > *,
-.gallery:not(article).gallery-columns-2 > * {
+div.gallery.gallery-columns-2 > * {
 	flex: 1 0 calc( 50% - ( 1.25em / 2 ) );
 }
 .wp-block-gallery.columns-3 > *,
-.gallery:not(article).gallery-columns-3 > * {
+div.gallery.gallery-columns-3 > * {
 	flex: 1 0 calc( ( 100% / 3 ) - ( 1.25em / 3 ) );
 }
 .wp-block-gallery.columns-4 > *,
-.gallery:not(article).gallery-columns-4 > * {
+div.gallery.gallery-columns-4 > * {
 	flex: 1 0 calc( 25% - ( 1.25em / 4 ) );
 }
 .wp-block-gallery.columns-5 > *,
-.gallery:not(article).gallery-columns-5 > * {
+div.gallery.gallery-columns-5 > * {
 	flex: 1 0 calc( 20% - ( 1em / 5 ) );
 }
 .wp-block-gallery.columns-6 > *,
-.gallery:not(article).gallery-columns-6 > * {
+div.gallery.gallery-columns-6 > * {
 	margin-right: 1em;
 	flex: 1 0 calc( ( 100% / 6 ) - ( 1em / 6 ) );
 }
 .wp-block-gallery.columns-7 > *,
-.gallery:not(article).gallery-columns-7 > * {
+div.gallery.gallery-columns-7 > * {
 	margin-right: 1em;
 	flex: 1 0 calc( ( 100% / 7 ) - ( 1em / 7 ) );
 }
 .wp-block-gallery.columns-8 > *,
-.gallery:not(article).gallery-columns-8 > * {
+div.gallery.gallery-columns-8 > * {
 	margin-right: .5em;
 	flex: 1 0 calc( ( 100% / 8 ) - ( .5em / 8 ) );
 }
 .wp-block-gallery.columns-9 > *,
-.gallery:not(article).gallery-columns-9 > * {
+div.gallery.gallery-columns-9 > * {
 	margin-right: .25em;
 	flex: 1 0 calc( ( 100% / 9 ) - ( .25em / 9 ) );
 }
-@supports (display: grid) {
+@supports ( display: grid ) {
 	.wp-block-gallery,
-	.gallery:not(article) {
+	div.gallery {
 		display: grid;
 		grid-auto-flow: dense;
 		grid-gap: 1.25em;
@@ -1398,61 +1373,68 @@ img[class*="wp-image"],
 		width: auto;
 	}
 	.wp-block-gallery > *,
-	.gallery:not(article) > * {
+	div.gallery > * {
 		margin-right: auto !important;
 	}
 	.wp-block-gallery.columns-1,
-	.gallery:not(article).gallery-columns-1 {
+	div.gallery.gallery-columns-1 {
 		grid-template-columns: 1fr;
 	}
 	.wp-block-gallery.columns-2,
-	.gallery:not(article).gallery-columns-2 {
+	div.gallery.gallery-columns-2 {
 		grid-template-columns: repeat(2, 1fr);
 	}
 	.wp-block-gallery.columns-3,
-	.gallery:not(article).gallery-columns-3 {
+	div.gallery.gallery-columns-3 {
 		grid-template-columns: repeat(3, 1fr);
 	}
 	.wp-block-gallery.columns-4,
-	.gallery:not(article).gallery-columns-4 {
+	div.gallery.gallery-columns-4 {
 		grid-template-columns: repeat(4, 1fr);
 	}
 	.wp-block-gallery.columns-5,
-	.gallery:not(article).gallery-columns-5 {
+	div.gallery.gallery-columns-5 {
 		grid-template-columns: repeat(5, 1fr);
 		grid-gap: 15px;
 	}
 	.wp-block-gallery.columns-6,
-	.gallery:not(article).gallery-columns-6 {
+	div.gallery.gallery-columns-6 {
 		grid-template-columns: repeat(6, 1fr);
 		grid-gap: 15px;
 	}
 	.wp-block-gallery.columns-7,
-	.gallery:not(article).gallery-columns-7 {
+	div.gallery.gallery-columns-7 {
 		grid-template-columns: repeat(7, 1fr);
 		grid-gap: 10px;
 	}
 	.wp-block-gallery.columns-8,
-	.gallery:not(article).gallery-columns-8 {
+	div.gallery.gallery-columns-8 {
 		grid-template-columns: repeat(8, 1fr);
 		grid-gap: 10px;
 	}
 	.wp-block-gallery.columns-9,
-	.gallery:not(article).gallery-columns-9 {
+	div.galler).gallery-columns-9 {
 		grid-template-columns: repeat(9, 1fr);
 		grid-gap: 5px;
 	}
 }
+div.gallery br {
+	display: none;
+}
+/* !important used to override WordPress style */
 .wp-block-gallery .blocks-gallery-item,
 .gallery-item,
 .gallery-icon {
 	position: relative;
-	margin: 0 auto;
-	padding: 0;
-}
-.gallery-item {
+	margin: 0 !important;
+	padding: 0 !important;
+	width: 100% !important;
+	float: unset !important;
 	list-style: none;
 	text-align: center;
+}
+div.gallery img {
+	border: 0 !important;
 }
 .wp-block-gallery.columns-1 .blocks-gallery-item,
 .wp-block-gallery.columns-2 .blocks-gallery-item, 
@@ -1471,25 +1453,29 @@ img[class*="wp-image"],
 	height: auto;
 	max-width: 100%;
 }
+.wp-block-gallery .blocks-gallery-image figcaption,
+.wp-block-gallery .blocks-gallery-item figcaption,
 .gallery-caption {
 	position: absolute;
 	bottom: 0;
 	left: 0;
+	right: 0;
+	margin: 0;
 	padding: 1em .5em;
-	width: 100%;
-	font-size: 0;
+	font-size: 13px;
 	font-weight: bold;
 	text-align: center;
 	vertical-align: middle;
-	color: var(--aemi-000);
+	color: white !important;
 	opacity: 0;
-	transition: .3s all ease-in-out;
+	transition: .3s opacity ease;
 	z-index: 1;
 }
+.wp-block-gallery .blocks-gallery-image:hover figcaption,
+.wp-block-gallery .blocks-gallery-item:hover figcaption,
 .gallery-item:hover .gallery-caption {
-	font-size: .8em;
 	opacity: 1;
-	transition: .3s all ease-in-out;
+	transition: .3s opacity ease;
 }
 /*--------------------------------------------------------------
 # Block - Categories
@@ -1554,7 +1540,7 @@ img[class*="wp-image"],
 	content: "";
 	left: 0;
 	bottom: 0;
-	height: 2pt;
+	height: 1.5pt;
 	width: 100%;
 	border-radius: 1pt;
 	background-color: var(--aemi-004);
@@ -1617,6 +1603,9 @@ article.comment-body {
 .comment-author > * {
 	margin-right: .5em;
 }
+.vcard img {
+	border-radius: 2pt;
+}
 .comment-metadata {
 	flex: 0 0 33%;
 	justify-content: flex-end;
@@ -1634,7 +1623,7 @@ article.comment-body {
 	padding: 1em 0;
 }
 .comment .children {
-	margin: 2em 0 0 2em;
+	margin: 1em 0 0 1.25em;
 }
 .comment-awaiting-moderation {
 	position: absolute;
@@ -1655,6 +1644,9 @@ article.comment-body {
 --------------------------------------------------------------*/
 .search-form {
 	padding: 0;
+}
+.search-form .search-field {
+	margin-bottom: .5em;
 }
 /*--------------------------------------------------------------
 # Widgets
@@ -1761,7 +1753,7 @@ body.darkui .widget_calendar td a::before {
 	border-radius: 10pt;
 }
 .pagination {
-	flex: 1 1 100%;
+	flex: 1 1 100% !important;
 	flex-wrap: wrap;
 }
 #post-pagination a:only-child {
@@ -2422,7 +2414,7 @@ body.darkui .aemisw { /* var to ie */
 	height: 3.19444em;
 	width: 100%;
 	max-width: calc(100vw - 11.9444em);
-	border-radius: 3.14159pt;
+	border-radius: 3pt;
 	font-size: .9em;
 	text-align: center;
 	background-color: var(--aemi-0003);
@@ -2440,7 +2432,7 @@ body.darkui .aemisw { /* var to ie */
 	padding: 0;
 	height: 1.27778em;
 	width: 1.27778em;
-	border-radius: 3.14159pt;
+	border-radius: 3pt;
 	font-size: 2em;
 	font-weight: 700;
 	line-height: 1.27778em;
@@ -2448,26 +2440,19 @@ body.darkui .aemisw { /* var to ie */
 	text-align: center;
 	background-color: var(--aemi-0003);
 	color: var(--aemi-9996);
-	transition-duration: .3s;
-	transition-property: all;
-	transition-timing-function: ease;
+	transition: .3s color ease;
 	cursor: pointer;
 }
 .aemisw-close:hover,
 .aemisw-next:hover,
 .aemisw-prev:hover { /* var to ie */
-	color: var(--aemi-999);
-	transition-duration: .3s;
-	transition-property: all;
-	transition-timing-function: ease;
+	color: var(--aemi-text);
+	transition: .3s color ease;
 }
 .aemisw-active .aemisw-close,
 .aemisw-active .aemisw-next,
 .aemisw-active .aemisw-prev {
 	display: block;
-	transition-duration: .3s;
-	transition-property: all;
-	transition-timing-function: ease;
 }
 .aemisw-close {
 	top: .5555556em;

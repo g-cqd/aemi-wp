@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.0
 * Requires PHP: 7.2
-* Version: 1.1.6
+* Version: 1.1.7
 * Stable Tag: trunk
 * License: MIT
 * License URI: https://opensource.org/licenses/mit-license.php
@@ -89,3 +89,7 @@ Source: https://github.com/originecode/aemi
 	- Fixed: Jetpack Infinite Loading
 	- Improved: post pagination, post navigation, site navigation
 	- Improved: Logo rendering in dark mode
+
+1.1.7 :
+	- Officially using Inter UI as main font
+	- Fixed some CSS rules
