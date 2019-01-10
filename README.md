@@ -62,23 +62,23 @@ SOFTWARE.
 ### aemi uses the following third-party resources:
 
 Inter UI Typeface, Copyright (c) 2016-2018 The Inter UI Project Authors
-License: SIL Open Font License 1.1
-Source: https://rsms.me/inter/
+- License: SIL Open Font License 1.1
+- Source: https://rsms.me/inter/
 
 
 Hack Typeface, Copyright (c) 2018 Source Foundry Authors
-License: MIT
-Source: https://github.com/source-foundry/Hack
+- License: MIT
+- Source: https://github.com/source-foundry/Hack
 
 
 Bundled screenshot.jpg, Copyright (c) 2018 Guillaume COQUARD
-License: CC0 1.0 Universal (CC0 1.0)
-Source: https://github.com/originecode/aemi
+- License: CC0 1.0 Universal (CC0 1.0)
+- Source: https://github.com/originecode/aemi
 
 
 Bundled Images in screenshot.jpg, Copyright (c) 2018 Guillaume COQUARD
-License: CC0 1.0 Universal (CC0 1.0)
-Source: https://github.com/originecode/aemi
+- License: CC0 1.0 Universal (CC0 1.0)
+- Source: https://github.com/originecode/aemi
 
 
 ## Changelog
