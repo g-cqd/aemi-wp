@@ -14,33 +14,39 @@ if ( ! function_exists( 'aemi_featured_image' ) )
 {
 	function aemi_featured_image()
 	{
-		if ( has_post_thumbnail() ) {
+		if ( has_post_thumbnail() )
+		{
+			if ( ! is_singular() )
+			{
+				?><div class="post-attachment"><?php
 
-			?><div class="post-attachment"><?php
+				if ( is_sticky() )
+				{ ?><div class="meta-sticky"><?php
+					echo esc_html_x( 'Featured', 'aemi', 'featured' );
+					?></div><?php
+				}
 
-				if ( ! is_singular() ) {
-					
-					?><a href="<?php the_permalink(); ?>" rel="bookmark"><?php
-					
-					if ( is_sticky() )
-					{
-						aemi_post_thumbnail( 'aemi-mid' );
-					}
-					else
-					{
-						aemi_post_thumbnail( 'aemi-small' );
-					}
+				?><a href="<?php the_permalink(); ?>" rel="bookmark"><?php
 
-					?></a><?php
+				if ( is_sticky() )
+				{
+					aemi_post_thumbnail( 'aemi-mid' );
 				}
 				else
 				{
+					aemi_post_thumbnail( 'aemi-small' );
+				}
 
-					/* aemi_post_thumbnail( 'aemi-large' ); */
+				?></a><?php
 
-				} 
+				?></div><?php
+			}
+			else
+			{
 
-			?></div><?php
+				/* aemi_post_thumbnail( 'aemi-large' ); */
+
+			} 
 		}
 	}
 }
@@ -49,65 +55,82 @@ if ( ! function_exists( 'aemi_featured_image' ) )
 if ( ! function_exists( 'aemi_posted_info' ) )
 {
 	function aemi_posted_info()
-	{ 
-		?><div class="post-details">
-			<div class="post-date"><?php the_time( 'j F Y' ); ?></div>
-			<div class="post-mod"><?php the_modified_time( 'j F Y - G:i'); ?></div>
-			<div class="post-author"><?php the_author_posts_link(); ?></div>
-		</div><?php
-	}
-}
-
-
-if ( ! function_exists( 'aemi_post_meta_header' ) )
-{
-	function aemi_post_meta_header()
-	{ 
-		?><div class="post-meta"><?php
-
-			aemi_posted_info();
-
-			if ( 'post' === get_post_type() && is_singular() ) {
-
-				if ( get_the_category_list() ) {
-
-					?><div class="post-cats"><?php the_category( ' + ' ); ?></div><?php
-
-				}
-
-			}
-
-			edit_post_link( esc_html_x( 'Edit', 'edit text', 'aemi' ), '<div class="post-edit">', '</div>' );
-
-			?></div><?php
-	}
-}
-
-if ( ! function_exists( 'aemi_post_meta_footer' ) )
-{
-	function aemi_post_meta_footer()
-	{ 
-		
-		global $post;
-
-		?><div class="post-meta"><?php
-
-		if ( is_singular() )
+	{
+		if ( is_page() )
 		{
-			foreach ( get_post_taxonomies( $post, 'name' ) as $tax )
+			?><div class="post-details">
+				<div class="post-mod"><span class="meta-detail"><?php echo esc_html_x( 'Updated: ', 'aemi', 'updated on' ); ?></span><?php the_modified_time( 'F j, Y - g:i a'); ?></div>
+				</div><?php
+			}
+			else
 			{
-				if ( $tax === 'post_tag' )
-				{
-					the_tags('<div class="post-tags">','','</div>');
-				}
-				else if ( $tax !== 'category' )
-				{
-					the_terms( $post->ID, $tax, '<div class="post-cptt ' . $tax . '"><h2 class="cptt-title">' . $tax . '</h2><div class="cptt-content">', '', '</div></div>' );
+				?><div class="post-details">
+					<div class="post-author"><?php the_author_posts_link(); ?></div>
+					<div class="post-date"><span class="meta-detail"><?php
+					if ( is_singular() )
+					{
+						echo esc_html_x( 'Published: ', 'aemi', 'published on' ); ?></span><?php the_date(); ?></div><?php
+					}
+					else
+					{
+						?></span><?php the_date(); ?></div><?php
+					}
+					?><div class="post-mod"><span class="meta-detail"><?php echo esc_html_x( 'Updated: ', 'aemi', 'updated on' ); ?></span><?php the_modified_time(); the_modified_time(' - g:i a'); ?></div>
+					</div><?php
 				}
 			}
 		}
 
-		?></div><?php
-		
-	}
-}
+
+		if ( ! function_exists( 'aemi_meta_header' ) )
+		{
+			function aemi_meta_header()
+			{ 
+				?><div class="post-meta"><?php
+
+				aemi_posted_info();
+
+				if ( 'post' === get_post_type() && is_singular() ) {
+
+					if ( get_the_category_list() ) {
+
+						?><div class="post-cats"><span class="meta-detail"><?php echo esc_html_x( 'Categories: ', 'aemi', 'categories' ); ?></span><?php the_category( ' + ' ); ?></div><?php
+
+					}
+
+				}
+
+				edit_post_link( esc_html_x( 'Edit', 'edit text', 'aemi' ), '<div class="post-edit">', '</div>' );
+
+				?></div><?php
+			}
+		}
+
+		if ( ! function_exists( 'aemi_post_meta_footer' ) )
+		{
+			function aemi_post_meta_footer()
+			{ 
+
+				global $post;
+
+				?><div class="post-meta"><?php
+
+				if ( is_singular() )
+				{
+					foreach ( get_post_taxonomies( $post, 'name' ) as $tax )
+					{
+						if ( $tax === 'post_tag' )
+						{
+							the_tags('<div class="post-tags">','','</div>');
+						}
+						else if ( $tax !== 'category' )
+						{
+							the_terms( $post->ID, $tax, '<div class="post-cptt ' . $tax . '"><h2 class="cptt-title">' . $tax . '</h2><div class="cptt-content">', '', '</div></div>' );
+						}
+					}
+				}
+
+				?></div><?php
+
+			}
+		}

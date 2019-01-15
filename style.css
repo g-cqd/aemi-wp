@@ -1010,6 +1010,7 @@ body.singular .post-header {
 	hyphens: auto;
 }
 .post-attachment {
+	position: relative;
 	flex: 1 1 100%;
 	align-self: stretch;
 	margin: 0;
@@ -1038,24 +1039,24 @@ body.singular .post-header {
 .post-header .post-meta {
 	flex-flow: column nowrap;
 }
+.meta-detail {
+	font-weight: normal;
+}
 .post-details {
 	display: flex;
 	flex-flow: column;
-	margin-top: .25em;
-	margin-bottom: 1.25em;
 }
-.post-details:last-child,
-body.logged-in.edit-able .post-details {
-	margin-bottom: .2em;
+.post-cats {
+	margin-top: .5em;
 }
-body.logged-in.edit-able .post-cats {
-	margin-top: 1em;
-}
-.post-mod {
+body:not(.page) .post-mod {
 	display: none;
 }
 .post-author {
-	margin-top: 1.25em;
+	margin-bottom: 1.25em;
+}
+body.singular .post-author {
+	margin-bottom: 2em;
 }
 .post-author a,
 .post-edit a { /* var to ie */
@@ -1063,21 +1064,35 @@ body.logged-in.edit-able .post-cats {
 	border-radius: 3pt;
 	background-color: var(--aemi-009);
 	color: var(--aemi-099);
+	transition: .3s background-color ease, .3s color ease;
+}
+.meta-sticky { /* var to ie */
+	padding: .25em .5em;
+	border-radius: 3pt;
+	background-color: var(--aemi-0003);
+	color: var(--aemi-9994);
+	transition: .3s background-color ease, .3s color ease;
 }
 body.darkui .post-author a,
 body.darkui .post-edit a { /* var to ie */
 	background-color: var(--aemi-044);
-	transition: .3s background-color ease;
+	transition: .3s background-color ease, .3s color ease;
 }
 body.darkui.multi .post-header:hover .post-author a,
 body.darkui.multi .post-header:hover .post-edit a { /* var to ie */
 	background-color: var(--aemi-009);
-	transition: .3s background-color ease;
+	transition: .3s background-color ease, .3s color ease;
 }
 .post-edit {
 	position: absolute;
 	right: 1.25em;
 	bottom: 1.45em;
+}
+.meta-sticky {
+	position: absolute;
+	left: 1.25em;
+	top: 1.45em;
+	z-index: 2;
 }
 /*--------------------------------------------------------------
 # Post Footer

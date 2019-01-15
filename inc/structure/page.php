@@ -15,7 +15,7 @@ if ( ! function_exists( 'aemi_page_header' ) )
 
 					the_title( '<h1 class="post-title" itemprop="name">', '</h1>' );
 
-					aemi_post_meta_header();
+					aemi_meta_header();
 
 				?></div>
 

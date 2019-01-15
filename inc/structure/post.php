@@ -21,7 +21,7 @@ if ( ! function_exists( 'aemi_post_header' ) )
 
 				}
 
-				aemi_post_meta_header(); 
+				aemi_meta_header(); 
 
 				?></div>
 		</div><?php
