@@ -94,7 +94,7 @@ if ( ! function_exists( 'aemi_posted_info' ) )
 
 					if ( get_the_category_list() ) {
 
-						?><div class="post-cats"><span class="meta-detail"><?php echo esc_html_x( 'Categories: ', 'aemi', 'categories' ); ?></span><?php the_category( ' + ' ); ?></div><?php
+						?><div class="post-cats"><span class="meta-detail"><?php echo esc_html_x( 'Categories: ', 'categories', 'aemi' ); ?></span><?php the_category( ' + ' ); ?></div><?php
 
 					}
 
