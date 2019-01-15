@@ -22,7 +22,7 @@ if ( ! function_exists( 'aemi_featured_image' ) )
 
 				if ( is_sticky() )
 				{ ?><div class="meta-sticky"><?php
-					echo esc_html_x( 'Featured', 'aemi', 'featured' );
+					echo esc_html_x( 'Featured', 'featured', 'aemi' );
 					?></div><?php
 				}
 
@@ -59,7 +59,7 @@ if ( ! function_exists( 'aemi_posted_info' ) )
 		if ( is_page() )
 		{
 			?><div class="post-details">
-				<div class="post-mod"><span class="meta-detail"><?php echo esc_html_x( 'Updated: ', 'aemi', 'updated on' ); ?></span><?php the_modified_time( 'F j, Y - g:i a'); ?></div>
+				<div class="post-mod"><span class="meta-detail"><?php echo esc_html_x( 'Updated: ', 'updated on', 'aemi' ); ?></span><?php the_modified_time( 'F j, Y - g:i a'); ?></div>
 				</div><?php
 			}
 			else
@@ -69,13 +69,13 @@ if ( ! function_exists( 'aemi_posted_info' ) )
 					<div class="post-date"><span class="meta-detail"><?php
 					if ( is_singular() )
 					{
-						echo esc_html_x( 'Published: ', 'aemi', 'published on' ); ?></span><?php the_date(); ?></div><?php
+						echo esc_html_x( 'Published: ', 'published on', 'aemi' ); ?></span><?php the_date(); ?></div><?php
 					}
 					else
 					{
 						?></span><?php the_date(); ?></div><?php
 					}
-					?><div class="post-mod"><span class="meta-detail"><?php echo esc_html_x( 'Updated: ', 'aemi', 'updated on' ); ?></span><?php the_modified_time(); the_modified_time(' - g:i a'); ?></div>
+					?><div class="post-mod"><span class="meta-detail"><?php echo esc_html_x( 'Updated: ', 'updated on', 'aemi' ); ?></span><?php the_modified_time(); the_modified_time(' - g:i a'); ?></div>
 					</div><?php
 				}
 			}
