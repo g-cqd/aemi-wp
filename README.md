@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.0
 * Requires PHP: 7.2
-* Version: 1.1.7
+* Version: 1.1.8
 * Stable Tag: trunk
 * License: MIT
 * License URI: https://opensource.org/licenses/mit-license.php
@@ -62,34 +62,40 @@ SOFTWARE.
 ### aemi uses the following third-party resources:
 
 Inter UI Typeface, Copyright (c) 2016-2018 The Inter UI Project Authors
-- License: SIL Open Font License 1.1
-- Source: https://rsms.me/inter/
+License: SIL Open Font License 1.1
+Source: https://rsms.me/inter/
 
 
 Hack Typeface, Copyright (c) 2018 Source Foundry Authors
-- License: MIT
-- Source: https://github.com/source-foundry/Hack
+License: MIT
+Source: https://github.com/source-foundry/Hack
 
 
 Bundled screenshot.jpg, Copyright (c) 2018 Guillaume COQUARD
-- License: CC0 1.0 Universal (CC0 1.0)
-- Source: https://github.com/originecode/aemi
+License: CC0 1.0 Universal (CC0 1.0)
+Source: https://github.com/originecode/aemi
 
 
 Bundled Images in screenshot.jpg, Copyright (c) 2018 Guillaume COQUARD
-- License: CC0 1.0 Universal (CC0 1.0)
-- Source: https://github.com/originecode/aemi
+License: CC0 1.0 Universal (CC0 1.0)
+Source: https://github.com/originecode/aemi
 
 
 ## Changelog
 
-
-1.1.6 :
-- Fixed: search input active style
-- Fixed: Jetpack Infinite Loading
-- Improved: post pagination, post navigation, site navigation
-- Improved: Logo rendering in dark mode
+1.1.8 :
+	- Changed: Post Author Text
+	- Changed: Post Published date Text
+	- Changed: Page Updated date Text
+	- Changed: Post Categories Text
+	- Added: Post Sticky Text
 
 1.1.7 :
-- Officially using Inter UI as main font
-- Fixed some CSS rules
+	- Officially using Inter UI as main font
+	- Fixed some CSS rules
+
+1.1.6 :
+	- Fixed: search input active style
+	- Fixed: Jetpack Infinite Loading
+	- Improved: post pagination, post navigation, site navigation
+	- Improved: Logo rendering in dark mode
