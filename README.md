@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.0
 * Requires PHP: 7.2
-* Version: 1.1.8
+* Version: 1.1.9
 * Stable Tag: trunk
 * License: MIT
 * License URI: https://opensource.org/licenses/mit-license.php
@@ -82,6 +82,9 @@ Source: https://github.com/originecode/aemi
 
 
 ## Changelog
+
+1.1.9 :
+	- Fixed : Posts do not display published date
 
 1.1.8 :
 	- Changed: Post Author Text
