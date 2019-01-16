@@ -69,11 +69,11 @@ if ( ! function_exists( 'aemi_posted_info' ) )
 					<div class="post-date"><span class="meta-detail"><?php
 					if ( is_singular() )
 					{
-						echo esc_html_x( 'Published: ', 'published on', 'aemi' ); ?></span><?php the_date(); ?></div><?php
+						echo esc_html_x( 'Published: ', 'published on', 'aemi' ); ?></span><?php echo get_the_date(); ?></div><?php
 					}
 					else
 					{
-						?></span><?php the_date(); ?></div><?php
+						?></span><?php echo get_the_date(); ?></div><?php
 					}
 					?><div class="post-mod"><span class="meta-detail"><?php echo esc_html_x( 'Updated: ', 'updated on', 'aemi' ); ?></span><?php the_modified_time(); the_modified_time(' - g:i a'); ?></div>
 					</div><?php
