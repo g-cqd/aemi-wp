@@ -117,7 +117,7 @@ if ( ! function_exists( 'aemi_header_search' ) )
 							<input type="search" class="search-field"
 							placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'aemi' ) ?>"
 							value="<?php echo get_search_query() ?>" name="s"
-							title="<?php echo esc_attr_x( 'Search for:', 'label' ) ?>" />
+							title="<?php echo esc_attr_x( 'Search for:', 'label', 'aemi' ) ?>" />
 							</label>
 							<input type="submit" class="search-submit"
 							value="<?php echo esc_attr_x( '&rarr;', 'submit button', 'aemi' ) ?>" />
