@@ -115,7 +115,7 @@ if ( ! function_exists( 'aemi_header_search' ) )
 					<label>
 						<span class="screen-reader-text"><?php echo _x( 'Search for:', 'label', 'aemi' ) ?></span>
 							<input type="search" class="search-field"
-							placeholder="<?php echo esc_attr_x( 'Search …', 'placeholder', 'aemi' ) ?>"
+							placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'aemi' ) ?>"
 							value="<?php echo get_search_query() ?>" name="s"
 							title="<?php echo esc_attr_x( 'Search for:', 'label' ) ?>" />
 							</label>
