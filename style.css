@@ -4,7 +4,7 @@ Theme URI: https://github.com/originecode/aemi/
 Author: Guillaume COQUARD
 Author URI: https://www.originecode.fr/
 Description: aemi is designed to be an aesthetic minimalist wordpress theme. It provides a highly legible, clean, clear and really minimalist theme.
-Version: 1.1.11
+Version: 1.1.12
 License: MIT
 License URI: https://opensource.org/licenses/mit-license.php
 Text Domain: aemi
@@ -30,10 +30,10 @@ Tags: one-column, custom-background, custom-menu, featured-image-header, feature
 	--aemi-0003: rgba( 255, 255, 255, .3 );
 	--aemi-text:  var(--aemi-999);
 	--a-link: var(--aemi-9994);
-
-
+	
+	
 	/* Initialization */
-
+	
 	--default-font: "Inter UI",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
 }
 .no-overflow {
@@ -147,7 +147,7 @@ body.darkui {
 	--aemi-0003: rgba( 0, 0, 0, .3 );
 	--aemi-text: var(--aemi-999);
 	--a-link: var(--aemi-9994);
-
+	
 	background-color: var(--aemi-000);
 	color: var(--aemi-text);
 }
@@ -1428,7 +1428,7 @@ div.gallery.gallery-columns-9 > * {
 		grid-gap: 10px;
 	}
 	.wp-block-gallery.columns-9,
-	div.galler).gallery-columns-9 {
+	div.gallery.gallery-columns-9 {
 		grid-template-columns: repeat(9, 1fr);
 		grid-gap: 5px;
 	}
@@ -1657,6 +1657,175 @@ article.comment-body {
 /*--------------------------------------------------------------
 # Search
 --------------------------------------------------------------*/
+#aemi-search {
+	position: relative;
+	height: 2.875em;
+	width: 2.875em;
+	z-index: 2;
+}
+#aemi-search .search-form {
+	position: fixed;
+	margin: 0;
+	padding: 0;
+	top: 1em;
+	right: -50em;
+	height: 2.875em;
+	max-width: calc( 100vw - ( 2 * 2.875em ) - 2em );
+	border-radius: 10em;
+	z-index: -1;
+	transition-property: right;
+	transition-duration: .7s;
+	transition-timing-function: ease;
+}
+#aemi-search > .toggled + .search-form {
+	right: calc( 1.25em + 2.875em);
+	transition-property: right;
+	transition-duration: .8s;
+	transition-timing-function: ease;
+}
+#aemi-search > .search-form label {
+	float: left;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	max-width: calc( 100vw - ( 2 * 2.875em ) - 2em );
+	border-radius: 10em;
+}
+#aemi-search label > input[type="search"] {
+	margin: 0;
+	padding-left: 1em;
+	padding-right: calc( 2.875em + .25em );
+	height: 100%;
+	max-width: calc( 100vw - ( 2 * 2.875em ) - 2em );
+	border-radius: 10em;
+	border-width: 0;
+	background-color: var(--aemi-000);
+}
+#aemi-search > .search-form input[type="submit"] {
+	position: absolute;
+	right: 0;
+	padding: 0;
+	height: 100%;
+	width: 1.91667em;
+	border-radius: 10em;
+	border-width: 0;
+	font-size: 1.5em !important;
+	line-height: 1.5;
+	color: var(--aemi-099);
+	background-color: var(--aemi-000);
+	transition-property: color;
+	transition-duration: .3s;
+	transition-timing-function: ease;
+}
+#aemi-search > .search-form input[type="submit"]:hover {
+	color: var(--aemi-900);
+	cursor: pointer;
+	transition-property: color;
+	transition-duration: .3s;
+	transition-timing-function: ease;
+}
+#aemi-search > .search-form input[type="submit"]:focus,
+#aemi-search > .search-form input[type="submit"]:active {
+	color: var(--aemi-999);
+	transition-property: color;
+	transition-duration: .3s;
+	transition-timing-function: ease;
+}
+#search-toggle {
+	display: block;
+	margin: 20%;
+	height:60%;
+	width: 60%;
+	background-color: var(--aemi-000);
+	border-radius: 10pt;
+	transition-property: height, width, margin;
+	transition-duration: .3s;
+	transition-timing-function: ease;
+}
+#search-toggle .icon {
+	position: relative;
+	display: block;
+	height: 70%;
+	width: 70%;
+	border: 3px solid var(--aemi-990);
+	border-radius: 100%;
+	transition-property: height, width, border-width, border-radius, border-color;
+	transition-duration: .3s;
+	transition-timing-function: ease;
+}
+#search-toggle:hover .icon {
+	border-color: var(--aemi-099);
+	transition-property: height, width, border-width, border-radius, border-color;
+	transition-duration: .3s;
+	transition-timing-function: ease;
+}
+#search-toggle.toggled {
+	margin: 0;
+	height: 100%;
+	width: 100%;
+	transition-property: height, width, margin;
+	transition-duration: .3s;
+	transition-timing-function: ease;
+}
+#search-toggle.toggled .icon {
+	height: 100%;
+	width: 100%;
+	border: 0;
+	transition-property: height, width, border-width, border-radius, border-color;
+	transition-duration: .3s;
+	transition-timing-function: ease;
+}
+#search-toggle .icon::after,
+#search-toggle .icon::before {
+	position: absolute;
+	content: "";
+	margin: 0;
+	padding: 0;
+	height: 4px;
+	width: 125%;
+	border-radius: 0px 1.25pt 1.25pt 0px;
+	top: 120%;
+	left: 70%;
+	background: var(--aemi-990);
+	transform: rotate( 45deg );
+	transition-property: height, width, background-color, border-radius, top, left, transform;
+	transition-duration: .3s;
+	transition-timing-function: ease;
+}
+#search-toggle:hover .icon::after,
+#search-toggle:hover .icon::before {
+	background: var(--aemi-099);
+	transition-property: height, width, background-color, border-radius, top, left, transform;
+	transition-duration: .3s;
+	transition-timing-function: ease;
+}
+#search-toggle.toggled .icon::after,
+#search-toggle.toggled .icon::before {
+	position: absolute;
+	content: "";
+	top: 44.75%;
+	left: 20.75%;
+	height: 4px;
+	width: 60%;
+	border-radius: 1.25pt;
+	transition-property: height, width, background-color, border-radius, top, left, transform;
+	transition-duration: .3s;
+	transition-timing-function: ease;
+}
+#search-toggle.toggled .icon::after {
+	transform: rotate( -45deg );
+	transition-property: height, width, background-color, border-radius, top, left, transform;
+	transition-duration: .3s;
+	transition-timing-function: ease;
+}
+#search-toggle.toggled .icon::before {
+	transform: rotate( 45deg );
+	transition-property: height, width, background-color, border-radius, top, left, transform;
+	transition-duration: .3s;
+	transition-timing-function: ease;
+}
+
+
 .search-form {
 	padding: 0;
 }
@@ -1666,8 +1835,6 @@ article.comment-body {
 /*--------------------------------------------------------------
 # Widgets
 --------------------------------------------------------------*/
-.w-cont > * {
-}
 .widget-title {
 	margin: 0 0 .5em;
 	font-size: 2em;
@@ -2294,8 +2461,8 @@ progress {
 	}
 	body.admin-bar #header-menu > .toggle + * {
 		top: calc( 4.875em + 46px );
-		height: calc( 100vh - 4.875em ) );
-}
+		height: calc( 100vh - 4.875em );
+	}
 }
 @media (max-width: 700px) {
 	main {
@@ -2363,6 +2530,10 @@ progress {
 	}
 	body.singular article {
 		margin-bottom: 4.875em;
+	}
+	#aemi-search .search-form {
+		top: unset;
+		bottom: 1em;
 	}
 	#site-footer {
 		margin: 0 auto calc( 4.875em + 2em );

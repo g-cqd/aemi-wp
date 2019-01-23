@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.0.3
 * Requires PHP: 7.2
-* Version: 1.1.11
+* Version: 1.1.12
 * Stable Tag: trunk
 * License: MIT
 * License URI: https://opensource.org/licenses/mit-license.php
@@ -82,6 +82,9 @@ Source: https://github.com/originecode/aemi
 
 
 ## Changelog
+
+1.1.12 :
+	- Added : Customizer support for Dark Theme and Top Bar Search form. Disabling features will be easier.
 
 1.1.11 :
 	- Fixed : Bug with Gutenberg Styling on child theme
