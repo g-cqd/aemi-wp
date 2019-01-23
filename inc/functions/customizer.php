@@ -2,9 +2,12 @@
 
 function aemi_custom_settings( $wp_customize )
 {
-	function aemi_sanitize_checkbox( $checked )
-	{
-		return ( ( isset( $checked ) && true == $checked ) ? true : false );
+	function aemi_sanitize_checkbox( $input ) {
+		if ( true === $input ) {
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 	
 	$wp_customize->add_section( 'aemi_features' , array(
@@ -13,9 +16,9 @@ function aemi_custom_settings( $wp_customize )
 	) );
 
 	$wp_customize->add_setting( 'aemi_darkmode_display' , array(
-		'default'	=> true,
+		'default'	=> 1,
+		'sanitize_callback'	=> 'aemi_sanitize_checkbox',
 		'transport'	=> 'refresh',
-		'sanitize_callback'	=> 'aemi_sanitize_checkbox'
 	) );
 	$wp_customize->add_control( 'aemi_darkmode_display', array(
 		'label' => esc_html_x( 'Dark Theme', 'darkmode activation' , 'aemi' ),
@@ -25,9 +28,9 @@ function aemi_custom_settings( $wp_customize )
 	) );
 
 	$wp_customize->add_setting( 'aemi_search_button_display' , array(
-		'default'	=> true,
+		'default'	=> 0,
+		'sanitize_callback'	=> 'aemi_sanitize_checkbox',
 		'transport'	=> 'refresh',
-		'sanitize_callback'	=> 'aemi_sanitize_checkbox'
 	) );
 	$wp_customize->add_control( 'aemi_search_button_display', array(
 		'label' => esc_html_x( 'Display Search Button in Top bar', 'search button display' , 'aemi' ),
