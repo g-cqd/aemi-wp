@@ -86,7 +86,14 @@ Source: https://github.com/originecode/aemi
 ## Changelog
 
 
-1.1.11 :
+### 1.1.13 :
+	- Improved : Search Results Titling
+	- Improved : Search Form Style with Top Bar Search Button
+	- Fixed : Nothing Found Titling
+	- Improved : readme.(txt | md) syntax
+### 1.1.12 :
+	- Added : Customizer support for Dark Theme and Top Bar Search form. Disabling features will be easier.
+### 1.1.11 :
 	- Fixed : Bug with Gutenberg Styling on child theme
 ### 1.1.10 :
 	- Added : Add Inter UI font as default Gutenberg editor font. 
