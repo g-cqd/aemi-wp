@@ -2,11 +2,15 @@
 
 	<div class="post-header">
 
+	<div class="post-info">
+
 		<h1 class="post-title"><?php
 
 			esc_html_e( 'Nothing Found', 'aemi' );
 
 		?></h1>
+
+</div>
 
 	</div>
 

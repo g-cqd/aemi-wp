@@ -120,7 +120,7 @@ if ( ! function_exists( 'aemi_header_search' ) )
 							title="<?php echo esc_attr_x( 'Search for:', 'label', 'aemi' ) ?>" />
 							</label>
 							<input type="submit" class="search-submit"
-							value="<?php echo esc_attr_x( '&rarr;', 'submit button', 'aemi' ) ?>" />
+							value="<?php echo esc_attr_x( 'go to results', 'submit button', 'aemi' ) ?>" />
 						</form>
 					</div><?php
 				}

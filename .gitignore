@@ -1,2 +1,2 @@
-
-.DS_Store
+# Every .DS_Store are now ignored. I forgot *
+*.DS_Store

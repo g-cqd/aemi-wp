@@ -21,7 +21,7 @@ function aemi_custom_settings( $wp_customize )
 		'transport'	=> 'refresh',
 	) );
 	$wp_customize->add_control( 'aemi_darkmode_display', array(
-		'label' => esc_html_x( 'Dark Theme', 'darkmode activation' , 'aemi' ),
+		'label' => esc_html_x( 'Activate Dark Theme', 'darkmode activation' , 'aemi' ),
 		'section' => 'aemi_features',
 		'settings' => 'aemi_darkmode_display',
 		'type' => 'checkbox',
@@ -33,7 +33,7 @@ function aemi_custom_settings( $wp_customize )
 		'transport'	=> 'refresh',
 	) );
 	$wp_customize->add_control( 'aemi_search_button_display', array(
-		'label' => esc_html_x( 'Display Search Button in Top bar', 'search button display' , 'aemi' ),
+		'label' => esc_html_x( 'Activate Search Button in Top bar', 'search button display' , 'aemi' ),
 		'section' => 'aemi_features',
 		'settings' => 'aemi_search_button_display',
 		'type' => 'checkbox',
