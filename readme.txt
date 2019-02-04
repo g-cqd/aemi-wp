@@ -1,4 +1,4 @@
-# aemi
+# AeMi
 
 
 
@@ -6,67 +6,53 @@
 * Requires at least: 4.9
 * Tested up to: 5.0.3
 * Requires PHP: 7.2
-* Version: 1.1.13
+* Version: 1.1.14
 * Stable Tag: trunk
-* License: MIT
-* License URI: https://opensource.org/licenses/mit-license.php
+* License: GPL-3.0
+* License URI: https://opensource.org/licenses/GPL-3.0
 * Tags: white, responsive-layout, one-column, custom-background, custom-menu, featured-image-header, featured-images, full-width-template, sticky-post, threaded-comments, photoblogging
 
 
 
 ## Description
 
-aemi is designed to be an aesthetic minimalist WordPress theme. It provides a highly legible, clean, clear and really minimalist theme. aemi is also a really fast and efficient theme. aemi is Gutenberg-ready.
+AeMi is designed to be an aesthetic minimalist WordPress theme. It provides a highly legible, clean, clear and really minimalist theme. AeMi is also a really fast and efficient theme. AeMi is Gutenberg-ready.
 
 
 
 ## Installation
 
 1. In your admin panel, go to Appearance -> Themes and click the 'Add New' button.
-2. Type in aemi in the search form and press the 'Enter' key on your keyboard.
+2. Type in AeMi in the search form and press the 'Enter' key on your keyboard.
 3. Click on the 'Install' button then click on the 'Activate' button to use your new theme right away.
 
 
 
 ## Copyright
 
-aemi WordPress Theme, Copyright 2018 Guillaume COQUARD.
+AeMi WordPress Theme, Copyright 2018 Guillaume COQUARD.
 
-aemi is distributed under the terms of the MIT License.
-
-
-## License - MIT License
-
-### Copyright © 2018 Guillaume COQUARD
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+AeMi is distributed under the terms of the GNU General Public License v3.0.
 
 
+## License - GNU GPL 3.0 License
 
-### aemi uses the following third-party resources:
+### AeMi WordPress Theme Copyright © 2018-2019 Guillaume COQUARD
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+
+### AeMi uses the following third-party resources:
 
 ```
-Inter UI Typeface, Copyright (c) 2016-2018 The Inter UI Project Authors
+Inter Typeface, Copyright (c) 2016-2019 The Inter Project Authors
 License: SIL Open Font License 1.1
 Source: https://rsms.me/inter/
 ```
-
 ```
 Hack Typeface, Copyright (c) 2018 Source Foundry Authors
 License: MIT
@@ -75,17 +61,20 @@ Source: https://github.com/source-foundry/Hack
 ```
 Bundled screenshot.jpg, Copyright (c) 2018 Guillaume COQUARD
 License: CC0 1.0 Universal (CC0 1.0)
-Source: https://github.com/originecode/aemi
+Source: https://github.com/originecode/AeMi
 ```
 ```
 Bundled Images in screenshot.jpg, Copyright (c) 2018 Guillaume COQUARD
 License: CC0 1.0 Universal (CC0 1.0)
-Source: https://github.com/originecode/aemi
+Source: https://github.com/originecode/AeMi
 ```
 
 ## Changelog
 
-
+### 1.1.14 :
+	- Added : Header and Footer Scripts in Customizer 
+	- Changed : Font Update : Inter UI became Inter (@rsms)
+	- Changed : Licensing : MIT to GNU GPL v3
 ### 1.1.13 :
 	- Improved : Search Results Titling
 	- Improved : Search Form Style with Top Bar Search Button

@@ -17,11 +17,9 @@ add_action( 'after_setup_theme', 'aemi_jetpack_setup' );
 
 function aemi_infinite_scroll_render()
 {
-	while ( have_posts() ) {
-
+	while ( have_posts() )
+	{
 		the_post();
-
 		get_template_part( 'inc/parts/content', get_post_format() );
-
 	}
 }

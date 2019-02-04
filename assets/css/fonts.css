@@ -1,128 +1,128 @@
 @font-face {
-	font-family: 'Inter UI';
+	font-family: 'Inter';
 	font-style:  normal;
 	font-weight: 100;
-	src: url("https://rsms.me/inter/font-files/Inter-UI-Thin.woff2") format("woff2"),
-		 url("https://rsms.me/inter/font-files/Inter-UI-Thin.woff") format("woff");
+	src: url("https://rsms.me/inter/font-files/Inter-Thin.woff2") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-Thin.woff") format("woff");
 }
 @font-face {
-	font-family: 'Inter UI';
+	font-family: 'Inter';
 	font-style:  italic;
 	font-weight: 100;
-	src: url("https://rsms.me/inter/font-files/Inter-UI-ThinItalic.woff2") format("woff2"),
-		 url("https://rsms.me/inter/font-files/Inter-UI-ThinItalic.woff") format("woff");
+	src: url("https://rsms.me/inter/font-files/Inter-ThinItalic.woff2") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-ThinItalic.woff") format("woff");
 }
 @font-face {
-	font-family: 'Inter UI';
+	font-family: 'Inter';
 	font-style:  normal;
 	font-weight: 200;
-	src: url("https://rsms.me/inter/font-files/Inter-UI-ExtraLight.woff2") format("woff2"),
-		 url("https://rsms.me/inter/font-files/Inter-UI-ExtraLight.woff") format("woff");
+	src: url("https://rsms.me/inter/font-files/Inter-ExtraLight.woff2") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-ExtraLight.woff") format("woff");
 }
 @font-face {
-	font-family: 'Inter UI';
+	font-family: 'Inter';
 	font-style:  italic;
 	font-weight: 200;
-	src: url("https://rsms.me/inter/font-files/Inter-UI-ExtraLightItalic.woff2") format("woff2"),
-		 url("https://rsms.me/inter/font-files/Inter-UI-ExtraLightItalic.woff") format("woff");
+	src: url("https://rsms.me/inter/font-files/Inter-ExtraLightItalic.woff2") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-ExtraLightItalic.woff") format("woff");
 }
 @font-face {
-	font-family: 'Inter UI';
+	font-family: 'Inter';
 	font-style:  normal;
 	font-weight: 300;
-	src: url("https://rsms.me/inter/font-files/Inter-UI-Light.woff2") format("woff2"),
-		 url("https://rsms.me/inter/font-files/Inter-UI-Light.woff") format("woff");
+	src: url("https://rsms.me/inter/font-files/Inter-Light.woff2") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-Light.woff") format("woff");
 }
 @font-face {
-	font-family: 'Inter UI';
+	font-family: 'Inter';
 	font-style:  italic;
 	font-weight: 300;
-	src: url("https://rsms.me/inter/font-files/Inter-UI-LightItalic.woff2") format("woff2"),
-		 url("https://rsms.me/inter/font-files/Inter-UI-LightItalic.woff") format("woff");
+	src: url("https://rsms.me/inter/font-files/Inter-LightItalic.woff2") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-LightItalic.woff") format("woff");
 }
 @font-face {
-	font-family: 'Inter UI';
+	font-family: 'Inter';
 	font-style:  normal;
 	font-weight: 400;
-	src: url("https://rsms.me/inter/font-files/Inter-UI-Regular.woff2") format("woff2"),
-		 url("https://rsms.me/inter/font-files/Inter-UI-Regular.woff") format("woff");
+	src: url("https://rsms.me/inter/font-files/Inter-Regular.woff2") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-Regular.woff") format("woff");
 }
 @font-face {
-	font-family: 'Inter UI';
+	font-family: 'Inter';
 	font-style:  italic;
 	font-weight: 400;
-	src: url("https://rsms.me/inter/font-files/Inter-UI-Italic.woff2") format("woff2"),
-		 url("https://rsms.me/inter/font-files/Inter-UI-Italic.woff") format("woff");
+	src: url("https://rsms.me/inter/font-files/Inter-Italic.woff2") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-Italic.woff") format("woff");
 }
 @font-face {
-	font-family: 'Inter UI';
+	font-family: 'Inter';
 	font-style:  normal;
 	font-weight: 500;
-	src: url("https://rsms.me/inter/font-files/Inter-UI-Medium.woff2") format("woff2"),
-		 url("https://rsms.me/inter/font-files/Inter-UI-Medium.woff") format("woff");
+	src: url("https://rsms.me/inter/font-files/Inter-Medium.woff2") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-Medium.woff") format("woff");
 }
 @font-face {
-	font-family: 'Inter UI';
+	font-family: 'Inter';
 	font-style:  italic;
 	font-weight: 500;
-	src: url("https://rsms.me/inter/font-files/Inter-UI-MediumItalic.woff2") format("woff2"),
-		 url("https://rsms.me/inter/font-files/Inter-UI-MediumItalic.woff") format("woff");
+	src: url("https://rsms.me/inter/font-files/Inter-MediumItalic.woff2") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-MediumItalic.woff") format("woff");
 }
 @font-face {
-	font-family: 'Inter UI';
+	font-family: 'Inter';
 	font-style:  normal;
 	font-weight: 600;
-	src: url("https://rsms.me/inter/font-files/Inter-UI-SemiBold.woff2") format("woff2"),
-		 url("https://rsms.me/inter/font-files/Inter-UI-SemiBold.woff") format("woff");
+	src: url("https://rsms.me/inter/font-files/Inter-SemiBold.woff2") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-SemiBold.woff") format("woff");
 }
 @font-face {
-	font-family: 'Inter UI';
+	font-family: 'Inter';
 	font-style:  italic;
 	font-weight: 600;
-	src: url("https://rsms.me/inter/font-files/Inter-UI-SemiBoldItalic.woff2") format("woff2"),
-		 url("https://rsms.me/inter/font-files/Inter-UI-SemiBoldItalic.woff") format("woff");
+	src: url("https://rsms.me/inter/font-files/Inter-SemiBoldItalic.woff2") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-SemiBoldItalic.woff") format("woff");
 }
 @font-face {
-	font-family: 'Inter UI';
+	font-family: 'Inter';
 	font-style:  normal;
 	font-weight: 700;
-	src: url("https://rsms.me/inter/font-files/Inter-UI-Bold.woff2") format("woff2"),
-		 url("https://rsms.me/inter/font-files/Inter-UI-Bold.woff") format("woff");
+	src: url("https://rsms.me/inter/font-files/Inter-Bold.woff2") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-Bold.woff") format("woff");
 }
 @font-face {
-	font-family: 'Inter UI';
+	font-family: 'Inter';
 	font-style:  italic;
 	font-weight: 700;
-	src: url("https://rsms.me/inter/font-files/Inter-UI-BoldItalic.woff2") format("woff2"),
-		 url("https://rsms.me/inter/font-files/Inter-UI-BoldItalic.woff") format("woff");
+	src: url("https://rsms.me/inter/font-files/Inter-BoldItalic.woff2") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-BoldItalic.woff") format("woff");
 }
 @font-face {
-	font-family: 'Inter UI';
+	font-family: 'Inter';
 	font-style:  normal;
 	font-weight: 800;
-	src: url("https://rsms.me/inter/font-files/Inter-UI-ExtraBold.woff2") format("woff2"),
-		 url("https://rsms.me/inter/font-files/Inter-UI-ExtraBold.woff") format("woff");
+	src: url("https://rsms.me/inter/font-files/Inter-ExtraBold.woff2") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-ExtraBold.woff") format("woff");
 }
 @font-face {
-	font-family: 'Inter UI';
+	font-family: 'Inter';
 	font-style:  italic;
 	font-weight: 800;
-	src: url("https://rsms.me/inter/font-files/Inter-UI-ExtraBoldItalic.woff2") format("woff2"),
-		 url("https://rsms.me/inter/font-files/Inter-UI-ExtraBoldItalic.woff") format("woff");
+	src: url("https://rsms.me/inter/font-files/Inter-ExtraBoldItalic.woff2") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-ExtraBoldItalic.woff") format("woff");
 }
 @font-face {
-	font-family: 'Inter UI';
+	font-family: 'Inter';
 	font-style:  normal;
 	font-weight: 900;
-	src: url("https://rsms.me/inter/font-files/Inter-UI-Black.woff2") format("woff2"),
-		 url("https://rsms.me/inter/font-files/Inter-UI-Black.woff") format("woff");
+	src: url("https://rsms.me/inter/font-files/Inter-Black.woff2") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-Black.woff") format("woff");
 }
 @font-face {
-	font-family: 'Inter UI';
+	font-family: 'Inter';
 	font-style:  italic;
 	font-weight: 900;
-	src: url("https://rsms.me/inter/font-files/Inter-UI-BlackItalic.woff2") format("woff2"),
-		 url("https://rsms.me/inter/font-files/Inter-UI-BlackItalic.woff") format("woff");
+	src: url("https://rsms.me/inter/font-files/Inter-BlackItalic.woff2") format("woff2"),
+		 url("https://rsms.me/inter/font-files/Inter-BlackItalic.woff") format("woff");
 }
 @font-face {
 	font-family: 'Hack';
