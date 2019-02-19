@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.0.3
 * Requires PHP: 7.2
-* Version: 1.1.14
+* Version: 1.1.15
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -71,8 +71,11 @@ Source: https://github.com/originecode/AeMi
 
 ## Changelog
 
+### 1.1.15 :
+	- Improved : Header Letter Spacing for better legibility
+	- Added : Support for prefers-color-scheme media query
 ### 1.1.14 :
-	- Added : Header and Footer Scripts in Customizer 
+	- Added : Header and Footer Scripts in Customizer
 	- Changed : Font Update : Inter UI became Inter (@rsms)
 	- Changed : Licensing : MIT to GNU GPL v3
 ### 1.1.13 :
@@ -85,7 +88,7 @@ Source: https://github.com/originecode/AeMi
 ### 1.1.11 :
 	- Fixed : Bug with Gutenberg Styling on child theme
 ### 1.1.10 :
-	- Added : Add Inter UI font as default Gutenberg editor font. 
+	- Added : Add Inter UI font as default Gutenberg editor font.
 ### 1.1.9 :
 	- Fixed : Posts do not display published date
 

@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.0.3
 * Requires PHP: 7.2
-* Version: 1.1.14
+* Version: 1.1.15
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -71,6 +71,9 @@ Source: https://github.com/originecode/AeMi
 
 ## Changelog
 
+### 1.1.15 :
+	- Improved : Header Letter Spacing for better legibility
+	- Added : Support for prefers-color-scheme media query
 ### 1.1.14 :
 	- Added : Header and Footer Scripts in Customizer
 	- Changed : Font Update : Inter UI became Inter (@rsms)

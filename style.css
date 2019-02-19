@@ -4,7 +4,7 @@ Theme URI: https://github.com/originecode/aemi/
 Author: Guillaume COQUARD
 Author URI: https://www.originecode.fr/
 Description: AeMi is designed to be an aesthetic minimalist wordpress theme. It provides a highly legible, clean, clear and really minimalist theme.
-Version: 1.1.14
+Version: 1.1.15
 License: GPL-3.0
 License URI: https://opensource.org/licenses/GPL-3.0
 Text Domain: aemi
@@ -30,10 +30,9 @@ Tags: one-column, custom-background, custom-menu, featured-image-header, feature
 	--aemi-0003: rgba( 255, 255, 255, .3 );
 	--aemi-text:  var(--aemi-999);
 	--a-link: var(--aemi-9994);
-	
-	
+
+
 	/* Initialization */
-	
 	--default-font: Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
 }
 .no-overflow {
@@ -110,7 +109,7 @@ html { /* var to ie */
 	font-family: var( --default-font );
 	font-size: 12pt;
 	line-height: 1.2;
-	/* font-smooth: auto; - Will be activate when widely supported */ 
+	/* font-smooth: auto; - Will be activate when widely supported */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-text-size-adjust: 100%;
@@ -147,7 +146,7 @@ body.darkui {
 	--aemi-0003: rgba( 0, 0, 0, .3 );
 	--aemi-text: var(--aemi-999);
 	--a-link: var(--aemi-9994);
-	
+
 	background-color: var(--aemi-000);
 	color: var(--aemi-text);
 }
@@ -158,6 +157,7 @@ h1,h2,h3,
 h4,h5,h6 {
 	font-weight: 700;
 	line-height: 1.2;
+	letter-spacing: -.03em;
 }
 h1 { font-size: 3em; }
 h2 { font-size: 2.5em; }
@@ -292,7 +292,7 @@ small {
 big {
 	font-size: 1.25em;
 }
-sub, 
+sub,
 sup {
 	position: relative;
 	font-size: .75em;
@@ -1452,7 +1452,7 @@ div.gallery img {
 	border: 0 !important;
 }
 .wp-block-gallery.columns-1 .blocks-gallery-item,
-.wp-block-gallery.columns-2 .blocks-gallery-item, 
+.wp-block-gallery.columns-2 .blocks-gallery-item,
 .wp-block-gallery.columns-3 .blocks-gallery-item,
 .wp-block-gallery.columns-4 .blocks-gallery-item,
 .wp-block-gallery.columns-5 .blocks-gallery-item,
@@ -2204,7 +2204,7 @@ body.darkui .button a:focus,
 body.darkui .button a:active,
 .wp-block-button a.wp-block-button__link:focus,
 body.darkui .wp-block-button a.wp-block-button__link:focus,
-.wp-block-button a.wp-block-button__link:active, 
+.wp-block-button a.wp-block-button__link:active,
 body.darkui .wp-block-button a.wp-block-button__link:active {
 	border-color: var(--aemi-099);
 	background-color: var(--aemi-099);
@@ -2525,7 +2525,7 @@ progress {
 		body.admin-bar #header-menu > .toggle + * {
 			top: calc(  46px );
 			height: calc( 100vh - 4.875em );
-		}	
+		}
 	}
 	main {
 		padding-top: 2em;

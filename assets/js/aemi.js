@@ -1,11 +1,11 @@
-var today = new Date(),
-aemi_time = today.getHours(),
-aemi_timetochange = ( ( aemi_time > 18) || ( aemi_time < 8 ) ) ? true : false,
-aemi = [],
-aemi_exist = function ( f ) {
-	return ( f === "function" );
-},
-aemi_lightbox = function () {
+var today = new Date();
+var aemi_time = today.getHours();
+var aemi_timetochange = ((aemi_time > 18) || (aemi_time < 8)) ? true : false;
+var aemi = [];
+var aemi_exist = function (f) {
+	return (f === "function");
+};
+var aemi_lightbox = function () {
 	var _const_name = 'aemisw',
 	_const_class_prefix = _const_name,
 	_const_id_prefix = _const_name,
@@ -186,7 +186,7 @@ function initControls() {
 		}, false);
 		LX.box.appendChild(nextBtn);
 	}
-	addClass(nextBtn, _const_class_prefix + '-active');	
+	addClass(nextBtn, _const_class_prefix + '-active');
 	if (!prevBtn) {
 		prevBtn = document.createElement('span');
 		addClass(prevBtn, _const_class_prefix + '-prev');
@@ -541,20 +541,18 @@ var cies = {
 
 if ( !aemi_exist( aemi_menu ) ) {
 	var aemi_menu = function () {
-		var a = document.querySelectorAll( ".menu" );
-		for ( let i = 0; i < a.length ; i++ ) {
-			var b = a[i].querySelectorAll( ".menu-item-has-children" );
-			for ( let j = 0; j < b.length; j++ ) {
-				let c = document.createElement( "div" );
+		var a = document.querySelectorAll(".menu");
+		for (let i = 0; i < a.length; i++) {
+			var b = a[i].querySelectorAll(".menu-item-has-children");
+			for (let j = 0; j < b.length; j++) {
+				let c = document.createElement("div");
 				c.innerHTML = '<div class="toggle-element"><span></span><span></span></div>';
-				c.classList.add( "toggle" );
-				b[j].insertBefore( c, b[j].childNodes[1] );
+				c.classList.add("toggle");
+				b[j].insertBefore(c, b[j].childNodes[1]);
 			}
 		}
-	}
-}
-aemi.push( aemi_menu );
-
+	};
+} aemi.push( aemi_menu );
 if ( !aemi_exist( aemi_toggle ) ) {
 	var aemi_toggle = function () {
 		var s = [ "toggle-header-menu", "toggled", "no-overflow", "blurred" ],
@@ -570,9 +568,7 @@ if ( !aemi_exist( aemi_toggle ) ) {
 			}, false );
 		}
 	};
-}
-aemi.push( aemi_toggle );
-
+} aemi.push( aemi_toggle );
 if ( !aemi_exist( aemi_galleries ) ) {
 	var aemi_galleries = function () {
 		var a = document.querySelectorAll( "div.gallery, .wp-block-gallery, .justified-gallery" );
@@ -587,23 +583,19 @@ if ( !aemi_exist( aemi_galleries ) ) {
 			}
 		}
 	};
-}
-aemi.push( aemi_galleries );
-
+} aemi.push( aemi_galleries );
 if ( !aemi_exist( aemi_dark ) ) {
 	var aemi_dark = function () {
-		var a = document.getElementById( "darkmode" ),
-		b = cies.get("darkmode");
+		var a = document.getElementById("darkmode");
+		var b = cies.get("darkmode");
+		var c = window.matchMedia('(prefers-color-scheme: dark)');
 		if ( a !== null ) {
 			if ( b === "" ) {
-				if ( aemi_timetochange ) {
+				if ( aemi_timetochange || c ) {
 					document.body.classList.add( "darkui" );
 					a.classList.add( "activated" );
 				}
 			} else {
-				if ( b === "true" || b === "false" ) {
-					cies.del( "darkmode" );
-				}
 				if ( b === "force-true" ) {
 					document.body.classList.add( "darkui" );
 					a.classList.add( "activated" );
@@ -613,14 +605,14 @@ if ( !aemi_exist( aemi_dark ) ) {
 				document.body.classList.toggle( "darkui" );
 				if ( document.body.classList.contains( "darkui" ) ) {
 					a.classList.add( "activated" );
-					if ( aemi_timetochange ) {
+					if ( aemi_timetochange || c ) {
 						cies.del( "darkmode" );
 					} else {
 						cies.set( "darkmode", "force-true" );
 					}
 				} else {
 					a.classList.remove( "activated" );
-					if ( aemi_timetochange ) {
+					if ( aemi_timetochange || c ) {
 						cies.set( "darkmode", "force-false" );
 					} else {
 						cies.del( "darkmode" );
@@ -629,12 +621,9 @@ if ( !aemi_exist( aemi_dark ) ) {
 			}, false );
 		}
 	};
-}
-aemi.push( aemi_dark );
+} aemi.push( aemi_dark );
 
-aemi.push( function () { lightbox.load() } );
+aemi.push( function () { lightbox.load(); } );
 
 
-for ( var i in aemi ) {
-	aemi[i]();
-}
+for ( var i in aemi ) { aemi[i](); }
