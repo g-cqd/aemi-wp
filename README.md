@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.0.3
 * Requires PHP: 7.2
-* Version: 1.1.15
+* Version: 1.1.16
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -71,6 +71,8 @@ Source: https://github.com/originecode/AeMi
 
 ## Changelog
 
+### 1.1.16 :
+	- Fixed : Bug with prefers-color-scheme media query
 ### 1.1.15 :
 	- Improved : Header Letter Spacing for better legibility
 	- Added : Support for prefers-color-scheme media query
@@ -91,18 +93,15 @@ Source: https://github.com/originecode/AeMi
 	- Added : Add Inter UI font as default Gutenberg editor font.
 ### 1.1.9 :
 	- Fixed : Posts do not display published date
-
 ### 1.1.8 :
 	- Changed: Post Author Text
 	- Changed: Post Published date Text
 	- Changed: Page Updated date Text
 	- Changed: Post Categories Text
 	- Added: Post Sticky Text
-
 ### 1.1.7 :
 	- Officially using Inter UI as main font
 	- Fixed some CSS rules
-
 ### 1.1.6 :
 	- Fixed: search input active style
 	- Fixed: Jetpack Infinite Loading

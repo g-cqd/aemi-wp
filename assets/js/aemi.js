@@ -588,7 +588,7 @@ if ( !aemi_exist( aemi_dark ) ) {
 	var aemi_dark = function () {
 		var a = document.getElementById("darkmode");
 		var b = cies.get("darkmode");
-		var c = window.matchMedia('(prefers-color-scheme: dark)');
+		var c = (window.matchMedia('(prefers-color-scheme: dark)')).matches;
 		if ( a !== null ) {
 			if ( b === "" ) {
 				if ( aemi_timetochange || c ) {
