@@ -11,8 +11,19 @@
 
 	<body <?php body_class(); ?>>
 		<?php do_action( 'aemi_header_before' ); ?>
-		<header <?php if ( get_header_image() ) { ?> style="background-image:url( '<?php echo esc_url( get_header_image() ); ?>' );"<?php } ?> role="banner" >
-			<?php do_action( 'aemi_header' ); ?>
+		<header
+			class="<?php
+			if ( get_theme_mod( 'aemi_header_autohiding', 1 ) == 1 ) {
+				esc_attr_e( "auto-hiding", "aemi" );
+			}
+			?>"<?php
+			if ( get_header_image() ) {
+				?>style="background-image:url( '<?php
+					echo esc_url( get_header_image() );
+				?>' ); "<?php
+			} ?>role="banner"><?php
+				do_action( 'aemi_header' );
+			?>
 		</header>
 		<main>
 			<div id="content">

@@ -21,10 +21,12 @@ if ( isset( $_SERVER['HTTP_USER_AGENT'] ) && ( ( strpos( $_SERVER['HTTP_USER_AGE
  * @see aemi_header_menu()
  * @see aemi_header_branding()
  * @see aemi_header_search()
+ * @see aemi_progress_bar()
  */
 add_action( 'aemi_header', 'aemi_header_menu', 10 );
 add_action( 'aemi_header', 'aemi_header_branding', 20 );
 add_action( 'aemi_header', 'aemi_header_search', 30 );
+add_action( 'aemi_header', 'aemi_progress_bar', 40 );
 
 /**
  * Footer

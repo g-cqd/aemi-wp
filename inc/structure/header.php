@@ -19,19 +19,22 @@ if ( ! function_exists( 'aemi_header_menu' ) )
 			{
 				wp_nav_menu( array(
 					'theme_location' => 'header-menu',
-					'container_class' => 'header-section'
+					'container' => '',
+					'menu_id' => 'header-menu',
+					'menu_class' => 'header-section menu'
 				) );
 			}
 			if ( has_nav_menu( 'social-menu' ) )
 			{
 				wp_nav_menu( array(
 					'theme_location' => 'social-menu',
+					'container' => '',
 					'depth' => '1',
-					'container_id' => 'header-social',
-					'container_class' => 'header-section'
+					'menu_id' => 'header-social',
+					'menu_class' => 'header-section'
 				) );
 			}
-			if ( get_theme_mod( 'aemi_darkmode_display' ) == 1 )
+			if ( get_theme_mod( 'aemi_darkmode_display', 1 ) == 1 )
 			{
 				?><div id="header-settings" class="header-section">
 					<div>
@@ -41,13 +44,10 @@ if ( ! function_exists( 'aemi_header_menu' ) )
 			}
 			if ( is_active_sidebar( 'header-widget-area' ) )
 			{
-				?><div id="toggle-header-widget" class="toggle">
-					<div id="toggle-widget-element">
-						<span></span>
-						<span></span>
-					</div>
+				?><div class="toggle">
+					<div id="toggle-widget"></div>
 				</div>
-				<div id="header-widgets"  class="header-section"><?php
+				<div id="header-widgets"><?php
 				dynamic_sidebar( 'header-widget-area' );
 				?></div><?php
 			}
@@ -97,13 +97,26 @@ if ( ! function_exists( 'aemi_header_search' ) )
 			?><div id="aemi-search">
 				<a id="search-toggle" href="javascript:void(0);" class="toggle"><span class="icon"></span></a>
 				<form role="search" method="get" class="search-form" action="<?php echo home_url( '/' ); ?>">
-					<label>
-						<span class="screen-reader-text"><?php echo _x( 'Search for:', 'label', 'aemi' ) ?></span>
-						<input type="search" class="search-field" placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'aemi' ) ?>" value="<?php echo get_search_query() ?>" name="s" title="<?php echo esc_attr_x( 'Search for:', 'label', 'aemi' ) ?>" />
+					<div id="search-container">
+						<label>
+							<span class="screen-reader-text"><?php echo _x( 'Search for:', 'label', 'aemi' ) ?></span>
+							<input type="search" id="searchOverlay" class="search-field" placeholder="<?php echo esc_attr_x( 'Search &hellip;', 'placeholder', 'aemi' ) ?>" value="<?php echo get_search_query() ?>" name="s" title="<?php echo esc_attr_x( 'Search for:', 'label', 'aemi' ) ?>" />
 					</label>
-					<input type="submit" class="search-submit" value="<?php echo esc_attr_x( 'go to results', 'submit button', 'aemi' ) ?>" />
+					<input type="submit" class="search-submit" value="<?php esc_html_e( '&#x23CE;', 'aemi' ); ?>" />
+				</div>
 				</form>
 			</div><?php
+		}
+	}
+}
+
+if ( ! function_exists( 'aemi_progress_bar' ) )
+{
+	function aemi_progress_bar()
+	{
+		if ( get_theme_mod( 'aemi_type_'.get_post_type().'_progress_bar' ) == 1 && is_singular() )
+		{
+			?><div id="aemi-progress-bar"></div><?php
 		}
 	}
 }

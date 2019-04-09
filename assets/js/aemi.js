@@ -1,11 +1,18 @@
-var today = new Date();
-var aemi_time = today.getHours();
-var aemi_timetochange = ((aemi_time > 18) || (aemi_time < 8)) ? true : false;
-var aemi = [];
-var aemi_exist = function (f) {
-	return (f === "function");
-};
-var aemi_lightbox = function () {
+const today = new Date();
+const aemi_time = today.getHours();
+const aemi_timetochange = ((aemi_time > 18) || (aemi_time < 8)) ? true : false;
+const header = document.querySelector( "header" );
+const aemi_exist = f => { return ( ( typeof f ) === "function" ); };
+
+let aemi = [],
+aemi_menu,
+aemi_toggle,
+aemi_galleries,
+aemi_dark,
+aemi_header_autoHiding,
+aemi_progress_bar;
+
+let aemi_lightbox = function () {
 	var _const_name = 'aemisw',
 	_const_class_prefix = _const_name,
 	_const_id_prefix = _const_name,
@@ -505,9 +512,18 @@ LX.close = function () {
 };
 };
 
-var lightbox = new aemi_lightbox();
+Element.prototype.isToggled = function () {
+	if (this.classList.contains("toggled")) { return true; }
+	else { return false; }
+};
+Element.prototype.toggle = function () {
+	if (this.isToggled()) { this.classList.remove("toggled"); }
+	else { this.classList.add("toggled"); }
+};
 
-var cies = {
+const lightbox = new aemi_lightbox();
+
+const cies = {
 	get : function ( cn ) {
 		var cn_ = cn + "=";
 		var dC = decodeURIComponent( document.cookie );
@@ -540,13 +556,13 @@ var cies = {
 };
 
 if ( !aemi_exist( aemi_menu ) ) {
-	var aemi_menu = function () {
+	aemi_menu = () => {
 		var a = document.querySelectorAll(".menu");
 		for (let i = 0; i < a.length; i++) {
 			var b = a[i].querySelectorAll(".menu-item-has-children");
 			for (let j = 0; j < b.length; j++) {
 				let c = document.createElement("div");
-				c.innerHTML = '<div class="toggle-element"><span></span><span></span></div>';
+				c.innerHTML = '<div class="toggle-element"></div>';
 				c.classList.add("toggle");
 				b[j].insertBefore(c, b[j].childNodes[1]);
 			}
@@ -554,28 +570,41 @@ if ( !aemi_exist( aemi_menu ) ) {
 	};
 } aemi.push( aemi_menu );
 if ( !aemi_exist( aemi_toggle ) ) {
-	var aemi_toggle = function () {
-		var s = [ "toggle-header-menu", "toggled", "no-overflow", "blurred" ],
-		t = document.querySelectorAll( ".toggle" );
-		for ( let i = 0 ; i < t.length ; i++ ) {
-			t[i].addEventListener( "click", function () {
-				this.classList.toggle( s[1] );
-				if ( this === document.getElementById( s[0] ) )
-				{
-					document.body.classList.toggle( s[2] );
-					document.body.classList.toggle( s[3] );
+	aemi_toggle = () => {
+		const searchFocus	= new Event("searchFocus");
+		const headerMenu 	= document.getElementById( "toggle-header-menu" );
+		const searchMenu	= document.getElementById( "search-toggle" );
+		const togglers		= document.querySelectorAll( ".toggle" );
+		Array.from( togglers ).forEach( element => {
+			element.addEventListener( "click", () => {
+				if ( element === headerMenu || element === searchMenu ) {
+					if ( element === headerMenu ) {
+						headerMenu.toggle();
+						if ( searchMenu.isToggled() ) { searchMenu.toggle(); }
+						else {
+							document.body.classList.toggle( "no-overflow" );
+						}
+					} else if ( element === searchMenu ) {
+						searchMenu.toggle();
+						if ( headerMenu.isToggled() ) { headerMenu.toggle(); }
+						else {
+							document.body.classList.toggle( "no-overflow" );
+						}
+						setTimeout(() => { document.getElementById("searchOverlay").focus(); }, 200 );
+					}
 				}
+				else { element.toggle(); }
 			}, false );
-		}
+		});
 	};
 } aemi.push( aemi_toggle );
 if ( !aemi_exist( aemi_galleries ) ) {
-	var aemi_galleries = function () {
-		var a = document.querySelectorAll( "div.gallery, .wp-block-gallery, .justified-gallery" );
+	aemi_galleries = () => {
+		let a = document.querySelectorAll( "div.gallery, .wp-block-gallery, .justified-gallery" );
 		if ( a !== null ) {
-			for ( var i = 0 ; i < a.length ; i++ ) {
+			for ( let i = 0 ; i < a.length ; i++ ) {
 				let b = a[i].querySelectorAll( ".gallery-item, .blocks-gallery-item, .jg-entry" );
-				for ( var j = 0 ; j < b.length ; j++ ) {
+				for ( let j = 0 ; j < b.length ; j++ ) {
 					let c = b[j].querySelector( "a" ) ? b[j].querySelector( "a" ) : b[j].querySelector( "img" ) ;
 					c.setAttribute( "data-aemisw", c.href || c.src );
 					c.setAttribute( "data-aemisw-group", i );
@@ -585,10 +614,10 @@ if ( !aemi_exist( aemi_galleries ) ) {
 	};
 } aemi.push( aemi_galleries );
 if ( !aemi_exist( aemi_dark ) ) {
-	var aemi_dark = function () {
-		var a = document.getElementById("darkmode");
-		var b = cies.get("darkmode");
-		var c = (window.matchMedia('(prefers-color-scheme: dark)')).matches;
+	aemi_dark = function () {
+		let a = document.getElementById("darkmode");
+		let b = cies.get("darkmode");
+		let c = (window.matchMedia('(prefers-color-scheme: dark)')).matches;
 		if ( a !== null ) {
 			if ( b === "" ) {
 				if ( aemi_timetochange || c ) {
@@ -601,7 +630,7 @@ if ( !aemi_exist( aemi_dark ) ) {
 					a.classList.add( "activated" );
 				}
 			}
-			a.addEventListener( "click", function () {
+			a.addEventListener( "click", () => {
 				document.body.classList.toggle( "darkui" );
 				if ( document.body.classList.contains( "darkui" ) ) {
 					a.classList.add( "activated" );
@@ -622,8 +651,41 @@ if ( !aemi_exist( aemi_dark ) ) {
 		}
 	};
 } aemi.push( aemi_dark );
+if ( header.classList.contains( "auto-hiding" ) ) {
+	let prevPosition;
+	if ( !aemi_exist( aemi_header_autoHiding ) ) {
+		aemi_header_autoHiding = () => {
+			prevPosition = window.pageYOffset;
+			window.addEventListener( "scroll", () => {
+				setTimeout( () => {
+					let currPosition = window.pageYOffset;
+					if (document.querySelector("#toggle-header-menu.toggled") == undefined && document.querySelector("#search-toggle.toggled") == undefined) {
+	  					if ( prevPosition > currPosition ) {
+							header.classList.remove( "hidden" );
+						} else if ( currPosition > prevPosition + 20 ) {
+							header.classList.add( "hidden" );
+						} prevPosition = currPosition;
+					}
+				}, 100);
+			}, false );
+		};
+	} aemi.push( aemi_header_autoHiding );
+}
+if ( document.querySelector( "#aemi-progress-bar" ) ) {
+	let progressBar = document.querySelector( "#aemi-progress-bar" );
+	if ( !aemi_exist( aemi_progress_bar ) ) {
+		aemi_progress_bar = () => {
+			window.addEventListener( "scroll", () => {
+				let max = document.body.scrollHeight - window.innerHeight;
+				let progressValue = ( window.pageYOffset / max ) * 100;
+				progressBar.style.width = ( progressValue > 100 ? 100 : progressValue )+"vw";
+			}, false );
+		};
+	} aemi.push( aemi_progress_bar );
+}
 
-aemi.push( function () { lightbox.load(); } );
+
+aemi.push( () => { lightbox.load(); } );
 
 
-for ( var i in aemi ) { aemi[i](); }
+for ( let f of aemi ) { f(); }

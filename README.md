@@ -4,9 +4,9 @@
 
 * Contributors: @guizillanet
 * Requires at least: 4.9
-* Tested up to: 5.0.3
+* Tested up to: 5.1.1
 * Requires PHP: 7.2
-* Version: 1.1.16
+* Version: 1.1.17
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -69,8 +69,18 @@ License: CC0 1.0 Universal (CC0 1.0)
 Source: https://github.com/originecode/AeMi
 ```
 
+## Coming
+
+	[ ] Blog Page header message
+
 ## Changelog
 
+### 1.1.17 :
+	- Added : Now it is possible to remove infos like Author, Published Date, Taxonomies... from every post types.
+	- Added : New Feature : Auto hiding header
+	- Added : New Feature : Scroll Indicator on top of page (easily-CSS-customizable)
+	- Fixed : Lot of Style improvments
+	- Fixed : Search input in Search Overlay autofocus
 ### 1.1.16 :
 	- Fixed : Bug with prefers-color-scheme media query
 ### 1.1.15 :

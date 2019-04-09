@@ -4,7 +4,7 @@ Theme URI: https://github.com/originecode/aemi/
 Author: Guillaume COQUARD
 Author URI: https://www.originecode.fr/
 Description: AeMi is designed to be an aesthetic minimalist wordpress theme. It provides a highly legible, clean, clear and really minimalist theme.
-Version: 1.1.16
+Version: 1.1.17
 License: GPL-3.0
 License URI: https://opensource.org/licenses/GPL-3.0
 Text Domain: aemi
@@ -12,61 +12,74 @@ Tags: one-column, custom-background, custom-menu, featured-image-header, feature
 
 */
 :root {
-	/* Colors */
-	--aemi-999:   rgb( 0, 0, 0 );
-	--aemi-990:   rgb( 30, 30, 30 );
-	--aemi-900:   rgb( 80, 80, 80 );
-	--aemi-099:   rgb( 150, 150, 150 );
-	--aemi-094:   rgb( 190, 190, 190 );
-	--aemi-009:   rgb( 230, 230, 230 );
-	--aemi-004:   rgb( 242, 242, 242 );
-	--aemi-000:   rgb( 255, 255, 255 );
-	--aemi-0000: rgba( 0, 0, 0, 0 );
-	--aemi-9998: rgba( 0, 0, 0, .8 );
-	--aemi-9996: rgba( 0, 0, 0, .6 );
-	--aemi-9994: rgba( 0, 0, 0, .4 );
-	--aemi-0009: rgba( 255, 255, 255, .9 );
-	--aemi-0008: rgba( 255, 255, 255, .8 );
-	--aemi-0003: rgba( 255, 255, 255, .3 );
-	--aemi-text:  var(--aemi-999);
-	--a-link: var(--aemi-9994);
+	--a-999:   rgb( 0, 0, 0 );
+	--a-998:   rgb( 20, 20, 20 );
+	--a-990:   rgb( 30, 30, 30 );
+	--a-900:   rgb( 80, 80, 80 );
+	--a-099:   rgb( 150, 150, 150 );
+	--a-094:   rgb( 190, 190, 190 );
+	--a-049:   rgb( 200, 200, 200 );
+	--a-044:   rgb( 215, 215, 215 );
+	--a-009:   rgb( 230, 230, 230 );
+	--a-004:   rgb( 242, 242, 242 );
+	--a-000:   rgb( 255, 255, 255 );
+	--a-0000: rgba( 0, 0, 0, 0 );
+	--a-9998: rgba( 0, 0, 0, .8 );
+	--a-9996: rgba( 0, 0, 0, .6 );
+	--a-9994: rgba( 0, 0, 0, .4 );
+	--a-0009: rgba( 255, 255, 255, .9 );
+	--a-0008: rgba( 255, 255, 255, .8 );
+	--a-0003: rgba( 255, 255, 255, .3 );
 
+	--a-text:  var(--a-999);
+	--a-clk: var(--a-999);
+	--a-clk-hover: var(--a-9996);
+	--a-clk-clicked: var(--a-9994);
 
-	/* Initialization */
+	--a-trans-func: cubic-bezier(0.65, 0.05, 0.36, 1);
+
+	--a-accent-1: #0080FF;
+
+	--a-border-radius: .5rem;
+
 	--default-font: Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
 }
-.no-overflow {
-	overflow: hidden;
-}
+
+
+.no-overflow { overflow: hidden; }
+
+*, * > * {box-sizing: border-box;}
+
+*::-moz-focus-inner { outline: none; }
 /*--------------------------------------------------------------
 # WordPress
 --------------------------------------------------------------*/
 .alignright {
 	float: right;
-	margin-top: 1.25em;
-	margin-bottom: 1.25em;
-	margin-left: 1.25em;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	margin-left: 2rem;
 	margin-right: 0;
 	text-align: right;
 }
 .alignleft {
 	float: left;
-	margin-top: 1.25em;
-	margin-bottom: 1.25em;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
 	margin-left: 0;
-	margin-right: 1.25em;
+	margin-right: 2rem;
 	text-align: left;
 }
 .aligncenter {
-	margin-top: 1.25em;
-	margin-bottom: 1.25em;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
 }
 .alignnone {
-	margin-top: 1.25em;
-	margin-bottom: 1.25em;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
 	margin-left: 0;
 	margin-right: 0;
 	float: none;
@@ -81,10 +94,10 @@ Tags: one-column, custom-background, custom-menu, featured-image-header, feature
 	width: 1px;
 	word-wrap: normal !important;
 }
-.screen-reader-text:focus { /* var to ie */
+.screen-reader-text:focus {
 	font-size: 15px;
 	font-size: 0.9375rem;
-	background-color: var(--aemi-004);
+	background-color: var(--a-000);
 	border-radius: 3px;
 	clip: auto;
 	color: #21759b;
@@ -98,57 +111,57 @@ Tags: one-column, custom-background, custom-menu, featured-image-header, feature
 	width: auto;
 	z-index: 100000;
 }
-.bypostauthor {
-	visibility: visible;
-}
+.bypostauthor { visibility: visible; }
 /*--------------------------------------------------------------
 # Basics
 --------------------------------------------------------------*/
-html { /* var to ie */
+html {
 	box-sizing: border-box;
 	font-family: var( --default-font );
-	font-size: 12pt;
 	line-height: 1.2;
-	/* font-smooth: auto; - Will be activate when widely supported */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+	font-smooth: auto;
+	-webkit-font-smoothing: auto;
+	-moz-osx-font-smoothing: auto;
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%;
 	text-rendering: optimizeLegibility;
 }
-* > * {
-	box-sizing: border-box;
-}
-*::-moz-focus-inner {
-	outline: none;
-}
 /*--------------------------------------------------------------
 # WordPress
 --------------------------------------------------------------*/
-body {
-	margin: 0;
-}
 body.darkui {
-	--aemi-999: rgb( 255, 255, 255 );
-	--aemi-990: rgb( 225, 225, 225 );
-	--aemi-900: rgb( 175, 175, 175 );
-	--aemi-099: rgb( 105, 105, 105 );
-	--aemi-094: rgb( 65, 65, 65 );
-	--aemi-049: rgb( 45, 45, 45 );
-	--aemi-044: rgb( 35, 35, 35 );
-	--aemi-009: rgb( 25, 25, 25 );
-	--aemi-004: rgb( 12, 12, 12 );
-	--aemi-000: rgb( 0, 0, 0 );
-	--aemi-9996: rgba( 255, 255, 255, .6 );
-	--aemi-9994: rgba( 255, 255, 255, .4 );
-	--aemi-0009: rgba( 0, 0, 0, .9 );
-	--aemi-0008: rgba( 0, 0, 0, .8 );
-	--aemi-0003: rgba( 0, 0, 0, .3 );
-	--aemi-text: var(--aemi-999);
-	--a-link: var(--aemi-9994);
+	--a-999: rgb( 255, 255, 255 );
+	--a-998: rgb( 235, 235, 235 );
+	--a-990: rgb( 225, 225, 225 );
+	--a-900: rgb( 175, 175, 175 );
+	--a-099: rgb( 105, 105, 105 );
+	--a-094: rgb( 65, 65, 65 );
+	--a-049: rgb( 45, 45, 45 );
+	--a-044: rgb( 35, 35, 35 );
+	--a-009: rgb( 25, 25, 25 );
+	--a-004: rgb( 12, 12, 12 );
+	--a-000: rgb( 0, 0, 0 );
+	--a-9996: rgba( 255, 255, 255, .6 );
+	--a-9994: rgba( 255, 255, 255, .4 );
+	--a-0009: rgba( 0, 0, 0, .9 );
+	--a-0008: rgba( 0, 0, 0, .8 );
+	--a-0003: rgba( 0, 0, 0, .3 );
 
-	background-color: var(--aemi-000);
-	color: var(--aemi-text);
+	--a-text: var(--a-999);
+	--a-bkgd: var(--a-000);
+
+	--a-clk: var(--a-999);
+	--a-clk-hover: var(--a-9994);
+}
+html,
+body {
+	margin : 0;
+	padding: 0;
+	border : 0;
+}
+body {
+	background-color: var(--a-bkgd);
+	color: var(--a-text);
 }
 /*--------------------------------------------------------------
 # Headings
@@ -156,43 +169,55 @@ body.darkui {
 h1,h2,h3,
 h4,h5,h6 {
 	font-weight: 700;
-	line-height: 1.2;
-	letter-spacing: -.03em;
+	letter-spacing: -.02em;
 }
-h1 { font-size: 3em; }
-h2 { font-size: 2.5em; }
-h3 { font-size: 2em; }
-h4 { font-size: 1.5em; }
-h5 { font-size: 1em; }
-h6 { font-size: 0.75em; }
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2.25rem; }
+h3 { font-size: 2rem; }
+h4 { font-size: 1.75rem; }
+h5 { font-size: 1.5rem; }
+h6 { font-size: 1.25rem; }
+.post-content h1, .post-content h2,
+.post-content h3, .post-content h4,
+.post-content h5, .post-content h6 {
+	line-height: 1.5;
+}
 /*--------------------------------------------------------------
 # HR
 --------------------------------------------------------------*/
 hr,
-hr.wp-block-separator { /* var to ie */
+hr.wp-block-separator {
 	box-sizing: content-box;
 	height: 0;
-	margin: 4.875em auto;
-	border: 1pt solid var(--aemi-009);
-	border-radius: 1pt;
-	background-color: var(--aemi-009);
+	margin: 5rem auto;
+	border: 1px solid var(--a-009);
+	border-radius: calc(var(--a-border-radius) / 15);
+	background-color: var(--a-009);
 	overflow: visible;
 }
-body.darkui hr { /* var to ie */
-	border-color: var(--aemi-044);
-	background-color: var(--aemi-044);
-}
 hr.wp-block-separator:not(.is-style-wide):not(.is-style-dots) {
-	width: 3em;
+	width: 4rem;
+}
+hr.wp-block-separator.is-style-dots {
+	margin: 5rem auto;
 }
 hr.wp-block-separator.is-style-dots::before {
-	padding: 0 0 0 .5em !important;
-	font-size: 3em !important;
-	letter-spacing: .5em !important;
-	color: var(--aemi-009) !important;
+	content: "...";
+	margin: 0;
+	padding: 0 0 0 .35em;
+	font-family: var( --default-font );
+	font-size: 1.5em;
+	font-weight: bold;
+	letter-spacing: .5em;
+	line-height: 0;
+	color: var(--a-009);
 }
-body.darkui hr.is-style-dots::before { /* var to ie */
-	color: var(--aemi-044) !important;
+.darkui hr {
+	border-color: var(--a-044);
+	background-color: var(--a-044);
+}
+.darkui hr.is-style-dots::before {
+	color: var(--a-044) !important;
 }
 /*--------------------------------------------------------------
 # Links
@@ -200,98 +225,78 @@ body.darkui hr.is-style-dots::before { /* var to ie */
 a,
 a:link,
 a:visited,
-a:active { /* var to ie */
+a:active {
 	font-weight: 700;
 	text-decoration: none;
 	outline: none;
-	color: var(--aemi-text);
-	transition-property: color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	color: var(--a-clk);
+	transition: color 200ms var(--a-trans-func);
 }
-a:hover { /* var to ie */
-	color: var(--a-link);
-	transition-property: color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+a:hover {
+	color: var(--a-clk-hover);
+	transition: color 200ms var(--a-trans-func);
 }
 a img {
 	opacity: 1;
-	transition-property: opacity;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition: opacity 200ms var(--a-trans-func);
 }
 a img:hover {
 	opacity: .7;
-	transition-property: opacity;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition: opacity 200ms var(--a-trans-func);
 }
 abbr,
 abbr[title],
-acronym { /* var to ie */
-	border-bottom: 2px dotted var(--aemi-009);
+acronym {
+	border-bottom: 2px dotted var(--a-009);
 	text-decoration: none;
 }
 body.darkui abbr,
 body.darkui abbr[title],
-body.darkui acronym { /* var to ie */
-	border-color: var(--aemi-094);
+body.darkui acronym {
+	border-color: var(--a-094);
 }
-b,
-strong {
-	font-weight: bolder;
+b, strong { font-weight: bolder; }
+tt, var,
+kbd, samp,
+code, pre {
+	font-family: "Monaco","Hack",Courier,"Courier New",monospace;
 }
-tt,
-var,
-kbd,
-samp,
-code,
-pre {
-	font-family: "Hack",Courier,"Courier New",monospace;
-}
-tt,
-var,
-kbd,
-samp {
+tt, var,
+kbd, samp {
 	font-size: 1em;
 }
-pre { /* var to ie */
-	margin: 1.25em 0;
-	padding: 1.25em;
-	border-radius: 7pt;
+pre {
+	margin: 0 0 2.5rem;
+	padding: 1.25rem;
+	border-radius: var(--a-border-radius);
 	overflow-x: scroll;
 	overflow-y: hidden;
 	overflow-wrap: unset;
-	font-size: .8em;
-	line-height: 1.25em;
+	font-size: 1rem;
+	line-height: 1.25;
 	-moz-tab-size: 4;
 	-o-tab-size: 4;
 	tab-size: 4;
 	text-align: left;
-	background-color: var(--aemi-004);
+	background-color: var(--a-004);
 }
-body.darkui pre { /* var to ie */
-	background-color: var(--aemi-009);
+body.darkui pre {
+	background-color: var(--a-009);
 }
-:not(pre) > code { /* var to ie */
+:not(pre) > code {
 	display: inline;
 	margin: 0;
 	padding: .1em .1em .05em;
-	border-radius: 2pt;
+	border-radius: calc(var(--a-border-radius) / 10);
 	font-size: .9em;
 	line-height: 0;
-	background-color: var(--aemi-004);
+	background-color: var(--a-004);
 }
-body.darkui :not(pre) > code { /* var to ie */
-	background-color: var(--aemi-009);
+body.darkui :not(pre) > code {
+	background-color: var(--a-009);
 }
-small {
-	font-size: .75em;
-}
-big {
-	font-size: 1.25em;
-}
+small { font-size: .75em; }
+big { font-size: 1.25em; }
 sub,
 sup {
 	position: relative;
@@ -299,12 +304,76 @@ sup {
 	line-height: 0;
 	vertical-align: baseline;
 }
-sub {
-	bottom: -.25em;
+sub { bottom: -.25em; }
+sup { top: -.5em; }
+dfn { border-bottom: 2px solid var(--a-009); }
+body.darkui dfn { border-color: var(--a-094); }
+dt {
+	padding-left: .5em;
+	font-weight: bold;
 }
-sup {
-	top: -.5em;
+dd { margin-bottom: 1em; }
+details {
+	margin: 0 0 2em;
+	padding: 0;
+	border: 2px solid var(--a-004);
+	border-radius: var(--a-border-radius);
 }
+details > *:last-child { margin-bottom: 1.5em; }
+body.darkui details { border-color: var(--a-009); }
+summary {
+	display: list-item;
+	padding: .5em;
+	list-style: none;
+	outline: none;
+	cursor: pointer;
+}
+summary::-webkit-details-marker { display: none; }
+summary::before {
+	display: inline-block;
+	content: "\2B";
+	margin-right: .5em;
+	padding: 0;
+	font-size: 1em;
+	font-feature-settings: "case";
+	font-weight: 700;
+	vertical-align: top;
+}
+[open] summary::before { content: "\2212"; }
+summary + * { margin-top: 1em; }
+table {
+	margin: 2em auto;
+	border-collapse: collapse;
+	background-color: transparent;
+}
+table caption {
+	padding: .13em;
+	border: none;
+	color: var(--a-990);
+}
+th, td { padding: .25em .5em; }
+table,
+th,
+tr,
+td,
+thead,
+tbody,
+tfoot {
+	border: 1px solid var(--a-009);
+}
+body.darkui table,
+body.darkui th,
+body.darkui tr,
+body.darkui td,
+body.darkui thead,
+body.darkui tbody,
+body.darkui tfoot {
+	border-color: var(--a-094);
+}
+thead { color: var(--a-990); }
+tfoot { color: var(--a-099); }
+template { display: none; }
+[hidden] { display: none; }
 figure,
 figcaption {
 	position: relative;
@@ -313,108 +382,11 @@ figcaption {
 	height: auto;
 	width: auto;
 }
-
 caption,
 figcaption {
 	height: auto;
 	width: auto;
 	font-weight: 700;
-}
-dfn { /* var to ie */
-	border-bottom: 2px solid var(--aemi-009);
-}
-body.darkui dfn { /* var to ie */
-	border-color: var(--aemi-094);
-}
-dt {
-	padding-left: .5em;
-	font-weight: bold;
-}
-dd {
-	margin-bottom: 1em;
-	line-height: 1;
-}
-details { /* var to ie */
-	display: block;
-	margin: 1em 0;
-	padding: 0;
-	border: 2px solid var(--aemi-004);
-	border-radius: 7pt;
-}
-details > *:last-child {
-	margin-bottom: 1.5em;
-}
-body.darkui details { /* var to ie */
-	border-color: var(--aemi-009);
-}
-summary {
-	display: list-item;
-	padding: .5em;
-	list-style: none;
-	outline: none;
-	cursor: pointer;
-}
-summary::-webkit-details-marker {
-	display: none;
-}
-summary::before {
-	display: inline-block;
-	content: "\2B";
-	margin-right: .5em;
-	padding: 0 0 .1em .25em;
-	font-size: 1.2em;
-	font-weight: 700;
-	line-height: .833em;
-}
-[open] summary::before {
-	content: "\2212";
-}
-summary + * {
-	margin-top: 1em;
-}
-table {
-	margin: 2em auto;
-	border-collapse: collapse;
-	background-color: transparent;
-}
-table caption { /* var to ie */
-	padding: .13em;
-	border: none;
-	color: var(--aemi-990);
-}
-th,
-td {
-	padding: .25em .5em;
-}
-table,
-th,
-tr,
-td,
-thead,
-tbody,
-tfoot { /* var to ie */
-	border: 1px solid var(--aemi-009);
-}
-body.darkui table,
-body.darkui th,
-body.darkui tr,
-body.darkui td,
-body.darkui thead,
-body.darkui tbody,
-body.darkui tfoot { /* var to ie */
-	border-color: var(--aemi-094);
-}
-thead { /* var to ie */
-	color: var(--aemi-990);
-}
-tfoot { /* var to ie */
-	color: var(--aemi-099);
-}
-template {
-	display: none;
-}
-[hidden] {
-	display: none;
 }
 /*--------------------------------------------------------------
 # Blockquote
@@ -423,11 +395,11 @@ template {
 .wp-block-quote.is-large,
 .wp-block-quote.is-style-large,
 .wp-block-pullquote,
-blockquote { /* var to ie */
-	padding: 2.5em;
+blockquote {
+	padding: 2.25rem;
 	border: none;
-	border-radius: 7pt;
-	background-color: var(--aemi-004);
+	border-radius: var(--a-border-radius);
+	background-color: var(--a-004);
 	font-style: italic;
 	text-align: left;
 }
@@ -435,35 +407,35 @@ blockquote { /* var to ie */
 .wp-block-quote.is-large,
 .wp-block-quote.is-style-large,
 blockquote {
-	margin: 1em 0;
+	margin: 0 0 2em;
 }
 .wp-block-pullquote {
-	margin: 1em inherit;
+	margin: 0 inherit 2em;
 }
 .wp-block-pullquote.alignleft,
 .wp-block-pullquote.alignright,
-.wp-block-pullquote.aligncenter { /* var to ie */
-	border-radius: 7pt;
-	background-color: var(--aemi-004);
+.wp-block-pullquote.aligncenter {
+	border-radius: var(--a-border-radius);
+	background-color: var(--a-004);
 }
 body.darkui .wp-block-quote,
 body.darkui .wp-block-quote.is-large,
 body.darkui .wp-block-quote.is-style-large,
 body.darkui .wp-block-pullquote,
-body.darkui blockquote { /* var to ie */
-	background-color: var(--aemi-009);
+body.darkui blockquote {
+	background-color: var(--a-009);
 }
 blockquote p {
 	margin: 0;
 	padding: 0;
 }
 blockquote cite,
-.wp-block-pullquote cite { /* var to ie */
+.wp-block-pullquote cite {
 	display: block;
 	margin: 0;
-	padding-top: 1.75em;
+	padding-top: 1.25rem;
 	font-weight: 700;
-	color: var(--aemi-094) !important;
+	color: var(--a-094) !important;
 }
 blockquote cite::before {
 	content: "– ";
@@ -473,8 +445,7 @@ blockquote cite::before {
 --------------------------------------------------------------*/
 .menu {
 	margin: 0;
-	font-size: 2em;
-	font-weight: 700;
+	font-size: 1.75rem;
 }
 .menu,
 .menu ul {
@@ -482,14 +453,12 @@ blockquote cite::before {
 	padding: 0;
 	list-style: none;
 }
-.menu li {
-	position: relative;
-}
+.menu li { position: relative; }
 .menu > li:not(:last-child) {
 	margin-bottom: .75em;
 }
 .menu .menu-item-has-children ul {
-	margin-left: 1.111em;
+	margin-left: 1.125em;
 	font-size: .9em;
 	font-weight: lighter;
 }
@@ -497,71 +466,44 @@ blockquote cite::before {
 	position: absolute;
 	top: 0;
 	right: 0;
-	height: 1.2em;
+	height: 1em;
 	width: 1em;
-	transition-property: color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	font-size: 1.2em;
+	line-height: 1;
+	color: var(--a-clk);
+	transition: color 200ms var(--a-trans-func);
 }
-.menu .toggle:hover { /* var to ie */
-	color: var(--aemi-099);
-	transition-property: color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+.menu .toggle:hover {
+	color: var(--a-clk-hover);
+	transition: color 200ms var(--a-trans-func);
 	cursor: pointer;
 }
 .menu .toggle .toggle-element {
 	position: relative;
-	box-sizing: border-box;
-	display: flex;
-	flex-flow: column nowrap;
-	align-items: center;
-	align-content: center;
-	justify-content: center;
-	height: 1.2em;
+	display: block;
+}
+.menu .toggle .toggle-element::before {
+	display: block;
+	top: 0;
+	right: 0;
+	height: 1em;
 	width: 1em;
-	transition-property: transform;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	content:"\2B";
+	font-weight: 600;
+	line-height: 1;
+	font-feature-settings: "case";
+	text-align: center;
 }
-.menu .toggle-element span,
-.menu .toggle.toggled .toggle-element span { /* var to ie */
-	position: absolute;
-	height: 5px;
-	width: .8em;
-	border-radius: 1pt;
-	background-color: var(--aemi-text);
-	transition-property: background-color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
-}
-.menu .toggle:hover .toggle-element span { /* var to ie */
-	background-color: var(--aemi-099);
-	transition-property: background-color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
-}
-.menu .toggle-element span:not(:first-child) {
-	transform: rotate(90deg);
-}
-.menu .toggle.toggled .toggle-element {
-	transform: rotate(45deg);
-	transition-property: transform;
-	transition-duration: .3s;
-	transition-timing-function: ease;
-}
+.menu .toggle.toggled .toggle-element::before { content:"\2212"; }
+
 .menu .toggle:not(.toggled) + ul {
 	max-height: 0;
 	overflow: hidden;
-	transition-property: max-height;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-property: max-height 200ms var(--a-trans-func);
 }
 .menu .toggle.toggled + ul {
 	max-height: 10em;
-	transition-property: max-height;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition: max-height 200ms var(--a-trans-func);
 }
 #header-social .menu .toggle,
 #footer-menu .menu .toggle {
@@ -570,7 +512,7 @@ blockquote cite::before {
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
-header { /* var to ie */
+header {
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -583,15 +525,23 @@ header { /* var to ie */
 	display: flex;
 	justify-content: flex-start;
 	padding: 1em 1.25em;
-	background-color: var(--aemi-000);
+	background-color: var(--a-000);
 	z-index: 10;
+	transition: top 300ms var(--a-trans-func);
 }
-body.admin-bar header {
+header.hidden {
+	top: -4.875em;
+	transition: top 300ms var(--a-trans-func);
+}
+.admin-bar header {
 	top: 32px;
+	transition: top 300ms var(--a-trans-func);
 }
-body.darkui header { /* var to ie */
-	background-color: var(--aemi-000);
+.admin-bar header.hidden {
+	top: calc( -4.875em + 32px);
+	transition: top 300ms var(--a-trans-func);
 }
+.darkui header { background-color: var(--a-000); }
 header .spacer {
 	min-height: 2.875em;
 	min-width: 2.875em;
@@ -606,106 +556,134 @@ header .spacer {
 	width: 2.875em;
 	cursor: pointer;
 }
+#aemi-progress-bar {
+	position: fixed;
+	display: block;
+	width: 0%;
+	height: 5px;
+	transition: width 50ms linear;
+	background-color: var(--a-text);
+	z-index: 3;
+	top: 0px;
+	left: 0px;
+	border-radius: 0;
+	max-width: 100vw;
+}
 /*--------------------------------------------------------------
 # Hamburger Menu Toggler
 --------------------------------------------------------------*/
 #toggle-element {
 	position: relative;
-	box-sizing: border-box;
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: center;
 	height: 80%;
 	width: 80%;
-	border-radius: 10pt;
+	border-radius: var(--a-border-radius);
 }
-#toggle-element > span { /* var to ie */
+#toggle-element > span {
 	position: absolute;
 	display: block;
 	height: 4px;
-	border-radius: 1.25pt;
-	background-color: var(--aemi-990);
+	border-radius: var(--a-border-radius);
+	background-color: var(--a-990);
 	transition-property: width, margin, background-color, transform;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 #toggle-element > span:nth-child(1) {
 	margin-top: calc( ( ( 2.3em - .75em ) / 3 ) * -1 );
 	margin-bottom: calc( ( ( 2.3em - .75em ) / 3 ) );
 	width: 80%;
 }
-#toggle-element > span:nth-child(2) {
-	width: 90%;
-}
+#toggle-element > span:nth-child(2) { width: 90%; }
 #toggle-element > span:nth-child(3) {
 	margin-top: calc( ( ( 2.3em - .75em ) / 3 ) );
 	margin-bottom: calc( ( ( 2.3em - .75em ) / 3 ) * -1 );
 	width: 60%;
 }
-.toggled > #toggle-element {
-	align-items: flex-start;
-}
+.toggled > #toggle-element { align-items: flex-start; }
 .toggled > #toggle-element > span:nth-child(1) {
 	margin: 0;
 	width: 75%;
 	transform: rotate( 45deg );
 	transition-property: width, margin, background-color, transform;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 .toggled > #toggle-element > span:nth-child(2) {
 	width: 0;
 	transition-property: width, margin, background-color, transform;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 .toggled > #toggle-element > span:nth-child(3) {
 	margin: 0;
 	width: 75%;
 	transform: rotate( -45deg );
 	transition-property: width, margin, background-color, transform;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
-#header-menu > .toggle:hover #toggle-element > span { /* var to ie */
-	background-color: var(--aemi-099);
+#header-menu > .toggle:hover #toggle-element > span {
+	background-color: var(--a-099);
 	transition-property: width, margin, background-color, transform;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 #header-menu > .toggle:hover,
-#toggle-header-widget:hover { /* var to ie */
-	color: var(--aemi-099);
+#toggle-header-widget:hover {
+	color: var(--a-099);
 	transition-property: color, transform;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 /*--------------------------------------------------------------
 # Header Menu
 --------------------------------------------------------------*/
-#header-menu > .toggle + * { /* var to ie */
+#header-menu > .wrap {
 	position: fixed;
 	top: 4.875em;
 	left: 0;
 	padding: 5vh 7.5vw;
-	height: calc( 100vh - 4.875em );
+	height: calc(100vh - 4.875em);
 	width: 100vw;
-	background-color: var(--aemi-000);
 	overflow: auto;
 	z-index: -1;
-	transition-property: left;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-property: top;
+	transition-duration: 400ms;
+	transition-timing-function: var(--a-trans-func);
 }
-body.admin-bar #header-menu > .toggle + * {
+#header-menu > .wrap::before {
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: var(--a-000);
+	opacity: 1;
+	z-index: -1;
+	transition-property: opacity, visibility;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
+}
+#header-menu > *:not(.toggled) + .wrap::before {
+	opacity: 0;
+	visibility: hidden;
+	transition-property: opacity, visibility;
+	transition-duration: 500ms;
+	transition-timing-function: var(--a-trans-func);
+}
+body.admin-bar #header-menu > .wrap {
 	top: calc( 4.875em + 32px );
 	height: calc( 100vh - ( 4.875em + 32px ) );
 }
-#header-menu > .toggle:not(.toggled) + * {
-	left: -100vw;
-	transition-property: left;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+#header-menu > *:not(.toggled) + .wrap {
+	top: 100vh;
+	transition-property: top;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 /*--------------------------------------------------------------
 # Header Menu Sections
@@ -713,31 +691,31 @@ body.admin-bar #header-menu > .toggle + * {
 .header-section:not(:first-child) {
 	margin-top: 2em;
 }
-.header-section { /* var to ie */
-	padding: 1.5em;
-	margin: auto;
-	width: 25em;
+.header-section {
+	padding: 1.5rem;
+	margin: 0 auto;
+	width: 25rem;
 	max-width: 85vw;
-	border-radius: 10pt;
-	background-color: var(--aemi-000);
+	border-radius: var(--a-border-radius);
+	background-color: var(--a-000);
 	box-shadow: 0 10px 30px -3px rgba(0,0,0,.09);
 	transition-property: box-shadow, background-color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 .header-section:hover {
 	box-shadow: 0 5px 20px 2px rgba(0,0,0,.125);
 	transition-property: box-shadow, background-color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 body.darkui .header-section,
-body.darkui .header-section:hover { /* var to ie */
+body.darkui .header-section:hover {
 	box-shadow: none;
-	background-color: var(--aemi-009);
+	background-color: var(--a-009);
 	transition-property: background-color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 /*--------------------------------------------------------------
 # Branding
@@ -769,96 +747,90 @@ body.darkui #logo img {
 /*--------------------------------------------------------------
 # Header Widgets
 --------------------------------------------------------------*/
-#toggle-header-widget {
+.wrap > .toggle {
 	position: relative;
-	margin: 4.875em 0 2em;
-	padding: 1em 0;
+	margin: calc(5vh + .5rem) auto;
 	text-align: center;
 	cursor: pointer;
 }
-#toggle-widget-element {
+#toggle-widget {
 	position: relative;
 	display: flex;
+	align-content: center;
 	align-items: center;
 	justify-content: center;
 	margin: auto;
-	width: 0;
-	transition: .3s transform ease;
+	height: 3rem;
+	width: auto;
 }
-#toggle-widget-element::before { /* var to ie */
+#toggle-widget::after {
+	content: "\2B";
+	font-size: 2.5em;
+	font-weight: 500;
+	line-height: 0;
+	font-feature-settings: "case";
+	color: var(--a-099);
+	transform: rotate(45deg);
+	transition: 300ms transform var(--a-trans-func);
+}
+:not(.toggled) > #toggle-widget::after {
+	transform: rotate(0deg);
+	transition: 300ms transform var(--a-trans-func);
+}
+#toggle-widget::before {
 	position: absolute;
+	display: block;
 	content: "";
-	top: -1.5em;
-	left: -1.5em;
 	height: 3em;
 	width: 3em;
 	border-radius: 100%;
-	background-color: var(--aemi-000);
+	background-color: var(--a-000);
 	box-shadow: 0 10px 20px -3px rgba(0,0,0,.09);
 	transition-property: transform, box-shadow;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 	z-index: -1;
 }
-body.darkui #toggle-widget-element::before { /* var to ie */
-	background-color: var(--aemi-009);
+body.darkui #toggle-widget::before {
+	background-color: var(--a-009);
 	box-shadow: none;
 }
-#toggle-widget-element:hover::before {
-	box-shadow: 0 5px 15px -2px rgba(0,0,0,.09);
+#toggle-widget:hover::before {
+	box-shadow: 0 5px 15px -2px rgba(0,0,0,.15);
 	transition-property: transform, box-shadow;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
-#toggle-header-widget.toggled #toggle-widget-element {
-	transform: rotate( 45deg );
-	transition: .3s transform ease;
-}
-#toggle-header-widget.toggled #toggle-widget-element::before {
-	transform: rotate( -45deg );
-	box-shadow: 0 5px 10px -2px rgba(0,0,0,.2);
-	transition-property: transform, box-shadow;
-	transition-duration: .3s;
-	transition-timing-function: ease;
-}
-#toggle-header-widget span { /* var to ie */
-	position: absolute;
-	height: 4px;
-	width: 1.5em;
-	border-radius: 1pt;
-	background-color: var(--aemi-094);
-	transition: .3s background-color ease;
-}
-#toggle-header-widget.toggled span { /* var to ie */
-	background-color: var(--aemi-text);
-	transition: .3s background-color ease;
-}
-#toggle-header-widget:hover span,
-#toggle-header-widget.toggled:hover span { /* var to ie */
-	background-color: var(--aemi-099);
-	transition: .3s background-color ease;
-}
-#toggle-header-widget span:not(:first-child) {
-	transform: rotate(90deg);
-}
-#toggle-header-widget + * {
-	padding: 0 1.5em;
+
+:not(.toggled) + #header-widgets {
 	max-height: 0;
+	margin: -2.5vh auto 0;
+	opacity: 0;
 	overflow: hidden;
-	transition-property: padding, max-height, box-shadow;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-property: opacity, margin, max-height;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
-#toggle-header-widget + * > * {
-	display: block;
-}
-#toggle-header-widget.toggled + * {
-	padding: 1.5em;
+.toggled + #header-widgets {
 	max-height: unset;
+	margin: 2.5vh auto 5vh;
+	padding-bottom: 5vh;
 	overflow: visible;
-	transition-property: padding, max-height, box-shadow;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	opacity: 1;
+	transition-property: opacity, margin, max-height;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
+}
+:not(.toggled) + #header-widgets > * {
+	box-shadow: none;
+	transition-property: box-shadow;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
+}
+.toggled + #header-widgets > * {
+	transition-property: box-shadow;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 /*--------------------------------------------------------------
 # Darkmode
@@ -874,18 +846,18 @@ body.darkui #darkmode::before {
 	position: absolute;
 	height: 100%;
 	width: 50%;
-	border-radius: 4pt;
+	border-radius: calc(var(--a-border-radius) / 2);
 	z-index: -1;
 }
-body:not(.darkui) #darkmode::before { /* var to ie */
+body:not(.darkui) #darkmode::before {
 	left: 0;
-	background-color: var(--aemi-text);
-	transition: .3s left ease;
+	background-color: var(--a-text);
+	transition: 300ms left var(--a-trans-func);
 }
-body.darkui #darkmode::before { /* var to ie */
+body.darkui #darkmode::before {
 	left: 50%;
-	background-color: var(--aemi-text);
-	transition: .3s left ease;
+	background-color: var(--a-text);
+	transition: 300ms left var(--a-trans-func);
 }
 #darkmode .on, #darkmode .off {
 	display: inline-block;
@@ -895,7 +867,7 @@ body.darkui #darkmode::before { /* var to ie */
 }
 body:not(.darkui) #darkmode .off,
 body.darkui #darkmode .on {
-	color: var(--aemi-000);
+	color: var(--a-000);
 }
 /*--------------------------------------------------------------
 # Main
@@ -923,29 +895,34 @@ main {
 # Content
 --------------------------------------------------------------*/
 #content {
-	position: relative;
 	margin-left: auto;
 	margin-right: auto;
 	width: 50em;
 	max-width: 85vw;
 }
-body.multi #content {
+.multi:not(.not-grid) #content {
 	display: flex;
 	flex-flow: row wrap;
 	align-content: flex-start;
 	align-items: flex-start;
 	justify-content: space-between;
 }
+body:not(.multi) #content > * {
+	margin-left: auto;
+	margin-right: auto;
+	width: 50em;
+	max-width: 85vw;
+}
 /*--------------------------------------------------------------
 # Article
 --------------------------------------------------------------*/
-body.multi #content > *:not(#post-lead) {
+.multi #content > *:not(#post-lead) {
 	flex: 0 1 calc( 50% - 1em );
 	margin: 0 0 2em;
 }
-body.multi #content > .sticky,
-body.multi #content > #post-lead,
-body.multi #content > #infinite-handle {
+.multi #content > .sticky,
+.multi #content > #post-lead,
+.multi #content > #infinite-handle {
 	flex: 1 1 100% !important;
 }
 #post-lead {
@@ -963,21 +940,21 @@ body.multi #content > #infinite-handle {
 	align-items: flex-start;
 	justify-content: space-between;
 	width: 100%;
-	border-radius: 10pt;
+	border-radius: calc(var(--a-border-radius) * 1.5);
 	box-shadow: 0 10px 30px -3px rgba(0,0,0,.09);
-	transition: .3s box-shadow ease;
+	transition: 300ms box-shadow var(--a-trans-func);
 }
 body.multi .post-header:hover {
 	box-shadow: 0 5px 20px 2px rgba(0,0,0,.125);
-	transition: .3s box-shadow ease;
+	transition: 300ms box-shadow var(--a-trans-func);
 }
-body.darkui .post-header { /* var to ie */
-	background-color: var(--aemi-009);
-	transition: .3s background-color ease;
+body.darkui .post-header {
+	background-color: var(--a-009);
+	transition: 300ms background-color var(--a-trans-func);
 }
-body.darkui.multi .post-header:hover { /* var to ie */
-	background-color: var(--aemi-004);
-	transition: .3s background-color ease;
+body.darkui.multi .post-header:hover {
+	background-color: var(--a-004);
+	transition: 300ms background-color var(--a-trans-func);
 }
 body.singular .post-header {
 	margin: 0 auto 4.875em;
@@ -999,7 +976,7 @@ body.singular .post-header {
 # Post Sticky
 --------------------------------------------------------------*/
 .post-title {
-	margin: 0 0 .3em;
+	margin: 0;
 	padding: 0;
 	font-size: 3em;
 	overflow-wrap: break-word;
@@ -1020,7 +997,7 @@ body.singular .post-header {
 	display: block;
 	height: auto;
 	width: 100%;
-	border-radius: 10pt 10pt 0 0;
+	border-radius: calc(var(--a-border-radius) * 1.5) calc(var(--a-border-radius) * 1.5) 0 0;
 	line-height: 0;
 }
 .post-meta {
@@ -1029,12 +1006,12 @@ body.singular .post-header {
 	padding: 0;
 }
 .post-meta *,
-.post-meta a { /* var to ie */
+.post-meta a {
 	font-weight: 600;
-	color: var(--aemi-099);
+	color: var(--a-099);
 }
-.post-meta a:hover { /* var to ie */
-	color: var(--aemi-990);
+.post-meta a:hover {
+	color: var(--a-990);
 }
 .post-header .post-meta {
 	flex-flow: column nowrap;
@@ -1046,42 +1023,48 @@ body.singular .post-header {
 	display: flex;
 	flex-flow: column;
 }
+.post-details:not(:empty) {
+	margin-top: 1em;
+}
 .post-cats {
 	margin-top: .5em;
-}
-body:not(.page) .post-mod {
-	display: none;
 }
 .post-author {
 	margin-bottom: 1.25em;
 }
+.post-author:only-child {
+	margin-bottom: .4em;
+}
 body.singular .post-author {
 	margin-bottom: 2em;
 }
-.post-author a,
-.post-edit a { /* var to ie */
-	padding: .25em .5em;
-	border-radius: 3pt;
-	background-color: var(--aemi-009);
-	color: var(--aemi-099);
-	transition: .3s background-color ease, .3s color ease;
+body.singular .post-author:only-child {
+	margin-bottom: .4em;
 }
-.meta-sticky { /* var to ie */
+.post-author a,
+.post-edit a {
 	padding: .25em .5em;
 	border-radius: 3pt;
-	background-color: var(--aemi-0003);
-	color: var(--aemi-9994);
-	transition: .3s background-color ease, .3s color ease;
+	background-color: var(--a-009);
+	color: var(--a-099);
+	transition: 300ms background-color var(--a-trans-func), 300ms color var(--a-trans-func);
+}
+.meta-sticky {
+	padding: .25em .5em;
+	border-radius: 3pt;
+	background-color: var(--a-0003);
+	color: var(--a-9994);
+	transition: 300ms background-color var(--a-trans-func), 300ms color var(--a-trans-func);
 }
 body.darkui .post-author a,
-body.darkui .post-edit a { /* var to ie */
-	background-color: var(--aemi-044);
-	transition: .3s background-color ease, .3s color ease;
+body.darkui .post-edit a {
+	background-color: var(--a-044);
+	transition: 300ms background-color var(--a-trans-func), 300ms color var(--a-trans-func);
 }
 body.darkui.multi .post-header:hover .post-author a,
-body.darkui.multi .post-header:hover .post-edit a { /* var to ie */
-	background-color: var(--aemi-009);
-	transition: .3s background-color ease, .3s color ease;
+body.darkui.multi .post-header:hover .post-edit a {
+	background-color: var(--a-009);
+	transition: 300ms background-color var(--a-trans-func), 300ms color var(--a-trans-func);
 }
 .post-edit {
 	position: absolute;
@@ -1113,16 +1096,16 @@ body.darkui.multi .post-header:hover .post-edit a { /* var to ie */
 .post-footer .post-meta > *:last-child {
 	margin-bottom: 4.875em;
 }
-.post-footer .post-meta::after { /* var to ie */
+.post-footer .post-meta::after {
 	position: absolute;
 	display: block;
 	content: "";
 	left: 0;
 	bottom: 0;
-	height: 2pt;
+	height: 2px;
 	width: 100%;
-	border-radius: 1pt;
-	background-color: var(--aemi-004);
+	border-radius: calc(var(--a-border-radius) / 15);
+	background-color: var(--a-004);
 }
 /*--------------------------------------------------------------
 # Post Tags
@@ -1131,13 +1114,13 @@ body.darkui.multi .post-header:hover .post-edit a { /* var to ie */
 	display: flex;
 	flex-flow: row wrap;
 }
-.post-tags > a { /* var to ie */
+.post-tags > a {
 	display: block;
 	margin-bottom: .72em;
 	padding: .2em .5em;
 	border-radius: 5pt;
-	background-color: var(--aemi-009);
-	color: var(--aemi-099);
+	background-color: var(--a-009);
+	color: var(--a-099);
 }
 .post-tags > a::before {
 	content: "\23";
@@ -1155,23 +1138,23 @@ body.darkui.multi .post-header:hover .post-edit a { /* var to ie */
 .post-cptt:not(:last-child) {
 	margin-bottom: 2em;
 }
-.cptt-title { /* var to ie */
+.cptt-title {
 	margin: 0;
 	text-transform: capitalize;
-	color: var(--aemi-text);
+	color: var(--a-text);
 }
 .cptt-content {
 	display: flex;
 	flex-flow: row wrap;
 	margin-top: .25em;
 }
-.cptt-content > a { /* var to ie */
+.cptt-content > a {
 	display: block;
 	margin-bottom: .75em;
 	padding: .2em .5em;
 	border-radius: 3pt;
-	background-color: var(--aemi-009);
-	color: var(--aemi-099);
+	background-color: var(--a-009);
+	color: var(--a-099);
 }
 .cptt-content > *:not(:last-child) {
 	margin-right: .75em;
@@ -1205,28 +1188,26 @@ body.darkui.multi .post-header:hover .post-edit a { /* var to ie */
 	-moz-hyphens: auto;
 	hyphens: auto;
 }
+
 .archive-type,
 .archive-details {
 	margin-top: 1em;
 	width: auto;
 }
-.archive-type { /* var to ie */
+.archive-type {
 	font-weight: bold;
 	text-transform: uppercase;
-	color: var(--aemi-099);
+	color: var(--a-099);
 }
-.archive-details { /* var to ie */
+.archive-details {
 	font-weight: 300;
-	color: var(--aemi-099);
+	color: var(--a-099);
 }
 /*--------------------------------------------------------------
 # Post Content Elements
 --------------------------------------------------------------*/
 p {
-	margin: 2em 0;
-}
-p:first-child {
-	margin-top: 0;
+	margin: 0 0 2em;
 }
 p:last-child {
 	margin-bottom: 0;
@@ -1249,17 +1230,15 @@ p:last-child {
 	padding-left: 0;
 	padding-right: 2em;
 }
-#sidebar .w-cont,
-#header-widgets .w-cont:not(:last-child) {
+#sidebar .w-cont {
 	position: relative;
 	padding-bottom: 4.5em;
 }
-#sidebar .w-cont:not(:last-child),
-#header-widgets .w-cont:not(:last-child) {
+#sidebar .w-cont:not(:last-child) {
 	margin-bottom: 4.5em;
 }
-body.darkui .w-cont:not(:last-child)::after { /* var to ie */
-	background-color: var(--aemi-044);
+body.darkui .w-cont:not(:last-child)::after {
+	background-color: var(--a-044);
 }
 /*--------------------------------------------------------------
 # Images
@@ -1311,14 +1290,14 @@ img[class*="wp-image"],
 	margin-right: auto;
 }
 .wp-block-image figcaption,
-.wp-caption-text { /* var to ie */
+.wp-caption-text {
 	display: inline-block;
 	padding: 1em 0 0;
 	width: auto;
 	font-weight: 400;
 	text-align: center;
 	vertical-align: middle;
-	color: var(--aemi-099);
+	color: var(--a-099);
 }
 /*--------------------------------------------------------------
 # Galleries
@@ -1483,14 +1462,14 @@ div.gallery img {
 	vertical-align: middle;
 	color: white !important;
 	opacity: 0;
-	transition: .3s opacity ease;
+	transition: 300ms opacity var(--a-trans-func);
 	z-index: 1;
 }
 .wp-block-gallery .blocks-gallery-image:hover figcaption,
 .wp-block-gallery .blocks-gallery-item:hover figcaption,
 .gallery-item:hover .gallery-caption {
 	opacity: 1;
-	transition: .3s opacity ease;
+	transition: 300ms opacity var(--a-trans-func);
 }
 /*--------------------------------------------------------------
 # Block - Categories
@@ -1518,7 +1497,7 @@ div.gallery img {
 # Block - Audio
 --------------------------------------------------------------*/
 .wp-block-audio figcaption {
-	color: var(--aemi-099);
+	color: var(--a-099);
 }
 /*--------------------------------------------------------------
 # Comments
@@ -1558,7 +1537,7 @@ div.gallery img {
 	height: 1.5pt;
 	width: 100%;
 	border-radius: 1pt;
-	background-color: var(--aemi-004);
+	background-color: var(--a-004);
 }
 #cancel-comment-reply-link {
 	display: inline-block;
@@ -1568,12 +1547,12 @@ div.gallery img {
 	font-size: .775em;
 	line-height: 1.2em;
 	vertical-align: top;
-	background-color: var(--aemi-009);
-	color: var(--aemi-099);
+	background-color: var(--a-009);
+	color: var(--a-099);
 }
 #cancel-comment-reply-link:hover {
-	background-color: var(--aemi-009);
-	color: var(--aemi-900);
+	background-color: var(--a-009);
+	color: var(--a-900);
 }
 .comment-form-comment,
 .comment-form-author,
@@ -1605,7 +1584,7 @@ article.comment-body {
 	margin: 0 auto 0 !important;
 	padding: 1em;
 	border-radius: 10pt;
-	background-color: var(--aemi-004);
+	background-color: var(--a-004);
 }
 .comment-meta, .comment-author, .comment-metadata, .comment-content, .comment-body .reply {
 	display: flex;
@@ -1649,7 +1628,7 @@ article.comment-body {
 	justify-content: center;
 	height: 100%;
 	width: 100%;
-	background-color: var(--aemi-0009);
+	background-color: var(--a-0009);
 	-webkit-backdrop-filter: blur(5px);
 	-moz-backdrop-filter: blur(5px);
 	backdrop-filter: blur(5px);
@@ -1664,72 +1643,117 @@ article.comment-body {
 #aemi-search .search-form {
 	position: fixed;
 	display: flex;
-	flex-flow: row wrap;
+	flex-flow: row nowrap;
 	align-content: center;
+	align-items: center;
 	justify-content: center;
 	margin: 0;
-	padding: 0;
-	top: 4.875em;
+	padding: 4.875em 10vw;
+	top: 0;
 	left: 0;
-	height: calc( 100vh - 4.875em );
+	height: 100vh;
 	width: 100vw;
 	text-align: center;
-	background-color: var(--aemi-000);
+	background-color: var(--a-000);
 	visibility: hidden;
 	opacity: 0;
 	z-index: -1;
 	transform-origin: center center;
 	transform: scale(.8);
 	transition-property: opacity, transform, visibility;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 #aemi-search > .toggled + .search-form {
 	visibility: visible;
 	opacity: 1;
 	transform: scale(1);
 	transition-property: opacity, transform, visibility;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 200ms;
+	transition-timing-function: var(--a-trans-func);
 }
-#aemi-search > .search-form label {
+#search-container {
+	position: relative;
+	display: flex;
 	margin: 0;
-	padding: 0;
-	flex: 1 1 80%;
+	flex-flow: row nowrap;
+	flex: 0 1 50%;
+	border-radius: .5em;
+	box-shadow: 0 10px 30px -3px rgba(0,0,0,.09);
 }
-#aemi-search label > input[type="search"] {
-	margin: 0 auto;
-	max-width: 100vw;
-	border-width: 0;
-	border-radius: 0;
-	font-size: 3em !important;
+body.darkui #search-container {
+	background-color: var(--a-004);
+	box-shadow: none;
+}
+#search-container label {
+	display: flex;
+	flex: 1 1 auto;
+	margin: 0;
+	height: auto;
+	max-width: 80vw;
+	border-radius: 10em 0 0 10em;
+}
+#search-container input[type="search"] {
+	flex: 1 1 100%;
+	margin: 0;
+	padding-left: .5em;
+	padding-right: 3.125em;
+	border-right-width: 0;
+	border-width: 2px;
+	border-color: var(--a-000);
+	border-radius: .333em;
+	line-height: initial;
+	font-size: 1.5em !important;
 	font-weight: bold;
-	text-align: center;
-	background-color: var(--aemi-000);
+	min-width: auto;
+	max-width: 80vw;
+	background-color: transparent;
 }
-#aemi-search > .search-form input[type="submit"] {
-	flex: 0 1 40%;
+#search-container input[type="search"]:focus,
+#search-container input[type="search"]:active {
+	border-color: var(--a-004);
+	background-color: transparent;
+}
+body.darkui #search-container input[type="search"]:not(:focus):not(:active) {
+	border-color: var(--a-004);
+}
+.darkui #search-container input[type="search"]:focus,
+.darkui #search-container input[type="search"]:active {
+	border-color: var(--a-009);
+	background-color: transparent;
+}
+#search-container input[type="submit"] {
+	position: absolute;
+	top: 2px;
+	right: 2px;
 	margin: 0;
-	padding: .4em .3333em .5em;
-	max-width: 100vw;
-	border-radius: 0;
-	border-width: 0;
-	letter-spacing: .2em;
-	line-height: 1;
-	text-transform: uppercase;
-	vertical-align: top;
-	color: var(--aemi-099);
-	background-color: var(--aemi-000);
-	transition-property: color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	padding: .84em 1em .66em;
+	border-radius: 0 .25em .25em 0;
+	font-size: 1.5em !important;
+	font-weight: 900;
+	line-height: initial;
+	border: 0;
+	color: var(--a-9994);
+	background-color: transparent;
+	z-index: 3;
+	transition-property: color, background-color;
+	transition-duration: 200ms;
+	transition-timing-function: var(--a-trans-func);
 }
-#aemi-search > .search-form input[type="submit"]:hover {
-	color: var(--aemi-999);
-	cursor: pointer;
-	transition-property: color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+#search-container input[type="submit"]:hover {
+	color: var(--a-999);
+	transition-property: color, background-color;
+	transition-duration: 200ms;
+	transition-timing-function: var(--a-trans-func);
+}
+#search-container input[type="submit"]:active,
+#search-container input[type="submit"]:focus {
+	color: var(--a-999);
+	background-color: var(--a-009);
+	box-shadow: none;
+	transition-property: color, background-color;
+	transition-duration: 200ms;
+	transition-timing-function: var(--a-trans-func);
 }
 #search-toggle {
 	position: relative;
@@ -1738,41 +1762,41 @@ article.comment-body {
 	height:60%;
 	width: 60%;
 	transition-property: height, width, margin;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 #search-toggle .icon {
 	position: relative;
 	display: block;
 	height: 70%;
 	width: 70%;
-	border: 3px solid var(--aemi-990);
+	border: 3px solid var(--a-990);
 	border-radius: 100%;
 	transition-property: visibility, opacity, border-color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 #search-toggle:hover .icon {
-	border-color: var(--aemi-099);
+	border-color: var(--a-099);
 	transition-property: visibility, opacity, border-color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 #search-toggle.toggled {
 	margin: 0;
 	height: 100%;
 	width: 100%;
 	transition-property: height, width, margin;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 #search-toggle.toggled .icon {
 	transform: scale(0);
 	visibility: hidden;
 	opacity: 0;
 	transition-property: visibility, opacity, border-color, transform;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 #search-toggle .icon::after,
 #search-toggle .icon::before {
@@ -1785,20 +1809,20 @@ article.comment-body {
 	border-radius: 0px 1.25pt 1.25pt 0px;
 	top: 120%;
 	left: 70%;
-	background-color: var(--aemi-990);
+	background-color: var(--a-990);
 	transform: rotate( 45deg );
 	transition-property: background-color, visibility, opacity, border-color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 #search-toggle:hover .icon::after,
 #search-toggle:hover .icon::before,
 #search-toggle.toggled:hover::after,
 #search-toggle.toggled:hover::before{
-	background-color: var(--aemi-099);
+	background-color: var(--a-099);
 	transition-property: visibility, opacity, border-color, background-color;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 #search-toggle.toggled::after,
 #search-toggle.toggled::before {
@@ -1809,25 +1833,23 @@ article.comment-body {
 	height: 4px;
 	width: 60%;
 	border-radius: 1.25pt;
-	background: var(--aemi-990);
+	background: var(--a-990);
 	transition-property: background-color, transform;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 #search-toggle.toggled::after {
 	transform: rotate( -45deg );
 	transition-property: background-color, transform;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
 #search-toggle.toggled::before {
 	transform: rotate( 45deg );
 	transition-property: background-color, transform;
-	transition-duration: .3s;
-	transition-timing-function: ease;
+	transition-duration: 300ms;
+	transition-timing-function: var(--a-trans-func);
 }
-
-
 .search-form {
 	padding: 0;
 }
@@ -1839,7 +1861,6 @@ article.comment-body {
 --------------------------------------------------------------*/
 .widget-title {
 	margin: 0 0 .5em;
-	font-size: 2em;
 }
 .w-cont ul {
 	padding: 0;
@@ -1851,36 +1872,20 @@ article.comment-body {
 .w-cont > ul ul {
 	padding-left: 1em;
 }
-.widget_recent_entries .post-date {
-	color: var(--aemi-099);
+.w-cont > *:last-child {
+	margin-bottom: 0;
 }
-.widget_calendar .calendar_wrap * {
+.widget_recent_entries .post-date {
+	color: var(--a-099);
+}
+.calendar_wrap * {
 	border: none;
 	text-align: center;
 }
-.widget_calendar td {
-	position: relative;
-}
-.widget_calendar td a::before {
-	content: "";
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
-	border-radius: 2pt;
-	background-color: var(--aemi-009);
-	z-index: -1;
-}
-body.darkui .widget_calendar td a::before {
-	background-color: var(--aemi-044);
-}
-.widget-title .rsswidget:first-child {
-	display: none;
-}
-.widget-title .rsswidget:last-child {
-	position: relative;
-}
+.calendar_wrap table { margin: 1.5em auto .5em; }
+.calendar_wrap td:not(#prev):not(#next) a { border-bottom: 2px solid var(--a-text); }
+.widget-title .rsswidget:first-child { display: none; }
+.widget-title .rsswidget:last-child { position: relative; }
 .widget-title .rsswidget:last-child::before {
 	display: inline-flex;
 	content: "RSS";
@@ -1895,18 +1900,16 @@ body.darkui .widget_calendar td a::before {
 	line-height: 2.5ex;
 	vertical-align: middle;
 	background-color: orange;
-	color: var(--aemi-000);
+	color: var(--a-000);
 }
-.widget_rss li {
-	margin-bottom: .5em;
-}
+.widget_rss li { margin-bottom: .5em; }
 .widget_rss li .rss-date {
-	color: var(--aemi-099);
+	color: var(--a-099);
 }
 .widget_rss .rssSummary,
 .widget_rss cite {
 	font-size: .8em;
-	color: var(--aemi-900);
+	color: var(--a-900);
 }
 .widget_media_audio,
 .widget_media_audio * {
@@ -1916,8 +1919,8 @@ body.darkui .widget_calendar td a::before {
 	border-radius: 0px !important;
 }
 .mejs-controls button:hover {
-	color: var(--aemi-900);
-	background-color: var(--aemi-900);
+	color: var(--a-900);
+	background-color: var(--a-900);
 }
 .mejs-controls .mejs-time-rail .mejs-time-current {
 	background-color: grey !important;
@@ -2040,10 +2043,11 @@ body.infinite-scroll #site-navigation {
 	list-style: none;
 	font-size: 1em;
 	font-weight: initial;
-	line-height: 3em;
+	line-height: 1.5em;
 }
 #footer-menu .menu > li {
-	margin: 0 1em 0 0;
+	margin: 0;
+	padding: 0 .5em;
 }
 #footer-menu .menu > li:last-child {
 	margin: 0;
@@ -2055,7 +2059,7 @@ body.infinite-scroll #site-navigation {
 #copyright,
 #footer-links {
 	text-align: center;
-	color: var(--aemi-900);
+	color: var(--a-900);
 }
 /*--------------------------------------------------------------
 # Form Elements
@@ -2075,7 +2079,7 @@ input[type="reset"],
 	-ms-appearance: none;
 	-o-appearance: none;
 	margin: 0;
-	padding: .75em;
+	padding: .75rem;
 	outline: none;
 	border: 1px solid;
 	font-family: var(--default-font);
@@ -2090,7 +2094,7 @@ form {
 label {
 	margin-top: .5em;
 	margin-bottom: .25em;
-	color: var(--aemi-900);
+	color: var(--a-900);
 }
 input,
 input[type],
@@ -2098,42 +2102,42 @@ select,
 textarea {
 	padding: .75em;
 	border-radius: 5pt;
-	border-color: var(--aemi-004);
-	background-color: var(--aemi-004);
-	color: var(--aemi-999);
-	transition-duration: .3s;
+	border-color: var(--a-004);
+	background-color: var(--a-004);
+	color: var(--a-999);
+	transition-duration: 300ms;
 	transition-property: background-color, border-color, color;
-	transition-timing-function: ease;
+	transition-timing-function: var(--a-trans-func);
 }
 body.darkui input,
 body.darkui input[type],
 body.darkui select,
 body.darkui textarea {
-	border-color: var(--aemi-044);
-	background-color: var(--aemi-044);
-	transition-duration: .3s;
+	border-color: var(--a-044);
+	background-color: var(--a-044);
+	transition-duration: 300ms;
 	transition-property: background-color, border-color, color;
-	transition-timing-function: ease;
+	transition-timing-function: var(--a-trans-func);
 }
 input:focus,
 input[type]:focus,
 select:focus,
 textarea:focus {
-	border-color: var(--aemi-009);
-	background-color: var(--aemi-000);
-	transition-duration: .3s;
+	border-color: var(--a-009);
+	background-color: var(--a-000);
+	transition-duration: 300ms;
 	transition-property: background-color, border-color, color;
-	transition-timing-function: ease;
+	transition-timing-function: var(--a-trans-func);
 }
 body.darkui input:focus,
 body.darkui input[type]:focus,
 body.darkui select:focus,
 body.darkui textarea:focus {
-	border-color: var(--aemi-044);
-	background-color: var(--aemi-004);
-	transition-duration: .3s;
+	border-color: var(--a-044);
+	background-color: var(--a-004);
+	transition-duration: 300ms;
 	transition-property: background-color, border-color, color;
-	transition-timing-function: ease;
+	transition-timing-function: var(--a-trans-func);
 }
 ::-webkit-input-placeholder {
 	line-height: 1.2;
@@ -2151,17 +2155,18 @@ body.darkui input[type="reset"],
 body.darkui .button a,
 .wp-block-button a.wp-block-button__link,
 body.darkui .wp-block-button a.wp-block-button__link {
-	padding: .75em;
-	border-radius: 5pt;
+	padding: 0rem .8em;
+	border-radius: calc(var(--a-border-radius) / 1.75);
 	font-weight: 700;
-	border: 1px solid;
-	border-color: var(--aemi-text);
-	background-color: var(--aemi-text);
-	color: var(--aemi-000);
-	cursor: default;
-	transition-duration: .3s;
-	transition-property: background-color, border-color, color;
-	transition-timing-function: ease;
+	border: 2px solid var(--a-999);
+	font-weight: 700;
+	line-height: 2.5;
+	background-color: var(--a-999);
+	color: var(--a-000);
+	cursor: pointer;
+	transition-duration: 200ms;
+	transition-property: background, border-color, color;
+	transition-timing-function: var(--a-trans-func);
 }
 input[type="button"]:hover,
 body.darkui input[type="button"]:hover,
@@ -2176,11 +2181,12 @@ body.darkui .button a:hover,
 .wp-block-button a.wp-block-button__link:hover,
 body.darkui .wp-block-button a.wp-block-button__link:hover {
 	text-decoration: none;
-	border-color: var(--aemi-900);
-	background-color: var(--aemi-900);
-	transition-duration: .3s;
+	background-color: var(--a-900);
+	border-color: var(--a-900);
+	color: var(--a-009);
+	transition-duration: 200ms;
 	transition-property: background-color, border-color, color;
-	transition-timing-function: ease;
+	transition-timing-function: var(--a-trans-func);
 }
 input[type="button"]:focus,
 body.darkui input[type="button"]:focus,
@@ -2206,11 +2212,12 @@ body.darkui .button a:active,
 body.darkui .wp-block-button a.wp-block-button__link:focus,
 .wp-block-button a.wp-block-button__link:active,
 body.darkui .wp-block-button a.wp-block-button__link:active {
-	border-color: var(--aemi-099);
-	background-color: var(--aemi-099);
-	transition-duration: .3s;
+	border-color: var(--a-999);
+	background-color: transparent;
+	color: var(--a-999);
+	transition-duration: 200ms;
 	transition-property: background-color, border-color, color;
-	transition-timing-function: ease;
+	transition-timing-function: var(--a-trans-func);
 }
 button::-moz-focus-inner,
 input[type="button"]::-moz-focus-inner,
@@ -2264,14 +2271,14 @@ input[type="radio"] {
 	padding: 0 !important;
 	height: 18px !important;
 	width: 18px !important;
-	border-color: var(--aemi-009);
-	background-color: var(--aemi-000);
-	color: var(--aemi-text);
+	border-color: var(--a-009);
+	background-color: var(--a-000);
+	color: var(--a-text);
 	vertical-align: .125em;
 }
 body.darkui input[type="checkbox"],
 body.darkui input[type="radio"] {
-	border-color: var(--aemi-044);
+	border-color: var(--a-044);
 }
 input[type="checkbox"] {
 	border-radius: 2pt !important;
@@ -2299,7 +2306,7 @@ input[type="radio"]::before {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	border-radius: 3em !important;
-	background-color: var(--aemi-text);
+	background-color: var(--a-text);
 	visibility: hidden;
 }
 input[type="checkbox"]:checked::before,
@@ -2307,24 +2314,24 @@ input[type="radio"]:checked::before {
 	visibility: visible;
 }
 input[type="checkbox"]:disabled {
-	border-color: var(--aemi-009);
-	background-color: var(--aemi-004);
-	color: var(--aemi-900);
+	border-color: var(--a-009);
+	background-color: var(--a-004);
+	color: var(--a-900);
 }
 /* Range */
 input[type="range"] {
 	padding: .2em inherit;
 	border: none;
 	border-radius: 1em !important;
-	background-color: var(--aemi-009);
+	background-color: var(--a-009);
 }
 input[type="range"]::-webkit-slider-runnable-track {
 	height: 5px;
 	border-radius: 1em;
-	background-color: var(--aemi-094);
+	background-color: var(--a-094);
 }
 input[type="range"]:focus::-webkit-slider-runnable-track {
-	background-color: var(--aemi-094);
+	background-color: var(--a-094);
 }
 input[type="range"]::-webkit-slider-thumb {
 	-webkit-appearance: none;
@@ -2332,32 +2339,32 @@ input[type="range"]::-webkit-slider-thumb {
 	height: .9em;
 	width: .9em;
 	margin-top: -.3em;
-	border: 1px solid var(--aemi-000);
+	border: 1px solid var(--a-000);
 	border-radius: 1em;
-	background-color: var(--aemi-000);
+	background-color: var(--a-000);
 }
 body.darkui input[type="range"]::-webkit-slider-thumb {
-	border-color: var(--aemi-text);
-	background-color: var(--aemi-text);
+	border-color: var(--a-text);
+	background-color: var(--a-text);
 }
 /* Range Firefox */
 input[type="range"]::-moz-range-track {
 	height: 5px;
 	border: 0;
 	border-radius: 1em;
-	background-color: var(--aemi-094);
+	background-color: var(--a-094);
 }
 input[type="range"]:focus::-moz-range-track {
-	background-color: var(--aemi-094);
+	background-color: var(--a-094);
 }
 input[type="range"]::-moz-range-thumb {
 	-moz-appearance: none;
 	height: .9em;
 	width: .9em;
 	margin-top: -4px;
-	border: 1px solid var(--aemi-text);
+	border: 1px solid var(--a-text);
 	border-radius: 1em;
-	background-color: var(--aemi-text);
+	background-color: var(--a-text);
 }
 /* Range Microsoft */
 input[type="range"]::-ms-track {
@@ -2406,31 +2413,31 @@ input[type="search"]::-webkit-search-decoration {
 }
 ::-webkit-file-upload-button {
 	-webkit-appearance: button;
-	font: inherit;
+	font-family: var(--default-font);
 }
 fieldset {
 	margin-top: .5em;
 	margin-bottom: .5em;
 	padding: .35em .75em .625em;
-	border: 2px solid var(--aemi-004);
+	border: 2px solid var(--a-004);
 	border-radius: 7pt;
 }
 body.darkui fieldset {
-	border-color: var(--aemi-009);
+	border-color: var(--a-009);
 }
 legend {
 	display: table;
 	margin: 0 .125em;
 	padding: .333em 1.25em;
 	max-width: 100%;
-	border: 2px solid var(--aemi-004);
+	border: 2px solid var(--a-004);
 	border-radius: 7pt;
 	text-align: center;
 	white-space: normal;
 	color: inherit;
 }
 body.darkui legend {
-	border-color: var(--aemi-009);
+	border-color: var(--a-009);
 }
 progress {
 	vertical-align: baseline;
@@ -2458,10 +2465,9 @@ progress {
 	}
 }
 @media ( max-width: 782px ) {
-	body.admin-bar header {
-		top: 46px;
-	}
-	body.admin-bar #header-menu > .toggle + * {
+	.admin-bar header { top: 46px; }
+	.admin-bar header.hidden { top: calc(-4.875em + 46px); }
+	.admin-bar #header-menu > .toggle + * {
 		top: calc( 4.875em + 46px );
 		height: calc( 100vh - 4.875em );
 	}
@@ -2473,7 +2479,7 @@ progress {
 	}
 	body.multi #content > *:not(#post-lead) {
 		flex: 0 1 100%;
-		margin: 0 0 2em;
+		margin: 0 auto 2em;
 	}
 }
 @media (max-width: 667px) {
@@ -2483,24 +2489,6 @@ progress {
 	}
 }
 @media (max-width: 520px) {
-	h1 {
-		font-size: 2em;
-	}
-	h2 {
-		font-size: 2em;
-	}
-	h3 {
-		font-size: 1.625em;
-	}
-	h4 {
-		font-size: 1.25em;
-	}
-	h5 {
-		font-size: 1em;
-	}
-	h6 {
-		font-size: 0.75em;
-	}
 	.wp-block-columns {
 		box-sizing: border-box;
 		flex-wrap: wrap;
@@ -2517,6 +2505,13 @@ progress {
 	body.admin-bar header {
 		top: initial;
 		bottom: 0;
+		transition: bottom 300ms var(--a-trans-func);
+	}
+	header.hidden,
+	body.admin-bar header.hidden {
+		top: initial;
+		bottom: -4.875em;
+		transition: bottom 300ms var(--a-trans-func);
 	}
 	#header-menu > .toggle + * {
 		top: 0;
@@ -2533,10 +2528,7 @@ progress {
 	body.singular article {
 		margin-bottom: 4.875em;
 	}
-	#aemi-search .search-form {
-		top: 0;
-		bottom: 4.875em;
-	}
+
 	#site-footer {
 		margin: 0 auto calc( 4.875em + 2em );
 	}
@@ -2544,7 +2536,7 @@ progress {
 /*--------------------------------------------------------------
 # Carousel
 --------------------------------------------------------------*/
-.aemisw { /* var to ie */
+.aemisw {
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -2554,14 +2546,14 @@ progress {
 	justify-content: center;
 	width: 100%;
 	height: 100%;
-	color: var(--aemi-text);
+	color: var(--a-text);
 	overflow: auto;
 	visibility: hidden;
-	background-color: var(--aemi-0008);
+	background-color: var(--a-0008);
 	z-index: 20;
 }
-body.darkui .aemisw { /* var to ie */
-	background-color: var(--aemi-0008);
+body.darkui .aemisw {
+	background-color: var(--a-0008);
 }
 .aemisw.aemisw-active {
 	visibility: visible;
@@ -2589,7 +2581,7 @@ body.darkui .aemisw { /* var to ie */
 .aemisw-contentwrapper.aemisw-wrapper-active > img {
 	opacity: 1;
 }
-.aemisw-caption { /* var to ie */
+.aemisw-caption {
 	display: none;
 	position: fixed;
 	align-content: center;
@@ -2605,15 +2597,15 @@ body.darkui .aemisw { /* var to ie */
 	border-radius: 3pt;
 	font-size: .9em;
 	text-align: center;
-	background-color: var(--aemi-0003);
-	color: var(--aemi-9996);
+	background-color: var(--a-0003);
+	color: var(--a-9996);
 }
 .aemisw-active .aemisw-caption {
 	display: flex;
 }
 .aemisw-close,
 .aemisw-next,
-.aemisw-prev { /* var to ie */
+.aemisw-prev {
 	display: none;
 	position: fixed;
 	margin: 0;
@@ -2626,16 +2618,16 @@ body.darkui .aemisw { /* var to ie */
 	line-height: 1.27778em;
 	vertical-align: middle;
 	text-align: center;
-	background-color: var(--aemi-0003);
-	color: var(--aemi-9996);
-	transition: .3s color ease;
+	background-color: var(--a-0003);
+	color: var(--a-9996);
+	transition: 300ms color var(--a-trans-func);
 	cursor: pointer;
 }
 .aemisw-close:hover,
 .aemisw-next:hover,
-.aemisw-prev:hover { /* var to ie */
-	color: var(--aemi-text);
-	transition: .3s color ease;
+.aemisw-prev:hover {
+	color: var(--a-text);
+	transition: 300ms color var(--a-trans-func);
 }
 .aemisw-active .aemisw-close,
 .aemisw-active .aemisw-next,

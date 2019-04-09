@@ -2,27 +2,27 @@
 
 :root {
 	/* Colors */
-	--aemi-999:   rgb( 0, 0, 0 );
-	--aemi-990:   rgb( 30, 30, 30 );
-	--aemi-900:   rgb( 80, 80, 80 );
-	--aemi-099:   rgb( 150, 150, 150 );
-	--aemi-094:   rgb( 190, 190, 190 );
-	--aemi-009:   rgb( 230, 230, 230 );
-	--aemi-004:   rgb( 242, 242, 242 );
-	--aemi-000:   rgb( 255, 255, 255 );
-	--aemi-0000: rgba( 0, 0, 0, 0 );
-	--aemi-9998: rgba( 0, 0, 0, .8 );
-	--aemi-9996: rgba( 0, 0, 0, .6 );
-	--aemi-9994: rgba( 0, 0, 0, .4 );
-	--aemi-0009: rgba( 255, 255, 255, .9 );
-	--aemi-0008: rgba( 255, 255, 255, .8 );
-	--aemi-0003: rgba( 255, 255, 255, .3 );
-	--aemi-text:  var(--aemi-999);
-	--a-link:	  var(--aemi-9994);
+	--a-999:   rgb( 0, 0, 0 );
+	--a-990:   rgb( 30, 30, 30 );
+	--a-900:   rgb( 80, 80, 80 );
+	--a-099:   rgb( 150, 150, 150 );
+	--a-094:   rgb( 190, 190, 190 );
+	--a-009:   rgb( 230, 230, 230 );
+	--a-004:   rgb( 242, 242, 242 );
+	--a-000:   rgb( 255, 255, 255 );
+	--a-0000: rgba( 0, 0, 0, 0 );
+	--a-9998: rgba( 0, 0, 0, .8 );
+	--a-9996: rgba( 0, 0, 0, .6 );
+	--a-9994: rgba( 0, 0, 0, .4 );
+	--a-0009: rgba( 255, 255, 255, .9 );
+	--a-0008: rgba( 255, 255, 255, .8 );
+	--a-0003: rgba( 255, 255, 255, .3 );
+	--a-text:  var(--a-999);
+	--a-link:	  var(--a-9994);
 
 	/* Initialization */
 
-	--default-font: -apple-system,BlinkMacSystemFont,"Inter UI","Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+	--default-font: "Inter","Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
 
 	font-family: var(--default-font);
 	font-size: 12pt;
@@ -104,8 +104,8 @@ body {
 	font-family: var(--default-font);
 	font-size: inherit;
 	line-height: 1.2;
-	background-color: var(--aemi-000);
-	color: var(--aemi-text);
+	background-color: var(--a-000);
+	color: var(--a-text);
 }
 body,
 body > *,
@@ -138,14 +138,14 @@ hr.wp-block-separator {
 	box-sizing: content-box;
 	height: 0;
 	margin: 4.875em auto;
-	border: 1pt solid var(--aemi-009);
+	border: 1pt solid var(--a-009);
 	border-radius: 1pt;
-	background-color: var(--aemi-009);
+	background-color: var(--a-009);
 	overflow: visible;
 }
 body.darkui hr {
-	border-color: var(--aemi-044);
-	background-color: var(--aemi-044);
+	border-color: var(--a-044);
+	background-color: var(--a-044);
 }
 hr.wp-block-separator:not(.is-style-wide):not(.is-style-dots) {
 	width: 3em;
@@ -154,7 +154,7 @@ hr.wp-block-separator.is-style-dots::before {
 	padding: 0 0 0 1em !important;
 	font-size: 3em !important;
 	letter-spacing: 1em !important;
-	color: var(--aemi-009) !important;
+	color: var(--a-009) !important;
 }
 *::-moz-focus-inner {
 	outline: none;
@@ -166,7 +166,7 @@ a:active {
 	font-weight: 700;
 	text-decoration: none;
 	outline: none;
-	color: var(--aemi-text);
+	color: var(--a-text);
 	transition-property: color;
 	transition-duration: .3s;
 	transition-timing-function: ease;
@@ -180,7 +180,7 @@ a:hover {
 abbr,
 abbr[title],
 acronym {
-	border-bottom: 2px dotted var(--aemi-009);
+	border-bottom: 2px dotted var(--a-009);
 	text-decoration: none;
 }
 b,
@@ -214,7 +214,7 @@ pre {
 	-o-tab-size: 4;
 	tab-size: 4;
 	text-align: left;
-	background-color: var(--aemi-004);
+	background-color: var(--a-004);
 }
 :not(pre) > code {
 	display: inline;
@@ -223,7 +223,7 @@ pre {
 	border-radius: 2pt;
 	font-size: .9em;
 	line-height: 0;
-	background-color: var(--aemi-004);
+	background-color: var(--a-004);
 }
 small {
 	font-size: .75em;
@@ -231,7 +231,7 @@ small {
 big {
 	font-size: 1.25em;
 }
-sub, 
+sub,
 sup {
 	position: relative;
 	font-size: .75em;
@@ -259,7 +259,7 @@ figcaption {
 	font-weight: 700;
 }
 dfn {
-	border-bottom: 2px solid var(--aemi-009);
+	border-bottom: 2px solid var(--a-009);
 }
 dt {
 	padding-left: .5em;
@@ -273,7 +273,7 @@ details {
 	display: block;
 	margin: 1em 0;
 	padding: 0;
-	border: 2px solid var(--aemi-004);
+	border: 2px solid var(--a-004);
 	border-radius: 7pt;
 }
 details > *:last-child {
@@ -312,7 +312,7 @@ table {
 table caption {
 	padding: .13em;
 	border: none;
-	color: var(--aemi-990);
+	color: var(--a-990);
 }
 th,
 td {
@@ -325,13 +325,13 @@ td,
 thead,
 tbody,
 tfoot {
-	border: 1px solid var(--aemi-009);
+	border: 1px solid var(--a-009);
 }
 thead {
-	color: var(--aemi-990);
+	color: var(--a-990);
 }
 tfoot {
-	color: var(--aemi-099);
+	color: var(--a-099);
 }
 template {
 	display: none;
@@ -350,7 +350,7 @@ blockquote {
 	padding: 2.5em;
 	border: none;
 	border-radius: 7pt;
-	background-color: var(--aemi-004);
+	background-color: var(--a-004);
 	font-style: italic;
 	text-align: left;
 }
@@ -367,7 +367,7 @@ blockquote {
 .wp-block-pullquote.alignright,
 .wp-block-pullquote.aligncenter {
 	border-radius: 7pt;
-	background-color: var(--aemi-004);
+	background-color: var(--a-004);
 }
 blockquote p {
 	margin: 0;
@@ -378,7 +378,7 @@ blockquote cite,
 	display: block;
 	margin: 0;
 	padding-top: 2.5em;
-	color: var(--aemi-094) !important;
+	color: var(--a-094) !important;
 }
 blockquote cite::before {
 	content: "– ";
@@ -435,7 +435,7 @@ img[class*="wp-image"],
 	font-weight: 400;
 	text-align: center;
 	vertical-align: middle;
-	color: var(--aemi-099);
+	color: var(--a-099);
 }
 /*--------------------------------------------------------------
 # Galleries
@@ -562,7 +562,7 @@ img[class*="wp-image"],
 	text-align: center;
 }
 .wp-block-gallery.columns-1 .blocks-gallery-item,
-.wp-block-gallery.columns-2 .blocks-gallery-item, 
+.wp-block-gallery.columns-2 .blocks-gallery-item,
 .wp-block-gallery.columns-3 .blocks-gallery-item,
 .wp-block-gallery.columns-4 .blocks-gallery-item,
 .wp-block-gallery.columns-5 .blocks-gallery-item,
@@ -588,7 +588,7 @@ img[class*="wp-image"],
 	font-weight: bold;
 	text-align: center;
 	vertical-align: middle;
-	color: var(--aemi-000);
+	color: var(--a-000);
 	opacity: 0;
 	transition: .3s all ease-in-out;
 	z-index: 1;
@@ -624,7 +624,7 @@ img[class*="wp-image"],
 # Block - Audio
 --------------------------------------------------------------*/
 .wp-block-audio figcaption {
-	color: var(--aemi-099);
+	color: var(--a-099);
 }
 button,
 input,
@@ -656,7 +656,7 @@ form {
 label {
 	margin-top: .5em;
 	margin-bottom: .25em;
-	color: var(--aemi-900);
+	color: var(--a-900);
 }
 input,
 input[type],
@@ -664,9 +664,9 @@ select,
 textarea {
 	padding: .75em;
 	border-radius: 5pt;
-	border-color: var(--aemi-004);
-	background-color: var(--aemi-004);
-	color: var(--aemi-999);
+	border-color: var(--a-004);
+	background-color: var(--a-004);
+	color: var(--a-999);
 	transition-duration: .3s;
 	transition-property: background-color, border-color, color;
 	transition-timing-function: ease;
@@ -675,8 +675,8 @@ input:focus,
 input[type]:focus,
 select:focus,
 textarea:focus {
-	border-color: var(--aemi-009);
-	background-color: var(--aemi-000);
+	border-color: var(--a-009);
+	background-color: var(--a-000);
 	transition-duration: .3s;
 	transition-property: background-color, border-color, color;
 	transition-timing-function: ease;
@@ -695,9 +695,9 @@ input[type="reset"],
 	border-radius: 5pt;
 	font-weight: 700;
 	border: 1px solid;
-	border-color: var(--aemi-text);
-	background-color: var(--aemi-text);
-	color: var(--aemi-000);
+	border-color: var(--a-text);
+	background-color: var(--a-text);
+	color: var(--a-000);
 	cursor: default;
 	transition-duration: .3s;
 	transition-property: background-color, border-color, color;
@@ -710,8 +710,8 @@ button:hover,
 .button a:hover,
 .wp-block-button a.wp-block-button__link:hover {
 	text-decoration: none;
-	border-color: var(--aemi-900);
-	background-color: var(--aemi-900);
+	border-color: var(--a-900);
+	background-color: var(--a-900);
 	transition-duration: .3s;
 	transition-property: background-color, border-color, color;
 	transition-timing-function: ease;
@@ -729,8 +729,8 @@ button:active,
 .button a:active,
 .wp-block-button a.wp-block-button__link:focus,
 .wp-block-button a.wp-block-button__link:active {
-	border-color: var(--aemi-099);
-	background-color: var(--aemi-099);
+	border-color: var(--a-099);
+	background-color: var(--a-099);
 	transition-duration: .3s;
 	transition-property: background-color, border-color, color;
 	transition-timing-function: ease;
@@ -781,9 +781,9 @@ input[type="radio"] {
 	padding: 0 !important;
 	height: 18px !important;
 	width: 18px !important;
-	border-color: var(--aemi-009);
-	background-color: var(--aemi-000);
-	color: var(--aemi-text);
+	border-color: var(--a-009);
+	background-color: var(--a-000);
+	color: var(--a-text);
 	vertical-align: .125em;
 }
 input[type="checkbox"] {
@@ -812,7 +812,7 @@ input[type="radio"]::before {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	border-radius: 3em !important;
-	background-color: var(--aemi-text);
+	background-color: var(--a-text);
 	visibility: hidden;
 }
 input[type="checkbox"]:checked::before,
@@ -820,24 +820,24 @@ input[type="radio"]:checked::before {
 	visibility: visible;
 }
 input[type="checkbox"]:disabled {
-	border-color: var(--aemi-009);
-	background-color: var(--aemi-004);
-	color: var(--aemi-900);
+	border-color: var(--a-009);
+	background-color: var(--a-004);
+	color: var(--a-900);
 }
 /* Range */
 input[type="range"] {
 	padding: .2em inherit;
 	border: none;
 	border-radius: 1em !important;
-	background-color: var(--aemi-009);
+	background-color: var(--a-009);
 }
 input[type="range"]::-webkit-slider-runnable-track {
 	height: 5px;
 	border-radius: 1em;
-	background-color: var(--aemi-094);
+	background-color: var(--a-094);
 }
 input[type="range"]:focus::-webkit-slider-runnable-track {
-	background-color: var(--aemi-094);
+	background-color: var(--a-094);
 }
 input[type="range"]::-webkit-slider-thumb {
 	-webkit-appearance: none;
@@ -845,28 +845,28 @@ input[type="range"]::-webkit-slider-thumb {
 	height: .9em;
 	width: .9em;
 	margin-top: -.3em;
-	border: 1px solid var(--aemi-000);
+	border: 1px solid var(--a-000);
 	border-radius: 1em;
-	background-color: var(--aemi-000);
+	background-color: var(--a-000);
 }
 /* Range Firefox */
 input[type="range"]::-moz-range-track {
 	height: 5px;
 	border: 0;
 	border-radius: 1em;
-	background-color: var(--aemi-094);
+	background-color: var(--a-094);
 }
 input[type="range"]:focus::-moz-range-track {
-	background-color: var(--aemi-094);
+	background-color: var(--a-094);
 }
 input[type="range"]::-moz-range-thumb {
 	-moz-appearance: none;
 	height: .9em;
 	width: .9em;
 	margin-top: -4px;
-	border: 1px solid var(--aemi-text);
+	border: 1px solid var(--a-text);
 	border-radius: 1em;
-	background-color: var(--aemi-text);
+	background-color: var(--a-text);
 }
 /* Range Microsoft */
 input[type="range"]::-ms-track {
@@ -921,7 +921,7 @@ fieldset {
 	margin-top: .5em;
 	margin-bottom: .5em;
 	padding: .35em .75em .625em;
-	border: 2px solid var(--aemi-004);
+	border: 2px solid var(--a-004);
 	border-radius: 7pt;
 }
 legend {
@@ -929,7 +929,7 @@ legend {
 	margin: 0 .125em;
 	padding: .333em 1.25em;
 	max-width: 100%;
-	border: 2px solid var(--aemi-004);
+	border: 2px solid var(--a-004);
 	border-radius: 7pt;
 	text-align: center;
 	white-space: normal;

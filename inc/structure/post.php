@@ -15,7 +15,7 @@ if ( ! function_exists( 'aemi_post_header' ) )
 				{
 					the_title( sprintf( '<h1 class="post-title" itemprop="name headline"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h1>' );
 				}
-				aemi_meta_header(); 
+				aemi_meta_header();
 			?></div>
 		</div><?php
 	}

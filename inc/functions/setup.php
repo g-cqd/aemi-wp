@@ -112,10 +112,10 @@ if ( ! function_exists( 'aemi_widgets_init' ) )
 			'name' => __( 'Header Widget Area', 'aemi' ),
 			'id' => 'header-widget-area',
 			'description' => __( 'Add widgets in this area to display them on header area.', 'aemi' ),
-			'before_widget' => '<div id="w-%1$s" class="w-cont %2$s">',
+			'before_widget' => '<div id="w-%1$s" class="w-cont header-section %2$s">',
 			'after_widget' => '</div>',
-			'before_title' => '<h6 class="widget-title">',
-			'after_title' => '</h6>',
+			'before_title' => '<h4 class="widget-title">',
+			'after_title' => '</h4>',
 		) );
 		register_sidebar( array (
 			'name' => __( 'Sidebar Widget Area', 'aemi' ),
@@ -123,8 +123,8 @@ if ( ! function_exists( 'aemi_widgets_init' ) )
 			'description' => __( 'Add widgets in this area to display them on sidebar area.', 'aemi' ),
 			'before_widget' => '<div id="w-%1$s" class="w-cont %2$s">',
 			'after_widget' => '</div>',
-			'before_title' => '<h6 class="widget-title">',
-			'after_title' => '</h6>',
+			'before_title' => '<h4 class="widget-title">',
+			'after_title' => '</h4>',
 		) );
 		register_sidebar( array (
 			'name' => __( 'Footer Widget Area', 'aemi' ),
@@ -132,8 +132,8 @@ if ( ! function_exists( 'aemi_widgets_init' ) )
 			'description' => __( 'Add widgets in this area to display them on footer area.', 'aemi' ),
 			'before_widget' => '<div id="w-%1$s" class="w-cont %2$s">',
 			'after_widget' => '</div>',
-			'before_title' => '<h6 class="widget-title">',
-			'after_title' => '</h6>',
+			'before_title' => '<h4 class="widget-title">',
+			'after_title' => '</h4>',
 		) );
 	}
 }
