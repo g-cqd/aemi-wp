@@ -87,7 +87,7 @@ function aemi_custom_settings( $wp_customize )
 			}
 			$wp_customize->add_control( $type_setting, array(
 				'label' => esc_html__( $meta->label, 'aemi' ),
-				'description' => esc_html__( 'Display ' . $meta->label . ' in ' . $post_name . '.', 'aemi' ),
+				'description' => esc_html( sprintf( '%1$s %2$s %3$s %4$s.', __( 'Display', 'aemi' ), $meta->label, __( 'in', 'aemi' ), $post_name ) ),
 				'section' => 'aemi_type_' . $post_name,
 				'settings' => $type_setting,
 				'type' => 'checkbox',

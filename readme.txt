@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.1.1
 * Requires PHP: 7.2
-* Version: 1.1.17
+* Version: 1.1.18
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -75,6 +75,8 @@ Source: https://github.com/originecode/AeMi
 
 ## Changelog
 
+### 1.1.18 :
+	- Fixed : Translation Domain in Customizer functions
 ### 1.1.17 :
 	- Added : Now it is possible to remove infos like Author, Published Date, Taxonomies... from every post types.
 	- Added : New Feature : Auto hiding header
