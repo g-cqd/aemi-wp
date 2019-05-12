@@ -4,9 +4,9 @@
 
 * Contributors: @guizillanet
 * Requires at least: 4.9
-* Tested up to: 5.1.1
+* Tested up to: 5.2
 * Requires PHP: 7.2
-* Version: 1.1.18
+* Version: 1.1.19
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -30,7 +30,7 @@ AeMi is designed to be an aesthetic minimalist WordPress theme. It provides a hi
 
 ## Copyright
 
-AeMi WordPress Theme, Copyright 2018 Guillaume COQUARD.
+AeMi WordPress Theme, Copyright 2019 Guillaume COQUARD.
 
 AeMi is distributed under the terms of the GNU General Public License v3.0.
 
@@ -59,6 +59,11 @@ License: MIT
 Source: https://github.com/source-foundry/Hack
 ```
 ```
+jsOnlyLightbox Lightbox, Copyright (c) 2014 Felix HAGSPIEL
+License: MIT
+Source: http://jslightbox.felixhagspiel.de
+```
+```
 Bundled screenshot.jpg, Copyright (c) 2018 Guillaume COQUARD
 License: CC0 1.0 Universal (CC0 1.0)
 Source: https://github.com/originecode/AeMi
@@ -70,11 +75,14 @@ Source: https://github.com/originecode/AeMi
 ```
 
 ## Coming
-
 	[ ] Blog Page header message
 
 ## Changelog
 
+### 1.1.19 :
+	- Improved : Button & Input Styles
+	- Improved : Featured post infos
+	- Fixed : Bug with overlay menu (so sorry for it) when logged in and admin bar visible
 ### 1.1.18 :
 	- Fixed : Translation Domain in Customizer functions
 ### 1.1.17 :

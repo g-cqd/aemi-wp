@@ -1,6 +1,7 @@
 @font-face {
 	font-family: 'Inter';
 	font-style:  normal;
+	font-display: swap;
 	font-weight: 100;
 	src: url("https://rsms.me/inter/font-files/Inter-Thin.woff2") format("woff2"),
 		 url("https://rsms.me/inter/font-files/Inter-Thin.woff") format("woff");
@@ -8,6 +9,7 @@
 @font-face {
 	font-family: 'Inter';
 	font-style:  italic;
+	font-display: swap;
 	font-weight: 100;
 	src: url("https://rsms.me/inter/font-files/Inter-ThinItalic.woff2") format("woff2"),
 		 url("https://rsms.me/inter/font-files/Inter-ThinItalic.woff") format("woff");
@@ -15,6 +17,7 @@
 @font-face {
 	font-family: 'Inter';
 	font-style:  normal;
+	font-display: swap;
 	font-weight: 200;
 	src: url("https://rsms.me/inter/font-files/Inter-ExtraLight.woff2") format("woff2"),
 		 url("https://rsms.me/inter/font-files/Inter-ExtraLight.woff") format("woff");
@@ -22,6 +25,7 @@
 @font-face {
 	font-family: 'Inter';
 	font-style:  italic;
+	font-display: swap;
 	font-weight: 200;
 	src: url("https://rsms.me/inter/font-files/Inter-ExtraLightItalic.woff2") format("woff2"),
 		 url("https://rsms.me/inter/font-files/Inter-ExtraLightItalic.woff") format("woff");
@@ -29,6 +33,7 @@
 @font-face {
 	font-family: 'Inter';
 	font-style:  normal;
+	font-display: swap;
 	font-weight: 300;
 	src: url("https://rsms.me/inter/font-files/Inter-Light.woff2") format("woff2"),
 		 url("https://rsms.me/inter/font-files/Inter-Light.woff") format("woff");
@@ -36,6 +41,7 @@
 @font-face {
 	font-family: 'Inter';
 	font-style:  italic;
+	font-display: swap;
 	font-weight: 300;
 	src: url("https://rsms.me/inter/font-files/Inter-LightItalic.woff2") format("woff2"),
 		 url("https://rsms.me/inter/font-files/Inter-LightItalic.woff") format("woff");
@@ -43,6 +49,7 @@
 @font-face {
 	font-family: 'Inter';
 	font-style:  normal;
+	font-display: swap;
 	font-weight: 400;
 	src: url("https://rsms.me/inter/font-files/Inter-Regular.woff2") format("woff2"),
 		 url("https://rsms.me/inter/font-files/Inter-Regular.woff") format("woff");
@@ -50,6 +57,7 @@
 @font-face {
 	font-family: 'Inter';
 	font-style:  italic;
+	font-display: swap;
 	font-weight: 400;
 	src: url("https://rsms.me/inter/font-files/Inter-Italic.woff2") format("woff2"),
 		 url("https://rsms.me/inter/font-files/Inter-Italic.woff") format("woff");
@@ -57,6 +65,7 @@
 @font-face {
 	font-family: 'Inter';
 	font-style:  normal;
+	font-display: swap;
 	font-weight: 500;
 	src: url("https://rsms.me/inter/font-files/Inter-Medium.woff2") format("woff2"),
 		 url("https://rsms.me/inter/font-files/Inter-Medium.woff") format("woff");
@@ -64,6 +73,7 @@
 @font-face {
 	font-family: 'Inter';
 	font-style:  italic;
+	font-display: swap;
 	font-weight: 500;
 	src: url("https://rsms.me/inter/font-files/Inter-MediumItalic.woff2") format("woff2"),
 		 url("https://rsms.me/inter/font-files/Inter-MediumItalic.woff") format("woff");
@@ -71,6 +81,7 @@
 @font-face {
 	font-family: 'Inter';
 	font-style:  normal;
+	font-display: swap;
 	font-weight: 600;
 	src: url("https://rsms.me/inter/font-files/Inter-SemiBold.woff2") format("woff2"),
 		 url("https://rsms.me/inter/font-files/Inter-SemiBold.woff") format("woff");
@@ -78,6 +89,7 @@
 @font-face {
 	font-family: 'Inter';
 	font-style:  italic;
+	font-display: swap;
 	font-weight: 600;
 	src: url("https://rsms.me/inter/font-files/Inter-SemiBoldItalic.woff2") format("woff2"),
 		 url("https://rsms.me/inter/font-files/Inter-SemiBoldItalic.woff") format("woff");
@@ -85,6 +97,7 @@
 @font-face {
 	font-family: 'Inter';
 	font-style:  normal;
+	font-display: swap;
 	font-weight: 700;
 	src: url("https://rsms.me/inter/font-files/Inter-Bold.woff2") format("woff2"),
 		 url("https://rsms.me/inter/font-files/Inter-Bold.woff") format("woff");
@@ -92,6 +105,7 @@
 @font-face {
 	font-family: 'Inter';
 	font-style:  italic;
+	font-display: swap;
 	font-weight: 700;
 	src: url("https://rsms.me/inter/font-files/Inter-BoldItalic.woff2") format("woff2"),
 		 url("https://rsms.me/inter/font-files/Inter-BoldItalic.woff") format("woff");
@@ -99,6 +113,7 @@
 @font-face {
 	font-family: 'Inter';
 	font-style:  normal;
+	font-display: swap;
 	font-weight: 800;
 	src: url("https://rsms.me/inter/font-files/Inter-ExtraBold.woff2") format("woff2"),
 		 url("https://rsms.me/inter/font-files/Inter-ExtraBold.woff") format("woff");
@@ -106,6 +121,7 @@
 @font-face {
 	font-family: 'Inter';
 	font-style:  italic;
+	font-display: swap;
 	font-weight: 800;
 	src: url("https://rsms.me/inter/font-files/Inter-ExtraBoldItalic.woff2") format("woff2"),
 		 url("https://rsms.me/inter/font-files/Inter-ExtraBoldItalic.woff") format("woff");
@@ -113,6 +129,7 @@
 @font-face {
 	font-family: 'Inter';
 	font-style:  normal;
+	font-display: swap;
 	font-weight: 900;
 	src: url("https://rsms.me/inter/font-files/Inter-Black.woff2") format("woff2"),
 		 url("https://rsms.me/inter/font-files/Inter-Black.woff") format("woff");
@@ -120,6 +137,7 @@
 @font-face {
 	font-family: 'Inter';
 	font-style:  italic;
+	font-display: swap;
 	font-weight: 900;
 	src: url("https://rsms.me/inter/font-files/Inter-BlackItalic.woff2") format("woff2"),
 		 url("https://rsms.me/inter/font-files/Inter-BlackItalic.woff") format("woff");
@@ -130,6 +148,7 @@
 		 url('https://cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/fonts/hack-regular.woff?sha=3114f1256') format('woff');
 	font-weight: 400;
 	font-style: normal;
+	font-display: swap;
 }
 @font-face {
 	font-family: 'Hack';
@@ -137,6 +156,7 @@
 		 url('https://cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/fonts/hack-bold.woff?sha=3114f1256') format('woff');
 	font-weight: 700;
 	font-style: normal;
+	font-display: swap;
 }
 @font-face {
 	font-family: 'Hack';
@@ -144,6 +164,7 @@
 		 url('https://cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/fonts/hack-italic.woff?sha=3114f1256') format('woff');
 	font-weight: 400;
 	font-style: italic;
+	font-display: swap;
 }
 @font-face {
 	font-family: 'Hack';
@@ -151,4 +172,5 @@
 		 url('https://cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/fonts/hack-bolditalic.woff?sha=3114f1256') format('woff');
 	font-weight: 700;
 	font-style: italic;
+	font-display: swap;
 }

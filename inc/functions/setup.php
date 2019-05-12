@@ -79,7 +79,8 @@ if ( ! function_exists( 'aemi_setup' ) )
 }
 add_action( 'after_setup_theme', 'aemi_setup' );
 
-
+/* Avoid WordPress to insert inline styling with galleries */
+add_filter( 'use_default_gallery_style', '__return_false' );
 
 function aemi_tagcount_filter ( $variable )
 {
