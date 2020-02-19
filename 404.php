@@ -1,15 +1,15 @@
 <?php get_header(); ?>
-
-<article id="post-lead" class="post not-found">
-	<div class="post-header">
-		<h1 class="post-title">
-			<?php esc_html_e( 'Error 404', 'aemi' ); ?>
-		</h1>
-	</div>
-	<div class="post-content">
-		<p><?php esc_html_e( 'Nothing found for the requested page. Try a search instead?', 'aemi' ) ; ?></p>
+<article id="entry-head" class="entry post page-404 not-found">
+	<header class="post-header">
+		<div class="post-info">
+			<h1 class="post-title"><?= esc_html__( '404', 'aemi' ) ?></h1>
+			<div class="archive-details 404-not-found"><?php
+				esc_html_e( 'You\'re taking a wrong turn. Please try a search instead.', 'aemi' );
+			?></div>
+		</div>
+	</header>
+	<main class="post-content">
 		<?php get_search_form(); ?>
-	</div>
+	</main>
 </article>
-
 <?php get_footer(); ?>

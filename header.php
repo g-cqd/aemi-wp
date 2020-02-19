@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html <?php language_attributes(); ?> <?php aemi_html_tag_schema(); ?>>
+<html <?php language_attributes(); ?> <?php /* aemi_html_tag_schema(); */ ?>>
 
 	<head>
 		<meta charset="<?php bloginfo( 'charset' ); ?>">
@@ -11,19 +11,14 @@
 
 	<body <?php body_class(); ?>>
 		<?php do_action( 'aemi_header_before' ); ?>
-		<header
-			class="<?php
-			if ( get_theme_mod( 'aemi_header_autohiding', 1 ) == 1 ) {
-				esc_attr_e( "auto-hiding", "aemi" );
-			}
-			?>"<?php
-			if ( get_header_image() ) {
-				?>style="background-image:url( '<?php
-					echo esc_url( get_header_image() );
-				?>' ); "<?php
-			} ?>role="banner"><?php
-				do_action( 'aemi_header' );
+		<header id="site-header">
+			<?php
+			printf(
+				'<a class="skip-link screen-reader-text" href="#main-content">%s</a>',
+				esc_html__( 'Skip to content', 'aemi' )
+			);
 			?>
+			<?php do_action( 'aemi_header' ); ?>
 		</header>
-		<main>
-			<div id="content">
+		<main id="site-content">
+			<div id="main-content">

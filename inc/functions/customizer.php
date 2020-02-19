@@ -1,18 +1,25 @@
 <?php
-
-
 function aemi_custom_settings( $wp_customize )
 {
 
 	/* ** Sanitizing Functions ** */
 	function aemi_sanitize_checkbox( $input )
 	{
-		if ( true === $input ) { return 1; }
-		else { return 0; }
+		if ( $input === true )
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 
 
-	function aemi_raw_js_code( $input ) { return $input; }
+	function aemi_raw_js_code( $input )
+	{
+		return $input;
+	}
 
 	/* ** Panel & Sections ** */
 	$wp_customize->add_panel( 'aemi_panel', array(
@@ -179,17 +186,19 @@ add_action( 'customize_register', 'aemi_custom_settings' );
 /* ** Functions ** */
 function aemi_header_script()
 {
-	?><script type="text/javascript">
-	<?php echo get_theme_mod( 'aemi_header_js_code' ); ?>
-	</script>
-	<?php
+	$header_script = get_theme_mod( 'aemi_header_js_code' );
+	if ( $header_script ) { 
+		?>
+		<script id="aemi-custom-header-script" type="text/javascript"><?= $header_script ?></script><?php
+	} 
 }
 function aemi_footer_script()
 {
-	?><script type="text/javascript">
-	<?php echo get_theme_mod( 'aemi_footer_js_code' ); ?>
-	</script>
-	<?php
+	$footer_script = get_theme_mod( 'aemi_footer_js_code' );
+	if ( $footer_script ) {
+		?>
+		<script id="aemi-custom-footer-script" type="text/javascript"><?= $footer_script ?></script><?php
+	} 
 }
 add_action( 'wp_head', 'aemi_header_script' );
 add_action( 'wp_footer', 'aemi_footer_script' );

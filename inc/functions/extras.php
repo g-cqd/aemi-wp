@@ -1,45 +1,49 @@
 <?php
 
 
-if ( ! function_exists( 'aemi_body_classes' ) )
-{
-	function aemi_body_classes( $classes )
+if (!function_exists('aemi_body_classes')) {
+	function aemi_body_classes($classes)
 	{
-		if ( is_singular() )
+		if (is_singular())
 		{
 			$classes[] = 'singular';
-		}
-		if ( ! is_singular() )
+		} else
 		{
-			$classes[] = 'multi';
+			$classes[] = 'not-singular';
 		}
-		if ( is_active_sidebar( 'sidebar-widget-area' ) )
+		if (is_active_sidebar('sidebar-widget-area'))
 		{
 			$classes[] = 'sidebar';
 		}
-		if ( current_user_can( 'edit_posts' ) )
+		if (current_user_can('edit_posts'))
 		{
-			$classes[] = 'edit-able';
+			$classes[] = 'editable';
+		}
+		if (get_theme_mod('aemi_header_autohiding', 1) == 1)
+		{
+			$classes[] = 'auto-hide';
 		}
 		return $classes;
 	}
 }
 
-
-/* Remove JQuery migrate
-function aemi_remove_jquery_migrate( $scripts ) {
-	if ( ! is_admin() && isset( $scripts->registered['jquery'] ) ) {
-		$script = $scripts->registered['jquery'];
-		if ( $script->deps ) {
-			$script->deps = array_diff( $script->deps, array( 'jquery-migrate' ) );
+if (!function_exists('aemi_remove_jquery_migrate')) {
+	function aemi_remove_jquery_migrate($scripts)
+	{
+		if (!is_admin() && isset($scripts->registered['jquery'])) {
+			$script = $scripts->registered['jquery'];
+			if ($script->deps) {
+				$script->deps = array_diff($script->deps, array('jquery-migrate'));
+			}
 		}
 	}
 }
-add_action( 'wp_default_scripts', 'aemi_remove_jquery_migrate' );
-*/
+if (true === false) {
+	add_action('wp_default_scripts', 'aemi_remove_jquery_migrate');
+}
 
 
-function aemi_html_tag_schema()
+/*'function aemi_html_tag_schema()
 {
 	$schema 	= 'http://schema.org/';
 	$type 		= 'WebPage';
@@ -56,96 +60,231 @@ function aemi_html_tag_schema()
 		$type 	= 'SearchResultsPage';
 	}
 	echo 'itemscope="itemscope" itemtype="' . esc_attr( $schema ) . esc_attr( $type ) . '"';
-}
+}*/
 
 
 
 function aemi_category_transient_flusher()
 {
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
-	{
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
 		return;
 	}
-	delete_transient( 'aemi_categories' );
+	delete_transient('aemi_categories');
 }
-add_action( 'edit_category', 'aemi_category_transient_flusher' );
-add_action( 'save_post', 'aemi_category_transient_flusher' );
+add_action('edit_category', 'aemi_category_transient_flusher');
+add_action('save_post', 'aemi_category_transient_flusher');
 
 
 
-function aemi_remove_script_version( $src )
+function aemi_remove_script_version($src)
 {
-	$parts = explode( '?', $src );
+	$parts = explode('?', $src);
 	return $parts[0];
 }
-add_filter( 'script_loader_src', 'aemi_remove_script_version', 15, 1 );
-add_filter( 'style_loader_src', 'aemi_remove_script_version', 15, 1 );
+add_filter('script_loader_src', 'aemi_remove_script_version', 15, 1);
+add_filter('style_loader_src', 'aemi_remove_script_version', 15, 1);
 
 
-
-function aemi_optimize_scripts( $tag, $handle )
-{
-	$scripts = array(
-		'aemi-script'
-	);
-	foreach( $scripts as $script )
+if (!function_exists('aemi_async_scripts')) {
+	function aemi_async_scripts($scripts_tag)
 	{
-		if ( $script === $handle )
-		{
-			return str_replace( ' src', ' defer src', $tag );
+
+		global $async_scripts;
+		if (!isset($async_scripts)) {
+			$async_scripts = array();
+		}
+		foreach ($scripts_tag as $script) {
+			$async_scripts[] = $script;
+		}
+
+		if (!function_exists('aemi_async_scripts_filter')) {
+			function aemi_async_scripts_filter($tag, $handle)
+			{
+				global $async_scripts;
+				foreach ($async_scripts as $script) {
+					if ($script === $handle) {
+						return str_replace(' src', ' async src', $tag);
+					}
+				}
+				return $tag;
+			}
+			add_filter('script_loader_tag', 'aemi_async_scripts_filter', 10, 2);
 		}
 	}
-	return $tag;
 }
-add_filter('script_loader_tag', 'aemi_optimize_scripts', 10, 2);
 
 
-
-if ( ! function_exists( 'aemi_custom_archive_title' ) )
-{
-	function aemi_custom_archive_title( $title )
+if (!function_exists('aemi_defer_scripts')) {
+	function aemi_defer_scripts($scripts_tag)
 	{
-		if ( is_category() ) {
-			$title = '<h1 class="post-title">' . single_cat_title( '', false ) . '</h1><div class="archive-type cat">' . _x( 'Category', 'archive page type category', 'aemi' ) . '</div>';
-		} elseif ( is_tag() ) {
-			$title = '<h1 class="post-title">' . single_tag_title( '', false ) . '</h1><div class="archive-type tag">' . _x( 'Tag', 'archive page type tag', 'aemi' ) . '</div>';
-		} elseif ( is_author() ) {
-			$title = '<h1 class="post-title">' . get_the_author() . '</h1><div class="archive-type author">' . _x( 'Author', 'archive page type author', 'aemi' ) . '</div>';
-		} elseif ( is_year() ) {
-			$title = '<h1 class="post-title">' . get_the_date( 'Y' ) . '</h1><div class="archive-type year">' . _x( 'Yearly Archives', 'archive page type yearly', 'aemi' ) . '</div>';
-		} elseif ( is_month() ) {
-			$title = '<h1 class="post-title">' . get_the_date( 'F Y' ) . '</h1><div class="archive-type month">' . _x( 'Monthly Archives', 'archive page type monthly', 'aemi' ) . '</div>';
-		} elseif ( is_day() ) {
-			$title = '<h1 class="post-title">' . get_the_date( 'j F Y' ) . '</h1><div class="archive-type day">' . _x( 'Daily Archives', 'archive page type daily', 'aemi' ) . '</div>';
-		} elseif ( is_tax( 'post_format' ) ) {
-			if ( is_tax( 'post_format', 'post-format-aside' ) ) {
-				$title = '<h1 class="post-title">' . _x( 'Asides', 'post format archive title', 'aemi' ) . '</h1>';
-			} elseif ( is_tax( 'post_format', 'post-format-gallery' ) ) {
-				$title = '<h1 class="post-title">' . _x( 'Galleries', 'post format archive title', 'aemi' ) . '</h1>';
-			} elseif ( is_tax( 'post_format', 'post-format-image' ) ) {
-				$title = '<h1 class="post-title">' . _x( 'Images', 'post format archive title', 'aemi' ) . '</h1>';
-			} elseif ( is_tax( 'post_format', 'post-format-video' ) ) {
-				$title = '<h1 class="post-title">' . _x( 'Videos', 'post format archive title', 'aemi' ) . '</h1>';
-			} elseif ( is_tax( 'post_format', 'post-format-quote' ) ) {
-				$title = '<h1 class="post-title">' . _x( 'Quotes', 'post format archive title', 'aemi' ) . '</h1>';
-			} elseif ( is_tax( 'post_format', 'post-format-link' ) ) {
-				$title = '<h1 class="post-title">' . _x( 'Links', 'post format archive title', 'aemi' ) . '</h1>';
-			} elseif ( is_tax( 'post_format', 'post-format-status' ) ) {
-				$title = '<h1 class="post-title">' . _x( 'Status', 'post format archive title', 'aemi' ) . '</h1>';
-			} elseif ( is_tax( 'post_format', 'post-format-audio' ) ) {
-				$title = '<h1 class="post-title">' . _x( 'Audio', 'post format archive title', 'aemi' ) . '</h1>';
-			} elseif ( is_tax( 'post_format', 'post-format-chat' ) ) {
-				$title = '<h1 class="post-title">' . _x( 'Chats', 'post format archive title', 'aemi' ) . '</h1>';
+
+		global $defer_scripts;
+		if (!isset($defer_scripts)) {
+			$defer_scripts = array();
+		}
+		foreach ($scripts_tag as $script) {
+			$defer_scripts[] = $script;
+		}
+
+		if (!function_exists('aemi_defer_scripts_filter')) {
+			function aemi_defer_scripts_filter($tag, $handle)
+			{
+				global $defer_scripts;
+				foreach ($defer_scripts as $script) {
+					if ($script === $handle) {
+						return str_replace(' src', ' defer src', $tag);
+					}
+				}
+				return $tag;
 			}
-		} elseif ( is_post_type_archive() ) {
-			$title = '<h1 class="post-title">' . post_type_archive_title( '', false ) . '</h1>';
-		} elseif ( is_tax() ) {
-			$tax = get_taxonomy( get_queried_object()->taxonomy );
-			$title = '<h1 class="post-title">' . single_term_title( '', false ) . '</h1><div class="archive-type ' . $tax->labels->singular_name . '">' . $tax->labels->singular_name . '</div>';
-		} else {
-			$title = '<h1 class="post-title">' . _x( 'Archives', 'generic archive title', 'aemi' ) . '</h1>';
+			add_filter('script_loader_tag', 'aemi_defer_scripts_filter', 10, 2);
+		}
+	}
+}
+
+
+
+if (!function_exists('aemi_custom_archive_title')) {
+	function aemi_custom_archive_title($title)
+	{
+		switch (true) {
+			case is_category(): {
+				$title = sprintf(
+					'<h1 class="post-title">%1$s</h1><div class="archive-type cat">%2$s</div>',
+					single_cat_title('', false),
+					__('Category', 'aemi')
+				);
+				break;
+			}
+			case is_tag(): {
+				$title = sprintf(
+					'<h1 class="post-title">%1$s</h1><div class="archive-type tag">%2$s</div>',
+					single_tag_title('', false),
+					__('Tag', 'aemi')
+				);
+				break;
+			}
+			case is_author(): {
+				$title = sprintf(
+					'<h1 class="post-title">%1$s</h1><div class="archive-type author">%2$s</div>',
+					get_the_author(),
+					__('Author', 'aemi')
+				);
+				break;
+			}
+			case is_year(): {
+				$title = sprintf(
+					'<h1 class="post-title">%1$s</h1><div class="archive-type year">%2$s</div>',
+					get_the_date('Y'),
+					__('Year', 'aemi')
+				);
+				break;
+			}
+			case is_month(): {
+				$title = sprintf(
+					'<h1 class="post-title">%1$s</h1><div class="archive-type month">%2$s</div>',
+					get_the_date('F Y'),
+					__('Month', 'aemi')
+				);
+				break;
+			}
+			case is_day(): {
+				$title = sprintf(
+					'<h1 class="post-title">%1$s</h1><div class="archive-type day">%2$s</div>',
+					get_the_date('j F Y'),
+					__('Day', 'aemi')
+				);
+				break;
+			}
+			case is_tax('post_format', 'post-format-aside'): {
+				$title = sprintf(
+					'<h1 class="post-title">%1$s</h1>',
+					__('Asides', 'aemi')
+				);
+				break;
+			}
+			case is_tax('post_format', 'post-format-gallery'): {
+				$title = sprintf(
+					'<h1 class="post-title">%1$s</h1>',
+					__('Galleries', 'aemi')
+				);
+				break;
+			}
+			case is_tax('post_format', 'post-format-image'): {
+				$title = sprintf(
+					'<h1 class="post-title">%1$s</h1>',
+					__('Images', 'aemi')
+				);
+				break;
+			}
+			case is_tax('post_format', 'post-format-video'): {
+				$title = sprintf(
+					'<h1 class="post-title">%1$s</h1>',
+					__('Videos', 'aemi')
+				);
+				break;
+			}
+			case is_tax('post_format', 'post-format-quote'): {
+				$title = sprintf(
+					'<h1 class="post-title">%1$s</h1>',
+					__('Quotes', 'aemi')
+				);
+				break;
+			}
+			case is_tax('post_format', 'post-format-link'): {
+				$title = sprintf(
+					'<h1 class="post-title">%1$s</h1>',
+					__('Links', 'aemi')
+				);
+				break;
+			}
+			case is_tax('post_format', 'post-format-status'): {
+				$title = sprintf(
+					'<h1 class="post-title">%1$s</h1>',
+					__('Statuses', 'aemi')
+				);
+				break;
+			}
+			case is_tax('post_format', 'post-format-audio'): {
+				$title = sprintf(
+					'<h1 class="post-title">%1$s</h1>',
+					__('Audios', 'aemi')
+				);
+				break;
+			}
+			case is_tax('post_format', 'post-format-chat'): {
+				$title = sprintf(
+					'<h1 class="post-title">%1$s</h1>',
+					__('Chats', 'aemi')
+				);
+				break;
+			}
+			case is_post_type_archive(): {
+				$title = sprintf(
+					'<h1 class="post-title">%1$s</h1>',
+					post_type_archive_title('', false)
+				);
+				break;
+			}
+			case is_tax(): {
+				$tax = get_taxonomy(get_queried_object()->taxonomy);
+				$title = sprintf(
+					'<h1 class="post-title">%1$s</h1><div class="archive-type %2$s">%3$s</div>',
+					single_term_title('', false),
+					$tax->labels->singular_name,
+					$tax->labels->singular_name
+				);
+				break;
+			}
+			default: {
+				$title = sprintf(
+					'<h1 class="post-title">%s</h1>',
+					__('Archives', 'aemi')
+				);
+				break;
+			}
 		}
 		return $title;
 	}
 }
-add_filter( 'get_the_archive_title', 'aemi_custom_archive_title' );
+add_filter('get_the_archive_title', 'aemi_custom_archive_title');

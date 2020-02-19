@@ -1,7 +1,6 @@
 <?php
 
-if ( ! function_exists( 'aemi_content_width' ) )
-{
+if ( ! function_exists( 'aemi_content_width' ) ) {
 	function aemi_content_width()
 	{
 		$GLOBALS['content_width'] = apply_filters( 'aemi_content_width', 1024 );
@@ -11,8 +10,7 @@ if ( ! function_exists( 'aemi_content_width' ) )
 $theme = wp_get_theme( 'aemi' );
 $aemi_version = $theme['Version'];
 
-if ( ! function_exists( 'aemi_setup' ) )
-{
+if ( ! function_exists( 'aemi_setup' ) ) {
 	function aemi_setup()
 	{
 		add_theme_support( 'automatic-feed-links' );
@@ -24,18 +22,25 @@ if ( ! function_exists( 'aemi_setup' ) )
 		add_image_size( 'aemi-logo', 92, 276, false );
 		register_nav_menus(
 			array(
-				'header-menu' => _x( 'Header Menu', 'header menu', 'aemi' ),
-				'social-menu' => _x( 'Social Menu', 'social menu', 'aemi' ),
-				'footer-menu' => _x( 'Footer Menu', 'footer menu', 'aemi' ),
+				'header-menu' => __( 'Header Menu', 'aemi' ),
+				'overlay-menu' => __( 'Overlay Menu', 'aemi' ),
+				'social-menu' => __( 'Social Menu', 'aemi' ),
+				'footer-menu' => __( 'Footer Menu', 'aemi' ),
 			)
 		);
 
 		add_theme_support( 'html5' );
 
-		add_theme_support( 'custom-background', apply_filters( 'aemi_custom_background_args', array(
-			'default-color' => 'ffffff',
-			'default-image' => '',
-		) ) );
+		add_theme_support(
+			'custom-background',
+			apply_filters(
+				'aemi_custom_background_args',
+				array(
+					'default-color' => 'ffffff',
+					'default-image' => ''
+				)
+			)
+		);
 
 		add_theme_support( 'custom-header', array(
 			'default-image'          => '',
@@ -71,8 +76,8 @@ if ( ! function_exists( 'aemi_setup' ) )
 				),
 				'footer-widget-area' => array(
 					'',
-				),
-			),
+				)
+			)
 		) );
 		add_theme_support( 'starter-content', $starter_content );
 	}
@@ -140,26 +145,84 @@ if ( ! function_exists( 'aemi_widgets_init' ) )
 }
 
 
-if ( ! function_exists( 'aemi_scripts' ) )
-{
+if ( ! function_exists( 'aemi_scripts' ) ) {
 	function aemi_scripts()
 	{
-		wp_enqueue_style( 'aemi-style', get_stylesheet_uri() );
-		wp_enqueue_style( 'aemi-font', get_template_directory_uri() . '/assets/css/fonts.css' );
-		/* Enqueue AeMi JavaScript Script in footer */
-		wp_register_script( 'aemi-script', get_template_directory_uri() . '/assets/js/aemi.js', '', '', true );
+		wp_register_style( 'aemi-fonts', get_template_directory_uri() . '/assets/styles/public/fonts.css' );
+		wp_register_style( 'aemi-standard', get_template_directory_uri() . '/assets/styles/public/standard.css' );
+		wp_register_style( 'aemi-styles', get_stylesheet_uri() );
+		wp_register_style( 'aemi-gutenberg', get_template_directory_uri() . '/assets/styles/public/gutenberg.css' );
+		wp_register_script( 'aemi-script', get_template_directory_uri() . '/assets/scripts/aemi.js', false, false, false );
+
+		wp_enqueue_style ( 'aemi-fonts' );
+		wp_enqueue_style ( 'aemi-standard' );
+		wp_enqueue_style ( 'aemi-styles' );
+		wp_enqueue_style ( 'aemi-gutenberg' );
+
 		wp_enqueue_script ( 'aemi-script' );
 
+		aemi_defer_scripts( array(
+				'aemi-script',
+			)
+		);
+		
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 			wp_enqueue_script( 'comment-reply' );
 		}
 	}
 }
 
-if ( ! function_exists( 'aemi_ie_scripts') )
-{
+if ( ! function_exists( 'aemi_ie_scripts') ) {
 	function aemi_ie_scripts()
 	{
-		wp_enqueue_style( 'aemi-ie-style', get_template_directory_uri() . '/assets/css/ie_style.css' );
+		wp_enqueue_style( 'aemi-ie-style', get_template_directory_uri() . '/assets/styles/admin/ie_style.css' );
 	}
 }
+
+if ( ! function_exists( 'aemi_gutenberg_editor_style' ) )
+{
+	function aemi_gutenberg_editor_style()
+	{
+		wp_enqueue_style( 'aemi-gutenberg-style', get_template_directory_uri() . "/assets/styles/admin/guten-style.css" );
+	}
+}
+add_action('enqueue_block_editor_assets', 'aemi_gutenberg_editor_style');
+
+if ( !function_exists( 'aemi_custom_comment_fields_order' ) ) {
+	function aemi_custom_comment_fields_order( $fields ) {
+		
+		$comment_field = $fields['comment'];
+		$author_field = $fields['author'];
+		$email_field = $fields['email'];
+		$url_field = $fields['url'];
+
+		unset( $fields['comment'] );
+		unset( $fields['author'] );
+		unset( $fields['email'] );
+		unset( $fields['url'] );
+		
+		$fields['author'] = $author_field;
+		$fields['email'] = $email_field;
+		$fields['url'] = $url_field;
+		$fields['comment'] = $comment_field;
+		
+		return $fields;
+	}
+}
+add_filter( 'comment_form_fields', 'aemi_custom_comment_fields_order' );
+
+// function aemi_change_comment_date_format(){
+// 	return sprintf( _x( '%s ago', '%s = human-readable time difference', 'your-text-domain' ), human_time_diff( get_comment_time( 'U' ), current_time( 'timestamp' ) ) );
+// }
+
+// if ( !function_exists( 'aemi_change_comment_date_format' ) ) {
+// 	function aemi_change_comment_date_format( $date, $date_format, $comment ) {
+// 		if ('Y/m/d' == $date_format ) {
+// 			return date( 'm.d.y', strtotime( $comment->comment_date ) );
+// 		  } else {
+// 			return date( 'm.d.y', strtotime( $comment->comment_date ) );
+// 		  }
+// 	}
+// }
+// add_filter( 'get_comment_date', 'aemi_change_comment_date_format' );
+// add_filter( 'get_comment_time', 'aemi_change_comment_date_format' );

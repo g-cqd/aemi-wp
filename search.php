@@ -1,30 +1,40 @@
-<?php get_header();
-if ( have_posts() ) { ?>
-<article id="post-lead" class="post">
-	<div class="post-header">
-		<div class="post-info">
-			<h1 class="post-title"><?php 
-				$search_query_content = get_search_query();
-				echo $search_query_content;
-			?></h1>
-			<div class="archive-type search"><?php
-			if ( $search_query_content == "" )
-			{
-				esc_html_e( "Is 'looking for anything' useful?", 'aemi' );
-			}
-			else
-			{
-				esc_html_e( 'Search Results', 'aemi' );
-			}
-			?></div>
-		</div>
-	</div>
-</article>
-<?php
-	get_template_part( 'loop' );
-}
-else
+<?php get_header(); ?>
+<?
+$query = get_search_query();
+if ( have_posts() )
 {
-	get_template_part( 'inc/parts/content', 'none' );
-}
-get_footer(); ?>
+	?><article id="entry-head" class="entry">
+		<header class="post-header">
+			<div class="post-info">
+				<h1 class="post-title"><?= $query === '' ? esc_html__( 'What are you looking for?', 'aemi') : $query ?></h1>
+				<?php
+				if ( $query === '' ) {
+					printf( '<div class="archive-details search">%s</div>',
+						esc_html__( 'Is looking for anything, whatever it is, useful?', 'aemi' )
+					);
+				}
+				else {
+					printf( '<div class="archive-details search">%s</div>',
+						esc_html__( 'Search Results', 'aemi' )
+					);
+				}
+				?>
+			</div>
+		</header><?php if ( $query === '' )
+		{
+		?>
+		<main class="post-content">
+			<?php get_search_form(); ?>
+		</main>
+	</article>
+	<?php } else { ?>
+	</article>
+	<?php
+		get_template_part( 'loop' );
+	}
+	}
+	else
+	{
+		get_template_part( 'inc/parts/content', 'none' );
+	} ?>
+<?php get_footer(); ?>
