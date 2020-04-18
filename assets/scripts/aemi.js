@@ -10,11 +10,12 @@ function is(object) {
 	'use strict';
 	return object !== null && object !== undefined;
 }
-function is_( object ) {
+function is_(object) {
 	'use strict';
 	return is(object) && object !== '';
 }
 function isFunction(object) {
+	'use strict';
 	return typeof object === 'function' ? object : false;
 }
 function catchError(caughtError, customMessage) {
@@ -24,24 +25,26 @@ function catchError(caughtError, customMessage) {
 		console.group(error.name);
 		console.warn(error.message);
 		console.warn(error.stack);
+		console.trace(error);
 		console.groupEnd(error.name);
 	});
 	return;
 }
 function id(string) {
+	'use strict';
 	return document.getElementById(string);
 }
 
-function requestFrame(func, ...args) {
+function requestFrame() {
+	'use strict';
+	const [func,...args] = arguments;
 	if (isFunction(func)) {
-		return window.requestAnimationFrame(function framed() {
-			return func(...args);
-		});
+		return window.requestAnimationFrame( () => func(...args) );
 	}
-	return catchError(func, 'is not a function.');
 }
 
 function cancelFrame(id) {
+	'use strict';
 	try {
 		cancelAnimationFrame(id);
 		return true;
@@ -66,22 +69,36 @@ function hasClass(element, className) {
 	}
 }
 
-function addClass(element, className) {
+function addClass(element, className, doNotRequestFrame) {
 	'use strict';
+	doNotRequestFrame = doNotRequestFrame || true;
 	if (is(element) && is(className)) {
-		return !!requestFrame(function framed() {
+		if ( doNotRequestFrame ) {
 			element.classList.add(className);
-		});
+			return true;
+		}
+		else {
+			return !!requestFrame(function framed() {
+				element.classList.add(className);
+			});
+		}
 	}
 	return catchError(className, 'is undefined.');
 }
 
-function removeClass(element, className) {
+function removeClass(element, className,doNotRequestFrame) {
 	'use strict';
+	doNotRequestFrame = doNotRequestFrame || false;
 	if (is(element) && is(className)) {
-		return !!requestFrame(function framed() {
+		if ( doNotRequestFrame ) {
 			element.classList.remove(className);
-		});
+			return true;
+		}
+		else {
+			return !!requestFrame(function framed() {
+				element.classList.remove(className);
+			});
+		}
 	}
 	return catchError(className, 'is undefined.');
 }
@@ -92,7 +109,7 @@ function toggleClass(element, className) {
 		className = is(className) ? className : 'toggled';
 		const boolean = hasClass(element, className);
 		if ((boolean === true) ^ (boolean === false)) {
-			return boolean ? !removeClass(element, className) : addClass(element, className);
+			return !!requestFrame(() => boolean ? !removeClass(element, className) : addClass(element, className) );
 		}
 	}
 	return catchError(element, 'is undefined.');
@@ -102,7 +119,7 @@ function ecs() {
     'use strict';
     const ce = a => document.createElement( is_( a ) ? a : 'div' );
 	const ac = (a,b) => { a.appendChild( b ); return a; };
-    const l= [...arguments].filter( is_ );
+    const l = [...arguments].filter( is_ );
 	const {length: ll} = l;
     if (ll === 0) { return ce(); }
 	else if (ll !== 1) {
@@ -149,6 +166,7 @@ function ecs() {
 }
 
 function ecsScript() {
+	'use script';
     const c = document.currentScript;
     if (![document.head, document.documentElement].includes(c.parentElement)) {
         for(const b of arguments) {c.insertAdjacentElement('beforebegin',ecs(b));}
@@ -163,8 +181,8 @@ class when {
 	}
 	static delay() {
 		'use strict';
-		const [func, ...args] = arguments;
-		return setTimeout(func, 0, ...args);
+		const [func, timeout, ...args] = arguments;
+		return setTimeout(func, timeout || 0, ...args);
 	}
 	static async desync() {
 		'use strict';
@@ -240,6 +258,7 @@ class Environment {
 	constructor() {
 		'use strict';
 		this.actions = [];
+		this.customs = new Map();
 	}
 	push() {
 		'use strict';
@@ -261,6 +280,36 @@ class Environment {
 			return catchError(error);
 		}
 	}
+	set( name, value, force ) {
+		force = force || false;
+		if ( !this.customs.has(name) || force ) {
+			return this.customs.set( name, value );
+		}
+		return false;
+	}
+	get( name ) {
+		if ( this.customs.has( name ) ) {
+			return this.customs.get( name );
+		}
+		return false;
+	}
+	has( name ) {
+		return this.customs.has( name );
+	}
+	update( name, value, force ) {
+		force = force || false;
+		if ( this.customs.has( name ) || force ) {
+			return this.customs.set( name, value );
+		}
+		return false;
+	}
+	delete( name ) {
+		if ( this.customs.has(name) ) {
+			return this.customs.delete(name);
+		}
+		return true;
+	}
+
 }
 class cookies {
 	constructor() {
@@ -323,15 +372,30 @@ class cookies {
 		document.cookie = cookieName + '=;' + expiration + ';path=/';
 	}
 }
+
+
+function blockScroll( env ) {
+	'use script';
+	env.set('lastScroll',window.scrollY);
+	console.log(env.get('lastScroll'));
+	addClass( document.body, 'no-overflow', false );
+}
+
+function freeScroll( env ) {
+	'use script';
+	when.delay(()=> {
+		removeClass( document.body, 'no-overflow', false );      
+    	window.scrollBy(0,env.get('lastScroll'));
+	}, 200 );
+}
+
 class Lightbox {
 	constructor(options, name) {
 		'use strict';
-		/** Default Values */
-		options = options || {};
 		/** Lightbox Name */
 		this.name = name || 'lightbox';
 		/** Options */
-		this.options = options;
+		this.options = options || {};
 		/** Box */
 		this.box = null;
 		/** Wrapper */
@@ -674,9 +738,9 @@ class Lightbox {
 			window.addEventListener('resize', () => {
 				this.resize();
 			});
-			addClass(this.box, 'no-overflow');
+			blockScroll( this.options.env );
 		} else {
-			removeClass(this.box, 'no-overflow');
+			freeScroll( this.options.env );
 		}
 		if (keyControls) {
 			document.addEventListener('keydown', $0 => {
@@ -739,7 +803,7 @@ class Lightbox {
 			}
 		}
 		if (!this.options || !('hideOverflow' in this.options) || this.options.hideOverflow) {
-			this.body.style.overflow = 'hidden';
+			blockScroll(this.options.env);
 		}
 		this.box.style.paddingTop = '0';
 		this.wrapper.innerHTML = '';
@@ -937,7 +1001,7 @@ class Lightbox {
 		this.box.style.paddingTop = '0px';
 		this.stopAnimation();
 		if (!this.options || !('hideOverflow' in this.options) || this.options.hideOverflow) {
-			this.body.style.overflow = 'auto';
+			freeScroll(this.options.env);
 		}
 		if (this.options.onclose) {
 			this.options.onclose($0);
@@ -952,11 +1016,11 @@ try {
 } catch ($e) {
 	aemi.push(function aemi_menu() {
 		'use strict';
-		for (const $0 of document.getElementsByClassName('menu')) {
-			if (!['header-menu', 'header-social', 'footer-menu'].includes($0.id)) {
-				for (const $1 of $0.getElementsByClassName('menu-item-has-children')) {
-					if ($1.getElementsByTagName('li').length > 0) {
-						$1.insertBefore(ecs({class:['toggle'],_:[{class:['toggle-element']}]}), $1.childNodes[1]);
+		for (const menu of document.getElementsByClassName('menu')) {
+			if (!['header-menu', 'header-social', 'footer-menu'].includes(menu.id)) {
+				for (const parent of menu.getElementsByClassName('menu-item-has-children')) {
+					if (parent.getElementsByTagName('li').length > 0) {
+						parent.insertBefore(ecs({class:['toggle'],_:[{class:['toggle-element']}]}), parent.childNodes[1]);
 					}
 				}
 			}
@@ -999,8 +1063,11 @@ try {
 					}
 					if (!hasClass(document.body, 'no-overflow') || $7) {
 						if ( $2.filter( str => hasClass( id( str ) ) ) || $7 ) {
-							addClass( document.body, 'no-overflow' );
+							blockScroll(aemi);
 						}
+					}
+					else {
+						freeScroll(aemi);
 					}
 				}
 			});
@@ -1014,7 +1081,7 @@ try {
 } catch ($e) {
 	aemi.push(function aemi_galleries() {
 		'use strict';
-		return new Lightbox().prepare({
+		return new Lightbox({env:aemi}).prepare({
 			wrapperSelectors: ['div.gallery', '.wp-block-gallery', '.justified-gallery'],
 			itemSelectors: ['.gallery-item', '.blocks-gallery-item', '.jg-entry'],
 			captionSelectors: ['figcaption', '.gallery-caption'],
@@ -1119,12 +1186,11 @@ try {
 		}
 		$1.addEventListener('input', () =>
 			requestFrame(() => {
-				if ($4.light.checked) {
-					$f1(true);
-				} else if ($4.dark.checked) {
-					$f2(true);
-				} else if ($4.auto.checked) {
-					$f3(true);
+				switch (true) {
+					case $4.light.checked: $f1(true); break;
+					case $4.dark.checked: $f2(true); break;
+					case $4.auto.checked: $f3(true); break;
+					default: break;
 				}
 			})
 		);
@@ -1145,7 +1211,7 @@ try {
 				const $1 = {
 					start: Math.round(window.performance.now()),
 					height: document.body.clientHeight,
-					scroll: window.pageYOffset,
+					scroll: window.scrollY,
 				};
 				setTimeout(
 					($0, $1) =>
@@ -1153,7 +1219,7 @@ try {
 							($0, $1) => {
 								const { start: $2, height: $3, scroll: $4 } = $1;
 								const $5 = Math.round(window.performance.now());
-								const $6 = window.pageYOffset;
+								const $6 = window.scrollY;
 								const $7 = id('navigation-toggle');
 								const $8 = id('search-toggle');
 								if ($4 > 0) {
@@ -1187,7 +1253,8 @@ try {
 		const aemi_progress_bar = $0 =>
 			requestFrame(() => {
 				const $1 = document.body.clientHeight - window.innerHeight;
-				const $2 = window.pageYOffset / $1;
+				const $2 = window.scrollY / $1;
+				console.log( document.body.clientHeight, window.innerHeight );
 				$0.style.width = `${100 * ($2 > 1 ? 1 : $2)}vw`;
 			}, $0);
 		const $0 = [
@@ -1209,7 +1276,7 @@ try {
 
 		$0.forEach( ({test, useTest, func, args}) => {
 			if (test.filter($ => $).length > 0) {
-				$1.push(useTest ? { args: [...args, ...test], func: func } : { args: [...args], func: func });
+				$1.push(useTest ? {args: [...args, ...test], func: func } : { args: [...args], func: func });
 			}
 		});
 

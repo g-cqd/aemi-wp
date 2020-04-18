@@ -23,6 +23,10 @@ if (!function_exists('aemi_body_classes')) {
 		{
 			$classes[] = 'auto-hide';
 		}
+		// if (get_theme_mod('aemi_loop_excerpts', 1) == 1)
+		// {
+		// 	$classes[] = 'loop-excertps';
+		// }
 		return $classes;
 	}
 }

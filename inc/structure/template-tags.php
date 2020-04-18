@@ -71,7 +71,23 @@ if ( ! function_exists( 'aemi_meta_header' ) )
 			{ ?>
 				<?php
 				$screader = $singular === false ? ' screen-reader-text' : '';
-				printf(
+				if ( get_post_type() == 'page' )
+				{
+					printf(
+						'<span class="post-date meta-detail%1$s" title="%3$s">%2$s %4$s</span>',
+						$screader,
+						esc_html__( 'Published on', 'aemi' ),
+						sprintf(
+							'%1$s %2$s',
+							esc_attr__( 'Updated on', 'aemi' ),
+							esc_attr( get_the_modified_time('j F Y - g:i a') )
+						),
+						esc_html( get_the_date( 'j F Y' ) )
+					);
+				}
+				else
+				{
+					printf(
 					'<a class="post-date" href="%3$s" title="%4$s"><span class="meta-detail%1$s">%2$s </span>%5$s</a>',
 					$screader,
 					esc_html__( 'Published on', 'aemi' ),
@@ -85,8 +101,9 @@ if ( ! function_exists( 'aemi_meta_header' ) )
 						esc_attr__( 'Updated on', 'aemi' ),
 						esc_attr( get_the_modified_time('j F Y - g:i a') )
 					),
-					esc_html( get_the_date( 'j F Y' ) )
+					esc_html( get_the_date( 'j F Y' ) ),
 				);
+				}
 			}
 			if ( $aemi_categories ) {
 				?><div class="post-categories">

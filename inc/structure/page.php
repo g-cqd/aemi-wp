@@ -7,7 +7,7 @@ if ( ! function_exists( 'aemi_page_header' ) ) {
 			?><header class="post-header">
 				<?php aemi_featured_image(); ?>
 				<div class="post-info">
-					<?php the_title( '<h2 class="post-title">', '</h2>' ); ?>
+					<?php the_title( '<h1 class="post-title">', '</h1>' ); ?>
 					<?php aemi_meta_header(); ?>
 				</div>
 			</header><?php

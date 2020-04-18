@@ -140,7 +140,9 @@ body.color-scheme-dark {
 
 html,
 body {
+	height: auto;
 	margin: 0;
+	max-width: 100%;
 	padding: 0;
 }
 

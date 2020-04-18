@@ -45,7 +45,8 @@ body {
 
 .no-overflow {
 	overflow: hidden !important;
-}
+	position: fixed;
+} 
 
 ::-moz-focus-inner {
 	outline: none;
@@ -141,23 +142,16 @@ body {
 	z-index: -1;
 }
 
+/*
+ * Scroll-Sensible Disappering Header
+ */
+
 body:not(.page-scrolled) #site-header::before {
 	background-color: unset;
 }
 
 body.page-scrolled #site-header::before {
 	background-color: var(--page-color-alpha);
-}
-
-@supports ( (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
-	body:not(.page-scrolled) #site-header::before {
-		-webkit-backdrop-filter: unset;
-		backdrop-filter: unset;
-	}
-	body.page-scrolled #site-header::before {
-		-webkit-backdrop-filter: blur(10px);
-		backdrop-filter: blur(10px);
-	}
 }
 
 .header-hidden #site-header:not(:hover) {
@@ -170,6 +164,21 @@ body.page-scrolled #site-header::before {
 
 .admin-bar.header-hidden #site-header:not(:hover) {
 	transform: translate( -50%, -100% );
+}
+
+/*
+ * Blurred Background on Header -> Safari, Chromium-Like
+ */
+
+@supports ( (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+	body:not(.page-scrolled) #site-header::before {
+		-webkit-backdrop-filter: unset;
+		backdrop-filter: unset;
+	}
+	body.page-scrolled #site-header::before {
+		-webkit-backdrop-filter: blur(10px);
+		backdrop-filter: blur(10px);
+	}
 }
 
 #site-header,
@@ -190,11 +199,26 @@ body.page-scrolled #site-header::before {
 	transition-timing-function: ease;
 }
 
+/* ----------------------------------------------------------
+ * BEGIN : Site Header Spacer -> Placeholder
+ * ---------------------------------------------------------- */
 
 #site-header .spacer {
+	max-height: 2.5rem;
 	min-height: 2.5rem;
+	max-width: 2.5rem;
 	min-width: 2.5rem;
 }
+
+/* ----------------------------------------------------------
+ * END : Site Header Spacer -> Placeholder
+ * ---------------------------------------------------------- */
+
+
+
+/* ----------------------------------------------------------
+ * BEGIN : Site Progress Bar
+ * ---------------------------------------------------------- */
 
 #site-progress-bar {
 	background-color: var(--text-color);
@@ -225,6 +249,15 @@ body:not(.header-hidden) #site-progress-bar {
 	transition-timing-function: ease;
 }
 
+/* ----------------------------------------------------------
+ * END : Site Progress Bar
+ * ---------------------------------------------------------- */
+
+
+/* ----------------------------------------------------------
+ * BEGIN : Site Header Menu
+ * ---------------------------------------------------------- */
+
 #header-menu,
 #header-menu .sub-menu,
 #header-menu .menu-item {
@@ -239,6 +272,10 @@ body:not(.header-hidden) #site-progress-bar {
 	flex-flow: row nowrap;
 	font-weight: normal;
 	position: relative;
+}
+
+#header-menu > li:nth-child(n+5) {
+	display: none;
 }
 
 #header-menu .menu-item,
@@ -380,6 +417,14 @@ body:not(.header-hidden) #site-progress-bar {
 	backdrop-filter: blur(10px);
 }
 
+/* ----------------------------------------------------------
+ * END : Site Header Menu
+ * ---------------------------------------------------------- */
+
+ /* ----------------------------------------------------------
+ * BEGIN : Site Header Menu
+ * ---------------------------------------------------------- */
+
 .menu {
 	font-size: 1.75rem;
 }
@@ -492,6 +537,11 @@ body:not(.header-hidden) #site-progress-bar {
 /* =============================
 
 ============================= */
+
+#navigation-toggle,
+#search-toggle {
+	flex: 0 0 2.5rem;
+}
 
 #header-menu+#navigation-toggle {
 	margin-left: 1.25rem;
@@ -960,8 +1010,8 @@ body.color-scheme-dark #toggle-widget::before {
 .singular .post-header::before,
 #entry-head .post-header::before {
 	background-color: var(--element-background-alpha);
-	-webkit-backdrop-filter: blur(10px);
-	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(20px);
+	backdrop-filter: blur(20px);
 	border: 0;
 	content: "";
 	display: block;
@@ -1023,6 +1073,7 @@ body.color-scheme-dark #toggle-widget::before {
 
 .post-title {
 	color: var(--text-important);
+	color: rgba(#FFFFFF,.75);
 	-webkit-hyphens: auto;
 	-moz-hyphens: auto;
 	-ms-hyphens: auto;
@@ -1031,6 +1082,18 @@ body.color-scheme-dark #toggle-widget::before {
 	overflow-wrap: break-word;
 	padding: 0;
 	word-wrap: break-word;
+}
+
+.post-title > a::before {
+	content: '';
+	display: block;
+	height: 100%;
+	left: 0;
+	padding: 1rem;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 1;
 }
 
 .not-singular .post-info {
@@ -1068,28 +1131,32 @@ body.color-scheme-dark #toggle-widget::before {
 }
 
 .post-meta {
-	display: block;
+	display: grid;
+	flex-direction: column;
 	font-weight: normal;
 	margin: 0;
 	padding: 0;
 	width: auto;
+	color: var(--text-important-hover);
+}
+
+.post-meta > * {
+	flex: 1 0 auto;
+	margin: .25rem 0 0;
 }
 
 .post-meta a {
 	font-weight: normal;
 }
 
-.post-info .post-meta {
-	color: var(--text-optional);
-}
-.post-info .post-meta a {
-	color: var(--text-important-hover);
-}
-.post-info .post-meta a:hover {
-	color: var(--text-important);
+
+
+.post-author {
+	display: flex;
 }
 
 .meta-detail {
+	color: inherit;
 	font-weight: normal;
 }
 
@@ -1108,18 +1175,6 @@ body.color-scheme-dark #toggle-widget::before {
 
 .post-categories> :nth-child(n+5)::after {
 	content: ' ...';
-}
-
-.post-author {
-	border-radius: var( --radius);
-	display: block;
-	padding: 0;
-	width: auto;
-}
-
-.post-author>* {
-	display: block;
-	height: auto;
 }
 
 .author-avatar,
