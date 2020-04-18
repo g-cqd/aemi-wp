@@ -152,6 +152,7 @@ if ( ! function_exists( 'aemi_scripts' ) ) {
 		wp_register_style( 'aemi-standard', get_template_directory_uri() . '/assets/styles/public/standard.css' );
 		wp_register_style( 'aemi-styles', get_stylesheet_uri() );
 		wp_register_style( 'aemi-gutenberg', get_template_directory_uri() . '/assets/styles/public/gutenberg.css' );
+		wp_register_script( 'aemi-companion', get_template_directory_uri() . '/assets/scripts/companion.js', false, false, false );
 		wp_register_script( 'aemi-script', get_template_directory_uri() . '/assets/scripts/aemi.js', false, false, false );
 
 		wp_enqueue_style ( 'aemi-fonts' );
@@ -159,9 +160,11 @@ if ( ! function_exists( 'aemi_scripts' ) ) {
 		wp_enqueue_style ( 'aemi-styles' );
 		wp_enqueue_style ( 'aemi-gutenberg' );
 
+		wp_enqueue_script ( 'aemi-companion' );
 		wp_enqueue_script ( 'aemi-script' );
 
 		aemi_defer_scripts( array(
+				'aemi-companion',
 				'aemi-script',
 			)
 		);

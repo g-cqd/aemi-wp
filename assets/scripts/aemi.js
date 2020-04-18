@@ -1,13 +1,12 @@
-function blockScroll( env ) {
-	'use script';
+'use script';
+function blockScroll(env) {
 	env.set('lastScroll',window.scrollY);
 	console.log(env.get('lastScroll'));
 	addClass( document.body, 'no-overflow', false );
 }
 
 function freeScroll( env ) {
-	'use script';
-	when.delay(()=> {
+	When.delay(()=> {
 		removeClass( document.body, 'no-overflow', false );      
     	window.scrollBy(0,env.get('lastScroll'));
 	}, 200 );
@@ -742,14 +741,14 @@ try {
 			removeClass($0, $3.dark);
 			addClass($0, $3.light);
 			if ($1) {
-				cookies.set('color-scheme', $2.light);
+				Cookies.set('color-scheme', $2.light);
 			}
 		}
 		function $f2($1) {
 			removeClass($0, $3.light);
 			addClass($0, $3.dark);
 			if ($1) {
-				cookies.set('color-scheme', $2.dark);
+				Cookies.set('color-scheme', $2.dark);
 			}
 		}
 		function $f3($1) {
@@ -766,14 +765,14 @@ try {
 				addClass($0, $3.light);
 			}
 			if ($1) {
-				cookies.delete('color-scheme');
+				Cookies.delete('color-scheme');
 			}
 		}
 		function $f4() {
-			let $1 = cookies.get('color-scheme') || cookies.get('darkmode');
+			let $1 = Cookies.get('color-scheme') || Cookies.get('darkmode');
 			if ($1) {
-				if (cookies.has('darkmode')) {
-					cookies.delete('darkmode');
+				if (Cookies.has('darkmode')) {
+					Cookies.delete('darkmode');
 				}
 				switch ($1) {
 					case 'force-true':
@@ -796,12 +795,12 @@ try {
 						removeClass($0, $3.dark);
 						addClass($0, $3.light);
 						$4.light.checked = true;
-						cookies.set('color-scheme', $2.light);
+						Cookies.set('color-scheme', $2.light);
 					} else {
 						removeClass($0, $3.light);
 						addClass($0, $3.dark);
 						$4.dark.checked = true;
-						cookies.set('color-scheme', $2.dark);
+						Cookies.set('color-scheme', $2.dark);
 					}
 				}
 			} else {
