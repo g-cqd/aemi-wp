@@ -114,6 +114,11 @@ function toggleClass(element, className,doNotRequestFrame) {
 	}
 	return catchError(element, 'is undefined.');
 }
+function attr() {
+	const [element, attrName, value] = arguments;
+	if (is(value)) { return element.setAttribute(attrName, value); }
+	return element.getAttribute(attrName);
+}
 /** @returns {HTMLElement} */
 function ecs() {
 	const ce = a => document.createElement(iss(a) ? a : 'div');
