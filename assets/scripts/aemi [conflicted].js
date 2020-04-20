@@ -24,9 +24,9 @@ class Lightbox {
 			Re: { mh: null, mw: null, nh: null, nw: null },
 			St: { op: false },
 			/** ID Formatter */
-			in: _ => `${this.name}${iss(_) ? '-' + _ : ''}`,
+			in: _ => `${this.name}${isset(_) ? '-' + _ : ''}`,
 			/** ClassName Formatter */
-			cn: _ => `${this.name}${iss(_) ? '-' + _ : ''}`,
+			cn: _ => `${this.name}${isset(_) ? '-' + _ : ''}`,
 			/** Dataset Attribute Name Formatter */
 			dn: _ => `data-${this.cn(_)}`
 		};
@@ -115,7 +115,7 @@ class Lightbox {
 				this.open(el, false, false, false);
 			});
 		}
-		return this.thumbnails.push(...arguments);
+		this.thumbnails.push(...arguments);
 	}
 	getByGroup(g) {
 		return [...this.thumbnails.filter(t => attr(t,this.dn('group')) === g)];
@@ -215,82 +215,81 @@ class Lightbox {
 		}, 500);
 	}
 	stopAnimation() {
-		'use strict';
 		const {
-			options: { loadingAnimation: $0 },
+			options: { loadingAnimation: lA },
 		} = this;
 		removeClass(this.box, this.cn('loading'));
-		if (typeof $0 !== 'string' && $0) {
-			clearInterval(this.animation.interval);
-			for (const $1 of this.animation.children) {
-				removeClass($1, this.cn('active'));
+		if (typeof lA !== 'string' && lA) {
+			clearInterval(this.animInterval);
+			for (const child of this.animChildren) {
+				removeClass(child, this.cn('active'));
 			}
 		}
 	}
 	initializeControls() {
-		'use strict';
-		const $s = this;
-		if (!this.controls.nextButton) {
-			let _ = [];
-			let c = [this.cn('next')];
-			if (this.options.nextImage) {
-				_.push({$:'img',attr:{src:this.options.nextButtonImage}});
-			} else {
-				c.push( this.cn('no-img') )
-			}
-			this.controls.nextButton = ecs({$:'span',class:c,_:_,events:[['click',ev=>{ev.stopPropagation();this.next();}]]});
-			this.box.appendChild(this.controls.nextButton);
+		if (!this.nextButton) {
+			const ni = this.options.nextImage;
+			this.nextButton = ecs({
+				$: 'span',
+				class: [this.cn('next'), ...(!ni ? [this.cn('no-img')] : [])],
+				_: [...(ni ? [{ $: 'img', attr: { src: this.options.nextImage } }] : [])],
+				events: [['click', ev => { inhibitEvent(ev); this.next(); }]]
+			});
+			this.box.appendChild(this.nextButton);
 		}
-		addClass(this.controls.nextButton, this.cn('active'));
-		if (!this.controls.prevButton) {
-			let _ = [];
-			let c = [this.cn('prev')];
-			if (this.options.prevImage) {
-				_.push( {$:'img',attr:{src:this.options.previousImage}} )
-			} else {
-				c.push( this.cn('no-img') );
-			}
-			this.controls.prevButton = ecs({$:'span',class:c,_:_,events:[['click',ev=>{ev.stopPropagation();this.prev();}]]});
-			this.box.appendChild(this.controls.prevButton);
+		addClass(this.nextButton, this.cn('active'));
+		if (!this.prevButton) {
+			const pi = this.options.prevImage;
+			this.prevButton = ecs({
+				$: 'span',
+				class: [this.cn('prev'), ...(!pi ? [this.cn('no-img')] : [])],
+				_: [...(pi ? [{ $: 'img', attr: { src: this.options.prevImage } }] : [])],
+				events: [['click', ev => { inhibitEvent(ev); this.prev(); }]]
+			});
+			this.box.appendChild(this.prevButton);
 		}
-		addClass(this.controls.prevButton, this.cn('active'));
+		addClass(this.prevButton, this.cn('active'));
 	}
 	repositionControls() {
-		'use strict';
-		if (this.options.responsive && this.controls.nextButton && this.controls.prevButton) {
-			const $0 = this.height / 2 - this.controls.nextButton.offsetHeight / 2;
-			this.controls.nextButton.style.top = $0 + 'px';
-			this.controls.prevButton.style.top = $0 + 'px';
+		if (this.options.responsive && this.nextButton && this.prevButton) {
+			const shift = this.height / 2 - this.nextButton.offsetHeight / 2;
+			this.nextButton.style.top = shift + 'px';
+			this.prevButton.style.top = shift + 'px';
 		}
 	}
-	setOptions($0) {
-		'use strict';
-		$0 = $0 || {};
+	setOptions(_) {
+		_ = _ || {};
+		function setBooleanValue(variable,def) {
+			return isBoolean(variable) ? variable : (def || false);
+		}
+		function setStringValue(variable, def) {
+			return isString(variable) ? variable : (def || false);
+		}
 		this.options = {
-			boxId: $0.boxId || false,
-			controls: $0.controls || true,
-			dimensions: $0.dimensions || true,
-			captions: $0.captions || true,
-			prevImage: typeof $0.prevImage === 'string' ? $0.prevImage : false,
-			nextImage: typeof $0.nextImage === 'string' ? $0.nextImage : false,
-			hideCloseButton: $0.hideCloseButton || false,
-			closeOnClick: $0.closeOnClick || true,
-			nextOnClick: $0.nextOnClick || true,
-			loadingAnimation: $0.loadingAnimation || true,
-			animationElementCount: $0.animationElementCount || 4,
-			preload: $0.preload || true,
-			carousel: $0.carousel || true,
-			animation: typeof $0.animation === 'number' || $0.animation === false ? $0.animation : 400,
-			responsive: $0.responsive || true,
-			maxImageSize: $0.maxImageSize || 0.8,
-			keyControls: $0.keyControls || true,
-			hideOverflow: $0.hideOverflow || true,
-			onopen: $0.onopen || false,
-			onclose: $0.onclose || false,
-			onload: $0.onload || false,
-			onresize: $0.onresize || false,
-			onloaderror: $0.onloaderror || false,
-			onimageclick: $0.onimageclick || false,
+			boxId: _.boxId || false,
+			controls: isBoolean(_.controls) ? _.controls || true,
+			dimensions: isBoolean(_.dimensions) ? _.dimensions || true,
+			captions: isBoolean(_.captions) ? _.controles || true,
+			prevImage: typeof _.prevImage === 'string' ? _.prevImage : false,
+			nextImage: typeof _.nextImage === 'string' ? _.nextImage : false,
+			hideCloseButton: _.hideCloseButton || false,
+			closeOnClick: _.closeOnClick || true,
+			nextOnClick: _.nextOnClick || true,
+			loadingAnimation: _.loadingAnimation || true,
+			animationElementCount: _.animationElementCount || 4,
+			preload: _.preload || true,
+			carousel: _.carousel || true,
+			animation: typeof _.animation === 'number' || _.animation === false ? _.animation : 400,
+			responsive: _.responsive || true,
+			maxImageSize: _.maxImageSize || 0.8,
+			keyControls: _.keyControls || true,
+			hideOverflow: _.hideOverflow || true,
+			onopen: _.onopen || false,
+			onclose: _.onclose || false,
+			onload: _.onload || false,
+			onresize: _.onresize || false,
+			onloaderror: _.onloaderror || false,
+			onimageclick: _.onimageclick || false,
 		};
 		let {
 			boxId,
@@ -322,7 +321,7 @@ class Lightbox {
 			this.box = id(this.options.boxId);
 			addClass(this.box, this.cn());
 		}
-		else if (!this.box) {
+		else {
 			let $1 = id(this.cn()) || document.createElement('div');
 			$1.id = this.cn();
 			addClass($1, this.cn());
@@ -349,18 +348,18 @@ class Lightbox {
 			});
 		}
 		if (typeof loadingAnimation === 'string') {
-			this.animation.element = new Image();
-			this.animation.element.src = loadingAnimation;
-			addClass(this.animation.element, this.cn('loading-animation'));
-			this.box.appendChild(this.animation.element);
+			this.animElement = new Image();
+			this.animElement.src = loadingAnimation;
+			addClass(this.animElement, this.cn('loading-animation'));
+			this.box.appendChild(this.animElement);
 		} else if (loadingAnimation) {
 			loadingAnimation = typeof loadingAnimation === 'number' ? loadingAnimation : 200;
-			this.animation.element = document.createElement('div');
-			addClass(this.animation.element, this.cn('loading-animation'));
+			this.animElement = document.createElement('div');
+			addClass(this.animElement, this.cn('loading-animation'));
 			for (let $5 = 0; $5 < animationElementCount; $5 += 1) {
-				this.animation.children.push(this.animation.element.appendChild(document.createElement('span')));
+				this.animChildren.push(this.animElement.appendChild(document.createElement('span')));
 			}
-			this.box.appendChild(this.animation.element);
+			this.box.appendChild(this.animElement);
 		}
 		if (responsive) {
 			window.addEventListener('resize', () => {
@@ -402,32 +401,32 @@ class Lightbox {
 		if (!$0 && !$1) {
 			return false;
 		}
-		this.current.group = $1 || this.current.group || $0.getAttribute(this.dn('group'));
-		if (this.current.group) {
-			this.current.images = this.getByGroup(this.current.group);
+		this.currGroup = $1 || this.currGroup || attr($0,this.dn('group'));
+		if (this.currGroup) {
+			this.currImages = this.getByGroup(this.current.group);
 			if ($0 === false) {
 				$0 = this.current.images[0];
 			}
 		}
-		this.current.image.img = new Image();
-		this.current.thumbnail = $0;
+		this.currImage.img = new Image();
+		this.currThumbnail = $0;
 		let $4;
 		if (typeof $0 === 'string') {
 			$4 = $0;
-		} else if ($0.getAttribute(this.dn())) {
-			$4 = $0.getAttribute(this.dn());
+		} else if (attr($0,this.dn())) {
+			$4 = attr($0,this.dn());
 		} else {
 			$4 = $0.src;
 		}
-		this.current.imageRatio = false;
+		this.currImgRatio = false;
 		if (!this.isOpen) {
 			if (typeof this.options.animation === 'number') {
-				addClass(this.current.image.img, this.cn('animate-transition'));
-				addClass(this.current.image.img, this.cn('animate-init'));
+				addClass(this.currImage.img, this.cn('animate-transition'));
+				addClass(this.currImage.img, this.cn('animate-init'));
 			}
 			this.isOpen = true;
 			if (this.options.onopen) {
-				this.options.onopen(this.current.image);
+				this.options.onopen(this.currImage);
 			}
 		}
 		if (!this.options || !('hideOverflow' in this.options) || this.options.hideOverflow) {
@@ -435,11 +434,11 @@ class Lightbox {
 		}
 		this.box.style.paddingTop = '0';
 		this.wrapper.innerHTML = '';
-		this.wrapper.appendChild(this.current.image.img);
+		this.wrapper.appendChild(this.currImage.img);
 		if (this.options.animation) {
 			addClass(this.wrapper, this.cn('animate'));
 		}
-		const $5 = $0.getAttribute(this.dn('caption'));
+		const $5 = attr($0,this.dn('caption'));
 		if ($5 && this.options.captions) {
 			let $6 = document.createElement('p');
 			addClass($6, this.cn('caption'));
@@ -447,7 +446,7 @@ class Lightbox {
 			this.wrapper.appendChild($6);
 		}
 		addClass(this.box, this.cn('active'));
-		if (this.options.controls && this.current.images.length > 1) {
+		if (this.options.controls && this.currImages.length > 1) {
 			this.initializeControls();
 			this.repositionControls();
 		}
@@ -457,34 +456,34 @@ class Lightbox {
 				this.options.onloaderror($0);
 			}
 		});
-		this.current.image.img.addEventListener('load', ({ target: $0 }) => {
-			this.current.image.originalWidth = $0.naturalWidth || $0.width;
-			this.current.image.originalHeight = $0.naturalHeight || $0.height;
+		this.currImage.img.addEventListener('load', ({ target: $0 }) => {
+			this.currImage.originalWidth = $0.naturalWidth || $0.width;
+			this.currImage.originalHeight = $0.naturalHeight || $0.height;
 			const $1 = setInterval(() => {
 				if (hasClass(this.box, this.cn('active'))) {
 					addClass(this.wrapper, this.cn('wrapper-active'));
 					if (typeof this.options.animation === 'number') {
-						addClass(this.current.image.img, this.cn('animate-transition'));
+						addClass(this.currImage.img, this.cn('animate-transition'));
 					}
 					if ($2) {
 						$2();
 					}
 					this.stopAnimation();
-					clearTimeout(this.animation.timeout);
+					clearTimeout(this.animTimeout);
 					if (this.options.preload) {
 						this.preload();
 					}
 					if (this.options.nextOnClick) {
-						addClass(this.current.image.img, this.cn('next-on-click'));
-						this.current.image.img.addEventListener('click', $0 => {
+						addClass(this.currImage.img, this.cn('next-on-click'));
+						this.currImage.img.addEventListener('click', $0 => {
 							$0.stopPropagation();
 							this.next();
 						});
 					}
 					if (this.options.onimageclick) {
-						this.current.image.img.addEventListener('click', $0 => {
+						this.currImage.img.addEventListener('click', $0 => {
 							$0.stopPropagation();
-							this.options.onimageclick(this.current.image);
+							this.options.onimageclick(this.currImage);
 						});
 					}
 					if (this.options.onload) {
@@ -504,115 +503,109 @@ class Lightbox {
 		const $1 = document.querySelectorAll('[' + this.dn() + ']');
 		for (let $2 = 0, $n = $1.length; $2 < $n; $2 += 1) {
 			const $3 = $1.item($2);
-			if ($3.hasAttribute(this.dn())) {
-				$3.setAttribute(this.dn('index'), $2);
+			if (attr($3,this.dn())) {
+				attr($3,this.dn('index'), $2);
 				this.push($3);
 			}
 		}
 	}
 	resize() {
-		if (!this.current || !this.current.image.img) {
+		if (!this.currImage.img) {
 			return;
 		}
-		this.r.maxWidth = this.width;
-		this.r.maxHeight = this.height;
+		this.maxWidth = this.width;
+		this.maxHeight = this.height;
 		const $0 = this.box.offsetWidth;
 		const $1 = this.box.offsetHeight;
-		if (!this.current.imageRatio && this.current.image.img && this.current.image.img.offsetWidth && this.current.image.img.offsetHeight) {
-			this.current.imageRatio = this.current.image.img.offsetWidth / this.current.image.img.offsetHeight;
+		if (!this.currImgRatio && this.currImage.img && this.currImage.img.offsetWidth && this.currImage.img.offsetHeight) {
+			this.currImgRatio = this.currImage.img.offsetWidth / this.currImage.img.offsetHeight;
 		}
 		// Height of image is too big to fit in viewport
-		if (Math.floor($0 / this.current.imageRatio) > $1) {
-			this.r.newImageWidth = $1 * this.current.imageRatio;
-			this.r.newImageHeight = $1;
+		if (Math.floor($0 / this.currImgRatio) > $1) {
+			this.newImageWidth = $1 * this.currImgRatio;
+			this.newImageHeight = $1;
 		}
 		// Width of image is too big to fit in viewport
 		else {
-			this.r.newImageHeight = $0;
-			this.r.newImageWidth = $0 / this.current.imageRatio;
+			this.newImageHeight = $0;
+			this.newImageWidth = $0 / this.currImgRatio;
 		}
 		// decrease size with modifier
-		this.r.newImageWidth = Math.floor(this.r.newImageWidth * this.options.maxImageSize);
-		this.r.newImageHeight = Math.floor(this.r.newImageHeight * this.options.maxImageSize);
+		this.newImageWidth = Math.floor(this.newImageWidth * this.options.maxImageSize);
+		this.newImageHeight = Math.floor(this.newImageHeight * this.options.maxImageSize);
 		// check if image exceeds maximum size
 		if ((this.options.dimensions && this.r.newImageHeight > this.current.image.originalHeight) || (this.options.dimensions && this.r.newImageWidth > this.current.image.originalWidth)) {
-			this.r.newImageHeight = this.current.image.originalHeight;
-			this.r.newImageWidth = this.current.image.originalWidth;
+			this.newImageHeight = this.currImage.originalHeight;
+			this.newImageWidth = this.currImage.originalWidth;
 		}
-		this.current.image.img.setAttribute('width', this.r.newImageWidth);
-		this.current.image.img.setAttribute('height', this.r.newImageHeight);
+		attr(this.currImage.img, 'width', this.newImageWidth);
+		attr(this.currImage.img, 'height', this.newImageHeight);
 		// reposition controls after timeout
 		setTimeout(() => {
 			this.repositionControls();
 		}, 200);
 		if (this.options.onresize) {
-			this.options.onresize(this.current.image);
+			this.options.onresize(this.currImage);
 		}
 	}
 	next() {
-		if (!this.current.group) {
+		if (!this.currGroup) {
 			return;
 		}
-		const {
-			current: { thumbnail, group, images },
-		} = this;
-		const $0 = this.getPosition(thumbnail, group) + 1;
-		if (images[$0]) {
-			this.current.thumbnail = images[$0];
+		const $0 = this.getPosition(this.currThumbnail, this.currGroup) + 1;
+		if (this.currImages[$0]) {
+			this.currThumbnail = this.currImages[$0];
 		} else if (this.options.carousel) {
-			this.current.thumbnail = images[0];
+			this.currThumbnail = this.currImages[0];
 		} else {
 			return;
 		}
 		if (this.options.animation === 'number') {
-			removeClass(this.current.image.img, this.cn('animating-next'));
+			removeClass(this.currImage.img, this.cn('animating-next'));
 			setTimeout(() => {
 				this.open(
-					this.current.thumbnail,
+					this.currThumbnail,
 					false,
 					() => {
 						setTimeout(() => {
-							addClass(this.current.image.img, this.cn('animating-next'));
+							addClass(this.currImage.img, this.cn('animating-next'));
 						}, this.options.animation / 2);
 					},
 					'next'
 					);
 				}, this.options.animation / 2);
 			} else {
-				this.open(this.current.thumbnail, false, false, 'next');
+				this.open(this.currThumbnail, false, false, 'next');
 			}
 		}
 		prev() {
-			if (!this.current.group) {
+			if (!this.currGroup) {
 				return;
 			}
-			const {
-				current: { thumbnail, group, images },
-			} = this;
-			const $0 = this.getPosition(thumbnail, group) - 1;
-			if (images[$0]) {
-				this.current.thumbnail = images[$0];
+			const $0 = this.getPosition(this.currThumbnail, this.currGroup) - 1;
+			if (this.currImages[$0]) {
+				this.current.thumbnail = this.currImages[$0];
 			} else if (this.options.carousel) {
-				this.current.thumbnail = images[images.length - 1];
+				this.current.thumbnail = this.currImages[this.currImages.length - 1];
 			} else {
 				return;
 			}
 			if (this.options.animation === 'number') {
-				removeClass(this.current.image.img, this.cn('animating-next'));
+				removeClass(this.currImage.img, this.cn('animating-next'));
 				setTimeout(() => {
 					this.open(
-						this.current.thumbnail,
+						this.currThumbnail,
 						false,
 						() => {
 							setTimeout(() => {
-								addClass(this.current.image.img, this.cn('animating-next'));
+								addClass(this.currImage.img, this.cn('animating-next'));
 							}, this.options.animation / 2);
 						},
 						'prev'
 						);
 					}, this.options.animation / 2);
 				} else {
-					this.open(this.current.thumbnail, false, false, 'prev');
+					this.open(this.currThumbnail, false, false, 'prev');
 				}
 			}
 			close() {

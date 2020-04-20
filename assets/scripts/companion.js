@@ -16,8 +16,14 @@ function entries(object, func) {
 function is(object) {
 	return object !== null && object !== undefined;
 }
-function iss(object) {
+function isset(object) {
 	return is(object) && object !== '';
+}
+function isString(variable) {
+	return typeof variable === 'string' || variable instanceof String;
+}
+function isBoolean(variable) {
+	return typeof variable === 'boolean';
 }
 function isFunction(object) {
 	return typeof object === 'function' ? object : false;
@@ -121,9 +127,9 @@ function attr() {
 }
 /** @returns {HTMLElement} */
 function ecs() {
-	const ce = a => document.createElement(iss(a) ? a : 'div');
+	const ce = a => document.createElement(isset(a) ? a : 'div');
 	const ac = (a, b) => { a.appendChild(b); return a; };
-	const l = [...arguments].filter(iss);
+	const l = [...arguments].filter(isset);
 	const { length: ll } = l;
 	if (ll === 0) { return ce(); }
 	else if (ll !== 1) {
@@ -312,34 +318,40 @@ class Cookies {
 }
 class PromiseWorker {
 	constructor(url) {
+		'use strict';
 		PromiseWorker.assert();
 		this.worker = new Worker(url);
 		this.worker.onmessage = PromiseWorker.onMessage;
 	}
 	get env() {
+		'use strict';
 		return currentGlobal().PromiseWorkers;
 	}
 	get onmessage() {
+		'use strict';
 		return this.worker.onmessage;
 	}
 	postMessage(data) {
+		'use strict';
 		return PromiseWorker.postMessage(data, this.worker);
 	}
 	static assert() {
+		'use strict';
 		const self = currentGlobal();
 		if (!('PromiseWorkers' in self)) {
 			self.PromiseWorkers = {
-				resolves: {},
-				rejects: {}
+				resolves: [],
+				rejects: []
 			}
 		}
 		else if (!('resolves' in self.PromiseWorkers && 'rejects' in self.PromiseWorkers)) {
-			self.PromiseWorkers.resolves = {};
-			self.PromiseWorkers.rejecs = {};
+			self.PromiseWorkers.resolves = [];
+			self.PromiseWorkers.rejecs = [];
 		}
 	}
 	static postMessage(data, worker) {
-		const messageId = Date.now();
+		'use strict';
+		const messageId = PromiseWorker.id();
 		const message = { id: messageId, data: data };
 		return new Promise((resolve, reject) => {
 			PromiseWorker.resolves[messageId] = resolve;
@@ -351,10 +363,12 @@ class PromiseWorker {
 		const { id, err, data } = message.data;
 		const resolve = PromiseWorker.resolves[id];
 		const reject = PromiseWorker.rejects[id];
-		if (data && resolve) { resolve(data); }
-		else if (reject) {
+		if (is(data)) {
+			if (resolve) { resolve(data); }
+		}
+		else if (is(reject)) {
 			if (err) { reject(err); }
-			else { reject('Nothing to reject.'); }
+			else { reject('Got nothing'); }
 		}
 		PromiseWorker.delete(id);
 	}
@@ -363,12 +377,29 @@ class PromiseWorker {
 		return currentGlobal().PromiseWorkers.resolves;
 	}
 	static get rejects() {
-		PromiseWorker.assert();
 		return currentGlobal().PromiseWorkers.rejects;
 	}
 	static delete(id) {
-		PromiseWorker.assert();
 		delete PromiseWorker.resolves[id];
 		delete PromiseWorker.rejects[id];
+	}
+	static id(length) {
+		const values = [];
+		const list = [];
+		for (let i = 0; i < 62; i+=1) {
+			if (i < 10) {
+				values[i] = 48 + i;
+			}
+			else if (i < 36) {
+				values[i] = 65 + (i - 10);
+			}
+			else if (i < 62) {
+				values[i] = 97 + (i - 36);
+			}
+		}
+		for (let i = 0; i < (length||16); i += 1) {
+			list[i] = values[Math.floor(Math.random() * 62)];
+		}
+		return String.fromCharCode(...list);
 	}
 }
