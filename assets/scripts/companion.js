@@ -1,5 +1,5 @@
 'use strict';
-function currentGlobal() {
+function getGlobal() {
 	if (typeof globalThis !== undefined) { return globalThis; }
 	if (typeof self !== undefined) { return self; }
 	if (typeof window !== undefined) { return window; }
@@ -19,6 +19,9 @@ function is(object) {
 function isset(object) {
 	return is(object) && object !== '';
 }
+function isNumber(variable) {
+	return typeof variable === 'number' || variable instanceof Number;
+}
 function isString(variable) {
 	return typeof variable === 'string' || variable instanceof String;
 }
@@ -26,7 +29,7 @@ function isBoolean(variable) {
 	return typeof variable === 'boolean';
 }
 function isFunction(object) {
-	return typeof object === 'function' ? object : false;
+	return typeof object === 'function' || object instanceof Function ? object : false;
 }
 function inhibitEvent(event) {
 	event.preventDefault();
@@ -325,7 +328,7 @@ class PromiseWorker {
 	}
 	get env() {
 		'use strict';
-		return currentGlobal().PromiseWorkers;
+		return getGlobal().PromiseWorkers;
 	}
 	get onmessage() {
 		'use strict';
@@ -337,7 +340,7 @@ class PromiseWorker {
 	}
 	static assert() {
 		'use strict';
-		const self = currentGlobal();
+		const self = getGlobal();
 		if (!('PromiseWorkers' in self)) {
 			self.PromiseWorkers = {
 				resolves: [],
@@ -374,10 +377,10 @@ class PromiseWorker {
 	}
 	static get resolves() {
 		PromiseWorker.assert();
-		return currentGlobal().PromiseWorkers.resolves;
+		return getGlobal().PromiseWorkers.resolves;
 	}
 	static get rejects() {
-		return currentGlobal().PromiseWorkers.rejects;
+		return getGlobal().PromiseWorkers.rejects;
 	}
 	static delete(id) {
 		delete PromiseWorker.resolves[id];
