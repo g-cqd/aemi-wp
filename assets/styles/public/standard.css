@@ -4,13 +4,14 @@
 	 */
 	--system-stack: -apple-system, BlinkMacSystemFont, Lato, Roboto, system-ui, 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif;
 	--mono-system-stack: 'SFMono-Regular', 'Roboto Mono', 'Inconsolata', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Consolas', Courier, 'Courier New', monospace;
-	--mono-stack: 'Fira Code', var(--mono-system-stack);
-	--font-stack: 'Inter', var(--system-stack);
+	--mono-stack: 'JetBrains Mono', 'Fira Code', 'Hack', var(--mono-system-stack);
+	--font-stack-std: 'Inter', var(--system-stack);
+	--font-stack-hdg: 'Inter Display', 'Inter', var(--system-stack);
 	--radius: 0.2rem;
 	/*
 	 * Fix some CSS font properties
 	 */
-	font-family: var(--font-stack);
+	font-family: var(--font-stack-std);
 	font-kerning: normal;
 	font-optical-sizing: auto;
 	font-size: 16px;
@@ -72,8 +73,9 @@
 
 @supports (font-variation-settings: normal) {
 	:root {
-		--font-stack: 'Inter var', 'Inter', var(--system-stack);
-		--mono-stack: 'Fira Code var', 'Fira Code', 'IBM Plex Mono', var(--mono-system-stack);
+		--font-stack-std: 'Inter Var', 'Inter', var(--system-stack);
+		--font-stack-hdg: 'Inter Display Var', 'Inter Display', 'Inter Var', 'Inter', var(--system-stack);
+		--mono-stack: 'JetBrains Mono', 'Fira Code Var', 'Fira Code', 'Hack', var(--mono-system-stack);
 	}
 }
 
@@ -236,43 +238,49 @@ h6,
 
 h1,
 .h1 {
+	font-family: var(--font-stack-hdg);
 	font-size: 2em;
-	letter-spacing: -0.022em;
+	/* letter-spacing: -0.022em; */
 	margin: 0.67em 0 0.67em;
 }
 
 h2,
 .h2 {
+	font-family: var(--font-stack-hdg);
 	font-size: 1.5em;
-	letter-spacing: -0.019em;
+	/* letter-spacing: -0.019em; */
 	margin: 0.75em 0 0.75em;
 }
 
 h3,
 .h3 {
+	font-family: var(--font-stack-hdg);
 	font-size: 1.17em;
-	letter-spacing: -0.015em;
+	/* letter-spacing: -0.015em; */
 	margin: 0.83em 0 0.83em;
 }
 
 h4,
 .h4 {
+	font-family: var(--font-stack-hdg);
 	font-size: 1em;
-	letter-spacing: -0.011em;
+	/* letter-spacing: -0.011em; */
 	margin: 1.12em 0 1.12em;
 }
 
 h5,
 .h5 {
+	font-family: var(--font-stack-hdg);
 	font-size: 0.83em;
-	letter-spacing: -0.004em;
+	/* letter-spacing: -0.004em; */
 	margin: 1.5em 0 1.5em;
 }
 
 h6,
 .h6 {
+	font-family: var(--font-stack-hdg);
 	font-size: 0.75rem;
-	letter-spacing: 0;
+	/* letter-spacing: 0; */
 	margin: 1.67em 0 1.67em;
 }
 
@@ -611,7 +619,7 @@ select {
 	border-style: solid;
 	border-width: 2px;
 	color: initial;
-	font-family: var(--font-stack);
+	font-family: var(--font-stack-std);
 	font-size: 1rem;
 	letter-spacing: -0.011em;
 	line-height: 1.5;
@@ -970,7 +978,7 @@ input[type='search']::-webkit-search-decoration {
 
 ::-webkit-file-upload-button {
 	-webkit-appearance: button;
-	font-family: var(--font-stack);
+	font-family: var(--font-stack-std);
 }
 
 fieldset {

@@ -221,13 +221,13 @@ class Lightbox {
 	}
 	prepare(arg) {
 		const {
-			wrapperSelectors: ws,
-			itemSelectors: is,
-			captionSelectors: cs,
+			wrapperSelectors: wsl,
+			itemSelectors: isl,
+			captionSelectors: csl,
 		} = arg;
-		const jws = (ws[0] ? [...ws] : [ws]).join(",");
-		const jis = (is[0] ? [...is] : [is]).join(",");
-		const jcs = (cs[0] ? [...cs] : [cs]).join(",");
+		const jws = (wsl[0] ? [...wsl] : [wsl]).join(",");
+		const jis = (isl[0] ? [...isl] : [isl]).join(",");
+		const jcs = (csl[0] ? [...csl] : [csl]).join(",");
 		const qws = [...document.querySelectorAll(jws)];
 		if (qws.length > 0) {
 			qws.forEach((qwsi, i) => {
@@ -487,10 +487,10 @@ class Lightbox {
 		if (responsive) {
 			window.addEventListener("resize", () => {
 				this.resize();
+				if (this.isOpen) {
+					blockScroll(this.options.env);
+				}
 			});
-			blockScroll(this.options.env);
-		} else {
-			freeScroll(this.options.env);
 		}
 		if (keyControls) {
 			document.addEventListener("keydown", (ev) => {
