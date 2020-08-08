@@ -1,40 +1,41 @@
-<?php get_header(); ?>
-<?
+<?php
+get_header();
+?>
+<?php
 $query = get_search_query();
-if ( have_posts() )
-{
-	?><article id="entry-head" class="entry">
-		<header class="post-header">
-			<div class="post-info">
-				<h1 class="post-title"><?= $query === '' ? esc_html__( 'What are you looking for?', 'aemi') : $query ?></h1>
-				<?php
-				if ( $query === '' ) {
-					printf( '<div class="archive-details search">%s</div>',
-						esc_html__( 'Is looking for anything, whatever it is, useful?', 'aemi' )
-					);
-				}
-				else {
-					printf( '<div class="archive-details search">%s</div>',
-						esc_html__( 'Search Results', 'aemi' )
-					);
-				}
-				?>
-			</div>
-		</header><?php if ( $query === '' )
-		{
-		?>
-		<main class="post-content">
-			<?php get_search_form(); ?>
-		</main>
-	</article>
-	<?php } else { ?>
-	</article>
-	<?php
-		get_template_part( 'loop' );
-	}
-	}
-	else
-	{
-		get_template_part( 'inc/parts/content', 'none' );
-	} ?>
-<?php get_footer(); ?>
+if (have_posts()) {
+    ?><article id="entry-head" class="entry">
+    <header class="post-header">
+        <div class="post-info">
+            <h1 class="post-title"><?= $query === '' ? esc_html__('What are you looking for?', 'aemi') : $query ?></h1>
+            <?php
+            if ($query === '') {
+                printf(
+                    '<div class="archive-details search">%s</div>',
+                    esc_html__(
+                        'Is looking for anything, whatever it is, useful?',
+                        'aemi'
+                    )
+                );
+            } else {
+                printf(
+                    '<div class="archive-details search">%s</div>',
+                    esc_html__('Search Results', 'aemi')
+                );
+            }
+            ?>
+        </div>
+    </header>
+    <?php if ($query === '') {
+        ?><main class="post-content">
+        <?php get_search_form(); ?>
+    </main>
+</article>
+    <?php } else { ?>
+</article>
+        <?php get_template_part('loop');
+    }
+} else {
+    get_template_part('inc/parts/content', 'none');
+} ?>
+<?php get_footer();

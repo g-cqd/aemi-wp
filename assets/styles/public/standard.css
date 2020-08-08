@@ -2,11 +2,16 @@
 	/*
 	 * Font Stacks
 	 */
-	--system-stack: -apple-system, BlinkMacSystemFont, Lato, Roboto, system-ui, 'Helvetica Neue', HelveticaNeue, Helvetica, Arial, sans-serif;
-	--mono-system-stack: 'SFMono-Regular', 'Roboto Mono', 'Inconsolata', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Consolas', Courier, 'Courier New', monospace;
-	--mono-stack: 'JetBrains Mono', 'Fira Code', 'Hack', var(--mono-system-stack);
-	--font-stack-std: 'Inter', var(--system-stack);
-	--font-stack-hdg: 'Inter Display', 'Inter', var(--system-stack);
+	--apple-stack: -apple-system, BlinkMacSystemFont;
+	--system-stack: Lato, Roboto, system-ui, 'Helvetica Neue', HelveticaNeue,
+		Helvetica, Arial, sans-serif;
+	--mono-system-stack: 'SFMono-Regular', 'Roboto Mono', 'Inconsolata', 'Menlo',
+		'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Consolas', Courier,
+		'Courier New', monospace;
+	--mono-stack: 'JetBrains Mono', 'Fira Code', 'Hack',
+		var(--mono-system-stack);
+	--font-stack-std: var(--apple-stack), 'Inter', var(--system-stack);
+	--font-stack-hdg: var(--apple-stack), 'Inter Display', var(--system-stack);
 	--radius: 0.2rem;
 	/*
 	 * Fix some CSS font properties
@@ -34,38 +39,38 @@
      */
 	/* Light Variables */
 	--light-page-color: #ffffff;
-	--light-page-color-alpha: #ffffffd8;
-	--light-caption-background: #00000080;
-	--light-element-background: #e6e6e64d;
-	--light-element-bkg-alpha: #e6e6e64d;
-	--light-element-border: #e6e6e6b3;
-	--light-border: #e6e6e6b3;
-	--light-inline-text-border: #b4b4b44d;
-	--light-input-background: #ffffffb3;
-	--light-input-border: #0000001a;
-	--light-input-shadow: #00000020;
-	--light-decoration: #e6e6e6b3;
-	--light-text-color: #202020;
-	--light-text-important: #000000;
-	--light-text-important-hover: #00000099;
-	--light-text-optional: #b4b4b4;
+	--light-page-color-alpha: rgba(255, 255, 255, 0.847);
+	--light-caption-background: rgba(0, 0, 0, 0.502);
+	--light-element-background: rgba(230, 230, 230, 0.302);
+	--light-element-bkg-alpha: rgba(230, 230, 230, 0.302);
+	--light-element-border: rgba(230, 230, 230, 0.702);
+	--light-border: rgba(230, 230, 230, 0.702);
+	--light-inline-text-border: rgba(180, 180, 180, 0.302);
+	--light-input-background: rgba(255, 255, 255, 0.702);
+	--light-input-border: rgba(0, 0, 0, 0.102);
+	--light-input-shadow: rgba(0, 0, 0, 0.125);
+	--light-decoration: rgba(230, 230, 230, 0.702);
+	--light-text-color: rgb(32, 32, 32);
+	--light-text-important: rgb(0, 0, 0);
+	--light-text-important-hover: rgba(0, 0, 0, 0.6);
+	--light-text-optional: rgb(180, 180, 180);
 	/* Dark Variables */
-	--dark-page-color: #1b1b1b;
-	--dark-page-color-alpha: #1b1b1bd8;
-	--dark-caption-background: #ffffff80;
-	--dark-element-background: #282828;
-	--dark-element-bkg-alpha: #28282880;
-	--dark-element-border: #404040;
-	--dark-border: #646464b3;
-	--dark-inline-text-border: #b4b4b44d;
-	--dark-input-background: #181818e6;
-	--dark-input-border: #ffffff1a;
-	--dark-input-shadow: #00000020;
-	--dark-decoration: #404040;
-	--dark-text-color: #e4e4e4;
-	--dark-text-important: #ffffff;
-	--dark-text-important-hover: #ffffff99;
-	--dark-text-optional: #646464;
+	--dark-page-color: rgb(27, 27, 27);
+	--dark-page-color-alpha: rgba(27, 27, 27, 0.847);
+	--dark-caption-background: rgba(255, 255, 255, 0.502);
+	--dark-element-background: rgb(40, 40, 40);
+	--dark-element-bkg-alpha: rgba(40, 40, 40, 0.502);
+	--dark-element-border: rgb(64, 64, 64);
+	--dark-border: rgba(100, 100, 100, 0.702);
+	--dark-inline-text-border: rgba(180, 180, 180, 0.302);
+	--dark-input-background: rgba(24, 24, 24, 0.902);
+	--dark-input-border: rgba(255, 255, 255, 0.102);
+	--dark-input-shadow: rgba(0, 0, 0, 0.125);
+	--dark-decoration: rgb(64, 64, 64);
+	--dark-text-color: rgb(228, 228, 228);
+	--dark-text-important: rgb(255, 255, 255);
+	--dark-text-important-hover: rgba(255, 255, 255, 0.6);
+	--dark-text-optional: rgb(100, 100, 100);
 	/* SVG Objects */
 	--light-select-arrows: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTE4IDExOCIgZmlsbD0iYmxhY2siIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxwYXRoIGQ9Ik02My4xNDIsOTAuMjMxbC0xNi4wMTUsLTI0LjYwM2wzMi4wMjksMGwtMTYuMDE0LDI0LjYwM1oiLz48cGF0aCBkPSJNNjMuMTQyLDI3LjIzMWwxNi4wMTQsMjQuNjAzbC0zMi4wMjksMGwxNi4wMTUsLTI0LjYwM1oiLz48L3N2Zz4=);
 	--dark-select-arrows: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTE4IDExOCIgZmlsbD0id2hpdGUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxwYXRoIGQ9Ik02My4xNDIsOTAuMjMxbC0xNi4wMTUsLTI0LjYwM2wzMi4wMjksMGwtMTYuMDE0LDI0LjYwM1oiLz48cGF0aCBkPSJNNjMuMTQyLDI3LjIzMWwxNi4wMTQsMjQuNjAzbC0zMi4wMjksMGwxNi4wMTUsLTI0LjYwM1oiLz48L3N2Zz4=);
@@ -73,9 +78,12 @@
 
 @supports (font-variation-settings: normal) {
 	:root {
-		--font-stack-std: 'Inter Var', 'Inter', var(--system-stack);
-		--font-stack-hdg: 'Inter Display Var', 'Inter Display', 'Inter Var', 'Inter', var(--system-stack);
-		--mono-stack: 'JetBrains Mono', 'Fira Code Var', 'Fira Code', 'Hack', var(--mono-system-stack);
+		--font-stack-std: var(--apple-stack), 'Inter Var', 'Inter',
+			var(--system-stack);
+		--font-stack-hdg: var(--apple-stack), 'Inter Display Var',
+			'Inter Display', 'Inter Var', 'Inter', var(--system-stack);
+		--mono-stack: 'JetBrains Mono', 'Fira Code Var', 'Fira Code', 'Hack',
+			var(--mono-system-stack);
 	}
 }
 
@@ -177,18 +185,26 @@ a:visited {
 	opacity: 1;
 	outline: none;
 	transition: color 200ms ease;
+	will-change: color;
 }
 
 a:hover,
 a:visited:hover {
 	color: var(--text-important-hover);
 	transition: color 200ms ease;
+	will-change: color;
 }
 
+a img {
+	opacity: 1;
+	transition: opacity 200ms ease;
+	will-change: opacity;
+}
 a:hover img,
 a:visited:hover img {
 	opacity: 0.7;
 	transition: opacity 200ms ease;
+	will-change: opacity;
 }
 
 img {
@@ -203,16 +219,6 @@ img {
 	opacity: 1;
 	transition: opacity 200ms ease;
 }
-
-/* a img {
-    transform: scale(1);
-    transition: .2s ease transform;
-}
-
-a img:active {
-    transform: scale(.7);
-    transition: .2s ease transform;
-} */
 
 abbr,
 abbr[title],
@@ -241,6 +247,7 @@ h1,
 	font-family: var(--font-stack-hdg);
 	font-size: 2em;
 	/* letter-spacing: -0.022em; */
+	line-height: 1.1;
 	margin: 0.67em 0 0.67em;
 }
 
@@ -249,6 +256,7 @@ h2,
 	font-family: var(--font-stack-hdg);
 	font-size: 1.5em;
 	/* letter-spacing: -0.019em; */
+	line-height: 1.15;
 	margin: 0.75em 0 0.75em;
 }
 
@@ -257,6 +265,7 @@ h3,
 	font-family: var(--font-stack-hdg);
 	font-size: 1.17em;
 	/* letter-spacing: -0.015em; */
+	line-height: 1.2;
 	margin: 0.83em 0 0.83em;
 }
 
@@ -265,6 +274,7 @@ h4,
 	font-family: var(--font-stack-hdg);
 	font-size: 1em;
 	/* letter-spacing: -0.011em; */
+	line-height: 1.4;
 	margin: 1.12em 0 1.12em;
 }
 
@@ -273,6 +283,7 @@ h5,
 	font-family: var(--font-stack-hdg);
 	font-size: 0.83em;
 	/* letter-spacing: -0.004em; */
+	line-height: 1.45;
 	margin: 1.5em 0 1.5em;
 }
 
@@ -281,6 +292,7 @@ h6,
 	font-family: var(--font-stack-hdg);
 	font-size: 0.75rem;
 	/* letter-spacing: 0; */
+	line-height: 1.5;
 	margin: 1.67em 0 1.67em;
 }
 
@@ -654,6 +666,7 @@ textarea {
 	border-color: var(--element-border);
 	box-shadow: 0 5px 10px -5px var(--inherit-box-shadow);
 	color: var(--text-color);
+	will-change: background, border-color, color;
 }
 
 input:-webkit-autofill,
@@ -711,10 +724,12 @@ input[type='reset'] {
 	margin: 0;
 	padding: 0.75ex 1.25ch;
 	box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.1);
-	transition-property: background-color, border-color, color, box-shadow, transform;
+	transition-property: background-color, border-color, color, box-shadow,
+		transform;
 	transition-duration: 150ms;
 	transition-timing-function: ease;
 	vertical-align: baseline;
+	will-change: background-color, border-color, color, box-shadow, transform;
 }
 
 button:not(:disabled):not(.no-style):hover,
@@ -727,7 +742,8 @@ input[type='reset']:not(:disabled):hover {
 	border-color: var(--text-important);
 	box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.2);
 	transform: scale(1);
-	transition-property: background-color, border-color, color, box-shadow, transform;
+	transition-property: background-color, border-color, color, box-shadow,
+		transform;
 	transition-duration: 150ms;
 	transition-timing-function: ease;
 }
@@ -748,7 +764,8 @@ input[type='reset']:not(:disabled):hover:active {
 	border-color: var(--input-border);
 	box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.2);
 	transform: scale(0.975);
-	transition-property: background-color, border-color, color, box-shadow, transform;
+	transition-property: background-color, border-color, color, box-shadow,
+		transform;
 	transition-duration: 150ms;
 	transition-timing-function: ease;
 }
@@ -837,7 +854,7 @@ input[type='radio']::before {
 
 input[type='checkbox']::before {
 	color: var(--page-color);
-    content: '\2713';
+	content: '\2713';
 	font-size: 0.8rem;
 	font-weight: 900;
 	letter-spacing: 0rem;
@@ -860,8 +877,6 @@ input[type='checkbox']:checked::before,
 input[type='radio']:checked::before {
 	visibility: visible;
 }
-
-
 
 /* Range */
 

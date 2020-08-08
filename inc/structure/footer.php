@@ -28,7 +28,7 @@ if ( !function_exists( 'aemi_footer_site_description' ) ) {
 	{
 		if ( get_bloginfo( 'description' ) ) {
 			printf(
-				'<h5 id="site-description" class="site-description">%s</h5>',
+				'<strong id="site-description" class="site-description h3">%s</strong>',
 				esc_html( get_bloginfo( 'description' ) )
 			);
 		}

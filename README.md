@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.2
 * Requires PHP: 7.2
-* Version: 1.1.19
+* Version: 2.0-beta1
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -79,6 +79,9 @@ Source: https://github.com/originecode/AeMi
 
 ## Changelog
 
+### 2.0-beta1 :
+	- Improved : Post display
+	- Improved : JavaScript Performance
 ### 1.1.19 :
 	- Improved : Button & Input Styles
 	- Improved : Featured post infos

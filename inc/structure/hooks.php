@@ -63,7 +63,6 @@ add_action( 'aemi_footer_after', 'aemi_footer_wp_footer', 10 );
  * @see aemi_display_comments()
  */
 add_action( 'aemi_loop_post', 'aemi_post_header', 10 );
-add_action( 'aemi_loop_post', 'aemi_post_excerpt', 20 );
 add_action( 'aemi_loop_after','aemi_posts_pagination', 10 );
 add_action( 'aemi_single_post', 'aemi_post_header', 10 );
 add_action( 'aemi_single_post', 'aemi_post_content', 20 );

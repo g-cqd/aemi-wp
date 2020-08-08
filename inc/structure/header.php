@@ -66,10 +66,13 @@ if ( ! function_exists( 'aemi_header_branding' ) ) {
 			}
 		}
 
+		$home = is_home();
+
 		printf(
-			'<%1$s id="site-title" class="site-title%2$s">%3$s</%1$s>',
-			is_home() ? 'h1' : 'strong',
+			'<%1$s id="site-title" class="site-title%2$s %3$s">%4$s</%1$s>',
+			$home ? 'h1' : 'strong',
 			$has_logo ? ' screen-reader-text' : '',
+			$home ? '' : 'h1',
 			esc_html( get_bloginfo( 'name' ) )
 		);
 
