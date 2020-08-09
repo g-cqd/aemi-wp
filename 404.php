@@ -1,5 +1,8 @@
-<?php get_header(); ?>
-<article id="entry-head" class="entry post page-404 not-found">
+<?php
+
+get_header();
+
+?><article id="entry-head" class="entry post page-404 not-found">
     <header class="post-header">
         <div class="post-info">
             <h1 class="post-title"><?= esc_html__('404', 'aemi') ?></h1>
@@ -8,8 +11,9 @@
             ?></div>
         </div>
     </header>
-    <main class="post-content">
-        <?php get_search_form(); ?>
-    </main>
-</article>
-<?php get_footer();
+    <main class="post-content"><?php
+        get_search_form();
+    ?></main>
+</article><?php 
+
+get_footer();

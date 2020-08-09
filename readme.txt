@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.2
 * Requires PHP: 7.2
-* Version: 2.0-beta2
+* Version: 2.0-beta3
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -79,6 +79,10 @@ Source: https://github.com/originecode/AeMi
 
 ## Changelog
 
+### 2.0-beta3 :
+	- Fixed : Tags did not follow customizer settings and performance improvements
+	- Fixed : Header style while scrolling
+	- Improved : Made room for next features in customizer
 ### 2.0-beta2 :
 	- Improved : Post having thumbnails - contrast with headings and header
 	- Improved : Comment Redesign

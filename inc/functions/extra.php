@@ -1,13 +1,15 @@
 <?php
 
 
-if (!function_exists('aemi_body_classes')) {
+if (!function_exists('aemi_body_classes'))
+{
 	function aemi_body_classes($classes)
 	{
 		if (is_singular())
 		{
 			$classes[] = 'singular';
-		} else
+		}
+		else
 		{
 			$classes[] = 'not-singular';
 		}
@@ -27,27 +29,23 @@ if (!function_exists('aemi_body_classes')) {
 		{
 			$classes[] = 'auto-hide';
 		}
-		// if (get_theme_mod('aemi_loop_excerpts', 1) == 1)
-		// {
-		// 	$classes[] = 'loop-excertps';
-		// }
 		return $classes;
 	}
 }
 
-if (!function_exists('aemi_remove_jquery_migrate')) {
+if (!function_exists('aemi_remove_jquery_migrate'))
+{
 	function aemi_remove_jquery_migrate($scripts)
 	{
-		if (!is_admin() && isset($scripts->registered['jquery'])) {
+		if (!is_admin() && isset($scripts->registered['jquery']))
+		{
 			$script = $scripts->registered['jquery'];
-			if ($script->deps) {
+			if ($script->deps)
+			{
 				$script->deps = array_diff($script->deps, array('jquery-migrate'));
 			}
 		}
 	}
-}
-if (true === false) {
-	add_action('wp_default_scripts', 'aemi_remove_jquery_migrate');
 }
 
 
@@ -71,85 +69,105 @@ if (true === false) {
 }*/
 
 
-
-function aemi_category_transient_flusher()
+if (!function_exists('aemi_category_transient_flusher'))
 {
-	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-		return;
+	function aemi_category_transient_flusher()
+	{
+		if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+		{
+			return;
+		}
+		delete_transient('aemi_categories');
 	}
-	delete_transient('aemi_categories');
 }
-add_action('edit_category', 'aemi_category_transient_flusher');
-add_action('save_post', 'aemi_category_transient_flusher');
 
 
-
-function aemi_remove_script_version($src)
+if (!function_exists('aemi_remove_script_version'))
 {
-	$parts = explode('?', $src);
-	return $parts[0];
+	function aemi_remove_script_version($src)
+	{
+		$parts = explode('?', $src);
+		return $parts[0];
+	}
 }
-add_filter('script_loader_src', 'aemi_remove_script_version', 15, 1);
-add_filter('style_loader_src', 'aemi_remove_script_version', 15, 1);
 
 
-if (!function_exists('aemi_async_scripts')) {
+if (!function_exists('aemi_async_scripts'))
+{
 	function aemi_async_scripts($scripts_tag)
 	{
-
 		global $async_scripts;
-		if (!isset($async_scripts)) {
-			$async_scripts = array();
+		if (!isset($async_scripts))
+		{
+			$async_scripts = [];
 		}
-		foreach ($scripts_tag as $script) {
+		foreach ($scripts_tag as $script)
+		{
 			$async_scripts[] = $script;
 		}
-
-		if (!function_exists('aemi_async_scripts_filter')) {
-			function aemi_async_scripts_filter($tag, $handle)
-			{
-				global $async_scripts;
-				foreach ($async_scripts as $script) {
-					if ($script === $handle) {
-						return str_replace(' src', ' async src', $tag);
-					}
-				}
-				return $tag;
-			}
-			add_filter('script_loader_tag', 'aemi_async_scripts_filter', 10, 2);
-		}
 	}
 }
 
 
-if (!function_exists('aemi_defer_scripts')) {
+if (!function_exists('aemi_async_scripts_filter'))
+{
+	function aemi_async_scripts_filter($tag, $handle)
+	{
+		global $async_scripts;
+
+		if (!isset($async_scripts))
+		{
+			$async_scripts = [];
+		}
+
+		foreach ($async_scripts as $script)
+		{
+			if ($script === $handle)
+			{
+				return str_replace(' src', ' async src', $tag);
+			}
+		}
+		return $tag;
+	}
+}
+
+
+if (!function_exists('aemi_defer_scripts'))
+{
 	function aemi_defer_scripts($scripts_tag)
 	{
-
 		global $defer_scripts;
-		if (!isset($defer_scripts)) {
-			$defer_scripts = array();
+		if (!isset($defer_scripts))
+		{
+			$defer_scripts = [];
 		}
-		foreach ($scripts_tag as $script) {
+		foreach ($scripts_tag as $script)
+		{
 			$defer_scripts[] = $script;
-		}
-
-		if (!function_exists('aemi_defer_scripts_filter')) {
-			function aemi_defer_scripts_filter($tag, $handle)
-			{
-				global $defer_scripts;
-				foreach ($defer_scripts as $script) {
-					if ($script === $handle) {
-						return str_replace(' src', ' defer src', $tag);
-					}
-				}
-				return $tag;
-			}
-			add_filter('script_loader_tag', 'aemi_defer_scripts_filter', 10, 2);
 		}
 	}
 }
 
+
+if (!function_exists('aemi_defer_scripts_filter'))
+{
+	function aemi_defer_scripts_filter($tag, $handle)
+	{
+		global $defer_scripts;
+		if (!isset($defer_scripts))
+		{
+			$defer_scripts = [];
+		}
+		foreach ($defer_scripts as $script)
+		{
+			if ($script === $handle)
+			{
+				return str_replace(' src', ' defer src', $tag);
+			}
+		}
+		return $tag;
+	}
+}
 
 
 if (!function_exists('aemi_custom_archive_title')) {
@@ -295,41 +313,39 @@ if (!function_exists('aemi_custom_archive_title')) {
 		return $title;
 	}
 }
-add_filter('get_the_archive_title', 'aemi_custom_archive_title');
 
 
-
-if ( !function_exists('aemi_filter_comment_text') ) {
-	function aemi_filter_comment_text( $comment ) {
-		$allowed_html = array(
-        	'a' => array(
-        		'href' => array(),
-        		'title' => array()
-      		),
-      		'br' => array(),
-      		'em' => array(),
-      		'i' => array(),
-      		'strong' => array(),
-      		'b' => array(),
-      		'del' => array(),
-      		's' => array(),
-      		'u' => array(),
-      		'pre' => array(),
-      		'code' => array(),
-      		'kbd' => array(),
-      		'big' => array(),
-      		'small' => array(),
-      		'acronym' => array(),
-      		'abbr' => array(),
-      		'ins' => array(),
-      		'sup' => array(),
-      		'sub' => array(),
-      		'ol' => array(),
-      		'ul' => array(),
-      		'li' => array()
-    	);
+if (!function_exists('aemi_filter_comment_text'))
+{
+	function aemi_filter_comment_text($comment)
+	{
+		$allowed_html = [
+        	'a' => [
+        		'href'	=>	[],
+        		'title'	=>	[]
+        	],
+      		'br'	=>		[],
+      		'em'	=>		[],
+      		'i'		=>		[],
+      		'strong'	=>	[],
+      		'b'		=>		[],
+      		'del'	=>		[],
+      		's'		=>		[],
+      		'u'		=>		[],
+      		'pre'	=>		[],
+      		'code'	=>		[],
+      		'kbd'	=>		[],
+      		'big'	=>		[],
+      		'small'	=>		[],
+      		'acronym'	=>	[],
+      		'abbr'	=>		[],
+      		'ins'	=>		[],
+      		'sup'	=>		[],
+      		'sub'	=>		[],
+      		'ol'	=>		[],
+      		'ul'	=>		[],
+      		'li'	=>		[]
+    	];
     	return wp_kses($comment, $allowed_html);
 	}
 }
-
-add_filter( 'comment_text', 'aemi_filter_comment_text' );

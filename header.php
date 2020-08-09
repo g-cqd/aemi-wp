@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
-<html <?php language_attributes(); ?> <?php /* aemi_html_tag_schema(); */ ?>>
-
+<html <?php language_attributes(); ?>>
     <head>
         <meta charset="<?php bloginfo('charset'); ?>">
         <meta name="viewport" content="width=device-width, initial-scale=1">

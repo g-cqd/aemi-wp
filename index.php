@@ -1,8 +1,14 @@
-<?php get_header(); ?>
 <?php
-if (have_posts()) {
+
+get_header();
+
+if (have_posts())
+{
     get_template_part('loop');
-} else {
+}
+else
+{
     get_template_part('inc/parts/content', 'none');
-} ?>
-<?php get_footer();
+}
+
+get_footer();

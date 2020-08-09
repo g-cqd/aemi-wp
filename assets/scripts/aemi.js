@@ -35,11 +35,7 @@ function addNoOpener(link) {
 	if (link instanceof HTMLAnchorElement) {
 		const relAttr = attr(link, 'rel') || '';
 		if (!relAttr.includes('noopener')) {
-			attr(
-				link,
-				'rel',
-				isset(relAttr) ? `${relAttr} noopener` : 'noopener'
-			);
+			attr( link, 'rel', isset(relAttr) ? `${relAttr} noopener` : 'noopener' );
 		}
 	}
 }
@@ -64,7 +60,7 @@ function isOnFirstHeader(element) {
 }
 
 function isWrapperToggled() {
-	return isToggled(aemi.get('nav-toggle')) || isToggled(aemi.get('sea-toggle'));
+	return aemi.assert('nav-toggle') && isToggled(aemi.get('nav-toggle')) || aemi.assert('sea-toggle') && isToggled(aemi.get('sea-toggle'));
 }
 
 function schemeCoherenceCondition() {
@@ -97,27 +93,27 @@ class ColorScheme {
 		if (['light', 'dark'].includes(scheme)) {
 			const opposite = scheme === 'light' ? 'dark' : 'light';
 			window
-				.matchMedia(`(prefers-color-scheme: ${scheme})`)
-				.addEventListener('change', (event) => {
-					if (dependsOnCookies && ColorScheme.hasCookie()) {
-						const cookieState = ColorScheme.getCookiesState();
-						if (event.matches) {
-							if (cookieState === scheme) {
-							} else {
-							}
+			.matchMedia(`(prefers-color-scheme: ${scheme})`)
+			.addEventListener('change', (event) => {
+				if (dependsOnCookies && ColorScheme.hasCookie()) {
+					const cookieState = ColorScheme.getCookiesState();
+					if (event.matches) {
+						if (cookieState === scheme) {
 						} else {
-							if (cookieState === scheme) {
-							} else {
-							}
 						}
 					} else {
-						if (event.matches) {
-							ColorScheme.change(scheme);
+						if (cookieState === scheme) {
 						} else {
-							ColorScheme.change(opposite);
 						}
 					}
-				});
+				} else {
+					if (event.matches) {
+						ColorScheme.change(scheme);
+					} else {
+						ColorScheme.change(opposite);
+					}
+				}
+			});
 		}
 	}
 
@@ -125,7 +121,7 @@ class ColorScheme {
 		if (is(window.matchMedia)) {
 			return (
 				window.matchMedia('(prefers-color-scheme)').media !== 'not all'
-			);
+				);
 		}
 	}
 
@@ -152,8 +148,8 @@ class ColorScheme {
 	static getBrowerState() {
 		try {
 			return window.matchMedia('(prefers-color-scheme: light').matches
-				? 'light'
-				: 'dark';
+			? 'light'
+			: 'dark';
 		} catch (error) {
 			catchError(error);
 			return null;
@@ -170,7 +166,7 @@ class ColorScheme {
 			ColorScheme.getBrowerState() ||
 			ColorScheme.getClassState() ||
 			null
-		);
+			);
 	}
 
 	static detect() {
@@ -455,7 +451,7 @@ class Lightbox {
 	}
 	getByGroup(g) {
 		return [
-			...this.thumbnails.filter((t) => attr(t, this.dn('group')) === g),
+		...this.thumbnails.filter((t) => attr(t, this.dn('group')) === g),
 		];
 	}
 	getPosition(t, g) {
@@ -463,7 +459,7 @@ class Lightbox {
 		for (let i = 0, l = ts.length; i < l; i += 1) {
 			const c1 = attr(t, 'src') === attr(ts[i], 'src');
 			const c2 =
-				attr(t, this.dn('index')) === attr(ts[i], this.dn('index'));
+			attr(t, this.dn('index')) === attr(ts[i], this.dn('index'));
 			const c3 = attr(t, this.dn()) === attr(ts[i], this.dn());
 			if (c1 && c2 && c3) {
 				return i;
@@ -484,8 +480,8 @@ class Lightbox {
 			qws.forEach((qwsi, i) => {
 				for (const item of qwsi.querySelectorAll(jis)) {
 					const el =
-						item.getElementsByTagName('a')[0] ||
-						item.getElementsByTagName('img')[0];
+					item.getElementsByTagName('a')[0] ||
+					item.getElementsByTagName('img')[0];
 					if (el.tagName === 'A') {
 						if (/\.(jpg|gif|png)$/.test(el.href)) {
 							attr(el, this.dn(), el.href);
@@ -514,7 +510,7 @@ class Lightbox {
 							inhibitEvent(event);
 							item.querySelector('a, img').dispatchEvent(
 								new Event('click')
-							);
+								);
 						});
 					}
 				}
@@ -531,11 +527,11 @@ class Lightbox {
 		const pos = this.getPosition(ct, cg);
 		if (pos === cis.length - 1) {
 			prev.src =
-				attr(cis[cis.length - 1], this.dn()) || cis[cis.length - 1].src;
+			attr(cis[cis.length - 1], this.dn()) || cis[cis.length - 1].src;
 			next.src = attr(cis[0], this.dn()) || cis[0].src;
 		} else if (pos === 0) {
 			prev.src =
-				attr(cis[cis.length - 1], this.dn()) || cis[cis.length - 1].src;
+			attr(cis[cis.length - 1], this.dn()) || cis[cis.length - 1].src;
 			next.src = attr(cis[1], this.dn()) || cis[1].src;
 		} else {
 			prev.src = attr(cis[pos - 1], this.dn()) || cis[pos - 1].src;
@@ -557,7 +553,7 @@ class Lightbox {
 						removeClass(
 							this.animChildren[index],
 							this.cn('active')
-						);
+							);
 					}, lA);
 					index = index >= this.animChildren.length ? 0 : ++index;
 				}, lA);
@@ -583,18 +579,18 @@ class Lightbox {
 				$: 'span',
 				class: [this.cn('next'), ...(!ni ? [this.cn('no-img')] : [])],
 				_: [
-					...(ni
-						? [{ $: 'img', attr: { src: this.options.nextImage } }]
-						: []),
+				...(ni
+					? [{ $: 'img', attr: { src: this.options.nextImage } }]
+					: []),
 				],
 				events: [
-					[
-						'click',
-						(ev) => {
-							inhibitEvent(ev);
-							this.next();
-						},
-					],
+				[
+				'click',
+				(ev) => {
+					inhibitEvent(ev);
+					this.next();
+				},
+				],
 				],
 			});
 			this.box.appendChild(this.nextButton);
@@ -606,18 +602,18 @@ class Lightbox {
 				$: 'span',
 				class: [this.cn('prev'), ...(!pi ? [this.cn('no-img')] : [])],
 				_: [
-					...(pi
-						? [{ $: 'img', attr: { src: this.options.prevImage } }]
-						: []),
+				...(pi
+					? [{ $: 'img', attr: { src: this.options.prevImage } }]
+					: []),
 				],
 				events: [
-					[
-						'click',
-						(ev) => {
-							inhibitEvent(ev);
-							this.prev();
-						},
-					],
+				[
+				'click',
+				(ev) => {
+					inhibitEvent(ev);
+					this.prev();
+				},
+				],
 				],
 			});
 			this.box.appendChild(this.prevButton);
@@ -650,15 +646,15 @@ class Lightbox {
 			closeOnClick: setBooleanValue(_.closeOnClick, true),
 			nextOnClick: setBooleanValue(_.nextOnClick, true),
 			loadingAnimation: is(_.loadingAnimation)
-				? _.loadingAnimation
-				: true,
+			? _.loadingAnimation
+			: true,
 			animationElementCount: _.animationElementCount || 4,
 			preload: setBooleanValue(_.preload, true),
 			carousel: setBooleanValue(_.carousel, true),
 			animation:
-				isNumber(_.animation) || _.animation === false
-					? _.animation
-					: 400,
+			isNumber(_.animation) || _.animation === false
+			? _.animation
+			: 400,
 			responsive: setBooleanValue(_.responsive, true),
 			maxImageSize: _.maxImageSize || 0.8,
 			keyControls: setBooleanValue(_.keyControls, true),
@@ -715,16 +711,16 @@ class Lightbox {
 					class: [this.cn('close')],
 					_: ['&#x2717;'],
 					events: [
-						[
-							'click',
-							(ev) => {
-								inhibitEvent(ev);
-								this.close();
-							},
-						],
+					[
+					'click',
+					(ev) => {
+						inhibitEvent(ev);
+						this.close();
+					},
+					],
 					],
 				})
-			);
+				);
 		}
 		if (closeOnClick) {
 			this.box.addEventListener('click', (ev) => {
@@ -739,13 +735,13 @@ class Lightbox {
 			this.box.appendChild(this.animElement);
 		} else if (loadingAnimation) {
 			loadingAnimation = isNumber(loadingAnimation)
-				? loadingAnimation
-				: 200;
+			? loadingAnimation
+			: 200;
 			this.animElement = ecs({ class: [this.cn('loading-animation')] });
 			for (let i = 0; i < animationElementCount; i += 1) {
 				this.animChildren.push(
 					this.animElement.appendChild(document.createElement('span'))
-				);
+					);
 			}
 			this.box.appendChild(this.animElement);
 		}
@@ -809,110 +805,110 @@ class Lightbox {
 			!this.options ||
 			!is(this.options.hideOverflow) ||
 			this.options.hideOverflow
-		) {
+			) {
 			blockScroll(this.body);
-		}
-		this.box.style.paddingTop = '0';
-		this.wrapper.innerHTML = '';
-		this.wrapper.appendChild(this.currImage.img);
-		if (this.options.animation) {
-			addClass(this.wrapper, this.cn('animate'));
-		}
-		const captionText = attr(el, this.dn('caption'));
-		if (captionText && this.options.captions) {
-			this.wrapper.appendChild(
-				ecs({ $: 'p', class: [this.cn('caption')], _: [captionText] })
-			);
-		}
-		addClass(this.box, this.cn('active'));
-		if (this.options.controls && this.currImages.length > 1) {
-			this.initializeControls();
-			this.repositionControls();
-		}
-		this.currImage.img.addEventListener('error', (imageErrorEvent) => {
-			if (this.options.onloaderror) {
-				imageErrorEvent._happenedWhile = event ? event : false;
-				this.options.onloaderror(imageErrorEvent);
-			}
-		});
-		this.currImage.img.addEventListener('load', (ev) => {
-			const { target } = ev;
-			this.currImage.originalWidth = target.naturalWidth || target.width;
-			this.currImage.originalHeight =
-				target.naturalHeight || target.height;
-			const checkClassInt = setInterval(() => {
-				if (hasClass(this.box, this.cn('active'))) {
-					addClass(this.wrapper, this.cn('wrapper-active'));
-					if (isNumber(this.options.animation)) {
-						addClass(
-							this.currImage.img,
-							this.cn('animate-transition')
-						);
-					}
-					if (callback) {
-						callback();
-					}
-					this.stopAnimation();
-					clearTimeout(this.animTimeout);
-					if (this.options.preload) {
-						this.preload();
-					}
-					if (this.options.nextOnClick) {
-						addClass(this.currImage.img, this.cn('next-on-click'));
-						this.currImage.img.addEventListener('click', (ev) => {
-							inhibitEvent(ev);
-							this.next();
-						});
-					}
-					if (this.options.onimageclick) {
-						this.currImage.img.addEventListener('click', (ev) => {
-							inhibitEvent(ev);
-							this.options.onimageclick(this.currImage);
-						});
-					}
-					if (this.options.onload) {
-						this.options.onload(event);
-					}
-					clearInterval(checkClassInt);
-					this.resize();
-				}
-			}, 10);
-		});
-		this.currImage.img.src = src;
-		this.startAnimation();
 	}
-	load(_) {
-		_ = _ || this.options;
-		this.setOptions(_);
-		this.push(
-			...[...document.querySelectorAll('[' + this.dn() + ']')].map(
-				(item, index) => {
-					if (attr(item, this.dn())) {
-						attr(item, this.dn('index'), index);
-					}
-					return item;
+	this.box.style.paddingTop = '0';
+	this.wrapper.innerHTML = '';
+	this.wrapper.appendChild(this.currImage.img);
+	if (this.options.animation) {
+		addClass(this.wrapper, this.cn('animate'));
+	}
+	const captionText = attr(el, this.dn('caption'));
+	if (captionText && this.options.captions) {
+		this.wrapper.appendChild(
+			ecs({ $: 'p', class: [this.cn('caption')], _: [captionText] })
+			);
+	}
+	addClass(this.box, this.cn('active'));
+	if (this.options.controls && this.currImages.length > 1) {
+		this.initializeControls();
+		this.repositionControls();
+	}
+	this.currImage.img.addEventListener('error', (imageErrorEvent) => {
+		if (this.options.onloaderror) {
+			imageErrorEvent._happenedWhile = event ? event : false;
+			this.options.onloaderror(imageErrorEvent);
+		}
+	});
+	this.currImage.img.addEventListener('load', (ev) => {
+		const { target } = ev;
+		this.currImage.originalWidth = target.naturalWidth || target.width;
+		this.currImage.originalHeight =
+		target.naturalHeight || target.height;
+		const checkClassInt = setInterval(() => {
+			if (hasClass(this.box, this.cn('active'))) {
+				addClass(this.wrapper, this.cn('wrapper-active'));
+				if (isNumber(this.options.animation)) {
+					addClass(
+						this.currImage.img,
+						this.cn('animate-transition')
+						);
 				}
+				if (callback) {
+					callback();
+				}
+				this.stopAnimation();
+				clearTimeout(this.animTimeout);
+				if (this.options.preload) {
+					this.preload();
+				}
+				if (this.options.nextOnClick) {
+					addClass(this.currImage.img, this.cn('next-on-click'));
+					this.currImage.img.addEventListener('click', (ev) => {
+						inhibitEvent(ev);
+						this.next();
+					});
+				}
+				if (this.options.onimageclick) {
+					this.currImage.img.addEventListener('click', (ev) => {
+						inhibitEvent(ev);
+						this.options.onimageclick(this.currImage);
+					});
+				}
+				if (this.options.onload) {
+					this.options.onload(event);
+				}
+				clearInterval(checkClassInt);
+				this.resize();
+			}
+		}, 10);
+	});
+	this.currImage.img.src = src;
+	this.startAnimation();
+}
+load(_) {
+	_ = _ || this.options;
+	this.setOptions(_);
+	this.push(
+		...[...document.querySelectorAll('[' + this.dn() + ']')].map(
+			(item, index) => {
+				if (attr(item, this.dn())) {
+					attr(item, this.dn('index'), index);
+				}
+				return item;
+			}
 			)
 		);
+}
+resize() {
+	if (!this.currImage.img) {
+		return;
 	}
-	resize() {
-		if (!this.currImage.img) {
-			return;
-		}
-		this.maxWidth = this.width;
-		this.maxHeight = this.height;
-		const boxWidth = this.box.offsetWidth;
-		const boxHeight = this.box.offsetHeight;
-		if (
-			!this.currImgRatio &&
-			this.currImage.img &&
-			this.currImage.img.offsetWidth &&
-			this.currImage.img.offsetHeight
+	this.maxWidth = this.width;
+	this.maxHeight = this.height;
+	const boxWidth = this.box.offsetWidth;
+	const boxHeight = this.box.offsetHeight;
+	if (
+		!this.currImgRatio &&
+		this.currImage.img &&
+		this.currImage.img.offsetWidth &&
+		this.currImage.img.offsetHeight
 		) {
-			this.currImgRatio =
-				this.currImage.img.offsetWidth /
-				this.currImage.img.offsetHeight;
-		}
+		this.currImgRatio =
+	this.currImage.img.offsetWidth /
+	this.currImage.img.offsetHeight;
+}
 		// Height of image is too big to fit in viewport
 		if (Math.floor(boxWidth / this.currImgRatio) > boxHeight) {
 			this.newImageWidth = boxHeight * this.currImgRatio;
@@ -926,22 +922,22 @@ class Lightbox {
 		// decrease size with modifier
 		this.newImageWidth = Math.floor(
 			this.newImageWidth * this.options.maxImageSize
-		);
+			);
 		this.newImageHeight = Math.floor(
 			this.newImageHeight * this.options.maxImageSize
-		);
+			);
 		// check if image exceeds maximum size
 		if (
 			(this.options.dimensions &&
 				this.newImageHeight > this.currImage.originalHeight) ||
 			(this.options.dimensions &&
 				this.newImageWidth > this.currImage.originalWidth)
-		) {
+			) {
 			this.newImageHeight = this.currImage.originalHeight;
-			this.newImageWidth = this.currImage.originalWidth;
-		}
-		attr(this.currImage.img, 'width', this.newImageWidth);
-		attr(this.currImage.img, 'height', this.newImageHeight);
+		this.newImageWidth = this.currImage.originalWidth;
+	}
+	attr(this.currImage.img, 'width', this.newImageWidth);
+	attr(this.currImage.img, 'height', this.newImageHeight);
 		// reposition controls after timeout
 		setTimeout(() => {
 			this.repositionControls();
@@ -973,11 +969,11 @@ class Lightbox {
 							addClass(
 								this.currImage.img,
 								this.cn('animating-next')
-							);
+								);
 						}, this.options.animation / 2);
 					},
 					'next'
-				);
+					);
 			}, this.options.animation / 2);
 		} else {
 			this.open(this.currThumbnail, false, false, 'next');
@@ -1006,11 +1002,11 @@ class Lightbox {
 							addClass(
 								this.currImage.img,
 								this.cn('animating-next')
-							);
+								);
 						}, this.options.animation / 2);
 					},
 					'prev'
-				);
+					);
 			}, this.options.animation / 2);
 		} else {
 			this.open(this.currThumbnail, false, false, 'prev');
@@ -1035,13 +1031,13 @@ class Lightbox {
 			!this.options ||
 			!is(this.options.hideCloseButton) ||
 			this.options.hideOverflow
-		) {
+			) {
 			freeScroll(this.body);
-		}
-		if (this.options.onclose) {
-			this.options.onclose(img);
-		}
 	}
+	if (this.options.onclose) {
+		this.options.onclose(img);
+	}
+}
 }
 
 try {
@@ -1051,13 +1047,12 @@ try {
 } catch (_) {
 	aemi.push(() => {
 		for (const menu of byClass('menu')) {
-			if (
-				!['header-menu', 'header-social', 'footer-menu'].includes(
-					menu.id
-				)
-			) {
-				for (const parent of byClass('menu-item-has-children', menu)) {
-					if (parent.getElementsByTagName('li').length > 0) {
+			if ( !['header-menu', 'header-social', 'footer-menu'].includes( menu.id ) )
+			{
+				for (const parent of byClass('menu-item-has-children', menu))
+				{
+					if (parent.getElementsByTagName('li').length > 0)
+					{
 						parent.insertBefore(
 							ecs({
 								class: ['toggle'],
@@ -1103,7 +1098,10 @@ try {
 				'.blocks-gallery-item',
 				'.jg-entry',
 			],
-			captionSelectors: ['figcaption', '.gallery-caption'],
+			captionSelectors: [
+				'figcaption',
+				'.gallery-caption'
+			],
 		})
 	);
 }
@@ -1145,107 +1143,83 @@ try {
 	aemi.push(() => {
 		const classScrolled = 'page-scrolled';
 		const classHidden = 'header-hidden';
-		const aemi_header_auto_hide = () =>
-			requestFrame((startTime) => {
-				const currentState = {
-					startTime: startTime,
-					height: document.body.clientHeight,
-					position: window.scrollY,
-				};
-				setTimeout(
-					(observable, currentState) =>
-						requestFrame(
-							(currentTime, observable, currentState) => {
-								const {
-									startTime,
-									height,
-									position,
-								} = currentState;
-								const currentPosition = window.scrollY;
-								const menuToggler = aemi.get('nav-toggle');
-								const searchToggler = aemi.get('sea-toggle');
-								if (position > 0) {
-									addClass(observable, classScrolled);
-								} else {
-									removeClass(observable, classScrolled);
-								}
-								if (
-									(!menuToggler || !isToggled(menuToggler)) &&
-									(!searchToggler ||
-										!isToggled(searchToggler))
-								) {
-									const elapsedTime = currentTime - startTime;
-									if (elapsedTime > 100) {
-										const elapsedDistance =
-											currentPosition - position;
-										const $11 = Math.round(
-											(1000 * elapsedDistance) /
-												elapsedTime
-										);
-										if (
-											!hasClass(observable, classHidden)
-										) {
-											if (
-												$11 > 0 &&
-												position > 0 &&
-												position + window.innerHeight <
-													height
-											) {
-												addClass(
-													observable,
-													classHidden
-												);
-											}
-										} else if (
-											($11 < 0 &&
-												position > 0 &&
-												position + window.innerHeight <
-													height) ||
-											position <= 0 ||
-											position + window.innerHeight >=
-												height
-										) {
-											removeClass(
-												observable,
-												classHidden
-											);
-										}
+		const aemi_header_auto_hide = autoHide =>
+		requestFrame((startTime) => {
+			const currentState = {
+				startTime: startTime,
+				height: document.body.clientHeight,
+				position: window.scrollY,
+			};
+			setTimeout(
+				(observable, currentState) => requestFrame(
+					(currentTime, observable, currentState) => {
+						const { startTime, height, position, } = currentState;
+						const currentPosition = window.scrollY;
+						const menuToggler = aemi.get('nav-toggle');
+						const searchToggler = aemi.get('sea-toggle');
+						if (position > 0) {
+							addClass(observable, classScrolled);
+						} else {
+							removeClass(observable, classScrolled);
+						}
+						if (
+							autoHide &&
+							(!menuToggler || !isToggled(menuToggler)) &&
+							(!searchToggler || !isToggled(searchToggler))
+						) {
+							const elapsedTime = currentTime - startTime;
+							if (elapsedTime > 100) {
+								const elapsedDistance =
+								currentPosition - position;
+								const $11 = Math.round( (1000 * elapsedDistance) / elapsedTime );
+								if ( !hasClass(observable, classHidden) )
+								{
+									if ( $11 > 0 && position > 0 && position + window.innerHeight < height )
+									{
+										addClass( observable, classHidden );
 									}
+								} else if (
+									($11 < 0 && position > 0 && position + window.innerHeight < height) ||
+									position <= 0 || position + window.innerHeight >= height )
+								{
+									removeClass( observable, classHidden );
 								}
-							},
-							observable,
-							currentState
-						),
-					100,
-					document.body,
+							}
+						}
+					},
+					observable,
 					currentState
-				);
-			});
+				),
+				100,
+				document.body,
+				currentState
+			);
+		});
 		const aemi_progress_bar = () =>
-			requestFrame(() => {
-				const totalHeight =
-					document.body.clientHeight - window.innerHeight;
-				const progress = window.scrollY / totalHeight;
-				aemi.get('pro-bar').style.width = `${
-					100 * (progress > 1 ? 1 : progress)
-				}vw`;
-			});
+		requestFrame(() => {
+			const totalHeight =
+			document.body.clientHeight - window.innerHeight;
+			const progress = window.scrollY / totalHeight;
+			aemi.get('pro-bar').style.width = `${
+				100 * (progress > 1 ? 1 : progress)
+			}vw`;
+		});
 		const features = [
-			{
-				test: [aemi.assert('pro-bar')],
-				func: aemi_progress_bar,
-				args: [],
-			},
-			{
-				test: [hasClass(document.body, 'auto-hide')],
-				func: aemi_header_auto_hide,
-				args: [],
-			},
-			{
-				test: [true],
-				func: changeHeaderScheme,
-				args: [],
-			},
+		{
+			test: [aemi.assert('pro-bar')],
+			func: aemi_progress_bar,
+			args: [],
+		},
+		{
+			test: [],
+			func: aemi_header_auto_hide,
+			args: [hasClass(document.body, 'auto-hide')],
+		},
+		{
+			test: [true],
+			func: changeHeaderScheme,
+			args: [],
+		},
 		];
 
 		features.forEach(({ test, func, args }) => {
@@ -1255,7 +1229,7 @@ try {
 						type,
 						() => func(...args),
 						{ passive: true }
-					);
+						);
 				}
 			}
 		});
@@ -1332,9 +1306,9 @@ try {
 				hash = url.hash;
 				external = window.location.origin !== url.origin;
 				scrollable =
-					!external &&
-					window.location.pathname === url.pathname &&
-					isset(hash);
+				!external &&
+				window.location.pathname === url.pathname &&
+				isset(hash);
 			} catch (_) {
 				if (link.href.indexOf('#') >= 0) {
 					hash = link.href.split('?')[0];
