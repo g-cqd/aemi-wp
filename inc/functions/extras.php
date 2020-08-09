@@ -11,6 +11,10 @@ if (!function_exists('aemi_body_classes')) {
 		{
 			$classes[] = 'not-singular';
 		}
+		if (has_post_thumbnail())
+		{
+			$classes[] = 'has-post-thumbnail';
+		}
 		if (is_active_sidebar('sidebar-widget-area'))
 		{
 			$classes[] = 'sidebar';
@@ -292,3 +296,40 @@ if (!function_exists('aemi_custom_archive_title')) {
 	}
 }
 add_filter('get_the_archive_title', 'aemi_custom_archive_title');
+
+
+
+if ( !function_exists('aemi_filter_comment_text') ) {
+	function aemi_filter_comment_text( $comment ) {
+		$allowed_html = array(
+        	'a' => array(
+        		'href' => array(),
+        		'title' => array()
+      		),
+      		'br' => array(),
+      		'em' => array(),
+      		'i' => array(),
+      		'strong' => array(),
+      		'b' => array(),
+      		'del' => array(),
+      		's' => array(),
+      		'u' => array(),
+      		'pre' => array(),
+      		'code' => array(),
+      		'kbd' => array(),
+      		'big' => array(),
+      		'small' => array(),
+      		'acronym' => array(),
+      		'abbr' => array(),
+      		'ins' => array(),
+      		'sup' => array(),
+      		'sub' => array(),
+      		'ol' => array(),
+      		'ul' => array(),
+      		'li' => array()
+    	);
+    	return wp_kses($comment, $allowed_html);
+	}
+}
+
+add_filter( 'comment_text', 'aemi_filter_comment_text' );

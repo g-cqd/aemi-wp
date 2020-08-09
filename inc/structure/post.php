@@ -5,7 +5,7 @@ if (!function_exists('aemi_post_header'))  {
 
 		$singular = is_singular();
 
-		?><header class="post-header"><?php
+		?><header class="post-header<?= has_post_thumbnail() ? ' color-scheme-dark' : '' ?>"><?php
 		
 		aemi_featured_image();
 

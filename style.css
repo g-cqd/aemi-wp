@@ -4,7 +4,7 @@ Theme URI: https://github.com/originecode/aemi/
 Author: Guillaume COQUARD
 Author URI: https://www.originecode.fr/
 Description: AeMi is designed to be an aesthetic minimalist wordpress theme. It provides a highly legible, clean, clear and really minimalist theme.
-Version: 2.0-beta1
+Version: 2.0-beta2
 License: GPL-3.0
 License URI: https://opensource.org/licenses/GPL-3.0
 Text Domain: aemi
@@ -31,7 +31,7 @@ Tags: one-column, custom-background, custom-menu, featured-image-header, feature
 body {
 	display: grid;
 	grid-template-columns: repeat(64, 1fr);
-	grid-gap: 0;
+	gap: 0;
 	grid-auto-rows: auto;
 }
 
@@ -101,7 +101,7 @@ body {
 	font-weight: 700;
 	text-decoration: none;
 	outline: none;
-	will-change: color;
+	
 }
 
 .toggle:hover {
@@ -135,7 +135,7 @@ body {
 	-o-user-select: none;
 	user-select: none;
 	width: var(--legible-width);
-	will-change: background-color, transform;
+	
 	z-index: 10;
 }
 
@@ -156,14 +156,14 @@ body {
  */
 
 body:not(.page-scrolled) #site-header::before {
-	background-color: unset;
+	background-color: transparent;
 }
 
 body.page-scrolled #site-header::before {
 	background-color: var(--page-color-alpha);
 }
 
-.header-hidden #site-header:not(:hover) {
+.header-hidden #site-header {
 	transform: translate(-50%, -100%);
 }
 
@@ -171,7 +171,7 @@ body.page-scrolled #site-header::before {
 	top: 32px;
 }
 
-.admin-bar.header-hidden #site-header:not(:hover) {
+.admin-bar.header-hidden #site-header {
 	transform: translate(-50%, -100%);
 }
 
@@ -180,8 +180,8 @@ body.page-scrolled #site-header::before {
  */
 
 body:not(.page-scrolled) #site-header::before {
-	-webkit-backdrop-filter: unset;
-	backdrop-filter: unset;
+	-webkit-backdrop-filter: blur(0);
+	backdrop-filter: blur(0);
 }
 body.page-scrolled #site-header::before {
 	-webkit-backdrop-filter: blur(10px);
@@ -190,13 +190,9 @@ body.page-scrolled #site-header::before {
 
 #site-header,
 .header-hidden #site-header,
-.header-hidden #site-header:not(:hover),
-.admin-bar #site-header,
-.admin-bar.header-hidden #site-header:not(:hover) {
-	transition-property: transform;
-	transition-duration: 300ms;
-	transition-timing-function: ease-in-out;
-	will-change: transform;
+.admin-bar #site-header {
+	transition: transform 300ms ease-in-out;
+	
 }
 
 #site-header::before,
@@ -205,7 +201,7 @@ body.page-scrolled #site-header::before {
 	transition-property: background-color, -webkit-backdrop-filter, backdrop-filter;
 	transition-duration: 300ms;
 	transition-timing-function: ease-in-out;
-	will-change: background-color, -webkit-backdrop-filter, backdrop-filter;
+	
 }
 
 /* ----------------------------------------------------------
@@ -251,10 +247,8 @@ body:not(.header-hidden) #site-progress-bar {
 
 #site-progress-bar,
 body:not(.header-hidden) #site-progress-bar {
-	transition-property: transform;
-	transition-duration: 300ms;
-	transition-timing-function: ease-in-out;
-	will-change: transform, width;
+	transition: transform 300ms ease-in-out;
+	
 }
 
 /* ----------------------------------------------------------
@@ -428,7 +422,7 @@ body:not(.header-hidden) #site-progress-bar {
  * ---------------------------------------------------------- */
 
 /* ----------------------------------------------------------
- * BEGIN : Site Header Menu
+ * BEGIN : Site Menu
  * ---------------------------------------------------------- */
 
 .menu {
@@ -598,7 +592,8 @@ body:not(.header-hidden) #site-progress-bar {
 	width: 50%;
 	transition-duration: 200ms;
 	transition-property: transform, border, width;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
+	
 }
 
 #navigation-toggle .top-bar {
@@ -617,7 +612,8 @@ body:not(.header-hidden) #site-progress-bar {
 	width: 60%;
 	transition-duration: 200ms;
 	transition-property: transform, border, width;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
+	
 }
 
 #navigation-toggle.toggled .top-bar {
@@ -633,14 +629,14 @@ body:not(.header-hidden) #site-progress-bar {
 	border-color: var(--text-important);
 	transition-duration: 200ms;
 	transition-property: transform, border, width;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 #navigation-toggle:hover {
 	color: var(--text-important);
 	transition-duration: 200ms;
 	transition-property: color, transform;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 .wrapper {
@@ -659,15 +655,16 @@ body:not(.header-hidden) #site-progress-bar {
 .wrapper:not(.toggled) {
 	opacity: 0;
 	transform: translate(-50%, 100%);
-	visibility: hidden;
+	content-visibility: hidden;
 }
 
 .wrapper,
 .admin-bar .wrapper,
 .wrapper:not(.toggled) {
-	transition-property: transform, opacity, visibility;
+	transition-property: transform, opacity, content-visibility;
 	transition-duration: 300ms;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
+	
 }
 
 /*--------------------------------------------------------------
@@ -688,14 +685,14 @@ body:not(.header-hidden) #site-progress-bar {
 	box-shadow: var(--input-shadow);
 	transition-duration: 200ms;
 	transition-property: box-shadow, background-color;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 .header-section:hover {
 	box-shadow: var(--input-shadow);
 	transition-duration: 200ms;
 	transition-property: box-shadow, background-color;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 .color-scheme-dark .header-section,
@@ -704,14 +701,14 @@ body:not(.header-hidden) #site-progress-bar {
 	background-color: var(--element-background);
 	transition-duration: 200ms;
 	transition-property: background-color;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 #toggle-header-widget:hover {
 	color: var(--text-important);
 	transition-duration: 200ms;
 	transition-property: color, transform;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 /*--------------------------------------------------------------
@@ -780,12 +777,12 @@ body:not(.header-hidden) #site-progress-bar {
 	color: var(--a-099);
 	transform: rotate(45deg);
 	transform-origin: center;
-	transition: 200ms transform ease-in-out
+	transition: 200ms transform ease-in-out;
 }
 
 :not(.toggled) > #toggle-widget::after {
 	transform: rotate(0deg);
-	transition: 200ms transform ease-in-out
+	transition: 200ms transform ease-in-out;
 }
 
 #toggle-widget::before {
@@ -799,7 +796,7 @@ body:not(.header-hidden) #site-progress-bar {
 	box-shadow: var(--a-box-shadow);
 	transition-duration: 200ms;
 	transition-property: transform, box-shadow;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 	z-index: -1;
 }
 
@@ -812,7 +809,7 @@ body.color-scheme-dark #toggle-widget::before {
 	box-shadow: var(--a-box-shadow-hover);
 	transition-duration: 200ms;
 	transition-property: transform, box-shadow;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 :not(.toggled) + #header-widgets {
@@ -822,7 +819,7 @@ body.color-scheme-dark #toggle-widget::before {
 	overflow: hidden;
 	transition-duration: 200ms;
 	transition-property: opacity, margin, max-height;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 .toggled + #header-widgets {
@@ -833,20 +830,20 @@ body.color-scheme-dark #toggle-widget::before {
 	opacity: 1;
 	transition-duration: 200ms;
 	transition-property: opacity, margin, max-height;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 :not(.toggled) + #header-widgets > * {
 	box-shadow: none;
 	transition-duration: 200ms;
 	transition-property: box-shadow;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 .toggled + #header-widgets > * {
 	transition-duration: 200ms;
 	transition-property: box-shadow;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 /*--------------------------------------------------------------
@@ -903,8 +900,8 @@ body.color-scheme-dark #toggle-widget::before {
 	margin-left: auto;
 	margin-right: auto;
 	max-width: calc(100vw - var(--legible-marge));
-	position: relative;
 	padding: 0;
+	position: relative;
 	width: var(--legible-width);
 }
 
@@ -940,19 +937,19 @@ body.color-scheme-dark #toggle-widget::before {
 }
 
 .not-singular.color-scheme-light .entry:not(#entry-head) {
-	box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.125);
+	/* box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.125); */
+	box-shadow: 0px 5px 20px -2px rgba(0, 0, 0, 0.125);
 }
 
 .not-singular.color-scheme-light .entry:hover:not(#entry-head) {
-	box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.125);
+	/* box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.125); */
+	box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.125);
 }
 
 .not-singular.color-scheme-light .entry:not(#entry-head),
 .not-singular.color-scheme-light .entry:hover:not(#entry-head) {
-	transition-property: box-shadow;
-	transition-duration: 250ms;
-	transition-timing-function: ease-in-out;
-	will-change: box-shadow;
+	transition: box-shadow 250ms ease-in-out;
+	
 }
 
 #site-aside {
@@ -1035,7 +1032,7 @@ body.color-scheme-dark #toggle-widget::before {
 }
 
 .singular .post-attachment {
-	transform: scale(1.075);
+	transform: scale(1.1);
 	z-index: 0;
 }
 
@@ -1043,17 +1040,18 @@ body.color-scheme-dark #toggle-widget::before {
 	opacity: 0.5;
 	transform: scale(1.1);
 	transition: transform 500ms ease-in-out, opacity 500ms ease-in-out;
-	will-change: opacity, transform;
+	
 }
 
 .post-attachment img {
 	filter: blur(5px);
 	height: 100%;
+	max-height: 100%;
 	object-fit: cover;
 	object-position: 50% 50%;
-	max-height: 100%;
+	transition: filter 500ms ease-in-out;
 	width: 100%;
-	will-change: filter;
+	
 }
 
 .not-singular .post-attachment,
@@ -1061,23 +1059,16 @@ body.color-scheme-dark #toggle-widget::before {
 	border-radius: calc(var(--radius) * 2);
 }
 
-.not-singular .post-attachment img {
-	filter: blur(5px);
-	transition: filter 500ms ease-in-out;
-	will-change: filter;
-	z-index: 0;
-}
-
 .not-singular .post-header:hover .post-attachment {
 	opacity: 1;
 	transform: scale(1.05);
 	transition: transform 500ms ease-in-out, opacity 500ms ease-in-out;
-	will-change: opacity, transform;
+	
 }
 .not-singular .post-header:hover .post-attachment img {
 	filter: blur(0);
 	transition: filter 500ms ease-in-out;
-	will-change: filter;
+	
 }
 
 /*--------------------------------------------------------------
@@ -1101,18 +1092,6 @@ a.post-info {
 a.post-info:hover {
 	opacity: 0.6;
 	transition: opacity 200ms ease-in-out;
-}
-
-a.post-info::after {
-	border-radius: calc(var(--radius) * 2);
-	content: '';
-	display: block;
-	height: 100%;
-	left: 0;
-	position: absolute;
-	top: 0;
-	width: 100%;
-	z-index: 5;
 }
 
 .singular .post-info,
@@ -1168,8 +1147,8 @@ a.post-info::after {
 	margin-top: 0.8rem;
 }
 
-.author-pre-text {
-	font-weight: 400 !important;
+a .author-pre-text {
+	font-weight: 400;
 }
 
 .post-author:last-child {
@@ -1261,11 +1240,15 @@ a.post-info::after {
 }
 
 .meta-item-list a {
+	border: 1px solid var(--input-border);
+	border-radius: var(--radius);
+	color: var(--text-color);
 	margin-left: 1ch;
 	padding: 0.2em 0.75em;
-	border-radius: var(--radius);
-	background-color: var(--element-background);
-	color: var(--text-color);
+}
+.meta-item-list a:hover {
+	border-color: var(--input-border-hover);
+	color: var(--text-important);
 }
 
 /*--------------------------------------------------------------
@@ -1442,202 +1425,195 @@ body.color-scheme-dark .w-cont:not(:last-child)::after {
 # Comments
 --------------------------------------------------------------*/
 
-.comments .reply {
-}
-.comments .reply a {
-}
-.comments .alt {
-}
-.comments .odd {
-}
-.comments .even {
-}
-.comments .thread-alt {
-}
-.comments .thread-odd {
-}
-.comments .thread-even {
-}
-.comments li ul.children .alt {
-}
-.comments li ul.children .odd {
-}
-.comments li ul.children .even {
-}
-.comments .vcard {
-}
-.comments .vcard cite.fn {
-}
-.comments .vcard span.says {
-}
-.comments .vcard img.photo {
-}
-.comments .vcard img.avatar {
-}
-.comments .vcard cite.fn a.url {
-}
-.comments .comment-meta {
-}
-.comments .comment-meta a {
-}
-.comments .commentmetadata {
-}
-.comments .commentmetadata a {
-}
-.comments .parent {
-}
-.comments .comment {
-}
-.comments .children {
-}
-.comments .pingback {
-}
-.comments .bypostauthor {
-}
-.comments .comment-author {
-}
-.comments .comment-author-admin {
-}
-.comments {
-}
-.comments li {
-}
-.comments li p {
-}
-.comments li ul {
-}
-.comments li ul.children li {
-}
-.comments li ul.children li.alt {
-}
-.comments li ul.children li.byuser {
-}
-.comments li ul.children li.comment {
-}
-.comments li ul.children li.depth-0 {
-}
-.comments li ul.children li.bypostauthor {
-}
-.comments li ul.children li.comment-author-admin {
+.reaction-section {
+	margin-bottom: 4rem;
 }
 
-#cancel-comment-reply {
-}
-#cancel-comment-reply a {
-}
-
-/*
-
-.comments-area {
-	position: relative;
-	margin-left: 0;
-	margin-right: 0;
-	margin-bottom: 4.5rem;
+.comments-list {
+	list-style: none;
+	margin: 0;
 	padding: 0;
+}
+
+.comment,
+.comment-body {
+	position: relative;
+}
+
+.comment {
+	margin-bottom: 1.5rem;
+	position: relative;
+}
+
+.comment-body {
+	border: 1px solid var(--input-border);
+	border-radius: var(--radius);
+	box-shadow: 0px 5px 20px -2px rgba(0, 0, 0, 0.125);
+	transition: box-shadow 200ms ease-in-out;
+	display: block;
+}
+
+.comment-body:hover {
+	box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.125);
+	transition: box-shadow 200ms ease-in-out;
+}
+
+.comment-body,
+.comment-body > * {
+	display: block;
+	height: auto;
+}
+
+.comment .comment-meta {
+	border-bottom: 1px solid var(--input-border);
+	border-radius: var(--radius) var(--radius) 0 0;
+	display: block;
+	padding: .5rem;
 	width: 100%;
 }
 
-#respond {
-	margin-left: auto;
-	margin-right: auto;
-	width: auto;
-	max-width: auto;
+.comment .comment-author.vcard {
+}
+.comment .comment-author.vcard cite.fn {
+	height: 1rem;
+}
+.comment .comment-author.vcard span.says {
+}
+.comment .comment-author.vcard img.photo,
+.comment .comment-author.vcard img.avatar {
+	border-radius: calc(var(--radius) / 2);
+	display: inline-block;
+	height: 1rem;
+	margin-right: .25rem;
+	width: 1rem;
 }
 
-#comments-list,
-#respond {
-	margin-top: 2rem;
-}
-
-#comments> :first-child,
-.comments>ul> :first-child,
-#respond> :first-child {
-	margin-top: 0;
-}
-
-
-
-.comments>ul,
-.comments .children,
-li.parent {
-	padding: 0;
-	position: relative;
-	list-style: none;
-}
-
-li.parent::before {
-	border-left: 2px solid var(--element-border);
-	border-radius: 0 0 0 0;
-	content: "";
+.comment .comment-metadata {
 	display: block;
-	height: 100%;
-	position: absolute;
-	width: 0;
+	text-transform: uppercase;
+	margin-top: .25rem;
 }
 
-li.parent>.comment-body {
-	border-radius: 0 var(--radius) var(--radius) 0;
-}
-
-.comments li.comment {
-	display: block;
-}
-
-.comments li.comment:not(:last-child) {
-	margin: 0 0 1rem;
-}
-
-article.comment-body {
-	position: relative;
-	display: flex;
-	flex-flow: column nowrap;
-	margin: 0 auto 0 !important;
-	padding: 1em;
-	border-radius: var(--radius);
-	background-color: var(--element-background);
-}
-
-.comment-meta, .comment-author, .comment-metadata, .comment-body .reply {
-	display: flex;
-	align-content: center;
-	align-items: center;
-}
-
-.comment-meta>* {
-	flex: 1 0 0;
-}
-
-.comment-author>* {
-	margin-right: .5em;
-}
-
-.vcard img {
-	border-radius: 2pt;
-}
-
-.comment-metadata {
-	flex: 0 0 33%;
-	justify-content: flex-end;
-	font-size: .75em;
+.comment .comment-metadata,
+.comment .comment-metadata a {
+	color: var(--text-optional);
+	font-size: .75rem;
 	font-weight: normal;
-	text-align: right;
 }
 
-.comment-metadata> :first-child:not(:only-child) {
-	margin-right: .5em;
+.comment .comment-metadata a:hover {
+	color: var(--text-important);
 }
 
-.says {
-	display: none;
+.comments .vcard cite.fn a.url {
 }
 
-.comment-content {
-	padding: 1em 0;
+.comment .reply {
+	border-top: 1px solid var(--input-border);
+	background-color: var(--element-background);
+	border-radius: 0 0 var(--radius) var(--radius);
+	display: block;
+	padding: .5rem;
+	width: 100%;
 }
 
 .comment .children {
-	margin: 1rem 0 0 1rem;
+	display: block;
+	list-style: none;
+	margin-top: 1rem;
+	margin-left: 1.5rem;
+	padding: 0;
+	position: relative;
 }
+
+.comment .children::before {
+	background-color: var(--input-border);
+	content: '';
+	display: block;
+	height: 1rem;
+	left: 50%;
+	position: absolute;
+	top: -1rem;
+	transform: translateX(-50%);
+	width: 2px;
+	z-index: 2;
+}
+
+.comment .comment-content {
+	line-height: 1.2;
+	padding: .75rem;
+	position: relative;
+}
+.comment .comment-content:last-child {
+	border-bottom: 0;
+}
+.comment .comment-content > :first-child {
+	margin-top: 0;
+}
+.comment .comment-content > :last-child {
+	margin-bottom: 0;
+}
+
+.comment .comment-content code {
+	font-size: .75rem;
+	line-height: 1.5;
+}
+
+.comment-respond {
+	border: 1px solid var(--input-border);
+	border-radius: var(--radius);
+	box-shadow: 0px 5px 20px -2px rgba(0, 0, 0, 0.125);
+	display: block;
+	margin-top: 1.5rem;
+	position: relative;
+	transition: box-shadow 200ms ease-in-out;
+}
+
+.comment:hover .comment-respond,
+.comment-respond:hover {
+	box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.125);
+	transition: box-shadow 200ms ease-in-out;
+}
+
+.comment-respond .comment-reply-title {
+	align-items: center;
+	background-color: var(--element-background);
+	border-bottom: 1px solid var(--input-border);
+	border-radius: var(--radius) var(--radius) 0 0;
+	display: flex;
+	flex-flow: row wrap;
+	font-size: 1.5rem;
+	justify-content: space-between;
+	margin: 0;
+	padding: 1rem;
+	width: 100%;
+}
+
+.comment-respond form {
+	padding: 1rem;
+}
+
+.comment .comment-respond::before {
+	background-color: var(--input-border);
+	content: '';
+	display: block;
+	height: 1.5rem;
+	left: 50%;
+	position: absolute;
+	top: calc(-1.5rem - 1px);
+	transform: translateX(-50%);
+	width: 2px;
+}
+
+a#cancel-comment-reply-link {
+	color: var(--text-important-hover);
+}
+a#cancel-comment-reply-link:hover {
+	color: var(--text-important);
+}
+
+
+
 
 .comment-awaiting-moderation {
 	position: absolute;
@@ -1658,49 +1634,11 @@ article.comment-body {
 	-webkit-backdrop-filter: blur(5px);
 	-moz-backdrop-filter: blur(5px);
 	backdrop-filter: blur(5px);
-}*/
-
-/*
-
-Comment Form
-
-*/
-
-.comments a[id*='reply-link'],
-.comments a[class*='reply-link'] {
-	border: 2px solid var(--text-optional);
-	border-radius: var(--radius);
-	color: var(--text-optional);
-	font-size: inherit;
-	font-weight: 600;
-	line-height: 1.75;
-	padding-top: 0;
-	padding-bottom: 0;
-	padding-left: 0.75em;
-	padding-right: 0.75em;
 }
 
 #cancel-comment-reply-link {
 	float: right;
-}
-
-.comments a[id*='reply-link']:hover,
-.comments a[class*='reply-link']:hover {
-	border-color: currentColor;
-	color: var(--text-important);
-}
-
-@media (max-width: 520px) {
-	#reply-title small {
-		display: block;
-		margin-top: 1ex;
-	}
-	#cancel-comment-reply-link {
-		display: inline-block;
-		float: none;
-		clear: both;
-		width: auto;
-	}
+	padding: .25rem 0;
 }
 
 .comment-form {
@@ -1708,7 +1646,7 @@ Comment Form
 }
 
 .comment-form > *:not(:first-child) {
-	margin: 2em 0 0;
+	margin: 1rem 0 0;
 }
 
 .comment-form label {
@@ -1734,10 +1672,6 @@ Comment Form
 	max-width: 100%;
 }
 
-.form-submit input[type='submit'],
-.form-submit input[type='submit']:focus {
-	margin: 0;
-}
 
 /*--------------------------------------------------------------
 # Search
@@ -1768,24 +1702,27 @@ Comment Form
 	position: absolute;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	transition: opacity 200ms ease-in-out
+	transition: opacity 200ms ease-in-out;
 	width: 100%;
+	
 }
 
 #search-toggle:hover::before {
 	opacity: 1;
-	transition: opacity 200ms ease-in-out
+	transition: opacity 200ms ease-in-out;
+	
 }
 
 .search-icon {
-	/* position: absolute; */
-	/* left: 50%; */
-	/* top: 50%; */
-	/* transform: translate(-50%, -50%) scale(1); */
-	/* width: 100%; */
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%) scale(1);
+	width: 100%;
 	transition-duration: 200ms;
 	transition-property: transform;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
+	
 }
 
 .search-icon::before,
@@ -1801,7 +1738,8 @@ Comment Form
 	top: 50%;
 	transition-duration: 200ms;
 	transition-property: transform, background, border, width;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
+	
 }
 
 .search-icon::before {
@@ -1823,7 +1761,7 @@ Comment Form
 	width: 60%;
 	transition-duration: 200ms;
 	transition-property: transform, background, border, width;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 :hover > .search-icon::before,
@@ -1833,7 +1771,7 @@ Comment Form
 	border-color: var(--text-important);
 	transition-duration: 200ms;
 	transition-property: transform, background, border, width;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 .toggled:hover > .search-icon::before,
@@ -1842,7 +1780,7 @@ Comment Form
 	background-color: var(--text-important);
 	transition-duration: 200ms;
 	transition-property: transform, background, border, width;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 :not(.toggled) > .search-icon::before {
@@ -1857,7 +1795,7 @@ Comment Form
 	transform: translate(-66%, -66%) rotate(0);
 	transition-duration: 200ms;
 	transition-property: transform, background, border, width;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 :not(.toggled) > .search-icon::after {
@@ -1869,21 +1807,21 @@ Comment Form
 	transform: translate(0, 100%) rotate(45deg);
 	transition-duration: 200ms;
 	transition-property: transform, background, border, width;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 .toggled > .search-icon::before {
 	transform: translate(-50%, -50%) rotate(-45deg);
 	transition-duration: 200ms;
 	transition-property: transform, background, border, width;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 .toggled > .search-icon::after {
 	transform: translate(-50%, -50%) rotate(45deg);
 	transition-duration: 200ms;
 	transition-property: transform, background, border, width;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 /* Search Container */
@@ -1924,7 +1862,7 @@ Comment Form
 #search-container input[type='search']:focus::placeholder,
 #search-container input[type='search']:active::placeholder {
 	color: var(--text-important-hover);
-	transition: color 200ms ease-in-out
+	transition: color 200ms ease-in-out;
 }
 
 #search-container .search-submit {
@@ -1938,7 +1876,7 @@ Comment Form
 	padding: 0;
 	position: relative;
 	min-width: 3.6rem;
-	transition: background-color 200ms ease-in-out
+	transition: background-color 200ms ease-in-out;
 }
 
 #search-container .search-submit::after {
@@ -1950,7 +1888,7 @@ Comment Form
 #search-container .search-submit:hover:not(:focus),
 #search-container .search-submit:hover:not(:active) {
 	background-color: unset;
-	transition: background-color 200ms ease-in-out
+	transition: background-color 200ms ease-in-out;
 }
 
 #search-container .search-submit:focus,
@@ -1958,7 +1896,7 @@ Comment Form
 #search-container .search-submit:active,
 #search-container .search-submit:hover:active {
 	background-color: var(--element-border);
-	transition: background-color 200ms ease-in-out
+	transition: background-color 200ms ease-in-out;
 }
 
 #search-container .search-submit .search-icon {
@@ -1967,7 +1905,7 @@ Comment Form
 	width: 3.6rem;
 	transition-duration: 200ms;
 	transition-property: transform;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 #search-container .search-submit .search-icon::before,
@@ -1986,7 +1924,7 @@ Comment Form
 	border-color: var(--text-important);
 	transition-duration: 200ms;
 	transition-property: transform, background, border, width;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 :hover > .search-icon::after,
 :hover:focus > .search-icon::after,
@@ -1994,7 +1932,7 @@ Comment Form
 	background-color: var(--text-important);
 	transition-duration: 200ms;
 	transition-property: transform, background, border, width;
-	transition-timing-function: ease-in-out
+	transition-timing-function: ease-in-out;
 }
 
 /*--------------------------------------------------------------
@@ -2345,7 +2283,7 @@ a .nav-previous,
 		.home:not(.with-header) #main-content,
 		.blog #main-content {
 			margin-top: 1rem;
-		}	
+		}
 	}
 
 	#site-footer {
@@ -2359,7 +2297,7 @@ a .nav-previous,
 
 .lightbox {
 	align-content: center;
-	background-color: var(--element-background);
+	background-color: var(--page-color-alpha);
 	color: var(--text-color);
 	display: flex;
 	flex-flow: column;
@@ -2370,17 +2308,23 @@ a .nav-previous,
 	position: fixed;
 	top: 0;
 	visibility: hidden;
+	content-visibility: hidden;
+	transition: visibility 200ms ease-in-out, content-visibility 200ms ease-in-out;
 	width: 100%;
 	z-index: 20;
 }
 
 .lightbox.lightbox-active {
 	visibility: visible;
+	content-visibility: visible;
+	transition: visibility 200ms ease-in-out, content-visibility 200ms ease-in-out;
 }
 
 .lightbox-content-wrapper {
 	margin: 0;
 	visibility: hidden;
+	content-visibility: hidden;
+	transition: visibility 200ms ease-in-out, content-visibility 200ms ease-in-out;
 }
 
 .lightbox-content-wrapper > img {
@@ -2393,14 +2337,18 @@ a .nav-previous,
 	opacity: 0;
 	padding: 0;
 	width: auto;
+	transition: opacity 200ms ease-in-out;
 }
 
 .lightbox-content-wrapper.lightbox-wrapper-active {
 	visibility: visible;
+	content-visibility: visible;
+	transition: visibility 200ms ease-in-out, content-visibility 200ms ease-in-out;
 }
 
 .lightbox-content-wrapper.lightbox-wrapper-active > img {
 	opacity: 1;
+	transition: opacity 200ms ease-in-out;
 }
 
 .lightbox-caption {
@@ -2445,7 +2393,7 @@ a .nav-previous,
 	padding: 0;
 	position: fixed;
 	text-align: center;
-	transition: 200ms color ease-in-out
+	transition: 200ms color ease-in-out;
 	width: 2.75rem;
 	cursor: pointer;
 }
@@ -2454,7 +2402,7 @@ a .nav-previous,
 .lightbox-next:hover,
 .lightbox-prev:hover {
 	color: var(--text-color);
-	transition: 200ms color ease-in-out
+	transition: 200ms color ease-in-out;
 }
 
 .lightbox-active .lightbox-close,

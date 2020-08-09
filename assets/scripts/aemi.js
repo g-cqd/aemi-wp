@@ -50,10 +50,46 @@ const freeScroll = () => {};
 const aemi = new Environment();
 
 aemi.set('global', getGlobal());
+aemi.set('site-header', byId('site-header'));
+aemi.set('first-header', byClass('post-header')[0]);
 aemi.set('nav-toggle', byId('navigation-toggle'));
 aemi.set('sea-toggle', byId('search-toggle'));
 aemi.set('sea-input', [...byClass('search-input')].pop());
 aemi.set('pro-bar', byId('site-progress-bar'));
+
+function isOnFirstHeader(element) {
+	const { bottom } = aemi.get('first-header').getClientRects()[0];
+	const { top } = element.getClientRects()[0];
+	return bottom > top;
+}
+
+function isWrapperToggled() {
+	return isToggled(aemi.get('nav-toggle')) || isToggled(aemi.get('sea-toggle'));
+}
+
+function schemeCoherenceCondition() {
+	return hasClass(document.body,'color-scheme-light') && hasClass(document.body, 'has-post-thumbnail');
+}
+
+function changeHeaderScheme() {
+	const header = aemi.get('site-header');
+	const bar = aemi.get('pro-bar');
+	const isBar = aemi.assert('pro-bar');
+	if (schemeCoherenceCondition()) {
+		if (!isWrapperToggled()) {
+			isOnFirstHeader(header) ? ColorScheme.toDarkScheme( header ) : ColorScheme.toLightScheme( header );
+			if (isBar) {
+				isOnFirstHeader(bar) ? ColorScheme.toDarkScheme( bar ) : ColorScheme.toLightScheme( bar );
+			}
+		}
+		else {
+			ColorScheme.toLightScheme( header );
+			isBar && ColorScheme.toLightScheme( bar );
+		}
+	}
+}
+
+
 
 class ColorScheme {
 	constructor(scheme, dependsOnCookies) {
@@ -141,6 +177,20 @@ class ColorScheme {
 		const scheme = ColorScheme.getState() || 'light';
 		addClass(document.body, `color-scheme-${scheme}`, false);
 		return scheme;
+	}
+
+	static toLightScheme(element) {
+		if (hasClass(element,'color-scheme-dark')) {
+			removeClass(element, 'color-scheme-dark');
+			addClass(element, 'color-scheme-light');
+		}
+	}
+
+	static toDarkScheme(element) {
+		if (hasClass(element,'color-scheme-light')) {
+			removeClass(element, 'color-scheme-light');
+			addClass(element, 'color-scheme-dark');
+		}
 	}
 
 	static change(scheme, cookie) {
@@ -1027,32 +1077,10 @@ try {
 	}
 } catch (_) {
 	aemi.push(() => {
-		const toggleFilter = [aemi.get('nav-toggle'), aemi.get('sea-toggle')];
 		for (const toggler of byClass('toggle')) {
 			toggler.addEventListener('click', () => {
-				if (!toggleFilter.includes(toggler)) {
-					doToggle(byId(data(toggler, 'target')));
-					doToggle(toggler);
-				} else {
-					doToggle(byId(data(toggler, 'target')));
-					doToggle(toggler);
-					for (const altToggler of toggleFilter.filter(
-						(e) => e !== toggler
-					)) {
-						if (altToggler && isToggled(altToggler)) {
-							doToggle(byId(data(altToggler, 'target')));
-							doToggle(altToggler);
-						}
-					}
-					if (
-						toggler === aemi.get('sea-toggle') &&
-						aemi.assert('sea-input')
-					) {
-						Wait.asyncDelay(() => {
-							aemi.get('sea-input').focus();
-						}, 200);
-					}
-				}
+				doToggle(byId(data(toggler, 'target')));
+				doToggle(toggler);
 			});
 		}
 	});
@@ -1110,8 +1138,8 @@ try {
 	});
 }
 try {
-	if (isFunction(aemi_scroll_handler)) {
-		aemi.push(aemi_scroll_handler);
+	if (isFunction(aemi_view_handler)) {
+		aemi.push(aemi_view_handler);
 	}
 } catch (_) {
 	aemi.push(() => {
@@ -1213,18 +1241,77 @@ try {
 				func: aemi_header_auto_hide,
 				args: [],
 			},
+			{
+				test: [true],
+				func: changeHeaderScheme,
+				args: [],
+			},
 		];
 
 		features.forEach(({ test, func, args }) => {
 			if (test.every((t) => t === true)) {
-				window.addEventListener(
-					'scroll',
-					() => {
-						func(...args);
-					},
-					{ passive: true }
-				);
+				for (const type of ['scroll','resize']) {
+					window.addEventListener(
+						type,
+						() => func(...args),
+						{ passive: true }
+					);
+				}
 			}
+		});
+	});
+}
+
+try {
+	if (isFunction(aemi_mutation_observer)) {
+		aemi.push(aemi_mutation_observer);
+	}
+} catch (_) {
+	aemi.push(() => {
+		const toggleFilter = [ aemi.get('nav-toggle'), aemi.get('sea-toggle') ];
+		function togglerHandler(mutationRecords) {
+			for ( const { target } of mutationRecords ) {
+				console.log(target);
+				const alts = toggleFilter.filter( e => e !== target );
+				if (isToggled(target)) {
+					for ( const alt of alts.filter( e => isToggled(e) ) ) {
+						doToggle(byId(data(alt, 'target')));
+						doToggle(alt);
+					}
+				}
+				if (target === aemi.get('sea-toggle') && aemi.assert('sea-input')) {
+					Wait.asyncDelay(() => {
+						aemi.get('sea-input').focus();
+					}, 200);
+				}
+				changeHeaderScheme();
+			}
+		}
+		const togglerObserver = new MutationObserver(togglerHandler);
+		togglerObserver.observe( aemi.get('nav-toggle'), {
+			attributes: true,
+			attributeFilter: ['class']
+		} );
+		togglerObserver.observe( aemi.get('sea-toggle'), {
+			attributes: true,
+			attributeFilter: ['class']
+		} );
+
+		function colorSchemeHandler(mutationRecords) {
+			for ( const { target } of mutationRecords ) {
+				if ( schemeCoherenceCondition() ) {
+					changeHeaderScheme();
+				}
+				else if ( hasClass(document.body,'has-post-thumbnail') ) {
+					ColorScheme.toDarkScheme( aemi.get('site-header') );
+					aemi.assert('pro-bar') && ColorScheme.toDarkScheme( aemi.get('pro-bar') );
+				}
+			}
+		}
+		const colorSchemeObserver = new MutationObserver(colorSchemeHandler);
+		colorSchemeObserver.observe( document.body, {
+			attributes: true,
+			attributeFilter: ['class']
 		});
 	});
 }

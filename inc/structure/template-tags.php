@@ -19,10 +19,10 @@ if ( ! function_exists( 'aemi_featured_image' ) )
 			?><div class="post-attachment"><?php
 			if ( !is_singular() ) {
 				if ( is_sticky() ) {
-					aemi_post_thumbnail( 'aemi-large' );
+					aemi_post_thumbnail( 'aemi-mid' );
 				}
 				else {
-					aemi_post_thumbnail( 'aemi-mid' );
+					aemi_post_thumbnail( 'aemi-small' );
 				}
 			}
 			else {

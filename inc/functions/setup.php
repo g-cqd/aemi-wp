@@ -16,9 +16,15 @@ if ( ! function_exists( 'aemi_setup' ) ) {
 		add_theme_support( 'automatic-feed-links' );
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'post-thumbnails' );
+		// add_image_size( 'aemi-4k', 4096, 2160, false );
+		// add_image_size( 'aemi-uhd', 3840, 2160, false );
 		add_image_size( 'aemi-large', 1920, 1200, false );
-		add_image_size( 'aemi-mid', 800, 500, false );
-		add_image_size( 'aemi-small', 400, 250, false );
+		add_image_size( 'aemi-fhd', 1920, 1080, false );
+		add_image_size( 'aemi-hd', 1280, 720, false );
+		add_image_size( 'aemi-mid', 720, 480, false );
+		add_image_size( 'aemi-small', 640, 360, false );
+		add_image_size( 'aemi-tiny', 320, 240, false );
+		add_image_size( 'aemi-thumb', 300, 300, false );
 		add_image_size( 'aemi-logo', 92, 276, false );
 		register_nav_menus(
 			array(
@@ -96,16 +102,16 @@ function aemi_tagcount_filter ( $variable )
 add_filter( 'wp_tag_cloud', 'aemi_tagcount_filter' );
 
 
-if ( ! function_exists( 'aemi_pingback_header' ) )
-{
-	function aemi_pingback_header()
-	{
-		if ( is_singular() && pings_open() ) {
-			echo '<link rel="pingback" href="', bloginfo( 'pingback_url' ), '">';
-		}
-	}
-}
-add_action( 'wp_head', 'aemi_pingback_header' );
+// if ( ! function_exists( 'aemi_pingback_header' ) )
+// {
+// 	function aemi_pingback_header()
+// 	{
+// 		if ( is_singular() && pings_open() ) {
+// 			echo '<link rel="pingback" href="', bloginfo( 'pingback_url' ), '">';
+// 		}
+// 	}
+// }
+// add_action( 'wp_head', 'aemi_pingback_header' );
 
 
 

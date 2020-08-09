@@ -29,7 +29,7 @@
 	letter-spacing: -0.011em;
 	line-height: 1.5;
 	overflow-x: hidden;
-	text-rendering: optimizeLegibility;
+	text-rendering: geometricPrecision;
 	vertical-align: baseline;
 	word-spacing: normal;
 	/*
@@ -39,32 +39,34 @@
      */
 	/* Light Variables */
 	--light-page-color: #ffffff;
-	--light-page-color-alpha: rgba(255, 255, 255, 0.847);
-	--light-caption-background: rgba(0, 0, 0, 0.502);
-	--light-element-background: rgba(230, 230, 230, 0.302);
-	--light-element-bkg-alpha: rgba(230, 230, 230, 0.302);
-	--light-element-border: rgba(230, 230, 230, 0.702);
-	--light-border: rgba(230, 230, 230, 0.702);
-	--light-inline-text-border: rgba(180, 180, 180, 0.302);
-	--light-input-background: rgba(255, 255, 255, 0.702);
-	--light-input-border: rgba(0, 0, 0, 0.102);
+	--light-page-color-alpha: rgba(255, 255, 255, 0.85);
+	--light-caption-background: rgba(0, 0, 0, 0.5);
+	--light-element-background: rgba(230, 230, 230, 0.3);
+	--light-element-bkg-alpha: rgba(230, 230, 230, 0.3);
+	--light-element-border: rgba(230, 230, 230, 0.7);
+	--light-border: rgba(230, 230, 230, 0.7);
+	--light-inline-text-border: rgba(180, 180, 180, 0.3);
+	--light-input-background: rgba(255, 255, 255, 0.7);
+	--light-input-border: rgba(0, 0, 0, 0.1);
+	--light-input-border-hover: rgba(0, 0, 0, 0.3);
 	--light-input-shadow: rgba(0, 0, 0, 0.125);
-	--light-decoration: rgba(230, 230, 230, 0.702);
+	--light-decoration: rgba(230, 230, 230, 0.7);
 	--light-text-color: rgb(32, 32, 32);
 	--light-text-important: rgb(0, 0, 0);
 	--light-text-important-hover: rgba(0, 0, 0, 0.6);
 	--light-text-optional: rgb(180, 180, 180);
 	/* Dark Variables */
 	--dark-page-color: rgb(27, 27, 27);
-	--dark-page-color-alpha: rgba(27, 27, 27, 0.847);
-	--dark-caption-background: rgba(255, 255, 255, 0.502);
+	--dark-page-color-alpha: rgba(27, 27, 27, 0.85);
+	--dark-caption-background: rgba(255, 255, 255, 0.5);
 	--dark-element-background: rgb(40, 40, 40);
-	--dark-element-bkg-alpha: rgba(40, 40, 40, 0.502);
+	--dark-element-bkg-alpha: rgba(40, 40, 40, 0.5);
 	--dark-element-border: rgb(64, 64, 64);
-	--dark-border: rgba(100, 100, 100, 0.702);
-	--dark-inline-text-border: rgba(180, 180, 180, 0.302);
-	--dark-input-background: rgba(24, 24, 24, 0.902);
-	--dark-input-border: rgba(255, 255, 255, 0.102);
+	--dark-border: rgba(100, 100, 100, 0.7);
+	--dark-inline-text-border: rgba(180, 180, 180, 0.3);
+	--dark-input-background: rgba(24, 24, 24, 0.9);
+	--dark-input-border: rgba(255, 255, 255, 0.1);
+	--dark-input-border-hover: rgba(255, 255, 255, 0.3);
 	--dark-input-shadow: rgba(0, 0, 0, 0.125);
 	--dark-decoration: rgb(64, 64, 64);
 	--dark-text-color: rgb(228, 228, 228);
@@ -87,7 +89,7 @@
 	}
 }
 
-body.color-scheme-light {
+.color-scheme-light {
 	--page-color: var(--light-page-color);
 	--page-color-alpha: var(--light-page-color-alpha);
 	--caption-background: var(--light-caption-background);
@@ -97,6 +99,7 @@ body.color-scheme-light {
 	--element-border: var(--light-element-border);
 	--border: var(--light-border);
 	--input-background: var(--light-input-background);
+	--input-border-hover: var(--light-input-border-hover);
 	--input-border: var(--light-input-border);
 	--text-color: var(--light-text-color);
 	--decoration: var(--light-decoration);
@@ -108,7 +111,7 @@ body.color-scheme-light {
 	--select-arrows: var(--light-select-arrows);
 }
 
-body.color-scheme-dark {
+.color-scheme-dark {
 	--page-color: var(--dark-page-color);
 	--page-color-alpha: var(--dark-page-color-alpha);
 	--caption-background: var(--dark-caption-background);
@@ -118,6 +121,7 @@ body.color-scheme-dark {
 	--element-border: var(--dark-element-border);
 	--border: var(--dark-border);
 	--input-background: var(--dark-input-background);
+	--input-border-hover: var(--dark-input-border-hover);
 	--input-border: var(--dark-input-border);
 	--text-color: var(--dark-text-color);
 	--decoration: var(--dark-decoration);
@@ -246,7 +250,7 @@ h1,
 .h1 {
 	font-family: var(--font-stack-hdg);
 	font-size: 2em;
-	/* letter-spacing: -0.022em; */
+	letter-spacing: -0.022em;
 	line-height: 1.1;
 	margin: 0.67em 0 0.67em;
 }
@@ -255,7 +259,7 @@ h2,
 .h2 {
 	font-family: var(--font-stack-hdg);
 	font-size: 1.5em;
-	/* letter-spacing: -0.019em; */
+	letter-spacing: -0.019em;
 	line-height: 1.15;
 	margin: 0.75em 0 0.75em;
 }
@@ -264,7 +268,7 @@ h3,
 .h3 {
 	font-family: var(--font-stack-hdg);
 	font-size: 1.17em;
-	/* letter-spacing: -0.015em; */
+	letter-spacing: -0.015em;
 	line-height: 1.2;
 	margin: 0.83em 0 0.83em;
 }
@@ -273,7 +277,7 @@ h4,
 .h4 {
 	font-family: var(--font-stack-hdg);
 	font-size: 1em;
-	/* letter-spacing: -0.011em; */
+	letter-spacing: -0.011em;
 	line-height: 1.4;
 	margin: 1.12em 0 1.12em;
 }
@@ -282,7 +286,7 @@ h5,
 .h5 {
 	font-family: var(--font-stack-hdg);
 	font-size: 0.83em;
-	/* letter-spacing: -0.004em; */
+	letter-spacing: -0.004em;
 	line-height: 1.45;
 	margin: 1.5em 0 1.5em;
 }
@@ -291,7 +295,7 @@ h6,
 .h6 {
 	font-family: var(--font-stack-hdg);
 	font-size: 0.75rem;
-	/* letter-spacing: 0; */
+	letter-spacing: 0;
 	line-height: 1.5;
 	margin: 1.67em 0 1.67em;
 }
@@ -315,8 +319,8 @@ blockquote {
 	padding-right: 2rem;
 	padding-bottom: 1.5rem;
 	padding-left: calc(2rem + 3px);
-	text-align: left;
 	position: relative;
+	text-align: left;
 }
 
 blockquote::before,

@@ -2937,24 +2937,34 @@ pre.wp-block-verse {
 
 .has-small-font-size {
 	font-size: 0.75rem;
+	letter-spacing: 0;
+	line-height: 1.5;
 }
 
 .has-normal-font-size,
 .has-regular-font-size {
 	font-size: 1rem;
+	letter-spacing: -0.011em;
+	line-height: 1.4;
 }
 
 .has-medium-font-size {
 	font-size: 1.25rem;
+	letter-spacing: -0.015em;
+	line-height: 1.2;
 }
 
 .has-large-font-size {
 	font-size: 2rem;
+	letter-spacing: -0.019em;
+	line-height: 1.15;
 }
 
 .has-huge-font-size,
 .has-larger-font-size {
 	font-size: 3rem;
+	letter-spacing: -0.022em;
+	line-height: 1.1;
 }
 
 .has-text-align-center {

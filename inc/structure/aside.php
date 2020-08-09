@@ -69,7 +69,7 @@ if ( ! function_exists( 'aemi_aside_progress_bar' ) ) {
 	{
 		if ( get_theme_mod( 'aemi_type_'.get_post_type().'_progress_bar', 1 ) == 1 && is_singular() )
 		{
-			?><div id="site-progress-bar"></div><?php
+			?><div id="site-progress-bar"<?= has_post_thumbnail() ? ' class="color-scheme-dark"' : '' ?>></div><?php
 		}
 	}
 }

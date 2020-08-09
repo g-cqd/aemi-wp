@@ -11,7 +11,7 @@
 
     <body <?php body_class(); ?>>
         <?php do_action('aemi_header_before'); ?>
-        <header id="site-header">
+        <header id="site-header"<?= is_singular() & has_post_thumbnail() ? ' class="color-scheme-dark"' : '' ?>>
             <?php
             printf(
                 '<a class="skip-link screen-reader-text" href="#main-content">%s</a>',
