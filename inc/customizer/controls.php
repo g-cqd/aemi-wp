@@ -4,6 +4,22 @@ if (!function_exists('aemi_customizer_controls')) {
     function aemi_customizer_controls($wp_customize)
     {
 
+        $wp_customize->add_control(
+            new WP_Customize_Image_Control($wp_customize, 'aemi_light_scheme_logo', [
+            'label'     => 'Add Light for Light Scheme',
+            'description'   => 'It is recommanded to set up this setting. If used, it replaces native logo setting.',
+            'settings'  => 'aemi_light_scheme_logo',
+            'section'   => 'aemi_site_identity'
+        ]));
+
+        $wp_customize->add_control(
+            new WP_Customize_Image_Control($wp_customize, 'aemi_dark_scheme_logo', [
+            'label'     => 'Add Logo for Dark Scheme',
+            'description'   => 'It is recommanded to set up this setting.',
+            'settings'  => 'aemi_dark_scheme_logo',
+            'section'   => 'aemi_site_identity'
+        ]));
+
         foreach (get_post_types(['public' => true], 'objects') as $post_type)
         {
             $post_name = $post_type->name;
@@ -102,6 +118,38 @@ if (!function_exists('aemi_customizer_controls')) {
             'description'   =>  esc_html__('Allow header bar to disappear while scrolling down and come back when scroll up occurs.', 'aemi'),
             'section'   =>      'aemi_features',
             'settings'  =>      'aemi_header_autohiding',
+            'type'      =>      'checkbox',
+        ]);
+
+        $wp_customize->add_control('aemi_remove_jquery_migrate', [
+            'label'     =>      esc_html__('Remove jQuery Migrate', 'aemi'),
+            'description'   =>  esc_html__('As far as Aemi needs not jQuery, Aemi needs not jQuery Migrate.', 'aemi'),
+            'section'   =>      'aemi_advanced_features',
+            'settings'  =>      'aemi_remove_jquery_migrate',
+            'type'      =>      'checkbox',
+        ]);
+
+        $wp_customize->add_control('aemi_remove_script_version', [
+            'label'     =>      esc_html__('Remove Script Version', 'aemi'),
+            'description'   =>  esc_html__('Remove script version in scripts and styles ressource URLs.', 'aemi'),
+            'section'   =>      'aemi_advanced_features',
+            'settings'  =>      'aemi_remove_script_version',
+            'type'      =>      'checkbox',
+        ]);
+        
+        $wp_customize->add_control('aemi_enable_svg_support', [
+            'label'     =>      esc_html__('Enable SVG Upload Support', 'aemi'),
+            'description'   =>  esc_html__('Administrator only.', 'aemi'),
+            'section'   =>      'aemi_advanced_features',
+            'settings'  =>      'aemi_enable_svg_support',
+            'type'      =>      'checkbox',
+        ]);
+
+        $wp_customize->add_control('aemi_remove_emojis', [
+            'label'     =>      esc_html__('Remove emojis', 'aemi'),
+            'description'   =>  esc_html__('Reduce requests by removing emojis scripts.', 'aemi'),
+            'section'   =>      'aemi_advanced_features',
+            'settings'  =>      'aemi_remove_emojis',
             'type'      =>      'checkbox',
         ]);
 

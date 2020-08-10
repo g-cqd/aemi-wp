@@ -4,7 +4,7 @@ Theme URI: https://github.com/originecode/aemi/
 Author: Guillaume COQUARD
 Author URI: https://www.originecode.fr/
 Description: AeMi is designed to be an aesthetic minimalist wordpress theme. It provides a highly legible, clean, clear and really minimalist theme.
-Version: 2.0-beta4
+Version: 2.0-beta5
 License: GPL-3.0
 License URI: https://opensource.org/licenses/GPL-3.0
 Text Domain: aemi
@@ -720,6 +720,7 @@ body:not(.header-hidden) #site-progress-bar {
 	margin-right: 2rem;
 	height: 2.5rem;
 	text-align: left;
+	position: relative;
 }
 
 #site-branding > a {
@@ -737,13 +738,35 @@ body:not(.header-hidden) #site-progress-bar {
 	line-height: 1.25;
 }
 
-#site-branding #logo,
-#site-branding #logo img {
-	position: relative;
-	margin: 0;
+#site-branding #site-logo {
+	display: block;
+	left: 0;
+	max-height: 4.5rem;
 	padding: 0;
-	height: 2.5em;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	min-width: 2.5rem;
+}
+#site-branding #site-logo img {
+	border-radius: 0;
+	display: block;
+	left: 50%;
+	max-height: 4.5rem;
+	padding: 0;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	transition: opacity 200ms ease-in-out;
 	width: auto;
+}
+
+body.color-scheme-dark #site-header:not(.color-scheme-dark) .light-scheme-logo:not(:only-child) img,
+body:not(.color-scheme-dark) #site-header.color-scheme-dark .light-scheme-logo:not(:only-child) img,
+body.color-scheme-light #site-header.color-scheme-light .dark-scheme-logo:not(:only-child) img,
+body.color-scheme-light #site-header:not(.color-scheme-dark) .dark-scheme-logo:not(:only-child) img {
+	opacity: 0;
+	transition: opacity 200ms ease-in-out;
 }
 
 /*--------------------------------------------------------------

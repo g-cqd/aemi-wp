@@ -357,3 +357,84 @@ if (!function_exists('aemi_filter_comment_text'))
     	return wp_kses($comment, $allowed_html);
 	}
 }
+
+if (!function_exists('aemi_add_svg_support'))
+{
+	function aemi_add_svg_support($mimes = array())
+	{
+		if (current_user_can('administrator'))
+		{
+			$mimes['svg'] = 'image/svg+xml';
+			$mimes['svgz'] = 'image/svg+xml';
+		}
+		return $mimes;
+	}	
+}
+
+if (!function_exists('aemi_svg_upload_check'))
+{
+	function aemi_svg_upload_check($checked, $file, $filename, $mimes)
+	{
+		if (!$checked['type'])
+		{
+			$check_filetype		= wp_check_filetype($filename, $mimes);
+			$ext				= $check_filetype['ext'];
+			$type				= $check_filetype['type'];
+			$proper_filename	= $filename;
+			if ($type && 0 === strpos($type, 'image/') && $ext !== 'svg')
+			{
+				$ext = $type = false;
+			}
+			$checked = compact('ext','type','proper_filename');
+		}
+		return $checked;
+	}
+}
+
+
+if (!function_exists('aemi_svg_allow_svg_upload'))
+{
+	function aemi_svg_allow_svg_upload($data, $file, $filename, $mimes)
+	{
+		global $wp_version;
+		if ($wp_version !== '4.7.1' || $wp_version !== '4.7.2')
+		{
+			return $data;
+		}
+		$filetype = wp_check_filetype($filename, $mimes);
+		return [
+			'ext'				=> $filetype['ext'],
+			'type'				=> $filetype['type'],
+			'proper_filename'	=> $data['proper_filename']
+		];
+	}
+}
+
+if (!function_exists('aemi_disable_tinymce_emojis'))
+{
+	function aemi_disable_tinymce_emojis($plugins) {
+		if (is_array($plugins))
+		{
+			return array_diff($plugins, array('wpemoji'));
+		}
+		else
+		{
+			return array();
+		}
+	}
+}
+
+if (!function_exists('aemi_remove_emojis'))
+{
+	function aemi_remove_emojis() {
+		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+		remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+		remove_action( 'wp_print_styles', 'print_emoji_styles' );
+		remove_action( 'admin_print_styles', 'print_emoji_styles' );	
+		remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+		remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );	
+		remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+	
+		add_filter( 'tiny_mce_plugins', 'aemi_disable_tinymce_emojis' );
+	}
+}

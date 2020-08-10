@@ -5,6 +5,15 @@ if (!function_exists('aemi_customizer_settings'))
 {
 	function aemi_customizer_settings($wp_customize)
 	{
+
+		$wp_customize->add_setting('aemi_light_scheme_logo', [
+
+		]);
+
+		$wp_customize->add_setting('aemi_dark_scheme_logo', [
+			
+		]);
+
 		foreach (get_post_types(['public' => true], 'objects') as $post_type)
 		{
 			$post_name = $post_type->name;
@@ -109,6 +118,31 @@ if (!function_exists('aemi_customizer_settings'))
 		]);
 
 		$wp_customize->add_setting('aemi_header_autohiding', [
+			'default'			=> 0,
+			'sanitize_callback'	=> 'aemi_sanitize_checkbox',
+			'transport'			=> 'refresh',
+		]);
+
+		$wp_customize->add_setting('aemi_remove_jquery_migrate', [
+			'default'			=> 0,
+			'sanitize_callback'	=> 'aemi_sanitize_checkbox',
+			'transport'			=> 'refresh',
+		]);
+
+		$wp_customize->add_setting('aemi_remove_script_version', [
+			'default'			=> 0,
+			'sanitize_callback'	=> 'aemi_sanitize_checkbox',
+			'transport'			=> 'refresh',
+		]);
+
+		$wp_customize->add_setting('aemi_enable_svg_support', [
+			'default'			=> 0,
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback'	=> 'aemi_sanitize_checkbox',
+			'transport'			=> 'refresh',
+		]);
+
+		$wp_customize->add_setting('aemi_remove_emojis', [
 			'default'			=> 0,
 			'sanitize_callback'	=> 'aemi_sanitize_checkbox',
 			'transport'			=> 'refresh',

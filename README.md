@@ -89,6 +89,12 @@ Source: https://github.com/originecode/AeMi
 
 ## Changelog
 
+### 2.0-beta5 :
+	- Added : Support for Light & Dark Scheme Logos
+	- Added : SVG Support Setting - Administrator Only
+	- Added : Remove Emojis Setting
+	- Added : Remove jQuery Migrate Setting
+	- Added : Remove Script Version Setting
 ### 2.0-beta4 :
 	- Fixed & Improved: Color Scheme Management
 ### 2.0-beta3 :

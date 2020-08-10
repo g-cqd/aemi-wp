@@ -42,12 +42,6 @@ if (!function_exists('aemi_header_branding'))
 {
 	function aemi_header_branding()
 	{
-		printf(
-			'<div id="site-branding"><a href="%1$s" title="%2$s - %3$s" rel="home">',
-			esc_url(home_url()),
-			esc_attr(get_bloginfo('name')),
-			esc_attr__('Home', 'aemi')
-		);
 
 		global $has_custom_logo;
 		global $has_jetpack_custom_logo;
@@ -55,14 +49,69 @@ if (!function_exists('aemi_header_branding'))
 
 		$has_custom_logo = function_exists('the_custom_logo') && has_custom_logo();
 		$has_jetpack_custom_logo = function_exists('jetpack_has_site_logo') && jetpack_has_site_logo();
-		$has_logo = $has_custom_logo || $has_jetpack_custom_logo;
+		$light_scheme_logo = get_theme_mod('aemi_light_scheme_logo');
+		$dark_scheme_logo = get_theme_mod('aemi_dark_scheme_logo');
+		$has_light_scheme_logo = $light_scheme_logo != '';
+		$has_dark_scheme_logo = $dark_scheme_logo != '';
+		$has_aemi_custom_logo = $has_light_scheme_logo || $has_dark_scheme_logo;
+		$has_logo = $has_custom_logo || $has_jetpack_custom_logo || $has_dark_scheme_logo || $has_light_scheme_logo;
+
+		printf(
+			'<div id="site-branding">%1$s',
+			$has_logo ? '' : sprintf(
+				'<a href="%1$s" title="%2$s - %3$s" rel="home">',
+				esc_url(home_url()),
+				esc_attr(get_bloginfo('name')),
+				esc_attr__('Home', 'aemi')
+			)
+		);
+
+		printf(
+			'<%1$s id="site-title" class="site-title%2$s %3$s">%4$s</%1$s>',
+			$home ? 'h1' : 'strong',
+			$has_logo ? ' screen-reader-text' : '',
+			$home ? '' : 'h1',
+			esc_html(get_bloginfo('name'))
+		);
 
 		if ($has_logo)
 		{
-			if ($has_custom_logo)
+			if ($has_custom_logo || $has_aemi_custom_logo)
 			{
 				?><div id="site-logo"><?php
-					the_custom_logo();
+				if ($has_light_scheme_logo) {
+
+					?><div class="light-scheme-logo"><?php
+
+					printf(
+						'<a href="%1$s" class="custom-logo-link" title="%2$s - %3$s" rel="home"><img src="%4$s" alt="%2$s Logo for Light Scheme"></a>',
+						esc_url(home_url()),
+						esc_attr(get_bloginfo('name')),
+						esc_attr__('Home', 'aemi'),
+						$light_scheme_logo
+					);
+
+					?></div><?php
+
+				}
+				else if ($has_custom_logo)
+				{
+					?><div class="light-scheme-logo"><?php the_custom_logo(); ?></div><?php
+				}
+				if ($has_dark_scheme_logo)
+				{
+					?><div class="dark-scheme-logo"><?php
+
+					printf(
+						'<a href="%1$s" class="custom-logo-link" title="%2$s - %3$s" rel="home"><img src="%4$s" alt="%2$s Logo for Dark Scheme"></a>',
+						esc_url(home_url()),
+						esc_attr(get_bloginfo('name')),
+						esc_attr__('Home', 'aemi'),
+						$dark_scheme_logo
+					);
+
+					?></div><?php
+				}
 				?></div><?php
 			}
 			else if ($has_jetpack_custom_logo)
@@ -73,15 +122,9 @@ if (!function_exists('aemi_header_branding'))
 
 		$home = is_home();
 
-		printf(
-			'<%1$s id="site-title" class="site-title%2$s %3$s">%4$s</%1$s>',
-			$home ? 'h1' : 'strong',
-			$has_logo ? ' screen-reader-text' : '',
-			$home ? '' : 'h1',
-			esc_html(get_bloginfo('name'))
-		);
+		printf( '%s', $has_logo ? '' : '</a>' );
 
-		?></a></div><?php
+		?></div><?php
 	}
 }
 
