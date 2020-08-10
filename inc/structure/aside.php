@@ -57,7 +57,10 @@ if (!function_exists('aemi_aside_wrapper_menu'))
 				]);
 			}
 
-			aemi_theme_switcher(get_theme_mod('aemi_darkmode_display', 1) == 1);
+			if (get_theme_mod('aemi_color_scheme_user', 0) == 1)
+			{
+				aemi_theme_switcher();
+			}
 
 			if (is_active_sidebar('header-widget-area'))
 			{

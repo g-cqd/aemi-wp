@@ -2,27 +2,26 @@
 
 if (!function_exists('aemi_theme_switcher'))
 {
-	function aemi_theme_switcher($boolean)
+	function aemi_theme_switcher()
 	{
-		if ($boolean)
-		{
-			?><div id="header-settings" class="header-section">
-				<form class="settings-set" id="color-scheme-selector">
-					<div class="color-scheme-option">
-						<input type="radio" id="light-scheme-option" class="color-scheme-input" name="color-scheme-option">
-						<label for="light-scheme-option" class="color-scheme-label"><?= esc_html__('Light', 'aemi'); ?></label>
-					</div>
-					<div class="color-scheme-option">
-						<input type="radio" id="dark-scheme-option" class="color-scheme-input" name="color-scheme-option">
-						<label for="dark-scheme-option" class="color-scheme-label"><?= esc_html__('Dark', 'aemi'); ?></label>
-					</div>
-					<div class="color-scheme-option">
-						<input type="radio" id="auto-scheme-option" class="color-scheme-input" name="color-scheme-option" checked>
-						<label for="auto-scheme-option" class="color-scheme-label"><?= esc_html__('Auto', 'aemi'); ?></label>
-					</div>
-				</form>
+		$scheme = get_theme_mod('aemi_color_scheme', 'auto');
+		$s = ' checked';
+		?><div id="header-settings" class="header-section">
+			<form class="settings-set" id="color-scheme-selector">
+				<div class="color-scheme-option">
+					<input type="radio" id="light-scheme-option" class="color-scheme-input" name="color-scheme-option"<?= $scheme == 'light' ? $s : '' ?>>
+					<label for="light-scheme-option" class="color-scheme-label"><?= esc_html__('Light', 'aemi'); ?></label>
+				</div>
+				<div class="color-scheme-option">
+					<input type="radio" id="dark-scheme-option" class="color-scheme-input" name="color-scheme-option"<?= $scheme == 'dark' ? $s : '' ?>>
+					<label for="dark-scheme-option" class="color-scheme-label"><?= esc_html__('Dark', 'aemi'); ?></label>
+				</div>
+				<div class="color-scheme-option">
+					<input type="radio" id="auto-scheme-option" class="color-scheme-input" name="color-scheme-option"<?= $scheme == 'auto' ? $s : '' ?>>
+					<label for="auto-scheme-option" class="color-scheme-label"><?= esc_html__('Auto', 'aemi'); ?></label>
+				</div>
+			</form>
 		</div><?php
-		}
 	}
 }
 

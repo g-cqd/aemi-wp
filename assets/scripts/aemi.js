@@ -8,29 +8,6 @@ function doToggle(element) {
 	return toggleClass(element, 'toggled');
 }
 
-function smoothScrollTo(selector, duration) {
-	const easing = Easing.easeInOutCubic;
-	let target = document.querySelector(selector);
-	if (!(target instanceof HTMLElement)) {
-		return;
-	}
-	let startPosition = window.pageYOffset;
-	let targetPosition = startPosition + target.getBoundingClientRect().top;
-	duration = duration || 1000;
-	let distance = targetPosition - startPosition;
-	let startTime = null;
-	function animation(currentTime) {
-		startTime = is(startTime) ? startTime : currentTime;
-		let timeElapsed = currentTime - startTime;
-		let run = easing(timeElapsed, startPosition, distance, duration);
-		window.scrollTo(0, run);
-		if (timeElapsed < duration) {
-			requestFrame(animation);
-		}
-	}
-	requestFrame(animation);
-}
-
 function addNoOpener(link) {
 	if (link instanceof HTMLAnchorElement) {
 		const relAttr = attr(link, 'rel') || '';
@@ -99,11 +76,15 @@ class ColorScheme {
 					const cookieState = ColorScheme.getCookiesState();
 					if (event.matches) {
 						if (cookieState === scheme) {
+							ColorScheme.change(scheme,true);
 						} else {
+							ColorScheme.change(opposite,true);
 						}
 					} else {
 						if (cookieState === scheme) {
+							ColorScheme.change(scheme,true);
 						} else {
+							ColorScheme.change(opposite,true);
 						}
 					}
 				} else {
@@ -125,6 +106,18 @@ class ColorScheme {
 		}
 	}
 
+	static isSet() {
+		return hasClass(document.body,'color-scheme-light') || hasClass(document.body,'color-scheme-dark');
+	}
+
+	static isForced() {
+		return hasClass(document.body, 'force-color-scheme');
+	}
+
+	static isAuto() {
+		return hasClass(document.body, 'auto-color-scheme');
+	}
+
 	static hasCookie() {
 		return Cookies.has('color-scheme');
 	}
@@ -134,9 +127,12 @@ class ColorScheme {
 		return ColorScheme.getCookiesState() === scheme;
 	}
 
-	static deleteCookie() {
+	static deleteCookie(change) {
+		change = isset(change) ? change : true;
 		Cookies.delete('color-scheme');
-		ColorScheme.change(ColorScheme.getBrowerState());
+		if (change) {
+			ColorScheme.change(ColorScheme.getBrowerState());
+		}
 		return Cookies.has('color-scheme') === false;
 	}
 
@@ -157,21 +153,45 @@ class ColorScheme {
 	}
 
 	static getClassState() {
-		return hasClass(document.body, 'color-scheme-light') ? 'light' : 'dark';
+		if (hasClass(document.body, 'color-scheme-light')) {
+			return 'light';
+		}
+		if (hasClass(document.body, 'color-scheme-dark')) {
+			return 'dark';
+		}
+		return null;
 	}
 
 	static getState() {
+		if (ColorScheme.isForced()) {
+			return (ColorScheme.getClassState() || ColorScheme.getBrowerState());
+		}
+		if (ColorScheme.isAuto()) {
+			return ColorScheme.getBrowerState();
+		}
 		return (
 			ColorScheme.getCookiesState() ||
-			ColorScheme.getBrowerState() ||
 			ColorScheme.getClassState() ||
-			null
+			ColorScheme.getBrowerState()
 			);
 	}
 
 	static detect() {
 		const scheme = ColorScheme.getState() || 'light';
-		addClass(document.body, `color-scheme-${scheme}`, false);
+		const isForced = ColorScheme.isForced();
+		const isAuto = ColorScheme.isAuto();
+		if (isForced || isAuto) {
+			ColorScheme.deleteCookie(false);
+		}
+		if (!ColorScheme.isSet()) {
+			addClass(document.body, `color-scheme-${scheme}`, false);
+		}
+		if (isAuto) {
+			getGlobal().colorScheme = new ColorScheme(scheme,false);
+		}
+		else if (!isForced) {
+			getGlobal().colorScheme = new ColorScheme(scheme,true);
+		}
 		return scheme;
 	}
 
@@ -252,6 +272,37 @@ class ColorScheme {
 			}
 		}
 	}
+}
+try {
+	if (isFunction(aemi_color_scheme)) {
+		aemi.push(aemi_color_scheme);
+	}
+} catch (_) {
+	aemi.push(() => {
+		aemi.set('csh-sel', byId('color-scheme-selector'));
+		aemi.set('csh-light', byId('light-scheme-option'));
+		aemi.set('csh-dark', byId('dark-scheme-option'));
+		aemi.set('csh-auto', byId('auto-scheme-option'));
+
+		const scheme = ColorScheme.detect();
+
+		if (aemi.assert('csh-sel')) {
+			if (ColorScheme.hasCookie()) {
+				aemi.get(`csh-${scheme}`).checked = true;
+			} else {
+				aemi.get(`csh-auto`).checked = true;
+			}
+			aemi.get('csh-sel').addEventListener('input', () => {
+				if (aemi.get('csh-light').checked) {
+					ColorScheme.change('light', true);
+				} else if (aemi.get('csh-dark').checked) {
+					ColorScheme.change('dark', true);
+				} else if (aemi.get('csh-auto').checked) {
+					ColorScheme.deleteCookie();
+				}
+			});
+		}
+	});
 }
 class Lightbox {
 	constructor(options, name) {
@@ -1104,36 +1155,6 @@ try {
 			],
 		})
 	);
-}
-try {
-	if (isFunction(aemi_color_scheme)) {
-		aemi.push(aemi_color_scheme);
-	}
-} catch (_) {
-	aemi.push(() => {
-		aemi.set('csh-sel', byId('color-scheme-selector'));
-		aemi.set('csh-light', byId('light-scheme-option'));
-		aemi.set('csh-dark', byId('dark-scheme-option'));
-		aemi.set('csh-auto', byId('auto-scheme-option'));
-
-		const scheme = ColorScheme.detect();
-
-		if (ColorScheme.hasCookie()) {
-			aemi.get(`csh-${scheme}`).checked = true;
-		} else {
-			aemi.get(`csh-auto`).checked = true;
-		}
-
-		aemi.get('csh-sel').addEventListener('input', () => {
-			if (aemi.get('csh-light').checked) {
-				ColorScheme.change('light', true);
-			} else if (aemi.get('csh-dark').checked) {
-				ColorScheme.change('dark', true);
-			} else if (aemi.get('csh-auto').checked) {
-				ColorScheme.deleteCookie();
-			}
-		});
-	});
 }
 try {
 	if (isFunction(aemi_view_handler)) {

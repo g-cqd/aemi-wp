@@ -68,11 +68,24 @@ if (!function_exists('aemi_customizer_controls')) {
             ]);
         }
 
-        $wp_customize->add_control('aemi_darkmode_display', [
-            'label'     =>      esc_html__('Dark Mode', 'aemi'),
-            'description'   =>  esc_html__('Allow theme to switch automatically between light and dark mode.', 'aemi'),
+        $wp_customize->add_control('aemi_color_scheme', [
+            'label'     =>      esc_html__('Color Scheme', 'aemi'),
+            'description'   =>  esc_html__('Choose to display dark or light color scheme or make it switch automatically.', 'aemi'),
             'section'   =>      'aemi_features',
-            'settings'  =>      'aemi_darkmode_display',
+            'settings'  =>      'aemi_color_scheme',
+            'type'      =>      'radio',
+            'choices'   => [
+                'light' =>  __('Light', 'aemi'),
+                'dark'  =>  __('Dark', 'aemi'),
+                'auto'  =>  __('Auto', 'aemi')
+            ]
+        ]);
+
+        $wp_customize->add_control('aemi_color_scheme_user', [
+            'label'     =>      esc_html__('Color Scheme User Preference', 'aemi'),
+            'description'   =>  esc_html__('Choose to let user adapt color scheme to its preference.', 'aemi'),
+            'section'   =>      'aemi_features',
+            'settings'  =>      'aemi_color_scheme_user',
             'type'      =>      'checkbox'
         ]);
 

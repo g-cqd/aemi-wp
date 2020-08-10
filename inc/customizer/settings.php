@@ -90,8 +90,14 @@ if (!function_exists('aemi_customizer_settings'))
 
 		}
 
-		$wp_customize->add_setting('aemi_darkmode_display', [
-			'default'			=> 1,
+		$wp_customize->add_setting('aemi_color_scheme', [
+			'default'			=> 'auto',
+			'sanitize_callback'	=> 'aemi_sanitize_radio',
+			'transport'			=> 'refresh',
+		]);
+
+		$wp_customize->add_setting('aemi_color_scheme_user', [
+			'default'			=> 0,
 			'sanitize_callback'	=> 'aemi_sanitize_checkbox',
 			'transport'			=> 'refresh',
 		]);
@@ -109,11 +115,13 @@ if (!function_exists('aemi_customizer_settings'))
 		]);
 
 		$wp_customize->add_setting('aemi_header_js_code', [
+			'capability'		=> 'edit_theme_options',
 			'sanitize_callback' => 'aemi_raw_js_code',
 		]);
 
 
 		$wp_customize->add_setting('aemi_footer_js_code', [
+			'capability'		=> 'edit_theme_options',
 			'sanitize_callback' => 'aemi_raw_js_code',
 		]);
 	}

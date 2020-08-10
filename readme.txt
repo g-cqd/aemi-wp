@@ -4,9 +4,9 @@
 
 * Contributors: @guizillanet
 * Requires at least: 4.9
-* Tested up to: 5.2
+* Tested up to: 5.4.2
 * Requires PHP: 7.2
-* Version: 2.0-beta3
+* Version: 2.0-beta4
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -30,14 +30,14 @@ AeMi is designed to be an aesthetic minimalist WordPress theme. It provides a hi
 
 ## Copyright
 
-AeMi WordPress Theme, Copyright 2019 Guillaume COQUARD.
+AeMi WordPress Theme, Copyright (c) 2020 Guillaume COQUARD.
 
 AeMi is distributed under the terms of the GNU General Public License v3.0.
 
 
 ## License - GNU GPL 3.0 License
 
-### AeMi WordPress Theme Copyright © 2018-2019 Guillaume COQUARD
+### AeMi WordPress Theme Copyright (c) 2018-2020 Guillaume COQUARD
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
@@ -49,7 +49,7 @@ You should have received a copy of the GNU General Public License along with thi
 ### AeMi uses the following third-party resources:
 
 ```
-Inter Typeface, Copyright (c) 2016-2019 The Inter Project Authors
+Inter Typeface, Copyright (c) 2016-2020 The Inter Project Authors
 License: SIL Open Font License 1.1
 Source: https://rsms.me/inter/
 ```
@@ -57,6 +57,16 @@ Source: https://rsms.me/inter/
 Hack Typeface, Copyright (c) 2018 Source Foundry Authors
 License: MIT
 Source: https://github.com/source-foundry/Hack
+```
+```
+JetBrains Mono Typeface, Copyright (c) 2020 JetBrains
+License: Apache-2.0 License
+Source: https://github.com/JetBrains/JetBrainsMono
+```
+```
+Fira Code Typeface, Copyright (c) 2014, The Fira Code Project Authors
+License: SIL Open Font License 1.1
+Source: https://github.com/tonsky/FiraCode
 ```
 ```
 jsOnlyLightbox Lightbox, Copyright (c) 2014 Felix HAGSPIEL
@@ -79,6 +89,8 @@ Source: https://github.com/originecode/AeMi
 
 ## Changelog
 
+### 2.0-beta4 :
+	- Fixed & Improved: Color Scheme Management
 ### 2.0-beta3 :
 	- Fixed : Tags did not follow customizer settings and performance improvements
 	- Fixed : Header style while scrolling

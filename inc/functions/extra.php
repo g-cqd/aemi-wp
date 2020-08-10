@@ -5,14 +5,22 @@ if (!function_exists('aemi_body_classes'))
 {
 	function aemi_body_classes($classes)
 	{
-		if (is_singular())
-		{
-			$classes[] = 'singular';
+
+		// Color Scheme Preferences
+		$scheme = get_theme_mod('aemi_color_scheme', 'auto');
+		$user_pref_scheme = get_theme_mod('aemi_color_scheme_user', 0) == 0;
+		$scheme_class = 'color-scheme';
+		if ($user_pref_scheme && $scheme != 'auto') {
+			$classes[] = $scheme_class . '-' . $scheme;
+			$classes[] = 'force-color-scheme';
 		}
-		else
+		else if ($scheme == 'auto')
 		{
-			$classes[] = 'not-singular';
+			$classes[] = 'auto-color-scheme';
 		}
+
+		$classes[] = is_singular() ? 'singular' : 'not-singular';
+
 		if (has_post_thumbnail())
 		{
 			$classes[] = 'has-post-thumbnail';
