@@ -148,6 +148,18 @@ if (!function_exists('aemi_customizer_settings'))
 			'transport'			=> 'refresh',
 		]);
 
+		$wp_customize->add_setting('aemi_remove_wpembeds', [
+			'default'			=> 0,
+			'sanitize_callback'	=> 'aemi_sanitize_checkbox',
+			'transport'			=> 'refresh',
+		]);
+
+		$wp_customize->add_setting('aemi_add_expire_headers', [
+			'default'			=> 0,
+			'sanitize_callback'	=> 'aemi_sanitize_checkbox',
+			'transport'			=> 'refresh',
+		]);
+
 		$wp_customize->add_setting('aemi_header_js_code', [
 			'capability'		=> 'edit_theme_options',
 			'sanitize_callback' => 'aemi_raw_js_code',

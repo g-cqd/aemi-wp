@@ -32,3 +32,8 @@ if (get_theme_mod('aemi_remove_emojis',0) == 1)
 {
 	add_action( 'init', 'aemi_remove_emojis' );
 }
+
+if (get_theme_mod('aemi_remove_wpembeds',0) == 1)
+{
+	add_action( 'init', 'aemi_remove_wpembeds', 9999 );
+}

@@ -36,7 +36,13 @@ if (!function_exists('aemi_customizer_panels'))
             'title'      => esc_html__('Advanced Features', 'aemi'),
         ]);
 
-        $id = 40;
+        $wp_customize->add_section('aemi_critical_features', [
+            'priority'   => 40,
+            'panel'      => 'aemi_panel',
+            'title'      => esc_html__('Critical Features', 'aemi'),
+        ]);
+
+        $id = 50;
 
         foreach (get_post_types(['public' => true], 'objects') as $post_type)
         {

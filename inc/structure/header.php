@@ -88,7 +88,7 @@ if (!function_exists('aemi_header_branding'))
 						esc_url(home_url()),
 						esc_attr(get_bloginfo('name')),
 						esc_attr__('Home', 'aemi'),
-						$light_scheme_logo
+						esc_url(aemi_ensure_https($light_scheme_logo))
 					);
 
 					?></div><?php
@@ -107,7 +107,7 @@ if (!function_exists('aemi_header_branding'))
 						esc_url(home_url()),
 						esc_attr(get_bloginfo('name')),
 						esc_attr__('Home', 'aemi'),
-						$dark_scheme_logo
+						esc_url(aemi_ensure_https($dark_scheme_logo))
 					);
 
 					?></div><?php

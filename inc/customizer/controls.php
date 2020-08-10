@@ -153,6 +153,22 @@ if (!function_exists('aemi_customizer_controls')) {
             'type'      =>      'checkbox',
         ]);
 
+        $wp_customize->add_control('aemi_remove_wpembeds', [
+            'label'     =>      esc_html__('Remove WP Embeds', 'aemi'),
+            'description'   =>  esc_html__('Reduce requests by removing wpembeds scripts.', 'aemi'),
+            'section'   =>      'aemi_advanced_features',
+            'settings'  =>      'aemi_remove_wpembeds',
+            'type'      =>      'checkbox',
+        ]);
+
+        $wp_customize->add_control('aemi_add_expire_headers', [
+            'label'     =>      esc_html__('Add Expire Headers', 'aemi'),
+            'description'   =>  esc_html__('Edit .htaccess file and add expire headers to improve browser caching.', 'aemi'),
+            'section'   =>      'aemi_critical_features',
+            'settings'  =>      'aemi_add_expire_headers',
+            'type'      =>      'checkbox',
+        ]);
+
         $wp_customize->add_control('aemi_header_js_code', [
             'label'     =>      esc_html__('Header JS Script', 'aemi'),
             'description'   =>  esc_html__('Add JS scripts to wp-head. No need to add script tag.', 'aemi'),

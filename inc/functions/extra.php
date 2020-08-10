@@ -358,6 +358,7 @@ if (!function_exists('aemi_filter_comment_text'))
 	}
 }
 
+
 if (!function_exists('aemi_add_svg_support'))
 {
 	function aemi_add_svg_support($mimes = array())
@@ -370,6 +371,7 @@ if (!function_exists('aemi_add_svg_support'))
 		return $mimes;
 	}	
 }
+
 
 if (!function_exists('aemi_svg_upload_check'))
 {
@@ -410,6 +412,7 @@ if (!function_exists('aemi_svg_allow_svg_upload'))
 	}
 }
 
+
 if (!function_exists('aemi_disable_tinymce_emojis'))
 {
 	function aemi_disable_tinymce_emojis($plugins) {
@@ -424,6 +427,7 @@ if (!function_exists('aemi_disable_tinymce_emojis'))
 	}
 }
 
+
 if (!function_exists('aemi_remove_emojis'))
 {
 	function aemi_remove_emojis() {
@@ -434,7 +438,93 @@ if (!function_exists('aemi_remove_emojis'))
 		remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
 		remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );	
 		remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
-	
 		add_filter( 'tiny_mce_plugins', 'aemi_disable_tinymce_emojis' );
+	}
+}
+
+if (!function_exists('aemi_disable_tinymce_plugin_embeds'))
+{
+	function aemi_disable_tinymce_plugin_embeds($plugins)
+	{
+    	return array_diff($plugins, array('wpembed'));
+	}
+}
+
+if (!function_exists('aemi_disable_embeds_rewrites'))
+{
+	function aemi_disable_embeds_rewrites($rules) {
+    	foreach($rules as $rule => $rewrite) {
+    	    if(false !== strpos($rewrite, 'embed=true')) {
+    	        unset($rules[$rule]);
+    	    }
+    	}
+    	return $rules;
+	}
+}
+
+
+if (!function_exists('aemi_remove_wpembeds'))
+{
+	function aemi_remove_wpembeds()
+	{
+		// Remove the REST API endpoint.
+		remove_action( 'rest_api_init', 'wp_oembed_register_route' );
+		// Turn off oEmbed auto discovery.
+		add_filter( 'embed_oembed_discover', '__return_false' );
+		// Don't filter oEmbed results.
+		remove_filter( 'oembed_dataparse', 'wp_filter_oembed_result', 10 );
+		// Remove oEmbed discovery links.
+		remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+		// Remove oEmbed-specific JavaScript from the front-end and back-end.
+		remove_action( 'wp_head', 'wp_oembed_add_host_js' );
+		add_filter( 'tiny_mce_plugins', 'aemi_disable_tinymce_plugin_embeds' );
+		// Remove all embeds rewrite rules.
+		add_filter( 'rewrite_rules_array', 'aemi_disable_embeds_rewrites' );
+		// Remove filter of the oEmbed result before any HTTP requests are made.
+		remove_filter( 'pre_oembed_result', 'wp_filter_pre_oembed_result', 10 );
+	}
+}
+
+if (!function_exists('aemi_ensure_https'))
+{
+	function aemi_ensure_https($string) {
+		if (is_ssl())
+		{
+			return preg_replace('/http\:/', 'https:', $string);
+		}
+		return $string;
+	}
+}
+
+if (!function_exists('aemi_get_htaccess_path'))
+{
+	function aemi_get_htaccess_path()
+	{
+		get_home_path().".htaccess";
+	}
+}
+
+
+if (!function_exists('aemi_add_expire_headers'))
+{
+	function aemi_add_expire_headers()
+	{
+		$lines = array();
+		$lines[] = '<Ifmodule mod_expires.c>';
+		$lines[] = '<filesmatch "\.(jpg|jpeg|gif|png|css|js|mov|svg|pdf|webp|webm|woff|woff2)$">';
+		$lines[] = 'ExpiresActive on';
+		$lines[] = 'ExpiresDefault "access plus 1 year"';
+		$lines[] = '</filesmatch>';
+		$lines[] = '</ifmodule>';
+		return $lines;
+	}
+}
+
+if (!function_exists('aemi_remove_expire_headers'))
+{
+	function aemi_remove_expire_headers($rules)
+	{
+
+		return preg_replace('/(# Begin Aemi Expire Headers)[\s\S]+?(# End Aemi Expire Headers)/', '', $rules);
 	}
 }
