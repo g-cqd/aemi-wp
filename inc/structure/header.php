@@ -84,7 +84,7 @@ if (!function_exists('aemi_header_branding'))
 					?><div class="light-scheme-logo"><?php
 
 					printf(
-						'<a href="%1$s" class="custom-logo-link" title="%2$s - %3$s" rel="home"><img src="%4$s" alt="%2$s Logo for Light Scheme"></a>',
+						'<a href="%1$s" class="custom-logo-link" title="%2$s - %3$s" rel="home"><img src="%4$s" alt="%2$s Logo for Light Scheme" height="40"></a>',
 						esc_url(home_url()),
 						esc_attr(get_bloginfo('name')),
 						esc_attr__('Home', 'aemi'),
@@ -103,7 +103,7 @@ if (!function_exists('aemi_header_branding'))
 					?><div class="dark-scheme-logo"><?php
 
 					printf(
-						'<a href="%1$s" class="custom-logo-link" title="%2$s - %3$s" rel="home"><img src="%4$s" alt="%2$s Logo for Dark Scheme"></a>',
+						'<a href="%1$s" class="custom-logo-link" title="%2$s - %3$s" rel="home"><img src="%4$s" alt="%2$s Logo for Dark Scheme" height="40"></a>',
 						esc_url(home_url()),
 						esc_attr(get_bloginfo('name')),
 						esc_attr__('Home', 'aemi'),

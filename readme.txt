@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.4.2
 * Requires PHP: 7.2
-* Version: 2.0-beta7
+* Version: 2.0-beta8
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -89,6 +89,8 @@ Source: https://github.com/originecode/AeMi
 
 ## Changelog
 
+### 2.0-beta8 :
+	- Fixed : Stryling Bugs with Logo & headers
 ### 2.0-beta7 :
 	- Added : High degree of personalization of informations shown on differents post types.
 	- Added : Add Expire Headers through Theme Modifications

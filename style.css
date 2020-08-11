@@ -4,7 +4,7 @@ Theme URI: https://github.com/originecode/aemi/
 Author: Guillaume COQUARD
 Author URI: https://www.originecode.fr/
 Description: AeMi is designed to be an aesthetic minimalist wordpress theme. It provides a highly legible, clean, clear and really minimalist theme.
-Version: 2.0-beta7
+Version: 2.0-beta8
 License: GPL-3.0
 License URI: https://opensource.org/licenses/GPL-3.0
 Text Domain: aemi
@@ -134,7 +134,7 @@ body {
 	-ms-user-select: none;
 	-o-user-select: none;
 	user-select: none;
-	min-width: var(--legible-width);
+	width: var(--legible-width);
 	
 	z-index: 10;
 }
@@ -740,6 +740,7 @@ body:not(.header-hidden) #site-progress-bar {
 
 #site-branding #site-logo {
 	display: block;
+	height: auto;
 	left: 0;
 	max-height: 4.5rem;
 	padding: 0;
@@ -747,6 +748,9 @@ body:not(.header-hidden) #site-progress-bar {
 	top: 50%;
 	transform: translateY(-50%);
 	min-width: 2.5rem;
+}
+#site-branding #site-logo a {
+	display: block;
 }
 #site-branding #site-logo img {
 	border-radius: 0;
@@ -758,7 +762,7 @@ body:not(.header-hidden) #site-progress-bar {
 	top: 50%;
 	transform: translate(-50%, -50%);
 	transition: opacity 200ms ease-in-out;
-	width: auto;
+	width: 100%;
 }
 
 body.color-scheme-dark #site-header:not(.color-scheme-dark) .light-scheme-logo:not(:only-child) img,
