@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.4.2
 * Requires PHP: 7.2
-* Version: 2.0-beta6
+* Version: 2.0-beta7
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -89,6 +89,10 @@ Source: https://github.com/originecode/AeMi
 
 ## Changelog
 
+### 2.0-beta7 :
+	- Added : High degree of personalization of informations shown on differents post types.
+	- Added : Add Expire Headers through Theme Modifications
+	- Fixed : Informations not shown on Pages
 ### 2.0-beta6 :
 	- Fixed : If https is used, ensure Light Scheme and Dark Scheme Logo will be served with https protocol
 	- In Pipe : Add Expire Headers through Theme Modifications

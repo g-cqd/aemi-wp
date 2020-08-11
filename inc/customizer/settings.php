@@ -25,13 +25,25 @@ if (!function_exists('aemi_customizer_settings'))
 					'name'	=> 'author',
 					'label'	=> __('Author', 'aemi')
 				],
+				'author_in_loop'	=>	[
+					'name'	=> 'author_in_loop',
+					'label'	=> __('Author in Loop', 'aemi')
+				],
 				'published_date'	=>	[
 					'name'	=> 'published_date',
 					'label'	=> __('Published Date', 'aemi')
 				],
+				'published_date_in_loop'	=>	[
+					'name'	=> 'published_date_in_loop',
+					'label'	=> __('Published Date in Loop', 'aemi')
+				],
 				'updated_date'	=>	[
 					'name'	=> 'updated_date',
 					'label'	=> __('Updated Date', 'aemi')
+				],
+				'updated_date_in_loop'	=>	[
+					'name'	=> 'updated_date_in_loop',
+					'label'	=> __('Updated Date in Loop', 'aemi')
 				]
 			];
 
@@ -70,24 +82,39 @@ if (!function_exists('aemi_customizer_settings'))
 						'transport'			=> 'refresh',
 					]);
 				}
+			}
 
-				$wp_customize->add_control($type_setting, [
-					'label'		=>		esc_html__($meta->label, 'aemi'),
-					'description'	=>	esc_html(
-						sprintf(
-							'%1$s %2$s %3$s %4$s.',
-							__('Display', 'aemi'),
-							$meta->label,
-							__('in', 'aemi'),
-							$post_name
-						)
-					),
-					'section'	=>	'aemi_type_' . $post_name,
-					'settings'	=>	$type_setting,
-					'type'		=>	'checkbox',
+			if ($post_name == "post" || $post_name == "page")
+			{
+				$show_excerpt = 'aemi_type_'.$post_name.'_show_excerpt';
+
+				$wp_customize->add_setting($show_excerpt, [
+					'default'			=> 0,
+					'sanitize_callback'	=> 'aemi_sanitize_checkbox',
+					'transport'			=> 'refresh',
+				]);
+			}
+
+			if ($post_name == "post")
+			{
+				$wp_customize->add_setting('aemi_type_post_sticky', [
+					'default'			=> 1,
+					'sanitize_callback'	=> 'aemi_sanitize_checkbox',
+					'transport'			=> 'refresh',
+				]);
+				$wp_customize->add_setting('aemi_type_post_sticky_in_loop', [
+					'default'			=> 1,
+					'sanitize_callback'	=> 'aemi_sanitize_checkbox',
+					'transport'			=> 'refresh',
 				]);
 
+				$wp_customize->add_setting('aemi_type_post_show_excerpt_when_sticky', [
+					'default'			=> 1,
+					'sanitize_callback'	=> 'aemi_sanitize_checkbox',
+					'transport'			=> 'refresh',
+				]);
 			}
+
 
 			$progress_bar = 'aemi_type_' . $post_name . '_progress_bar';
 

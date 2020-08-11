@@ -6,13 +6,21 @@ if (!function_exists('aemi_page_header'))
 	{
 		if (!is_front_page())
 		{
-			?><header class="post-header"><?php
+			?><header class="post-header<?= has_post_thumbnail() ? ' color-scheme-dark' : '' ?>"><?php
+
 				aemi_featured_image();
+
 				?><div class="post-info"><?php
+					aemi_info_dates();
+
 					the_title('<h1 class="post-title">', '</h1>');
-					aemi_meta_header();
-				?></div>
-			</header><?php
+
+					aemi_info_author();
+				?></div><?php
+
+			aemi_meta_header();
+			
+		?></header><?php
 		}
 	}
 }

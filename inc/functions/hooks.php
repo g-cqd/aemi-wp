@@ -37,3 +37,12 @@ if (get_theme_mod('aemi_remove_wpembeds',0) == 1)
 {
 	add_action( 'init', 'aemi_remove_wpembeds', 9999 );
 }
+
+if (get_theme_mod('aemi_add_expire_headers',0) == 1)
+{
+	add_action( 'admin_init', 'aemi_add_expire_headers_true');
+}
+else
+{
+	add_action( 'admin_init', 'aemi_add_expire_headers_false');
+}

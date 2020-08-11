@@ -500,31 +500,62 @@ if (!function_exists('aemi_get_htaccess_path'))
 {
 	function aemi_get_htaccess_path()
 	{
-		get_home_path().".htaccess";
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		$home_path = get_home_path();
+		return $home_path . ".htaccess";
 	}
 }
 
+if (!function_exists('aemi_insert_htaccess'))
+{
+	function aemi_insert_htaccess($marker,$string)
+	{
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		$home_path = get_home_path();
+		$htaccess_file = $home_path . ".htaccess";
+		if ($htaccess_file != '')
+		{
+			if (!file_exists($htaccess_file) && is_writable($home_path) || is_writable($htaccess_file))
+			{
+				if (got_mod_rewrite())
+				{
+	            	$rules = explode( "\n", $string );
+	            	return insert_with_markers($htaccess_file, sprintf('%1$s %2$s', __('Aemi Theme', 'aemi'), $marker), $rules);
+	        	}
+	    	}
+		}
+	}
+}
 
 if (!function_exists('aemi_add_expire_headers'))
 {
-	function aemi_add_expire_headers()
+	function aemi_add_expire_headers($bool)
 	{
-		$lines = array();
-		$lines[] = '<Ifmodule mod_expires.c>';
-		$lines[] = '<filesmatch "\.(jpg|jpeg|gif|png|css|js|mov|svg|pdf|webp|webm|woff|woff2)$">';
-		$lines[] = 'ExpiresActive on';
-		$lines[] = 'ExpiresDefault "access plus 1 year"';
-		$lines[] = '</filesmatch>';
-		$lines[] = '</ifmodule>';
-		return $lines;
+		$aemi_rules = '';
+		if ($bool) {
+			$aemi_rules = <<<EOD
+\n<Ifmodule mod_expires.c>
+<filesmatch "\.(jpg|jpeg|gif|png|css|js|mov|svg|pdf|webp|webm|woff|woff2)$">
+ExpiresActive on
+ExpiresDefault "access plus 1 year"
+</filesmatch>
+</ifmodule>\n
+EOD;
+		}
+    	return $aemi_rules;
 	}
 }
 
-if (!function_exists('aemi_remove_expire_headers'))
-{
-	function aemi_remove_expire_headers($rules)
-	{
 
-		return preg_replace('/(# Begin Aemi Expire Headers)[\s\S]+?(# End Aemi Expire Headers)/', '', $rules);
+if (!function_exists('aemi_add_expire_headers_true'))
+{
+	function aemi_add_expire_headers_true() {
+		aemi_insert_htaccess(__('Expire Headers', 'aemi'),aemi_add_expire_headers(true));
+	}
+}
+if (!function_exists('aemi_add_expire_headers_false'))
+{
+	function aemi_add_expire_headers_false() {
+		aemi_insert_htaccess(__('Expire Headers', 'aemi'),aemi_add_expire_headers(false));
 	}
 }
