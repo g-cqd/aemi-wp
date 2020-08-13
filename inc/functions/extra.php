@@ -29,10 +29,6 @@ if (!function_exists('aemi_body_classes'))
 		{
 			$classes[] = 'sidebar';
 		}
-		if (current_user_can('edit_posts'))
-		{
-			$classes[] = 'editable';
-		}
 		if (get_theme_mod('aemi_header_autohiding', 1) == 1)
 		{
 			$classes[] = 'auto-hide';

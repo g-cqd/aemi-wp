@@ -51,15 +51,28 @@ if (!function_exists('aemi_info_dates'))
 {
 	function aemi_info_dates()
 	{
+
 		$singular = is_singular();
-		$in_loop = !$singular;
-		$published_date = get_theme_mod(aemi_type('published_date'), 0) == 1;
-		$updated_date = get_theme_mod(aemi_type('updated_date'), 0) == 1;
-		$published_date_in_loop = get_theme_mod(aemi_type('published_date_in_loop'), 0) == 1;
-		$updated_date_in_loop = get_theme_mod(aemi_type('updated_date_in_loop'), 0) == 1;
-		if ($singular && $published_date || $in_loop && $published_date_in_loop)
+
+		$pub_mod = get_theme_mod(aemi_type('published_date'), 'both');
+		$pub_both = $pub_mod == 'both';
+		$pub_none = $pub_mod == 'none';
+		$pub_single = $pub_mod == 'single';
+		$pub_loop = $pub_mod == 'loop';
+
+		$upt_mod = get_theme_mod(aemi_type('updated_date'), 'none');
+		$upt_both = $upt_mod == 'both';
+		$upt_none = $upt_mod == 'none';
+		$upt_single = $upt_mod == 'single';
+		$upt_loop = $upt_mod == 'loop';
+
+		$pub = !$pub_none && ($pub_both || ($singular && $pub_single || !$singular && $pub_loop));
+
+		$upt = !$upt_none && ($upt_both || ($singular && $upt_single || !$singular && $upt_loop));
+
+		if ($pub)
 		{
-			if ($singular && $updated_date || $in_loop && $updated_date_in_loop)
+			if ($upt)
 			{
 				printf(
 					'<div class="post-date">%1$s%3$s • %2$s</div>',
@@ -92,7 +105,7 @@ if (!function_exists('aemi_info_dates'))
 				);
 			}
 		}
-		else if ($singular && $updated_date || $in_loop && $updated_date_in_loop)
+		else if ($upt)
 		{
 			printf(
 				'<div class="post-date">%1$s%2$s</div>',
@@ -115,11 +128,13 @@ if (!function_exists('aemi_info_author'))
 {
 	function aemi_info_author()
 	{
+		$author_mod = get_theme_mod(aemi_type('author'), 'both');
+		$author_both = $author_mod == 'both';
+		$author_none = $author_mod == 'none';
+		$author_single = $author_mod == 'single';
+		$author_loop = $author_mod == 'loop';
 		$singular = is_singular();
-		$in_loop = !$singular;
-		$author = get_theme_mod(aemi_type('author'), 1) == 1;
-		$author_in_loop = get_theme_mod(aemi_type('author_in_loop'), 1) == 1;
-		if ($singular && $author || $in_loop && $author_in_loop)
+		if (!$author_none && ($author_both || ($singular && $author_single || !$singular && $author_loop)))
 		{
 			$tag = 'div';
 			$screader = ' screen-reader-text';
@@ -148,29 +163,78 @@ if (!function_exists('aemi_info_author'))
 	}
 }
 
+if (!function_exists('aemi_sticky_badge'))
+{
+	function aemi_sticky_badge($post_type)
+	{
+		if ($post_type == 'post')
+		{
+			$singular = is_singular();
+			$in_loop = !$singular;
+			$is_sticky = is_sticky();
+			$sticky_mod = get_theme_mod(aemi_type('show_sticky_badge'), 'both');
+			$sticky_both = $sticky_mod == 'both';
+			$sticky_single = $sticky_mod == 'single';
+			$sticky_loop = $sticky_mod == 'loop';
+			$sticky_none = $sticky_mod == 'none';
+			if ($is_sticky && !$sticky_none && ($sticky_both || ($singular && $sticky_single || !$singular && $sticky_loop)))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+}
+
+if (!function_exists('aemi_show_excerpt'))
+{
+	function aemi_show_excerpt($post_type)
+	{
+		if (!is_singular())
+		{
+			if ($post_type == 'post')
+			{
+				$is_sticky = is_sticky();
+				$excerpt_mod = get_theme_mod(aemi_type('show_excerpt'), 'sticky_only');
+				$excerpt_both = $excerpt_mod == 'both';
+				$excerpt_sticky = $excerpt_mod == 'sticky_only';
+				$excerpt_non_sticky = $excerpt_mod == 'non_sticky_only';
+				$excerpt_none = $excerpt_mod == 'none';
+				if (!$excerpt_none && ($excerpt_both || ($is_sticky && $excerpt_sticky || !$is_sticky && $excerpt_non_sticky)))
+				{
+					return true;
+				}
+			}
+			else if (get_theme_mod(aemi_type('show_excerpt'), 0))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+}
+
 if (!function_exists('aemi_meta_header'))
 {
 	function aemi_meta_header()
 	{
+		$p_type = get_post_type();
 		$singular = is_singular();
-		$in_loop = !$singular;
-		$categories = 'post' === get_post_type() && $singular && get_the_category_list() && get_theme_mod(aemi_type('category'), 1) == 1;
-		$sticky = 'post' === get_post_type() && get_theme_mod(aemi_type('sticky'), 1) == 1;
-		$sticky_in_loop = 'post' === get_post_type() && get_theme_mod(aemi_type('sticky_in_loop'), 1) == 1;
-		$show_excerpt = !is_sticky() && ('post' === get_post_type() || 'page' === get_post_type()) && get_theme_mod(aemi_type('show_excerpt'), 0) == 1;
-		$show_excerpt_sticky = is_sticky() && 'post' === get_post_type() && get_theme_mod(aemi_type('show_excerpt_when_sticky'), 1) == 1;
-		$excerpt = $in_loop && ($show_excerpt || $show_excerpt_sticky);
-		$is_sticky = is_sticky() && ($singular && $sticky || $in_loop && $sticky_in_loop);
-		if ($excerpt || $is_sticky || $categories)
+		$categories = 'post' === $p_type && $singular && get_the_category_list() && get_theme_mod(aemi_type('category'), 1) == 1;
+		$excerpt = aemi_show_excerpt($p_type);
+		$sticky = aemi_sticky_badge($p_type);
+		$edit_link = get_edit_post_link();
+		
+		if ($categories || $excerpt || $sticky || $edit_link)
 		{
 			?><div class="post-meta"><?php
-			if ($is_sticky)
+			if ($sticky)
 			{
-				?><div class="meta-sticky"><?= esc_html__( 'Featured', 'aemi' ); ?></div><?php
+				?><div class="meta-sticky"><?= esc_html__('Featured', 'aemi') ?></div><?php
 			}
 			if ($excerpt)
 			{
-				?><p class="meta-excerpt"><?= get_the_excerpt(); ?></p><?php
+				?><p class="meta-excerpt"><?= get_the_excerpt() ?></p><?php
 			}
 			if ($categories)
 			{
@@ -185,7 +249,10 @@ if (!function_exists('aemi_meta_header'))
 					</div>
 				</div><?php
 			}
-			edit_post_link(esc_html__('Edit', 'aemi'), '<div class="post-edit">', '</div>');
+			if ($edit_link)
+			{
+				edit_post_link(esc_html__('Edit', 'aemi'), '<div class="post-edit">', '</div>');
+			}
 			?></div><?php
 		}		
 	}

@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.4.2
 * Requires PHP: 7.2
-* Version: 2.0-beta8
+* Version: 2.0-beta9
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -89,6 +89,15 @@ Source: https://github.com/originecode/AeMi
 
 ## Changelog
 
+### 2.0-beta9 :
+	- Improved : Content Types Settings
+	- Added : Content Loop - Category Filtering
+		- This feature exclude 'Content Loop Post Type Selection' feature
+	- Added : Content Loop - Choose Post Types to display in Content Loop 
+		- This feature exclude 'Content Loop Category Filtering' feature
+	- Improved : Entry header styling and many-categories display
+	- Improved : SVG Support Option has been moved to critical features
+	- Improved : Customizer Theme Setting Sections have been renamed
 ### 2.0-beta8 :
 	- Fixed : Stryling Bugs with Logo & headers
 ### 2.0-beta7 :

@@ -33,16 +33,22 @@ if (!function_exists('aemi_customizer_panels'))
         $wp_customize->add_section('aemi_advanced_features', [
             'priority'   => 30,
             'panel'      => 'aemi_panel',
-            'title'      => esc_html__('Advanced Features', 'aemi'),
+            'title'      => esc_html__('Features: Advanced', 'aemi'),
         ]);
 
         $wp_customize->add_section('aemi_critical_features', [
             'priority'   => 40,
             'panel'      => 'aemi_panel',
-            'title'      => esc_html__('Critical Features', 'aemi'),
+            'title'      => esc_html__('Features: Critical', 'aemi'),
         ]);
 
-        $id = 50;
+        $wp_customize->add_section('aemi_loop', [
+            'priority'   => 50,
+            'panel'      => 'aemi_panel',
+            'title'      => esc_html__('Content Loop', 'aemi'),
+        ]);
+
+        $id = 60;
 
         foreach (get_post_types(['public' => true], 'objects') as $post_type)
         {
@@ -50,12 +56,14 @@ if (!function_exists('aemi_customizer_panels'))
 
             $wp_customize->add_section(('aemi_type_' . $post_name), [
                 'panel'     =>  'aemi_panel',
-                'title'     =>  esc_html__($post_type->label, 'aemi'),
+                'title'     =>  esc_html__( 'Type', 'aemi') . ': ' . $post_type->label,
                 'priority'  =>  $id,
             ]);
             
             $id += 10;
         }
+
+
     }
 }
 add_action('customize_register', 'aemi_customizer_panels');

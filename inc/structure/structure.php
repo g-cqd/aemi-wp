@@ -1,6 +1,7 @@
 <?php
 
 require get_template_directory() . '/inc/structure/hooks.php';
+require get_template_directory() . '/inc/structure/loop.php';
 require get_template_directory() . '/inc/structure/header.php';
 require get_template_directory() . '/inc/structure/aside.php';
 require get_template_directory() . '/inc/structure/footer.php';

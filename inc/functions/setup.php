@@ -255,3 +255,12 @@ if (!function_exists('aemi_custom_comment_fields_order'))
 	}
 }
 add_filter('comment_form_fields', 'aemi_custom_comment_fields_order');
+
+if (!function_exists('aemi_load_customize_controls'))
+{
+	function aemi_load_customize_controls() {
+		require_once( trailingslashit( get_template_directory() ) . 'inc/customizer/custom-controls/custom-controls.php' );
+	}
+}
+
+add_action( 'customize_register', 'aemi_load_customize_controls', 0 );

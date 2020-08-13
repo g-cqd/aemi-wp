@@ -6,50 +6,38 @@ if (!function_exists('aemi_customizer_controls')) {
 
         $wp_customize->add_control(
             new WP_Customize_Image_Control($wp_customize, 'aemi_light_scheme_logo', [
-            'label'     => 'Add Light for Light Scheme',
-            'description'   => 'It is recommanded to set up this setting. If used, it replaces native logo setting.',
+            'label'     => __('Add Light for Light Scheme', 'aemi'),
+            'description'   => __('It is recommanded to set up this setting. If used, it replaces native logo setting.', 'aemi'),
             'settings'  => 'aemi_light_scheme_logo',
             'section'   => 'aemi_site_identity'
         ]));
 
         $wp_customize->add_control(
             new WP_Customize_Image_Control($wp_customize, 'aemi_dark_scheme_logo', [
-            'label'     => 'Add Logo for Dark Scheme',
-            'description'   => 'It is recommanded to set up this setting.',
+            'label'     => __('Add Logo for Dark Scheme', 'aemi'),
+            'description'   => __('It is recommanded to set up this setting.', 'aemi'),
             'settings'  => 'aemi_dark_scheme_logo',
             'section'   => 'aemi_site_identity'
         ]));
 
         foreach (get_post_types(['public' => true], 'objects') as $post_type)
         {
-            $post_name = $post_type->name;
+            $p_name = $post_type->name;
 
-            $post_type_object = (object) ['post_type' => $post_name];
+            $post_type_object = (object) ['post_type' => $p_name];
 
             $default_metas = [
-                'author'    =>  [
-                    'name'  => 'author',
+                'author'            => [
+                    'name' => 'author',
                     'label' => __('Author', 'aemi')
                 ],
-                'author_in_loop'    =>  [
-                    'name'  => 'author_in_loop',
-                    'label' => __('Author in Loop', 'aemi')
-                ],
-                'published_date'    =>  [
-                    'name'  => 'published_date',
+                'published_date'    => [
+                    'name' => 'published_date',
                     'label' => __('Published Date', 'aemi')
                 ],
-                'published_date_in_loop'    =>  [
-                    'name'  => 'published_date_in_loop',
-                    'label' => __('Published Date in Loop', 'aemi')
-                ],
-                'updated_date'  =>  [
-                    'name'  => 'updated_date',
+                'updated_date'      => [
+                    'name' => 'updated_date',
                     'label' => __('Updated Date', 'aemi')
-                ],
-                'updated_date_in_loop'  =>  [
-                    'name'  => 'updated_date_in_loop',
-                    'label' => __('Updated Date in Loop', 'aemi')
                 ]
             ];
 
@@ -66,74 +54,105 @@ if (!function_exists('aemi_customizer_controls')) {
 
             foreach ($array_of_metas as $meta)
             {
-                $type_setting = 'aemi_type_' . $post_name . '_' . $meta->name;
+                $m_name = $meta->name;
+                $m_label = $meta->label;
 
-                $wp_customize->add_control($type_setting, [
-                    'label'     =>      esc_html__($meta->label, 'aemi'),
-                    'description'   =>  esc_html(
-                        sprintf(
-                            '%1$s %2$s %3$s %4$s.',
-                            __('Display', 'aemi'),
-                            $meta->label,
-                            __('in', 'aemi'),
-                            $post_name
-                        )
-                    ),
-                    'section'   =>      'aemi_type_' . $post_name,
-                    'settings'  =>      $type_setting,
-                    'type'      =>      'checkbox'
-                ]);
-            }
+                $setting = aemi_setting($p_name,$m_name);
 
-            if ($post_name == "post")
-            {
-                $wp_customize->add_control('aemi_type_post_sticky', [
-                    'label'     =>      esc_html__('Featured Badge', 'aemi'),
-                    'description'   =>  esc_html__('Display a "Featured" badge for each featured post.', 'aemi'),
-                    'section'   =>      'aemi_type_' . $post_name,
-                    'settings'  =>      'aemi_type_post_sticky',
-                    'type'      =>      'checkbox'
-                ]);
-                $wp_customize->add_control('aemi_type_post_sticky_in_loop', [
-                    'label'     =>      esc_html__('Featured Badge in Loop', 'aemi'),
-                    'description'   =>  esc_html__('Display a "Featured" badge for each featured post in lists of posts.', 'aemi'),
-                    'section'   =>      'aemi_type_' . $post_name,
-                    'settings'  =>      'aemi_type_post_sticky_in_loop',
-                    'type'      =>      'checkbox'
-                ]);
-            }
-
-            if ($post_name == "post" || $post_name == "page")
-            {
-                $show_excerpt = 'aemi_type_'.$post_name.'_show_excerpt';
-
-                $wp_customize->add_control($show_excerpt, [
-                    'label'     =>      esc_html__('Show Excerpt', 'aemi'),
-                    'description'   =>  esc_html__('Show a short excerpt of '.$post_name.'s in lists of ' .$post_name.'s.', 'aemi'),
-                    'section'   =>      'aemi_type_' . $post_name,
-                    'settings'  =>      $show_excerpt,
-                    'type'      =>      'checkbox'
-                ]);
-
-                if ($post_name == "post")
+                if (in_array($m_name, ['author','published_date','updated_date']))
                 {
-                    $wp_customize->add_control('aemi_type_post_show_excerpt_when_sticky', [
-                        'label'     =>      esc_html__('Show Excerpt when Featured', 'aemi'),
-                        'description'   =>  esc_html__('Show a short excerpt of featured posts in lists of posts.', 'aemi'),
-                        'section'   =>      'aemi_type_post',
-                        'settings'  =>      'aemi_type_post_show_excerpt_when_sticky',
+                    $wp_customize->add_control($setting, [
+                        'label'         =>  esc_html__($m_label, 'aemi'),
+                        'description'   =>  esc_html(
+                            sprintf(
+                                '%1$s %2$s %3$s.',
+                                __('Choose to display', 'aemi'),
+                                $meta->label,
+                                __('information in single page, content loop, both or none', 'aemi')
+                            )
+                        ),
+                        'section'   =>      'aemi_type_' . $p_name,
+                        'settings'  =>      $setting,
+                        'type'      =>      'radio',
+                        'choices'   =>      [
+                            'both'  => __('Both','aemi'),
+                            'single'  => __('Single Page Only','aemi'),
+                            'loop'  => __('Content Loop Only','aemi'),
+                            'none'  => __('None','aemi')
+                        ]
+                    ]);
+                }
+                else
+                {
+                    $wp_customize->add_control($setting, [
+                        'label'     =>      esc_html__($m_label, 'aemi'),
+                        'description'   =>  esc_html(
+                            sprintf(
+                                '%1$s %2$s %3$s %4$s.',
+                                __('Display', 'aemi'),
+                                $m_label,
+                                __('in', 'aemi'),
+                                $p_name
+                            )
+                        ),
+                        'section'   =>      'aemi_type_' . $p_name,
+                        'settings'  =>      $setting,
                         'type'      =>      'checkbox'
-                    ]);   
+                    ]);
                 }
             }
 
-            $progress_bar = 'aemi_type_' . $post_name . '_progress_bar';
+            if ($p_name == "post")
+            {
+                $setting = aemi_setting($p_name,'show_excerpt');
+                $wp_customize->add_control($setting, [
+                    'label'     =>      esc_html__('Show Excerpt', 'aemi'),
+                    'description'   =>  esc_html__('Choose to display a short excerpt of featured, non-featured, both or none of the posts.', 'aemi'),
+                    'section'   =>      'aemi_type_post',
+                    'settings'  =>      $setting,
+                    'type'      =>      'radio',
+                    'choices'   =>      [
+                        'both'  => __('Both','aemi'),
+                        'sticky_only'  => __('Featured Only','aemi'),
+                        'non_sticky_only'  => __('Not Featured Only','aemi'),
+                        'none'  => __('None','aemi')
+                    ]
+                ]);
+                $setting = aemi_setting($p_name,'show_sticky_badge');
+                $wp_customize->add_control($setting, [
+                    'label'     =>      esc_html__('Show Featured Badge', 'aemi'),
+                    'description'   =>  esc_html__('Choose to display a "Featured" badge on single page, content loop, both or none of the featured posts.', 'aemi'),
+                    'section'   =>      'aemi_type_post',
+                    'settings'  =>      $setting,
+                    'type'      =>      'radio',
+                    'choices'   =>      [
+                        'both'  => __('Both','aemi'),
+                        'single'  => __('Single Page Only','aemi'),
+                        'loop'  => __('Content Loop Only','aemi'),
+                        'none'  => __('None','aemi')
+                    ]
+                ]);
+            }
+            else {
 
-            $wp_customize->add_control($progress_bar, [
+                $setting = aemi_setting($p_name,'show_excerpt');
+
+                $wp_customize->add_control($setting, [
+                    'label'     =>      esc_html__('Show Excerpt', 'aemi'),
+                    'description'   =>  esc_html__('Show a short excerpt of '.$p_name.'s in lists of ' .$p_name.'s.', 'aemi'),
+                    'section'   =>      'aemi_type_' . $p_name,
+                    'settings'  =>      $setting,
+                    'type'      =>      'checkbox'
+                ]);
+            }
+
+            $setting = aemi_setting($p_name,'progress_bar');
+
+            $wp_customize->add_control($setting, [
                 'label'     =>      esc_html__('Progress Bar', 'aemi'),
                 'description'   =>  esc_html__('Display a progress bar that indicate what quantity of the page you read.', 'aemi'),
-                'section'   =>      'aemi_type_' . $post_name,
-                'settings'  =>      $progress_bar,
+                'section'   =>      'aemi_type_' . $p_name,
+                'settings'  =>      $setting,
                 'type'      =>      'checkbox'
             ]);
         }
@@ -190,14 +209,6 @@ if (!function_exists('aemi_customizer_controls')) {
             'settings'  =>      'aemi_remove_script_version',
             'type'      =>      'checkbox',
         ]);
-        
-        $wp_customize->add_control('aemi_enable_svg_support', [
-            'label'     =>      esc_html__('Enable SVG Upload Support', 'aemi'),
-            'description'   =>  esc_html__('Administrator only.', 'aemi'),
-            'section'   =>      'aemi_advanced_features',
-            'settings'  =>      'aemi_enable_svg_support',
-            'type'      =>      'checkbox',
-        ]);
 
         $wp_customize->add_control('aemi_remove_emojis', [
             'label'     =>      esc_html__('Remove emojis', 'aemi'),
@@ -215,6 +226,14 @@ if (!function_exists('aemi_customizer_controls')) {
             'type'      =>      'checkbox',
         ]);
 
+        $wp_customize->add_control('aemi_enable_svg_support', [
+            'label'     =>      esc_html__('Enable SVG Upload Support', 'aemi'),
+            'description'   =>  esc_html__('Administrator only.', 'aemi'),
+            'section'   =>      'aemi_critical_features',
+            'settings'  =>      'aemi_enable_svg_support',
+            'type'      =>      'checkbox',
+        ]);
+
         $wp_customize->add_control('aemi_add_expire_headers', [
             'label'     =>      esc_html__('Add Expire Headers', 'aemi'),
             'description'   =>  esc_html__('Edit .htaccess file and add expire headers to improve browser caching.', 'aemi'),
@@ -222,6 +241,59 @@ if (!function_exists('aemi_customizer_controls')) {
             'settings'  =>      'aemi_add_expire_headers',
             'type'      =>      'checkbox',
         ]);
+
+        $wp_customize->add_control('aemi_loop_cat_filtering', [
+            'label'     =>      esc_html__('Enable Loop Filtering by Post Categories', 'aemi'),
+            'description'   =>  esc_html__('Enable this feature to select which categories you want to be shown in content loop and those you do not want to see.', 'aemi'),
+            'section'   =>      'aemi_loop',
+            'settings'  =>      'aemi_loop_cat_filtering',
+            'type'      =>      'checkbox',
+        ]);
+
+        $wp_customize->add_control('aemi_loop_add_types', [
+            'label'     =>      esc_html__('Add Custom Post Types to Content Loop', 'aemi'),
+            'description'   =>  esc_html__('Enable this feature to select which custom post types to add to WordPress content loop.', 'aemi'),
+            'section'   =>      'aemi_loop',
+            'settings'  =>      'aemi_loop_add_types',
+            'type'      =>      'checkbox',
+        ]);
+
+        $categories = get_categories();
+
+        $cat_labels = [];
+
+        foreach ($categories as $cat) {
+            $cat_labels[$cat->cat_ID] = $cat->name;
+        }
+
+        $wp_customize->add_control( new Aemi_Customize_Control_Checkbox_Multiple(
+            $wp_customize,
+            'aemi_loop_cat_filters', [
+                'label'     =>      esc_html__('Content Loop Post Category Filter', 'aemi'),
+                'description'   =>  esc_html__('Choose post categories that will be shown in content loop.', 'aemi'),
+                'section'   =>      'aemi_loop',
+                'settings'  =>      'aemi_loop_cat_filters',
+                'choices'   =>      $cat_labels
+            ]
+        ));
+
+        $custom_types = [];
+
+        foreach( get_post_types(['public' => true], 'objects') as $post_type )
+        {
+            $custom_types[$post_type->name] = $post_type->label;
+        } 
+
+        $wp_customize->add_control( new Aemi_Customize_Control_Checkbox_Multiple(
+            $wp_customize,
+            'aemi_loop_added_types', [
+                'label'     =>      esc_html__('Custom Post Types to add', 'aemi'),
+                'description'   =>  esc_html__('Choose custom post types that will be added to the content loop.', 'aemi'),
+                'section'   =>      'aemi_loop',
+                'settings'  =>      'aemi_loop_added_types',
+                'choices'   =>      $custom_types
+            ]
+        ));
 
         $wp_customize->add_control('aemi_header_js_code', [
             'label'     =>      esc_html__('Header JS Script', 'aemi'),

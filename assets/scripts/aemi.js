@@ -22,13 +22,19 @@ const freeScroll = () => {};
 
 const aemi = new Environment();
 
-aemi.set('global', getGlobal());
-aemi.set('site-header', byId('site-header'));
-aemi.set('first-header', byClass('post-header')[0]);
-aemi.set('nav-toggle', byId('navigation-toggle'));
-aemi.set('sea-toggle', byId('search-toggle'));
-aemi.set('sea-input', [...byClass('search-input')].pop());
-aemi.set('pro-bar', byId('site-progress-bar'));
+aemi.parallel([
+	aemi.set('global', getGlobal()),
+	aemi.set('site-header', byId('site-header')),
+	aemi.set('first-header', byClass('post-header')[0]),
+	aemi.set('nav-toggle', byId('navigation-toggle')),
+	aemi.set('sea-toggle', byId('search-toggle')),
+	aemi.set('sea-input', [...byClass('search-input')].pop()),
+	aemi.set('pro-bar', byId('site-progress-bar')),
+	aemi.set('csh-sel', byId('color-scheme-selector')),
+	aemi.set('csh-light', byId('light-scheme-option')),
+	aemi.set('csh-dark', byId('dark-scheme-option')),
+	aemi.set('csh-auto', byId('auto-scheme-option'))
+]);
 
 function isOnFirstHeader(element) {
 	const { bottom } = aemi.get('first-header').getClientRects()[0];
@@ -118,6 +124,10 @@ class ColorScheme {
 		return hasClass(document.body, 'auto-color-scheme');
 	}
 
+	static isUserKing() {
+		return aemi.assert('csh-sel');
+	}
+
 	static hasCookie() {
 		return Cookies.has('color-scheme');
 	}
@@ -166,7 +176,7 @@ class ColorScheme {
 		if (ColorScheme.isForced()) {
 			return (ColorScheme.getClassState() || ColorScheme.getBrowerState());
 		}
-		if (ColorScheme.isAuto()) {
+		if (ColorScheme.isAuto() && !ColorScheme.isUserKing()) {
 			return ColorScheme.getBrowerState();
 		}
 		return (
@@ -180,7 +190,8 @@ class ColorScheme {
 		const scheme = ColorScheme.getState() || 'light';
 		const isForced = ColorScheme.isForced();
 		const isAuto = ColorScheme.isAuto();
-		if (isForced || isAuto) {
+		const isUserKing = ColorScheme.isUserKing();
+		if (isForced || isAuto && !isUserKing) {
 			ColorScheme.deleteCookie(false);
 		}
 		if (!ColorScheme.isSet()) {
@@ -279,11 +290,6 @@ try {
 	}
 } catch (_) {
 	aemi.push(() => {
-		aemi.set('csh-sel', byId('color-scheme-selector'));
-		aemi.set('csh-light', byId('light-scheme-option'));
-		aemi.set('csh-dark', byId('dark-scheme-option'));
-		aemi.set('csh-auto', byId('auto-scheme-option'));
-
 		const scheme = ColorScheme.detect();
 
 		if (aemi.assert('csh-sel')) {
@@ -296,6 +302,9 @@ try {
 				if (aemi.get('csh-light').checked) {
 					ColorScheme.change('light', true);
 				} else if (aemi.get('csh-dark').checked) {
+					if (ColorScheme.isAuto()) {
+
+					}
 					ColorScheme.change('dark', true);
 				} else if (aemi.get('csh-auto').checked) {
 					ColorScheme.deleteCookie();
@@ -1266,7 +1275,6 @@ try {
 		const toggleFilter = [ aemi.get('nav-toggle'), aemi.get('sea-toggle') ];
 		function togglerHandler(mutationRecords) {
 			for ( const { target } of mutationRecords ) {
-				console.log(target);
 				const alts = toggleFilter.filter( e => e !== target );
 				if (isToggled(target)) {
 					for ( const alt of alts.filter( e => isToggled(e) ) ) {

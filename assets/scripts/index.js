@@ -31,6 +31,9 @@ function isBoolean(variable) {
 function isFunction(object) {
 	return typeof object === 'function' || object instanceof Function ? object : false;
 }
+function isObject(object) {
+	return typeof object === 'object' || object instanceof Object;
+}
 function isURL(object) {
 	if (isString(object)) {
 		try {
@@ -462,8 +465,17 @@ class Environment {
 		this.actions = [];
 		this.properties = new Object(null);
 	}
-	set(key, value) {
+	async set(key, value) {
 		return this.properties[key] = value;
+	}
+	async parallel(array) {
+		try {
+			return Promise.all(array);
+		}
+		catch (_) {
+			return array;
+		}
+		return;
 	}
 	has(key) {
 		return key in this.properties;
@@ -513,22 +525,28 @@ class Cookies {
 				.map(string => string.trim().split(/=/))
 		).has(string);
 	}
-	static set(cookieName, cookieValue, expiration) {
-		if (expiration === undefined) {
+	static set(cookieName, cookieValue, options) {
+		options = is(options) && isObject(options) ? options : {};
+
+		let { expiration, sameSite } = options;
+
+		if (!is(expiration)) {
 			const newDate = new Date();
 			const year = 365.25 * 24 * 3600 * 1000;
 			newDate.setTime(newDate.getTime() + year);
 			expiration = newDate.toUTCString();
 		}
-		const expirationString = 'expires=' + expiration;
+		const expirationString = `expires=${expiration}`;
+		const sameSiteString = `SameSite=${sameSite||'Strict'}${sameSite==='None'?';Secure':''}`;
 		document.cookie =
-			cookieName + '=' + encodeURIComponent(cookieValue) + ';' + expirationString + ';path=/';
+			`${cookieName}=${encodeURIComponent(cookieValue)};${expirationString};${sameSiteString}`;
 	}
 	static delete(cookieName) {
 		const newDate = new Date();
 		newDate.setTime(newDate.getTime() - 1);
-		const expiration = 'expires=' + newDate.toUTCString();
-		document.cookie = cookieName + '=;' + expiration + ';path=/';
+		const expirationString = `expires=${newDate.toUTCString()}`;
+		const sameSiteString = `SameSite=strict`;
+		document.cookie = `${cookieName}=;${expirationString};${sameSiteString};`;
 	}
 }
 class PromiseWorker {

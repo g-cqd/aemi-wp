@@ -22,6 +22,16 @@ if (!function_exists('aemi_sanitize_checkbox'))
     }
 }
 
+if (!function_exists('aemi_sanitize_checkbox_multiple'))
+{
+    function aemi_sanitize_checkbox_multiple( $values ) {
+
+        $multi_values = !is_array( $values ) ? explode( ',', $values ) : $values;
+
+        return !empty( $multi_values ) ? array_map( 'sanitize_text_field', $multi_values ) : array();
+    }
+}
+
 if (!function_exists('aemi_sanitize_radio'))
 {
     function aemi_sanitize_radio($input, $setting)

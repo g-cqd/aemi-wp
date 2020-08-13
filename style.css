@@ -4,7 +4,7 @@ Theme URI: https://github.com/originecode/aemi/
 Author: Guillaume COQUARD
 Author URI: https://www.originecode.fr/
 Description: AeMi is designed to be an aesthetic minimalist wordpress theme. It provides a highly legible, clean, clear and really minimalist theme.
-Version: 2.0-beta8
+Version: 2.0-beta9
 License: GPL-3.0
 License URI: https://opensource.org/licenses/GPL-3.0
 Text Domain: aemi
@@ -17,34 +17,14 @@ Tags: one-column, custom-background, custom-menu, featured-image-header, feature
 --------------------------------------------------------------*/
 
 :root {
-	--blur: url('data:text/svg+xml;charset=utf8,<svg height="110" width="110"><defs><filter id="blur" x="0" y="0"><feGaussianBlur in="SourceGraphic" stdDeviation="10" /></filter></defs></svg>#blur');
 	--legible-width: 65ch;
-	--legible-marge: 4rem;
+	--legible-margin: 4rem;
 }
 
 @media (max-width: 460px) {
 	:root {
-		--legible-marge: 2rem;
+		--legible-margin: 2rem;
 	}
-}
-
-body {
-	display: grid;
-	grid-template-columns: repeat(64, 1fr);
-	gap: 0;
-	grid-auto-rows: auto;
-}
-
-#site-header,
-#site-content,
-#site-aside {
-	grid-column: 1 / 65;
-	grid-row: 1;
-}
-
-#site-footer {
-	grid-column: 1 / 65;
-	grid-row: 2;
 }
 
 /*--------------------------------------------------------------
@@ -64,7 +44,7 @@ body {
  * ---------------------------------------------------------- */
 
 .screen-reader-text {
-	clip: rect(0, 0, 0, 0);
+	clip-path: rect(0, 0, 0, 0);
 	display: block;
 	height: 1px;
 	overflow: hidden;
@@ -124,7 +104,7 @@ body {
 	justify-content: space-between;
 	left: 50%;
 	margin: 0 auto;
-	max-width: calc(100vw - var(--legible-marge));
+	max-width: calc(100vw - var(--legible-margin));
 	padding: 1rem 0;
 	position: fixed;
 	top: 0;
@@ -175,24 +155,11 @@ body.page-scrolled #site-header::before {
 	transform: translate(-50%, -100%);
 }
 
-/*
- * Blurred Background on Header -> Safari, Chromium-Like
- */
-
-body:not(.page-scrolled) #site-header::before {
-	-webkit-backdrop-filter: blur(0);
-	backdrop-filter: blur(0);
-}
-body.page-scrolled #site-header::before {
-	-webkit-backdrop-filter: blur(10px);
-	backdrop-filter: blur(10px);
-}
-
 #site-header,
 .header-hidden #site-header,
 .admin-bar #site-header {
 	transition: transform 300ms ease-in-out;
-	
+	will-change: transform;
 }
 
 #site-header::before,
@@ -201,7 +168,26 @@ body.page-scrolled #site-header::before {
 	transition-property: background-color, -webkit-backdrop-filter, backdrop-filter;
 	transition-duration: 300ms;
 	transition-timing-function: ease-in-out;
-	
+	will-change: background-color;
+}
+
+@supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+	/*
+	 * Blurred Background on Header -> Safari, Chromium-Like
+	 */
+	body:not(.page-scrolled) #site-header::before {
+		-webkit-backdrop-filter: blur(0);
+		backdrop-filter: blur(0);
+	}
+	body.page-scrolled #site-header::before {
+		-webkit-backdrop-filter: blur(10px);
+		backdrop-filter: blur(10px);
+	}
+	#site-header::before,
+	body:not(.page-scrolled) #site-header::before,
+	body.page-scrolled #site-header::before {
+		will-change: background-color, -webkit-backdrop-filter, backdrop-filter;
+	}
 }
 
 /* ----------------------------------------------------------
@@ -234,6 +220,7 @@ body.page-scrolled #site-header::before {
 	top: 0;
 	transform: translateY(0);
 	width: 0;
+	will-change: transform, width;
 	z-index: 1;
 }
 
@@ -926,7 +913,7 @@ body.color-scheme-dark #toggle-widget::before {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: calc(100vw - var(--legible-marge));
+	max-width: calc(100vw - var(--legible-margin));
 	padding: 0;
 	position: relative;
 	width: var(--legible-width);
@@ -1017,8 +1004,6 @@ body.color-scheme-dark #toggle-widget::before {
 	border-radius: 0;
 	clear: both;
 	float: none;
-	min-height: 300px;
-	height: 600px;
 	margin-left: calc(50% - 50vw);
 	margin-right: calc(50% - 50vw);
 	margin-bottom: var(--margin);
@@ -1123,14 +1108,20 @@ a.post-info:hover {
 
 .singular .post-info,
 #entry-head .post-info {
+	height: auto;
+	margin: 6.75rem auto 4.5rem;
 	min-height: 300px;
-	height: 600px;
-	padding: 4rem 0 2rem;
-	margin-left: auto;
-	margin-right: auto;
-	max-width: calc(100vw - var(--legible-marge));
+	max-width: calc(100vw - var(--legible-margin));
+	padding: 4.5rem 0;
 	width: var(--legible-width);
 }
+
+.singular .post-info:not(:last-child),
+#entry-head .post-info:not(:last-child) {
+	margin-bottom: 2.25rem;
+	padding-bottom: 4.5rem;
+}
+
 
 .post-title {
 	color: var(--text-important);
@@ -1192,10 +1183,20 @@ a .author-pre-text {
 	flex-flow: row wrap;
 	font-weight: normal;
 	margin: 0 auto;
-	max-width: calc(100vw - var(--legible-marge));
-	padding: 1rem 0;
+	max-width: calc(100vw - var(--legible-margin));
 	width: var(--legible-width);
 	z-index: 2;
+}
+
+
+body:not(.singular) .post-meta > * {
+	margin-left: 1rem;
+	margin-right: 1rem;
+	margin-top: 1rem;
+}
+
+.post-meta > :last-child {
+	margin-bottom: 1rem;
 }
 
 .post-header:hover .meta-excerpt {
@@ -1219,7 +1220,6 @@ a .author-pre-text {
 
 .meta-excerpt {
 	display: block;
-	margin: 0 1rem;
 	opacity: 1;
 	transition: opacity 200ms ease-in-out;
 }
@@ -1236,19 +1236,25 @@ a .author-pre-text {
 }
 
 .sticky .post-edit {
-	margin-top: 3rem;
+	top: 1.75rem;
 }
 
-.meta-categories {
-}
-
-.meta-item-list {
+.meta-categories .meta-item-list {
 	display: flex;
 	flex-flow: row nowrap;
 	margin-top: 0.5rem;
+	max-width: calc(100vw - var(--legible-margin));
 	overflow: scroll;
-	max-width: calc(100vw - var(--legible-marge));
 	width: var(--legible-width);
+	-moz-scrollbar-width: none;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+
+.meta-categories .meta-item-list::-webkit-scrollbar {
+	background: transparent;
+	display: none;
+	width: 0px;
 }
 
 .meta-item-list > :first-child a {
@@ -1263,7 +1269,8 @@ a .author-pre-text {
 
 .meta-item-list > * {
 	flex: 0 1 auto;
-	width: max-content;
+	min-width: fit-content;
+	min-width: -moz-fit-content;
 }
 
 .meta-item-list a {
@@ -2279,16 +2286,6 @@ a .nav-previous,
 		transform: translateY(0);
 	}
 
-	@supports (
-		(-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))
-	) {
-		body:not(.page-scrolled) #site-header::before,
-		body.page-scrolled #site-header::before {
-			-webkit-backdrop-filter: blur(10px);
-			backdrop-filter: blur(10px);
-		}
-	}
-
 	#header-menu {
 		display: none;
 	}
@@ -2311,6 +2308,11 @@ a .nav-previous,
 		.blog #main-content {
 			margin-top: 1rem;
 		}
+	}
+
+	.singular .post-info,
+	#entry-head .post-info {
+		margin-top: 2.25rem;
 	}
 
 	#site-footer {

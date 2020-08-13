@@ -16,35 +16,14 @@ if (!function_exists('aemi_customizer_settings'))
 
 		foreach (get_post_types(['public' => true], 'objects') as $post_type)
 		{
-			$post_name = $post_type->name;
+			$p_name = $post_type->name;
 
-			$post_type_object = (object) ['post_type' => $post_name];
+			$post_type_object = (object) ['post_type' => $p_name];
 
 			$default_metas = [
-				'author'	=>	[
-					'name'	=> 'author',
-					'label'	=> __('Author', 'aemi')
-				],
-				'author_in_loop'	=>	[
-					'name'	=> 'author_in_loop',
-					'label'	=> __('Author in Loop', 'aemi')
-				],
-				'published_date'	=>	[
-					'name'	=> 'published_date',
-					'label'	=> __('Published Date', 'aemi')
-				],
-				'published_date_in_loop'	=>	[
-					'name'	=> 'published_date_in_loop',
-					'label'	=> __('Published Date in Loop', 'aemi')
-				],
-				'updated_date'	=>	[
-					'name'	=> 'updated_date',
-					'label'	=> __('Updated Date', 'aemi')
-				],
-				'updated_date_in_loop'	=>	[
-					'name'	=> 'updated_date_in_loop',
-					'label'	=> __('Updated Date in Loop', 'aemi')
-				]
+				'author'			=> [ 'name' => 'author' ],
+				'published_date'	=> [ 'name' => 'published_date' ],
+				'updated_date'		=> [ 'name' => 'updated_date' ]
 			];
 
 			$array_of_metas = [];
@@ -61,137 +40,165 @@ if (!function_exists('aemi_customizer_settings'))
 
 			foreach ($array_of_metas as $meta)
 			{
-				$type_setting = 'aemi_type_' . $post_name . '_' . $meta->name;
+				$m_name = $meta->name;
 
-				if (
-					($post_name == "post" && $meta->name == "updated_date") ||
-					($post_name == "page" && ($meta->name == "author" || $meta->name == "published_date"))
-				)
+				$setting = aemi_setting($p_name,$m_name);
+
+				if (in_array($m_name, ['author','published_date']))
 				{
-					$wp_customize->add_setting($type_setting, [
-						'default'			=> 0,
-						'sanitize_callback'	=> 'aemi_sanitize_checkbox',
-						'transport'			=> 'refresh',
-					]);
+					aemi_add_setting_radio($wp_customize,$setting,'both');
+				}
+				else if ($m_name == 'updated_date')
+				{
+					aemi_add_setting_radio($wp_customize,$setting,'none');	
 				}
 				else
 				{
-					$wp_customize->add_setting($type_setting, [
-						'default'			=> 1,
-						'sanitize_callback'	=> 'aemi_sanitize_checkbox',
-						'transport'			=> 'refresh',
-					]);
+					aemi_add_setting_checkbox($wp_customize,$setting,1);
 				}
 			}
 
-			if ($post_name == "post" || $post_name == "page")
+			if ($p_name == "post")
 			{
-				$show_excerpt = 'aemi_type_'.$post_name.'_show_excerpt';
-
-				$wp_customize->add_setting($show_excerpt, [
-					'default'			=> 0,
-					'sanitize_callback'	=> 'aemi_sanitize_checkbox',
-					'transport'			=> 'refresh',
-				]);
+				aemi_add_setting_radio(
+					$wp_customize,
+					aemi_setting($p_name,'show_excerpt'),
+					'sticky_only'
+				);
+				aemi_add_setting_radio(
+					$wp_customize,
+					aemi_setting($p_name,'show_sticky_badge'),
+					'both'
+				);
+			}
+			else
+			{
+				aemi_add_setting_checkbox(
+					$wp_customize,
+					aemi_setting($p_name,'show_excerpt'),
+					0
+				);
 			}
 
-			if ($post_name == "post")
-			{
-				$wp_customize->add_setting('aemi_type_post_sticky', [
-					'default'			=> 1,
-					'sanitize_callback'	=> 'aemi_sanitize_checkbox',
-					'transport'			=> 'refresh',
-				]);
-				$wp_customize->add_setting('aemi_type_post_sticky_in_loop', [
-					'default'			=> 1,
-					'sanitize_callback'	=> 'aemi_sanitize_checkbox',
-					'transport'			=> 'refresh',
-				]);
-
-				$wp_customize->add_setting('aemi_type_post_show_excerpt_when_sticky', [
-					'default'			=> 1,
-					'sanitize_callback'	=> 'aemi_sanitize_checkbox',
-					'transport'			=> 'refresh',
-				]);
-			}
-
-
-			$progress_bar = 'aemi_type_' . $post_name . '_progress_bar';
-
-			$wp_customize->add_setting($progress_bar, [
-				'default'			=> 0,
-				'sanitize_callback'	=> 'aemi_sanitize_checkbox',
-				'transport'			=> 'refresh',
-			]);
+			aemi_add_setting_checkbox(
+				$wp_customize,
+				aemi_setting($p_name,'progress_bar'),
+				1
+			);
 
 		}
 
-		$wp_customize->add_setting('aemi_color_scheme', [
-			'default'			=> 'auto',
-			'sanitize_callback'	=> 'aemi_sanitize_radio',
-			'transport'			=> 'refresh',
+		$settings = [
+			[
+				'name' => 'aemi_color_scheme',
+				'type' => 'radio',
+				'default' => 'auto'
+			],
+			[
+				'name' => 'aemi_color_scheme_user',
+				'type' => 'checkbox',
+				'default' => 0
+			],
+			[
+				'name' => 'aemi_search_button_display',
+				'type' => 'checkbox',
+				'default' => 0
+			],
+			[
+				'name' => 'aemi_header_autohiding',
+				'type' => 'checkbox',
+				'default' => 0
+			],
+			[
+				'name' => 'aemi_remove_jquery_migrate',
+				'type' => 'checkbox',
+				'default' => 0
+			],
+			[
+				'name' => 'aemi_remove_script_version',
+				'type' => 'checkbox',
+				'default' => 0
+			],
+			[
+				'name' => 'aemi_remove_emojis',
+				'type' => 'checkbox',
+				'default' => 0
+			],
+			[
+				'name' => 'aemi_remove_wpembeds',
+				'type' => 'checkbox',
+				'default' => 0
+			],
+			[
+				'name' => 'aemi_enable_svg_support',
+				'type' => 'checkbox',
+				'default' => 0,
+				'critical' => true
+			],
+			[
+				'name' => 'aemi_add_expire_headers',
+				'type' => 'checkbox',
+				'default' => 0,
+				'critical' => true
+			],
+			[
+				'name' => 'aemi_loop_cat_filtering',
+				'type' => 'checkbox',
+				'default' => 0,
+				'critical' => true
+			],
+			[
+				'name' => 'aemi_loop_add_types',
+				'type' => 'checkbox',
+				'default' => 0,
+				'critical' => true
+			]
+		];
+
+		foreach ($settings as $setting) {
+			switch ($setting['type']) {
+				case 'radio':
+					aemi_add_setting_radio(
+						$wp_customize,
+						$setting['name'],
+						$setting['default']
+					);
+					break;
+				case 'checkbox':
+					aemi_add_setting_checkbox(
+						$wp_customize,
+						$setting['name'],
+						$setting['default'],
+						isset($setting['critical']) ? $setting['critical'] : false
+					);
+					break;
+				default:
+					break;
+			}
+		}
+
+		$categories = get_categories();
+
+		$cat_ids = [];
+
+		foreach ($categories as $cat) {
+			$cat_IDs[] = $cat->cat_ID;
+		}
+
+		$wp_customize->add_setting('aemi_loop_cat_filters', [
+			'default' => $cat_IDs,
+			'sanitize_callback' => 'aemi_sanitize_checkbox_multiple'
 		]);
 
-		$wp_customize->add_setting('aemi_color_scheme_user', [
-			'default'			=> 0,
-			'sanitize_callback'	=> 'aemi_sanitize_checkbox',
-			'transport'			=> 'refresh',
-		]);
-
-		$wp_customize->add_setting('aemi_search_button_display', [
-			'default'	        => 0,
-			'sanitize_callback'	=> 'aemi_sanitize_checkbox',
-			'transport'	        => 'refresh',
-		]);
-
-		$wp_customize->add_setting('aemi_header_autohiding', [
-			'default'			=> 0,
-			'sanitize_callback'	=> 'aemi_sanitize_checkbox',
-			'transport'			=> 'refresh',
-		]);
-
-		$wp_customize->add_setting('aemi_remove_jquery_migrate', [
-			'default'			=> 0,
-			'sanitize_callback'	=> 'aemi_sanitize_checkbox',
-			'transport'			=> 'refresh',
-		]);
-
-		$wp_customize->add_setting('aemi_remove_script_version', [
-			'default'			=> 0,
-			'sanitize_callback'	=> 'aemi_sanitize_checkbox',
-			'transport'			=> 'refresh',
-		]);
-
-		$wp_customize->add_setting('aemi_enable_svg_support', [
-			'default'			=> 0,
-			'capability'		=> 'edit_theme_options',
-			'sanitize_callback'	=> 'aemi_sanitize_checkbox',
-			'transport'			=> 'refresh',
-		]);
-
-		$wp_customize->add_setting('aemi_remove_emojis', [
-			'default'			=> 0,
-			'sanitize_callback'	=> 'aemi_sanitize_checkbox',
-			'transport'			=> 'refresh',
-		]);
-
-		$wp_customize->add_setting('aemi_remove_wpembeds', [
-			'default'			=> 0,
-			'sanitize_callback'	=> 'aemi_sanitize_checkbox',
-			'transport'			=> 'refresh',
-		]);
-
-		$wp_customize->add_setting('aemi_add_expire_headers', [
-			'default'			=> 0,
-			'sanitize_callback'	=> 'aemi_sanitize_checkbox',
-			'transport'			=> 'refresh',
+		$wp_customize->add_setting('aemi_loop_added_types', [
+			'default' => ['post'],
+			'sanitize_callback' => 'aemi_sanitize_checkbox_multiple'
 		]);
 
 		$wp_customize->add_setting('aemi_header_js_code', [
 			'capability'		=> 'edit_theme_options',
 			'sanitize_callback' => 'aemi_raw_js_code',
 		]);
-
 
 		$wp_customize->add_setting('aemi_footer_js_code', [
 			'capability'		=> 'edit_theme_options',
