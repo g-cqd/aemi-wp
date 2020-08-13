@@ -1243,7 +1243,7 @@ try {
 		{
 			test: [],
 			func: aemi_header_auto_hide,
-			args: [hasClass(document.body, 'auto-hide')],
+			args: [hasClass(document.body, 'header-auto-hide')],
 		},
 		{
 			test: [true],

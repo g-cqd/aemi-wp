@@ -4,7 +4,7 @@ Theme URI: https://github.com/originecode/aemi/
 Author: Guillaume COQUARD
 Author URI: https://www.originecode.fr/
 Description: AeMi is designed to be an aesthetic minimalist wordpress theme. It provides a highly legible, clean, clear and really minimalist theme.
-Version: 2.0-beta9
+Version: 2.0-beta10
 License: GPL-3.0
 License URI: https://opensource.org/licenses/GPL-3.0
 Text Domain: aemi
@@ -115,8 +115,11 @@ Tags: one-column, custom-background, custom-menu, featured-image-header, feature
 	-o-user-select: none;
 	user-select: none;
 	width: var(--legible-width);
-	
 	z-index: 10;
+}
+
+.header-absolute #site-header {
+	position: absolute;
 }
 
 #site-header::before {
@@ -228,7 +231,7 @@ body.page-scrolled #site-header::before {
 	top: 32px;
 }
 
-body:not(.header-hidden) #site-progress-bar {
+body:not(.header-hidden):not(.header-absolute) #site-progress-bar {
 	transform: translateY(4.5rem);
 }
 
@@ -260,10 +263,6 @@ body:not(.header-hidden) #site-progress-bar {
 	flex-flow: row nowrap;
 	font-weight: normal;
 	position: relative;
-}
-
-#header-menu > li:nth-child(n + 5) {
-	display: none;
 }
 
 #header-menu .menu-item,
@@ -2245,16 +2244,16 @@ a .nav-previous,
 	#footer-widgets > * {
 		flex: 1 1 100%;
 	}
-	#footer-widgets > *:not(:last-child) {
+	.header-adaptative #footer-widgets > *:not(:last-child) {
 		margin-bottom: 4.5em;
 	}
 }
 
 @media (max-width: 782px) {
-	.admin-bar #site-progress-bar {
+	.header-adaptative.admin-bar #site-progress-bar {
 		top: 0;
 	}
-	.admin-bar #overlay-menu > .toggle + * {
+	.header-adaptative.admin-bar #overlay-menu > .toggle + * {
 		top: calc(4.5em + 46px);
 		height: calc(100vh - 4.5em);
 	}
@@ -2262,27 +2261,27 @@ a .nav-previous,
 
 @media (max-aspect-ratio: 5/6) and (orientation: portrait) and (max-width: 1024px),
 	(max-width: 900px) {
-	.admin-bar.header-hidden #site-header:not(:hover) {
+	.header-adaptative.admin-bar.header-hidden #site-header:not(:hover) {
 		transform: translate(-50%, 100%);
 	}
-	#site-header::before,
-	body:not(.page-scrolled) #site-header::before,
-	body.page-scrolled #site-header::before,
-	body.header-hidden #site-header::before {
+	.header-adaptative #site-header::before,
+	body.header-adaptative:not(.page-scrolled) #site-header::before,
+	body.header-adaptative.page-scrolled #site-header::before,
+	body.header-adaptative.header-hidden #site-header::before {
 		background-color: var(--page-color-alpha);
 	}
-	#site-header,
-	.admin-bar #site-header {
+	.header-adaptative #site-header,
+	.header-adaptative.admin-bar #site-header {
 		bottom: 0;
 		top: unset;
 		transform: translate(-50%, 0);
 	}
-	body.header-hidden #site-header:hover,
-	body.header-hidden #site-header:not(:hover),
-	body.admin-bar.header-hidden #site-header {
+	body.header-adaptative.header-hidden #site-header:hover,
+	body.header-adaptative.header-hidden #site-header:not(:hover),
+	body.header-adaptative.admin-bar.header-hidden #site-header {
 		transform: translate(-50%, 100%);
 	}
-	body:not(.header-hidden) #site-progress-bar {
+	body.header-adaptative:not(.header-hidden) #site-progress-bar {
 		transform: translateY(0);
 	}
 
@@ -2290,32 +2289,32 @@ a .nav-previous,
 		display: none;
 	}
 
-	#overlay-menu > .toggle + * {
+	.header-adaptative #overlay-menu > .toggle + * {
 		top: 0;
 	}
 	@media (max-width: 782px) {
-		.admin-bar #overlay-menu > .toggle + * {
+		.header-adaptative.admin-bar #overlay-menu > .toggle + * {
 			height: 100vh;
 			top: 46px;
 		}
 	}
-	.home:not(.with-header) #main-content,
-	.blog #main-content {
+	.header-adaptative.home #main-content,
+	.header-adaptative.blog #main-content {
 		margin-top: 2rem;
 	}
 	@media (max-width: 460px) {
-		.home:not(.with-header) #main-content,
-		.blog #main-content {
+		.header-adaptative.home #main-content,
+		.header-adaptative.blog #main-content {
 			margin-top: 1rem;
 		}
 	}
 
-	.singular .post-info,
-	#entry-head .post-info {
+	.header-adaptative .singular .post-info,
+	.header-adaptative #entry-head .post-info {
 		margin-top: 2.25rem;
 	}
 
-	#site-footer {
+	.header-adaptative #site-footer {
 		margin-bottom: 4.5rem;
 	}
 }

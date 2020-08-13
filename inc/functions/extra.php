@@ -29,10 +29,22 @@ if (!function_exists('aemi_body_classes'))
 		{
 			$classes[] = 'sidebar';
 		}
-		if (get_theme_mod('aemi_header_autohiding', 1) == 1)
+
+		$stickyness = get_theme_mod('aemi_header_stickyness', 'adaptative');
+
+		if (in_array($stickyness,['top','adaptative']))
 		{
-			$classes[] = 'auto-hide';
+			$classes[] = 'header-'.$stickyness;
+			$auto_hide = get_theme_mod('aemi_header_autohiding', 1) == 1;
+			if ($auto_hide)
+			{
+				$classes[] = 'header-auto-hide';
+			}
 		}
+		else {
+			$classes[] = 'header-absolute';
+		}
+
 		return $classes;
 	}
 }
@@ -478,6 +490,39 @@ if (!function_exists('aemi_remove_wpembeds'))
 		add_filter( 'rewrite_rules_array', 'aemi_disable_embeds_rewrites' );
 		// Remove filter of the oEmbed result before any HTTP requests are made.
 		remove_filter( 'pre_oembed_result', 'wp_filter_pre_oembed_result', 10 );
+	}
+}
+
+if (!function_exists('aemi_ga_script'))
+{
+	function aemi_ga_script()
+	{
+		$ga_id = get_theme_mod('aemi_ga_id','');
+		$type = get_theme_mod('aemi_ga_type','none');
+		if ($ga_id != '' && $type != 'none')
+		{
+			switch ($type) {
+				case 'gtag':
+					?><script async src="https://www.googletagmanager.com/gtag/js?id=<?= $ga_id ?>"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '<?= esc_js($ga_id) ?>');
+</script><?php
+					break;
+				case 'analytics':
+					?><script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', '<?= esc_js($ga_id) ?>', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script><?php
+					break;
+				default:
+					break;
+			}
+		}
 	}
 }
 

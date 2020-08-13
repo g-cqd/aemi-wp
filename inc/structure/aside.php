@@ -25,7 +25,14 @@ if (!function_exists('aemi_aside_wrapper_menu'))
 {
     function aemi_aside_wrapper_menu()
     {
-        ?><nav id="navigation-wrapper" class="wrapper"><?php
+		?><nav id="navigation-wrapper" class="wrapper"><?php
+
+		?><div class="header-section"><?php
+
+    		printf('<div><pre><code>%s</code></pre></div>',get_browser());
+
+		?></div><?php
+
             if (has_nav_menu('header-menu'))
             {
                 wp_nav_menu([
@@ -79,7 +86,7 @@ if (!function_exists('aemi_aside_progress_bar'))
 	function aemi_aside_progress_bar()
 	{
 		if (
-			get_theme_mod('aemi_type_'.get_post_type().'_progress_bar', 1) == 1 &&
+			get_theme_mod(aemi_setting(get_post_type(), 'progress_bar'), 1) == 1 &&
 			is_singular())
 		{
 			?><div id="site-progress-bar"<?= has_post_thumbnail() ? ' class="color-scheme-dark"' : '' ?>></div><?php

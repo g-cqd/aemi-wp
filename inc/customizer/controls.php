@@ -178,18 +178,39 @@ if (!function_exists('aemi_customizer_controls')) {
             'type'      =>      'checkbox'
         ]);
 
+        $wp_customize->add_control('aemi_display_comments', [
+            'label'     =>      esc_html__('Display Comments', 'aemi'),
+            'description'   =>  esc_html__('Disable this to hide comments and comment forms.', 'aemi'),
+            'section'   =>      'aemi_comments',
+            'settings'  =>      'aemi_display_comments',
+            'type'      =>      'checkbox'
+        ]);
+
         $wp_customize->add_control('aemi_search_button_display', [
             'label'     =>      esc_html__('Search Button', 'aemi'),
             'description'   =>  esc_html__('Display a search button on right side of header bar.', 'aemi'),
-            'section'   =>      'aemi_features',
+            'section'   =>      'aemi_search',
             'settings'  =>      'aemi_search_button_display',
             'type'      =>      'checkbox'
         ]);
 
+        $wp_customize->add_control('aemi_header_stickyness', [
+            'label'     =>      esc_html__('Header Stickyness', 'aemi'),
+            'description'   =>  esc_html__('Choose to keep the header in the view (top or adaptative) while scrolling or not. Adaptative option keeps the header at the bottom of the view on mobile devices.', 'aemi'),
+            'section'   =>      'aemi_header',
+            'settings'  =>      'aemi_header_stickyness',
+            'type'      =>      'radio',
+            'choices'   =>      [
+                'no'    =>      __('Do not keep in view','aemi'),
+                'top'   =>      __('Keep the header to the top of the view','aemi'),
+                'adaptative'   =>   __('Keep the header more accessible on mobile devices','aemi'),
+            ]
+        ]);
+
         $wp_customize->add_control('aemi_header_autohiding', [
             'label'     =>      esc_html__('Header Auto Hiding', 'aemi'),
-            'description'   =>  esc_html__('Allow header bar to disappear while scrolling down and come back when scroll up occurs.', 'aemi'),
-            'section'   =>      'aemi_features',
+            'description'   =>  esc_html__('Allow header bar to disappear while scrolling down and come back when scroll up occurs. Only works if "Header Stickyness" set to "Top" or "Adaptative".', 'aemi'),
+            'section'   =>      'aemi_header',
             'settings'  =>      'aemi_header_autohiding',
             'type'      =>      'checkbox',
         ]);
@@ -294,6 +315,26 @@ if (!function_exists('aemi_customizer_controls')) {
                 'choices'   =>      $custom_types
             ]
         ));
+
+        $wp_customize->add_control('aemi_ga_id', [
+            'label'     =>      esc_html__('Google Analytics ID', 'aemi'),
+            'description'   =>  esc_html__('Enter your Google Analytics ID to set up Google Analytics on this website.', 'aemi'),
+            'section'   =>      'aemi_analytics',
+            'type'      =>      'input'
+        ]);
+
+        $wp_customize->add_control('aemi_ga_type', [
+            'label'     =>      esc_html__('Google Analytics Method', 'aemi'),
+            'description'   =>  esc_html__('Choose the method to set up Google Analytics. If "gtag.js" or "analytics.js" is selected, please fill your Google Analytics ID.', 'aemi'),
+            'section'   =>      'aemi_analytics',
+            'type'      =>      'radio',
+            'choices'   =>      [
+                'none'  => __('None','aemi'),
+                'gtag'  => __('gtag.js','aemi'),
+                'analytics'  => __('analytics.js','aemi')
+            ]
+
+        ]);
 
         $wp_customize->add_control('aemi_header_js_code', [
             'label'     =>      esc_html__('Header JS Script', 'aemi'),

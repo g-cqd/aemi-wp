@@ -1,5 +1,26 @@
 <?php
 
+
+
+/*
+ * Hooks from ./setup.php
+ */
+add_action('after_setup_theme', 'aemi_setup');
+add_filter('wp_nav_menu_objects', 'aemi_header_menu_filter', 10, 2);
+/* Avoid WordPress to insert inline styling with galleries */
+add_filter('use_default_gallery_style', '__return_false');
+add_filter('wp_tag_cloud', 'aemi_tagcount_filter');
+// add_action( 'wp_head', 'aemi_pingback_header' );
+add_action('enqueue_block_editor_assets', 'aemi_gutenberg_editor_style');
+
+add_filter('comment_form_fields', 'aemi_custom_comment_fields_order');
+add_filter('comment_text', 'aemi_filter_comment_text');
+
+add_action('customize_register', 'aemi_load_customize_controls', 0);
+
+/*
+ * Hooks from ./extra.php
+ */
 if (get_theme_mod('aemi_remove_jquery_migrate',0) == 1)
 {
 	add_action('wp_default_scripts', 'aemi_remove_jquery_migrate');
@@ -18,8 +39,6 @@ add_filter('script_loader_tag', 'aemi_async_scripts_filter', 10, 2);
 add_filter('script_loader_tag', 'aemi_defer_scripts_filter', 10, 2);
 
 add_filter('get_the_archive_title', 'aemi_custom_archive_title');
-
-add_filter('comment_text', 'aemi_filter_comment_text');
 
 if (get_theme_mod('aemi_enable_svg_support',0) == 1)
 {

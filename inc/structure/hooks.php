@@ -17,6 +17,13 @@ if ( isset( $_SERVER['HTTP_USER_AGENT'] ) && ( ( strpos( $_SERVER['HTTP_USER_AGE
 }
 
 /**
+ * Head
+ * @see aemi_ga_script()
+ */
+add_action( 'aemi_head', 'aemi_ga_script', 10 );
+
+
+/**
  * Header
  * @see aemi_header_menu()
  * @see aemi_header_branding()
@@ -60,26 +67,30 @@ add_action( 'aemi_footer_after', 'aemi_footer_wp_footer', 10 );
  * @see aemi_post_excerpt()
  * @see aemi_posts_pagination()
  * @see aemi_post_navigation()
- * @see aemi_display_comments()
  */
 add_action( 'aemi_loop_post', 'aemi_post_header', 10 );
 add_action( 'aemi_loop_after','aemi_posts_pagination', 10 );
 add_action( 'aemi_single_post', 'aemi_post_header', 10 );
 add_action( 'aemi_single_post', 'aemi_post_content', 20 );
 add_action( 'aemi_single_post_after', 'aemi_post_meta_footer', 10 );
-add_action( 'aemi_single_post_after', 'aemi_display_comments', 20 );
 add_action( 'aemi_single_post_after', 'aemi_post_navigation', 30 );
 
 /**
  * Pages
  * @see aemi_page_header()
  * @see aemi_page_content()
- * @see aemi_display_comments()
  */
 add_action( 'aemi_page', 'aemi_page_header', 10 );
 add_action( 'aemi_page', 'aemi_page_content',	20 );
 add_action( 'aemi_page_after', 'aemi_post_meta_footer', 10 );
-add_action( 'aemi_page_after', 'aemi_display_comments', 20 );
+
+
+// Display comments
+if (get_theme_mod('aemi_display_comments',1)==1)
+{
+	add_action( 'aemi_single_post_after', 'aemi_display_comments', 20 );
+	add_action( 'aemi_page_after', 'aemi_display_comments', 20 );
+}
 
 /**
  * Extras

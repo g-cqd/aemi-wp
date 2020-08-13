@@ -62,12 +62,24 @@ if (!function_exists('aemi_add_setting_checkbox'))
 
 if (!function_exists('aemi_add_setting_radio'))
 {
-	function aemi_add_setting_radio($wp_customize,$setting,$default)
+	function aemi_add_setting_radio($wp_customize,$setting,$default,$critical = false)
 	{
-		$wp_customize->add_setting($setting, [
-			'default'			=> $default,
-			'sanitize_callback'	=> 'aemi_sanitize_radio',
-			'transport'			=> 'refresh',
-		]);
+		if ($critical)
+		{
+			$wp_customize->add_setting($setting, [
+				'default'			=> $default,
+				'capability'		=> 'edit_theme_options',
+				'sanitize_callback'	=> 'aemi_sanitize_radio',
+				'transport'			=> 'refresh',
+			]);
+		}
+		else
+		{
+			$wp_customize->add_setting($setting, [
+				'default'			=> $default,
+				'sanitize_callback'	=> 'aemi_sanitize_radio',
+				'transport'			=> 'refresh',
+			]);
+		}
 	}
 }

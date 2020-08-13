@@ -100,6 +100,11 @@ if (!function_exists('aemi_customizer_settings'))
 				'default' => 0
 			],
 			[
+				'name' => 'aemi_display_comments',
+				'type' => 'checkbox',
+				'default' => 1
+			],
+			[
 				'name' => 'aemi_search_button_display',
 				'type' => 'checkbox',
 				'default' => 0
@@ -108,6 +113,11 @@ if (!function_exists('aemi_customizer_settings'))
 				'name' => 'aemi_header_autohiding',
 				'type' => 'checkbox',
 				'default' => 0
+			],
+			[
+				'name' => 'aemi_header_stickyness',
+				'type' => 'radio',
+				'default' => 'adaptative'
 			],
 			[
 				'name' => 'aemi_remove_jquery_migrate',
@@ -151,6 +161,12 @@ if (!function_exists('aemi_customizer_settings'))
 				'name' => 'aemi_loop_add_types',
 				'type' => 'checkbox',
 				'default' => 0,
+				'critical' => true
+			],
+			[
+				'name' => 'aemi_ga_type',
+				'type' => 'radio',
+				'default' => 'none',
 				'critical' => true
 			]
 		];
@@ -203,6 +219,11 @@ if (!function_exists('aemi_customizer_settings'))
 		$wp_customize->add_setting('aemi_footer_js_code', [
 			'capability'		=> 'edit_theme_options',
 			'sanitize_callback' => 'aemi_raw_js_code',
+		]);
+
+		$wp_customize->add_setting('aemi_ga_id', [
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback' => 'sanitize_text_field',
 		]);
 	}
 }

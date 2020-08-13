@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.4.2
 * Requires PHP: 7.2
-* Version: 2.0-beta9
+* Version: 2.0-beta10
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -89,6 +89,11 @@ Source: https://github.com/originecode/AeMi
 
 ## Changelog
 
+### 2.0-beta10 :
+	- Added : Google Analytics Script Integration (gtag.js or analytics.js)
+	- Added : Possibility to remove disable Comments
+	- Added : Header Settings :
+		- Stickyness : None, Top, Adaptative
 ### 2.0-beta9 :
 	- Improved : Content Types Settings
 	- Added : Content Loop - Category Filtering
