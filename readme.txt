@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.4.2
 * Requires PHP: 7.2
-* Version: 2.0-beta11
+* Version: 2.0-beta12
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -89,6 +89,8 @@ Source: https://github.com/originecode/AeMi
 
 ## Changelog
 
+### 2.0-beta12 :
+	- Fixed : A unwanted character in single.php
 ### 2.0-beta11 :
 	- Added : Bing Webmaster Tools Integration via meta tag
 	- Improved : Possibility to remove disable Comments
