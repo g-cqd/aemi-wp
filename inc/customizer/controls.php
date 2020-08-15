@@ -215,12 +215,17 @@ if (!function_exists('aemi_customizer_controls')) {
             'type'      =>      'checkbox',
         ]);
 
-        $wp_customize->add_control('aemi_remove_jquery_migrate', [
+        $wp_customize->add_control('aemi_remove_jquery', [
             'label'     =>      esc_html__('Remove jQuery Migrate', 'aemi'),
-            'description'   =>  esc_html__('As far as Aemi needs not jQuery, Aemi needs not jQuery Migrate.', 'aemi'),
+            'description'   =>  esc_html__('As far as Aemi needs not jQuery, Aemi needs not jQuery Migrate. Maybe do you.', 'aemi'),
             'section'   =>      'aemi_advanced_features',
-            'settings'  =>      'aemi_remove_jquery_migrate',
-            'type'      =>      'checkbox',
+            'settings'  =>      'aemi_remove_jquery',
+            'type'      =>      'radio',
+            'choices'   =>      [
+                'all'   =>      __('Remove every jQuery-related resources.','aemi'),
+                'migrate'   =>  __('Remove only jQuery Migrate','aemi'),
+                'keep'  =>      __('Do not remove and keep them all')
+            ]
         ]);
 
         $wp_customize->add_control('aemi_remove_script_version', [
@@ -247,6 +252,39 @@ if (!function_exists('aemi_customizer_controls')) {
             'type'      =>      'checkbox',
         ]);
 
+        $wp_customize->add_control('aemi_remove_generator', [
+            'label'     =>      esc_html__('Remove Generator Meta Tag', 'aemi'),
+            'description'   =>  esc_html__('This removes display of WordPress Version.', 'aemi'),
+            'section'   =>      'aemi_advanced_features',
+            'settings'  =>      'aemi_remove_generator',
+            'type'      =>      'checkbox',
+        ]);
+
+        $wp_customize->add_control('aemi_remove_rsd_link', [
+            'label'     =>      esc_html__('Remove XML-RPC RSD Link', 'aemi'),
+            'description'   =>  esc_html__('If you do not know what it is, you need not it, otherwise reactivate it.', 'aemi'),
+            'section'   =>      'aemi_advanced_features',
+            'settings'  =>      'aemi_remove_rsd_link',
+            'type'      =>      'checkbox',
+        ]);
+
+        $wp_customize->add_control('aemi_remove_wlwmanifest_link', [
+            'label'     =>      esc_html__('Remove Windows Live Writer', 'aemi'),
+            'description'   =>  esc_html__('Windows Live Writer is a native Microsoft blogging software. It is not much used anymore. So Aemi Theme disables it by default.', 'aemi'),
+            'section'   =>      'aemi_advanced_features',
+            'settings'  =>      'aemi_remove_wlwmanifest_link',
+            'type'      =>      'checkbox',
+        ]);
+
+        $wp_customize->add_control('aemi_remove_shortlink', [
+            'label'     =>      esc_html__('Remove WordPress Shortlink', 'aemi'),
+            'description'   =>  esc_html__('Shortlinks are placed in head tag. Rarely used, if you use pretty permalinks such as domain-name/post-name, you can remove them.', 'aemi'),
+            'section'   =>      'aemi_advanced_features',
+            'settings'  =>      'aemi_remove_shortlink',
+            'type'      =>      'checkbox',
+        ]);
+
+
         $wp_customize->add_control('aemi_enable_svg_support', [
             'label'     =>      esc_html__('Enable SVG Upload Support', 'aemi'),
             'description'   =>  esc_html__('Administrator only.', 'aemi'),
@@ -261,6 +299,20 @@ if (!function_exists('aemi_customizer_controls')) {
             'section'   =>      'aemi_critical_features',
             'settings'  =>      'aemi_add_expire_headers',
             'type'      =>      'checkbox',
+        ]);
+
+        $wp_customize->add_control('aemi_remove_apiworg', [
+            'label'     =>      esc_html__('Remove WordPress REST API', 'aemi'),
+            'description'   =>  esc_html__('Remove REST API in Wordpress. Mostly used admin-side, perhaps by some of your plugins on public side. Non-admn', 'aemi'),
+            'section'   =>      'aemi_critical_features',
+            'settings'  =>      'aemi_remove_apiworg',
+            'type'      =>      'radio',
+            'choices'   =>      [
+                'all'   => __('Remove for All Users','aemi'),
+                'non-admins'     => __('Remove for Non-Admins Users'),
+                'public'     => __('Remove for Public Users'),
+                'keep'     => __('Keep it enabled')
+            ]
         ]);
 
         $wp_customize->add_control('aemi_loop_cat_filtering', [
@@ -320,20 +372,38 @@ if (!function_exists('aemi_customizer_controls')) {
             'label'     =>      esc_html__('Google Analytics ID', 'aemi'),
             'description'   =>  esc_html__('Enter your Google Analytics ID to set up Google Analytics on this website.', 'aemi'),
             'section'   =>      'aemi_analytics',
+            'settings'  =>      'aemi_ga_id',
             'type'      =>      'input'
         ]);
+
 
         $wp_customize->add_control('aemi_ga_type', [
             'label'     =>      esc_html__('Google Analytics Method', 'aemi'),
             'description'   =>  esc_html__('Choose the method to set up Google Analytics. If "gtag.js" or "analytics.js" is selected, please fill your Google Analytics ID.', 'aemi'),
             'section'   =>      'aemi_analytics',
+            'settings'  =>      'aemi_ga_type',
             'type'      =>      'radio',
             'choices'   =>      [
                 'none'  => __('None','aemi'),
                 'gtag'  => __('gtag.js','aemi'),
                 'analytics'  => __('analytics.js','aemi')
             ]
+        ]);
 
+        $wp_customize->add_control('aemi_bing_meta_tag', [
+            'label'     =>      esc_html__('Enable Bing Meta Tag', 'aemi'),
+            'description'   =>  esc_html__('Enable this feature to be able to set up Bing Webmaster Tools on this website.', 'aemi'),
+            'section'   =>      'aemi_analytics',
+            'settings'  =>      'aemi_bing_meta_tag',
+            'type'      =>      'checkbox'
+        ]);
+
+        $wp_customize->add_control('aemi_bing_meta_tag_content', [
+            'label'     =>      esc_html__('Bing Meta Tag', 'aemi'),
+            'description'   =>  esc_html__('Enter your Bing Meta Tag to set up Bing Webmaster Tools on this website.', 'aemi'),
+            'section'   =>      'aemi_analytics',
+            'settings'  =>      'aemi_bing_meta_tag_content',
+            'type'      =>      'input'
         ]);
 
         $wp_customize->add_control('aemi_header_js_code', [

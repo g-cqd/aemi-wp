@@ -120,9 +120,9 @@ if (!function_exists('aemi_customizer_settings'))
 				'default' => 'adaptative'
 			],
 			[
-				'name' => 'aemi_remove_jquery_migrate',
-				'type' => 'checkbox',
-				'default' => 0
+				'name' => 'aemi_remove_jquery',
+				'type' => 'radio',
+				'default' => 'all'
 			],
 			[
 				'name' => 'aemi_remove_script_version',
@@ -167,6 +167,42 @@ if (!function_exists('aemi_customizer_settings'))
 				'name' => 'aemi_ga_type',
 				'type' => 'radio',
 				'default' => 'none',
+				'critical' => true
+			],
+			[
+				'name' => 'aemi_remove_generator',
+				'type' => 'checkbox',
+				'default' => 0,
+				'critical' => true
+			],
+			[
+				'name' => 'aemi_remove_rsd_link',
+				'type' => 'checkbox',
+				'default' => 1,
+				'critical' => true
+			],
+			[
+				'name' => 'aemi_remove_wlwmanifest_link',
+				'type' => 'checkbox',
+				'default' => 1,
+				'critical' => true
+			],
+			[
+				'name' => 'aemi_remove_shortlink',
+				'type' => 'checkbox',
+				'default' => 1,
+				'critical' => true
+			],
+			[
+				'name' => 'aemi_remove_apiworg',
+				'type' => 'radio',
+				'default' => 'non-admins',
+				'critical' => true
+			],
+			[
+				'name' => 'aemi_bing_meta_tag',
+				'type' => 'checkbox',
+				'default' => 0,
 				'critical' => true
 			]
 		];
@@ -222,6 +258,10 @@ if (!function_exists('aemi_customizer_settings'))
 		]);
 
 		$wp_customize->add_setting('aemi_ga_id', [
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback' => 'sanitize_text_field',
+		]);
+		$wp_customize->add_setting('aemi_bing_meta_tag_content', [
 			'capability'		=> 'edit_theme_options',
 			'sanitize_callback' => 'sanitize_text_field',
 		]);

@@ -89,6 +89,16 @@ Source: https://github.com/originecode/AeMi
 
 ## Changelog
 
+### 2.0-beta11 :
+	- Added : Bing Webmaster Tools Integration via meta tag
+	- Improved : Possibility to remove disable Comments
+	- Added : Advanced Features :
+		- Advanced jQuery Removal
+		- Remove Generator Meta Tag
+		- Remove XML-RPC RSD Link
+		- Remove Windows Live Writer
+		- Remove WordPress Shortlinks
+	- Improved : Critical Features : jQuery managment 
 ### 2.0-beta10 :
 	- Added : Google Analytics Script Integration (gtag.js or analytics.js)
 	- Added : Possibility to remove disable Comments

@@ -11,16 +11,13 @@ add_action( 'after_setup_theme', 'aemi_content_width', 0 );
 add_action( 'after_setup_theme', 'aemi_setup' );
 add_action( 'widgets_init', 'aemi_widgets_init' );
 add_action( 'wp_enqueue_scripts', 'aemi_scripts', 10 );
-if ( isset( $_SERVER['HTTP_USER_AGENT'] ) && ( ( strpos( $_SERVER['HTTP_USER_AGENT'], 'MSIE' ) !== false ) || ( strpos( $_SERVER['HTTP_USER_AGENT'], 'Trident/7.0' ) !== false ) ) )
-{
-	add_action( 'wp_enqueue_scripts', 'aemi_ie_scripts', 20 );
-}
 
 /**
  * Head
  * @see aemi_ga_script()
  */
 add_action( 'aemi_head', 'aemi_ga_script', 10 );
+add_action( 'aemi_head', 'aemi_bing_meta_tag', 20 );
 
 
 /**
