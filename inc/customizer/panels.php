@@ -62,12 +62,6 @@ if (!function_exists('aemi_customizer_panels'))
             'title'      => esc_html__('Security', 'aemi'),
         ]);
 
-
-        $wp_customize->add_section('aemi_technical', [
-            'panel'      => 'aemi_panel',
-            'title'      => esc_html__('Technical', 'aemi'),
-        ]);
-
         foreach (get_post_types(['public' => true], 'objects') as $post_type)
         {
             $post_name = $post_type->name;

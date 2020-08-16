@@ -38,7 +38,7 @@ if (!function_exists('aemi_bing_meta_tag'))
 	function aemi_bing_meta_tag()
 	{
 		$bing_content = get_theme_mod('aemi_bing_meta_tag_content','');
-		if ($bing_content != '')
+		if (is_enabled('aemi_bing_meta_tag',0) && $bing_content != '')
 		{
 			?><meta name="msvalidate.01" content="<?= esc_attr($bing_content) ?>" /><?php
 		}

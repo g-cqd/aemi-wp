@@ -6,6 +6,7 @@ if (!function_exists('aemi_customizer_settings__analytics'))
 	{
 		$wp_customize->add_setting('aemi_ga_type', [
 			'default' => 'none',
+			'capability'		=> 'edit_theme_options',
 			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
 		]);
 
@@ -38,6 +39,7 @@ if (!function_exists('aemi_customizer_settings__colors'))
 			'default' => 'auto',
 			'sanitize_callback' => 'aemi_sanitize_dropdown_options'
 		]);
+
 		aemi_add_settings([
 			[
 				'name' => 'aemi_color_scheme_user',
@@ -57,6 +59,11 @@ if (!function_exists('aemi_customizer_settings__comments'))
 				'name' => 'aemi_display_comments',
 				'type' => 'checkbox',
 				'default' => 1
+			],
+			[
+				'name' => 'aemi_remove_recent_comments_style',
+				'type' => 'checkbox',
+				'default' => 0
 			]
 		], $wp_customize);
 	}
@@ -160,22 +167,26 @@ if (!function_exists('aemi_customizer_settings__performance'))
 			[
 				'name' => 'aemi_remove_jquery',
 				'type' => 'radio',
-				'default' => 'all'
+				'default' => 'all',
+				'critical' => true
 			],
 			[
 				'name' => 'aemi_remove_script_version',
 				'type' => 'checkbox',
-				'default' => 0
+				'default' => 0,
+				'critical' => true
 			],
 			[
 				'name' => 'aemi_remove_emojis',
 				'type' => 'checkbox',
-				'default' => 0
+				'default' => 0,
+				'critical' => true
 			],
 			[
 				'name' => 'aemi_remove_wpembeds',
 				'type' => 'checkbox',
-				'default' => 0
+				'default' => 0,
+				'critical' => true
 			],
 			[
 				'name' => 'aemi_remove_generator',
@@ -202,12 +213,30 @@ if (!function_exists('aemi_customizer_settings__performance'))
 				'critical' => true
 			],
 			[
-				'name' => 'aemi_add_gzip_compression',
+				'name' => 'aemi_add_expire_headers',
+				'type' => 'checkbox',
+				'default' => 0,
+				'critical' => true
+			],
+			[
+				'name' => 'aemi_remove_apiworg',
+				'type' => 'radio',
+				'default' => 'non-admins',
+				'critical' => true
+			],
+			[
+				'name' => 'aemi_add_keep_alive',
 				'type' => 'checkbox',
 				'default' => 0,
 				'critical' => true
 			]
 		], $wp_customize);
+
+		$wp_customize->add_setting('aemi_add_compression',[
+			'default' => 'none',
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
 	}
 }
 
@@ -320,12 +349,6 @@ if (!function_exists('aemi_customizer_settings__security'))
 				'critical' => true
 			],
 			[
-				'name' => 'aemi_add_xframe_options',
-				'type' => 'checkbox',
-				'default' => 0,
-				'critical' => true
-			],
-			[
 				'name' => 'aemi_add_csph',
 				'type' => 'checkbox',
 				'default' => 0,
@@ -348,21 +371,7 @@ if (!function_exists('aemi_customizer_settings__security'))
 				'type' => 'checkbox',
 				'default' => 0,
 				'critical' => true
-			]
-		], $wp_customize);
-		
-		$wp_customize->add_setting('aemi_add_referer',[
-			'default' => 'not-set-up',
-			'sanitize_callback' => 'aemi_sanitize_dropdown_options'
-		]);
-	}
-}
-
-if (!function_exists('aemi_customizer_settings__technical'))
-{
-	function aemi_customizer_settings__technical($wp_customize)
-	{
-		aemi_add_settings([
+			],
 			[
 				'name' => 'aemi_enable_svg_support',
 				'type' => 'checkbox',
@@ -370,18 +379,24 @@ if (!function_exists('aemi_customizer_settings__technical'))
 				'critical' => true
 			],
 			[
-				'name' => 'aemi_add_expire_headers',
+				'name' => 'aemi_add_powered_by',
 				'type' => 'checkbox',
 				'default' => 0,
 				'critical' => true
-			],
-			[
-				'name' => 'aemi_remove_apiworg',
-				'type' => 'radio',
-				'default' => 'non-admins',
-				'critical' => true
 			]
 		], $wp_customize);
+		
+		$wp_customize->add_setting('aemi_add_xframe_options',[
+			'default' => 'not-set',
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options'
+		]);
+
+		$wp_customize->add_setting('aemi_add_referer',[
+			'default' => 'not-set',
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options'
+		]);
 	}
 }
 

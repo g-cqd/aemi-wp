@@ -13,14 +13,16 @@ if (!function_exists('aemi_scripts'))
 		// -- Register Scripts -- //
 		wp_register_script( 'aemi-index', get_template_directory_uri() . '/assets/scripts/index.js', false, false, false );
 		wp_register_script( 'aemi-script', get_template_directory_uri() . '/assets/scripts/aemi.js', false, false, false );
-		// -- Register Styles -- //
+		// -- Enqueue Styles -- //
 		wp_enqueue_style( 'aemi-fonts' );
 		wp_enqueue_style( 'aemi-standard' );
 		wp_enqueue_style( 'aemi-styles' );
 		wp_enqueue_style( 'aemi-gutenberg' );
-		// -- Register Scripts -- //
+		// -- Enqueue Scripts -- //
 		wp_enqueue_script( 'aemi-index' );
 		wp_enqueue_script( 'aemi-script' );
+		// -- Dequeue Default Styles -- //
+		wp_dequeue_style( 'wp-block-library' );
 		// -- Defer Scripts -- //
 		aemi_defer_scripts([ 'aemi-index', 'aemi-script' ]);
 		

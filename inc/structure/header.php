@@ -49,11 +49,19 @@ if (!function_exists('aemi_header_branding'))
 
 		$has_custom_logo = function_exists('the_custom_logo') && has_custom_logo();
 		$has_jetpack_custom_logo = function_exists('jetpack_has_site_logo') && jetpack_has_site_logo();
+		
 		$light_scheme_logo = get_theme_mod('aemi_light_scheme_logo');
 		$dark_scheme_logo = get_theme_mod('aemi_dark_scheme_logo');
+		
+		$color_scheme = get_theme_mod('aemi_color_scheme','auto');
+		$scheme_user_pref = is_enabled('aemi_color_scheme_user',0);
+		$lazy_load = $scheme_user_pref || $color_scheme == 'auto';
+
 		$has_light_scheme_logo = $light_scheme_logo != '';
 		$has_dark_scheme_logo = $dark_scheme_logo != '';
+
 		$has_aemi_custom_logo = $has_light_scheme_logo || $has_dark_scheme_logo;
+		
 		$has_logo = $has_custom_logo || $has_jetpack_custom_logo || $has_dark_scheme_logo || $has_light_scheme_logo;
 
 		printf(
@@ -81,16 +89,18 @@ if (!function_exists('aemi_header_branding'))
 			if ($has_custom_logo || $has_aemi_custom_logo)
 			{
 				?><div id="site-logo"><?php
-				if ($has_light_scheme_logo) {
+				if ($has_light_scheme_logo && $color_scheme == 'light' || $color_scheme != 'dark' || $scheme_user_pref)
+				{
 
 					?><div class="light-scheme-logo"><?php
 
 					printf(
-						'<a href="%1$s" class="custom-logo-link" title="%2$s - %3$s" rel="home"><img src="%4$s" alt="%2$s Logo for Light Scheme" height="40"></a>',
+						'<a href="%1$s" class="custom-logo-link" title="%2$s - %3$s" rel="home"><img src="%4$s" alt="%2$s Logo for Light Scheme" height="40"%5$s></a>',
 						esc_url(home_url()),
 						esc_attr(get_bloginfo('name')),
 						esc_attr__('Home', 'aemi'),
-						esc_url(aemi_ensure_https($light_scheme_logo))
+						esc_url(aemi_ensure_https($light_scheme_logo)),
+						$lazy_load ? ' loading="lazy"' : ''
 					);
 
 					?></div><?php
@@ -100,16 +110,17 @@ if (!function_exists('aemi_header_branding'))
 				{
 					?><div class="light-scheme-logo"><?php the_custom_logo(); ?></div><?php
 				}
-				if ($has_dark_scheme_logo)
+				if ($has_dark_scheme_logo && $color_scheme == 'dark' || $color_scheme != 'light' || $scheme_user_pref)
 				{
 					?><div class="dark-scheme-logo"><?php
 
 					printf(
-						'<a href="%1$s" class="custom-logo-link" title="%2$s - %3$s" rel="home"><img src="%4$s" alt="%2$s Logo for Dark Scheme" height="40"></a>',
+						'<a href="%1$s" class="custom-logo-link" title="%2$s - %3$s" rel="home"><img src="%4$s" alt="%2$s Logo for Dark Scheme" height="40"%5$s></a>',
 						esc_url(home_url()),
 						esc_attr(get_bloginfo('name')),
 						esc_attr__('Home', 'aemi'),
-						esc_url(aemi_ensure_https($dark_scheme_logo))
+						esc_url(aemi_ensure_https($dark_scheme_logo)),
+						$lazy_load ? ' loading="lazy"' : ''
 					);
 
 					?></div><?php

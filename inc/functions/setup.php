@@ -43,6 +43,25 @@ if (!function_exists('aemi_setup'))
 		);
 
 		add_theme_support( 'html5' );
+		add_theme_support( 'align-wide' );
+		add_theme_support( 'site-logo' );
+		// add_theme_support( 'wp-block-styles' );
+		add_theme_support( 'custom-line-height' );
+		add_theme_support( 'custom-units' );
+		//add_theme_support( 'custom-units', 'rem', 'em' );
+
+		add_theme_support( 'responsive-embeds' );
+		add_theme_support( 'experimental-link-color' );
+		add_theme_support( 'experimental-custom-spacing' );
+
+		add_theme_support( 'editor-styles' );
+		// add_theme_support( 'dark-editor-style' );
+		add_editor_style([ 'assets/editor-style.css' ]);
+
+		// add_theme_support( 'disable-custom-font-sizes' );
+		// add_theme_support( 'disable-custom-colors' );
+		// add_theme_support( 'disable-custom-gradients' );
+		// remove_theme_support( 'core-block-patterns' );
 
 		add_theme_support(
 			'custom-background',
@@ -70,8 +89,6 @@ if (!function_exists('aemi_setup'))
 			'admin-preview-callback' => '',
 		]);
 
-		add_theme_support('site-logo');
-
 		add_theme_support('custom-logo', [
 			'height'      => 92,
 			'width'		  => 276,
@@ -79,8 +96,6 @@ if (!function_exists('aemi_setup'))
 			'flex-width'  => true,
 			'header-text' => [],
 		]);
-
-		add_editor_style([ 'assets/editor-style.css' ]);
 
 		$starter_content = apply_filters('aemi_starter_content', [
 			'widgets' => [

@@ -85,6 +85,14 @@ if (!function_exists('aemi_customizer_controls__comments'))
             'settings'  =>      'aemi_display_comments',
             'type'      =>      'checkbox'
         ]);
+
+        $wp_customize->add_control('aemi_remove_recent_comments_style', [
+            'label'     =>      esc_html__('Remove "Recent Comments" Widget Inline CSS', 'aemi'),
+            'description'   =>  esc_html__('Remove default inline-css style for "Recent Comments" Widget.', 'aemi'),
+            'section'   =>      'aemi_comments',
+            'settings'  =>      'aemi_remove_recent_comments_style',
+            'type'      =>      'checkbox'
+        ]);
     }
 }
 
@@ -289,11 +297,48 @@ if (!function_exists('aemi_customizer_controls__performance'))
             'type'      =>      'checkbox',
         ]);
 
-        $wp_customize->add_control('aemi_add_gzip_compression', [
-            'label'     =>      esc_html__('Add GZip Compression', 'aemi'),
+        $wp_customize->add_control('aemi_add_expire_headers', [
+            'label'     =>      esc_html__('Add Expire Headers', 'aemi'),
+            'description'   =>  esc_html__('Edit .htaccess file and add expire headers to improve browser caching.', 'aemi'),
+            'section'   =>      'aemi_performance',
+            'settings'  =>      'aemi_add_expire_headers',
+            'type'      =>      'checkbox',
+        ]);
+
+        $wp_customize->add_control(new Aemi_Dropdown_Options(
+            $wp_customize,
+            'aemi_add_compression', [
+            'label'     =>      esc_html__('Add Compression', 'aemi'),
             'description'   =>  esc_html__('Reduce global resource transfer size.', 'aemi'),
             'section'   =>      'aemi_performance',
-            'settings'  =>      'aemi_add_gzip_compression',
+            'settings'  =>      'aemi_add_compression',
+            'choices'   =>      [
+                'none'  =>  __('None','aemi'),
+                'gzip'  =>  __('GZip','aemi'),
+                'brotli'  =>  __('Brotli','aemi'),
+                'all'  =>  __('All','aemi'),
+            ]
+        ]));
+
+        $wp_customize->add_control('aemi_remove_apiworg', [
+            'label'     =>      esc_html__('Remove WordPress REST API', 'aemi'),
+            'description'   =>  esc_html__('Remove REST API in Wordpress. Mostly used admin-side, perhaps by some of your plugins on public side. Non-admn', 'aemi'),
+            'section'   =>      'aemi_performance',
+            'settings'  =>      'aemi_remove_apiworg',
+            'type'      =>      'radio',
+            'choices'   =>      [
+                'all'   => __('Remove for All Users','aemi'),
+                'non-admins'     => __('Remove for Non-Admins Users'),
+                'public'     => __('Remove for Public Users'),
+                'keep'     => __('Keep it enabled')
+            ]
+        ]);
+
+        $wp_customize->add_control('aemi_add_keep_alive', [
+            'label'     =>      esc_html__('Add Keep Alive Headers', 'aemi'),
+            'description'   =>  esc_html__('Prevent browser to create a connection to server for each request.', 'aemi'),
+            'section'   =>      'aemi_performance',
+            'settings'  =>      'aemi_add_keep_alive',
             'type'      =>      'checkbox',
         ]);
     }
@@ -471,13 +516,19 @@ if (!function_exists('aemi_customizer_controls__security'))
             'type'      =>      'checkbox',
         ]);
 
-        $wp_customize->add_control('aemi_add_xframe_options', [
+        $wp_customize->add_control(new Aemi_Dropdown_Options(
+            $wp_customize,
+            'aemi_add_xframe_options', [
             'label'     =>      esc_html__('Add X-Frame-Options Header', 'aemi'),
             'description'   =>  esc_html__('X-Frame Options prevent your website to be embedded in <frame>, <iframe>, <embed> or <object> tags.', 'aemi'),
             'section'   =>      'aemi_security',
             'settings'  =>      'aemi_add_xframe_options',
-            'type'      =>      'checkbox',
-        ]);
+            'choices'   =>      [
+                'not-set'   =>  __('Not set','aemi'),
+                'deny'      =>  __('Deny','aemi'),
+                'sameorigin'   =>  __('Same Origin','aemi')
+            ]
+        ]));
 
         $wp_customize->add_control('aemi_add_hsts', [
             'label'     =>      esc_html__('Add HTTP Strict Transport Security Header', 'aemi'),
@@ -510,6 +561,7 @@ if (!function_exists('aemi_customizer_controls__security'))
              'settings'  =>      'aemi_add_csph',
              'type'      =>      'checkbox',
         ]);
+
         $wp_customize->add_control(new Aemi_Dropdown_Options(
             $wp_customize,
             'aemi_add_referer', [
@@ -518,7 +570,7 @@ if (!function_exists('aemi_customizer_controls__security'))
              'section'   =>      'aemi_security',
              'settings'  =>      'aemi_add_referer',
              'choices'  => [
-                'not-set-up'                        => __('Not Set Up','aemi'),
+                'not-set'                        => __('Not set','aemi'),
                 'no-referrer'                       => __('No Referrer', 'aemi'),
                 'no-referrer-when-downgrade'        => __('No Referrer when Downgrade', 'aemi'),
                 'same-origin'                       => __('Same Origin', 'aemi'),
@@ -529,41 +581,21 @@ if (!function_exists('aemi_customizer_controls__security'))
                 'unsafe-url'                        => __('Unsafe URL', 'aemi'),
              ]
         ]));
-    }
-}
 
-if (!function_exists('aemi_customizer_controls__technical'))
-{
-    function aemi_customizer_controls__technical($wp_customize)
-    {
         $wp_customize->add_control('aemi_enable_svg_support', [
             'label'     =>      esc_html__('Enable SVG Upload Support', 'aemi'),
             'description'   =>  esc_html__('Administrator only.', 'aemi'),
-            'section'   =>      'aemi_technical',
+            'section'   =>      'aemi_security',
             'settings'  =>      'aemi_enable_svg_support',
             'type'      =>      'checkbox',
         ]);
 
-        $wp_customize->add_control('aemi_add_expire_headers', [
-            'label'     =>      esc_html__('Add Expire Headers', 'aemi'),
-            'description'   =>  esc_html__('Edit .htaccess file and add expire headers to improve browser caching.', 'aemi'),
-            'section'   =>      'aemi_technical',
-            'settings'  =>      'aemi_add_expire_headers',
+        $wp_customize->add_control('aemi_add_powered_by', [
+            'label'     =>      esc_html__('Remove X-Powered-By Header', 'aemi'),
+            'description'   =>  esc_html__('Reduce informations disclosed in HTTP Headers.', 'aemi'),
+            'section'   =>      'aemi_security',
+            'settings'  =>      'aemi_add_powered_by',
             'type'      =>      'checkbox',
-        ]);
-
-        $wp_customize->add_control('aemi_remove_apiworg', [
-            'label'     =>      esc_html__('Remove WordPress REST API', 'aemi'),
-            'description'   =>  esc_html__('Remove REST API in Wordpress. Mostly used admin-side, perhaps by some of your plugins on public side. Non-admn', 'aemi'),
-            'section'   =>      'aemi_technical',
-            'settings'  =>      'aemi_remove_apiworg',
-            'type'      =>      'radio',
-            'choices'   =>      [
-                'all'   => __('Remove for All Users','aemi'),
-                'non-admins'     => __('Remove for Non-Admins Users'),
-                'public'     => __('Remove for Public Users'),
-                'keep'     => __('Keep it enabled')
-            ]
         ]);
     }
 }
