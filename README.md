@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.4.2
 * Requires PHP: 7.2
-* Version: 2.0-beta12
+* Version: 2.0-beta13
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -89,6 +89,13 @@ Source: https://github.com/originecode/AeMi
 
 ## Changelog
 
+### 2.0-beta13 :
+	- Added : .htaccess Theme Modifications - Security & Performance
+		- HSTS, X-XSS, X-Frame-Options, Expect-CT, CSP, X-Content-Type-Options, Referrer Policy and GZip Compression
+	- Improved : Replaced Some Radio-buttons by Custom Dropdown
+	- Fixed : Placed Hooks in hooks.php
+	- Improved : Organized Settings and Controls source code
+	- Improved : Search Form
 ### 2.0-beta12 :
 	- Fixed : A unwanted character in single.php
 ### 2.0-beta11 :

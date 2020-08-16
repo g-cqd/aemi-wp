@@ -1,11 +1,147 @@
 <?php
 
-
-if (!function_exists('aemi_customizer_settings'))
+if (!function_exists('aemi_customizer_settings__analytics'))
 {
-	function aemi_customizer_settings($wp_customize)
+	function aemi_customizer_settings__analytics($wp_customize)
+	{
+		$wp_customize->add_setting('aemi_ga_type', [
+			'default' => 'none',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
+
+		aemi_add_settings([
+			[
+				'name' => 'aemi_bing_meta_tag',
+				'type' => 'checkbox',
+				'default' => 0,
+				'critical' => true
+			]
+		], $wp_customize);
+
+		$wp_customize->add_setting('aemi_ga_id', [
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback' => 'sanitize_text_field',
+		]);
+
+		$wp_customize->add_setting('aemi_bing_meta_tag_content', [
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback' => 'sanitize_text_field',
+		]);
+	}
+}
+
+if (!function_exists('aemi_customizer_settings__colors'))
+{
+	function aemi_customizer_settings__colors($wp_customize)
+	{
+		$wp_customize->add_setting( 'aemi_color_scheme',[
+			'default' => 'auto',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options'
+		]);
+		aemi_add_settings([
+			[
+				'name' => 'aemi_color_scheme_user',
+				'type' => 'checkbox',
+				'default' => 0
+			]
+		], $wp_customize);
+	}
+}
+
+if (!function_exists('aemi_customizer_settings__comments'))
+{
+	function aemi_customizer_settings__comments($wp_customize)
+	{
+		aemi_add_settings([
+			[
+				'name' => 'aemi_display_comments',
+				'type' => 'checkbox',
+				'default' => 1
+			]
+		], $wp_customize);
+	}
+}
+
+if (!function_exists('aemi_customizer_settings__content_loop'))
+{
+	function aemi_customizer_settings__content_loop($wp_customize)
 	{
 
+		aemi_add_settings([
+			[
+				'name' => 'aemi_loop_cat_filtering',
+				'type' => 'checkbox',
+				'default' => 0,
+				'critical' => true
+			],
+			[
+				'name' => 'aemi_loop_add_types',
+				'type' => 'checkbox',
+				'default' => 0,
+				'critical' => true
+			]
+		], $wp_customize);
+
+		$categories = get_categories();
+
+		$cat_ids = [];
+
+		foreach ($categories as $cat)
+		{
+			$cat_IDs[] = $cat->cat_ID;
+		}
+
+		$wp_customize->add_setting('aemi_loop_cat_filters', [
+			'default' => $cat_IDs,
+			'sanitize_callback' => 'aemi_sanitize_checkbox_multiple'
+		]);
+
+		$wp_customize->add_setting('aemi_loop_added_types', [
+			'default' => ['post'],
+			'sanitize_callback' => 'aemi_sanitize_checkbox_multiple'
+		]);
+	}
+}
+
+if (!function_exists('aemi_customizer_settings__custom_scripts'))
+{
+	function aemi_customizer_settings__custom_scripts($wp_customize)
+	{
+		$wp_customize->add_setting('aemi_header_js_code', [
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback' => 'aemi_raw_js_code',
+		]);
+
+		$wp_customize->add_setting('aemi_footer_js_code', [
+			'capability'		=> 'edit_theme_options',
+			'sanitize_callback' => 'aemi_raw_js_code',
+		]);
+	}
+}
+
+if (!function_exists('aemi_customizer_settings__header'))
+{
+	function aemi_customizer_settings__header($wp_customize)
+	{
+		aemi_add_settings([
+			[
+				'name' => 'aemi_header_autohiding',
+				'type' => 'checkbox',
+				'default' => 0
+			],
+			[
+				'name' => 'aemi_header_stickyness',
+				'type' => 'radio',
+				'default' => 'adaptative'
+			]
+		], $wp_customize);
+	}
+}
+
+if (!function_exists('aemi_customizer_settings__identity'))
+{
+	function aemi_customizer_settings__identity($wp_customize)
+	{
 		$wp_customize->add_setting('aemi_light_scheme_logo', [
 
 		]);
@@ -13,7 +149,72 @@ if (!function_exists('aemi_customizer_settings'))
 		$wp_customize->add_setting('aemi_dark_scheme_logo', [
 			
 		]);
+	}
+}
 
+if (!function_exists('aemi_customizer_settings__performance'))
+{
+	function aemi_customizer_settings__performance($wp_customize)
+	{
+		aemi_add_settings([
+			[
+				'name' => 'aemi_remove_jquery',
+				'type' => 'radio',
+				'default' => 'all'
+			],
+			[
+				'name' => 'aemi_remove_script_version',
+				'type' => 'checkbox',
+				'default' => 0
+			],
+			[
+				'name' => 'aemi_remove_emojis',
+				'type' => 'checkbox',
+				'default' => 0
+			],
+			[
+				'name' => 'aemi_remove_wpembeds',
+				'type' => 'checkbox',
+				'default' => 0
+			],
+			[
+				'name' => 'aemi_remove_generator',
+				'type' => 'checkbox',
+				'default' => 0,
+				'critical' => true
+			],
+			[
+				'name' => 'aemi_remove_rsd_link',
+				'type' => 'checkbox',
+				'default' => 1,
+				'critical' => true
+			],
+			[
+				'name' => 'aemi_remove_wlwmanifest_link',
+				'type' => 'checkbox',
+				'default' => 1,
+				'critical' => true
+			],
+			[
+				'name' => 'aemi_remove_shortlink',
+				'type' => 'checkbox',
+				'default' => 1,
+				'critical' => true
+			],
+			[
+				'name' => 'aemi_add_gzip_compression',
+				'type' => 'checkbox',
+				'default' => 0,
+				'critical' => true
+			]
+		], $wp_customize);
+	}
+}
+
+if (!function_exists('aemi_customizer_settings__post_types'))
+{
+	function aemi_customizer_settings__post_types($wp_customize)
+	{
 		foreach (get_post_types(['public' => true], 'objects') as $post_type)
 		{
 			$p_name = $post_type->name;
@@ -46,11 +247,17 @@ if (!function_exists('aemi_customizer_settings'))
 
 				if (in_array($m_name, ['author','published_date']))
 				{
-					aemi_add_setting_radio($wp_customize,$setting,'both');
+					$wp_customize->add_setting( $setting, [
+						'default' => 'both',
+						'sanitize_callback' => 'aemi_sanitize_dropdown_options'
+					]);
 				}
 				else if ($m_name == 'updated_date')
 				{
-					aemi_add_setting_radio($wp_customize,$setting,'none');	
+					$wp_customize->add_setting( $setting, [
+						'default' => 'none',
+						'sanitize_callback' => 'aemi_sanitize_dropdown_options'
+					]);
 				}
 				else
 				{
@@ -60,16 +267,14 @@ if (!function_exists('aemi_customizer_settings'))
 
 			if ($p_name == "post")
 			{
-				aemi_add_setting_radio(
-					$wp_customize,
-					aemi_setting($p_name,'show_excerpt'),
-					'sticky_only'
-				);
-				aemi_add_setting_radio(
-					$wp_customize,
-					aemi_setting($p_name,'show_sticky_badge'),
-					'both'
-				);
+				$wp_customize->add_setting( aemi_setting($p_name,'show_excerpt'), [
+					'default' => 'sticky_only',
+					'sanitize_callback' => 'aemi_sanitize_dropdown_options'
+				]);
+				$wp_customize->add_setting( aemi_setting($p_name,'show_sticky_badge'), [
+					'default' => 'both',
+					'sanitize_callback' => 'aemi_sanitize_dropdown_options'
+				]);
 			}
 			else
 			{
@@ -85,60 +290,79 @@ if (!function_exists('aemi_customizer_settings'))
 				aemi_setting($p_name,'progress_bar'),
 				1
 			);
-
 		}
+	}
+}
 
-		$settings = [
-			[
-				'name' => 'aemi_color_scheme',
-				'type' => 'radio',
-				'default' => 'auto'
-			],
-			[
-				'name' => 'aemi_color_scheme_user',
-				'type' => 'checkbox',
-				'default' => 0
-			],
-			[
-				'name' => 'aemi_display_comments',
-				'type' => 'checkbox',
-				'default' => 1
-			],
+if (!function_exists('aemi_customizer_settings__search'))
+{
+	function aemi_customizer_settings__search($wp_customize)
+	{
+		aemi_add_settings([
 			[
 				'name' => 'aemi_search_button_display',
 				'type' => 'checkbox',
 				'default' => 0
-			],
+			]
+		], $wp_customize);
+	}
+}
+
+if (!function_exists('aemi_customizer_settings__security'))
+{
+	function aemi_customizer_settings__security($wp_customize)
+	{
+		aemi_add_settings([
 			[
-				'name' => 'aemi_header_autohiding',
+				'name' => 'aemi_add_content_nosniff',
 				'type' => 'checkbox',
-				'default' => 0
+				'default' => 0,
+				'critical' => true
 			],
 			[
-				'name' => 'aemi_header_stickyness',
-				'type' => 'radio',
-				'default' => 'adaptative'
-			],
-			[
-				'name' => 'aemi_remove_jquery',
-				'type' => 'radio',
-				'default' => 'all'
-			],
-			[
-				'name' => 'aemi_remove_script_version',
+				'name' => 'aemi_add_xframe_options',
 				'type' => 'checkbox',
-				'default' => 0
+				'default' => 0,
+				'critical' => true
 			],
 			[
-				'name' => 'aemi_remove_emojis',
+				'name' => 'aemi_add_csph',
 				'type' => 'checkbox',
-				'default' => 0
+				'default' => 0,
+				'critical' => true
 			],
 			[
-				'name' => 'aemi_remove_wpembeds',
+				'name' => 'aemi_add_hsts',
 				'type' => 'checkbox',
-				'default' => 0
+				'default' => 0,
+				'critical' => true
 			],
+			[
+				'name' => 'aemi_add_xss',
+				'type' => 'checkbox',
+				'default' => 0,
+				'critical' => true
+			],
+			[
+				'name' => 'aemi_add_expect_ct',
+				'type' => 'checkbox',
+				'default' => 0,
+				'critical' => true
+			]
+		], $wp_customize);
+		
+		$wp_customize->add_setting('aemi_add_referer',[
+			'default' => 'not-set-up',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options'
+		]);
+	}
+}
+
+if (!function_exists('aemi_customizer_settings__technical'))
+{
+	function aemi_customizer_settings__technical($wp_customize)
+	{
+		aemi_add_settings([
 			[
 				'name' => 'aemi_enable_svg_support',
 				'type' => 'checkbox',
@@ -152,120 +376,12 @@ if (!function_exists('aemi_customizer_settings'))
 				'critical' => true
 			],
 			[
-				'name' => 'aemi_loop_cat_filtering',
-				'type' => 'checkbox',
-				'default' => 0,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_loop_add_types',
-				'type' => 'checkbox',
-				'default' => 0,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_ga_type',
-				'type' => 'radio',
-				'default' => 'none',
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_remove_generator',
-				'type' => 'checkbox',
-				'default' => 0,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_remove_rsd_link',
-				'type' => 'checkbox',
-				'default' => 1,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_remove_wlwmanifest_link',
-				'type' => 'checkbox',
-				'default' => 1,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_remove_shortlink',
-				'type' => 'checkbox',
-				'default' => 1,
-				'critical' => true
-			],
-			[
 				'name' => 'aemi_remove_apiworg',
 				'type' => 'radio',
 				'default' => 'non-admins',
 				'critical' => true
-			],
-			[
-				'name' => 'aemi_bing_meta_tag',
-				'type' => 'checkbox',
-				'default' => 0,
-				'critical' => true
 			]
-		];
-
-		foreach ($settings as $setting) {
-			switch ($setting['type']) {
-				case 'radio':
-					aemi_add_setting_radio(
-						$wp_customize,
-						$setting['name'],
-						$setting['default']
-					);
-					break;
-				case 'checkbox':
-					aemi_add_setting_checkbox(
-						$wp_customize,
-						$setting['name'],
-						$setting['default'],
-						isset($setting['critical']) ? $setting['critical'] : false
-					);
-					break;
-				default:
-					break;
-			}
-		}
-
-		$categories = get_categories();
-
-		$cat_ids = [];
-
-		foreach ($categories as $cat) {
-			$cat_IDs[] = $cat->cat_ID;
-		}
-
-		$wp_customize->add_setting('aemi_loop_cat_filters', [
-			'default' => $cat_IDs,
-			'sanitize_callback' => 'aemi_sanitize_checkbox_multiple'
-		]);
-
-		$wp_customize->add_setting('aemi_loop_added_types', [
-			'default' => ['post'],
-			'sanitize_callback' => 'aemi_sanitize_checkbox_multiple'
-		]);
-
-		$wp_customize->add_setting('aemi_header_js_code', [
-			'capability'		=> 'edit_theme_options',
-			'sanitize_callback' => 'aemi_raw_js_code',
-		]);
-
-		$wp_customize->add_setting('aemi_footer_js_code', [
-			'capability'		=> 'edit_theme_options',
-			'sanitize_callback' => 'aemi_raw_js_code',
-		]);
-
-		$wp_customize->add_setting('aemi_ga_id', [
-			'capability'		=> 'edit_theme_options',
-			'sanitize_callback' => 'sanitize_text_field',
-		]);
-		$wp_customize->add_setting('aemi_bing_meta_tag_content', [
-			'capability'		=> 'edit_theme_options',
-			'sanitize_callback' => 'sanitize_text_field',
-		]);
+		], $wp_customize);
 	}
 }
-add_action('customize_register', 'aemi_customizer_settings');
 

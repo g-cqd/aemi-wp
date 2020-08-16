@@ -17,6 +17,11 @@ if (!function_exists('aemi_customizer_panels'))
             'title'      => esc_html__('Analytics', 'aemi'),
         ]);
 
+        $wp_customize->add_section('aemi_colors', [
+            'panel'      => 'aemi_panel',
+            'title'      => esc_html__('Colors', 'aemi'),
+        ]);
+
         $wp_customize->add_section('aemi_comments', [
             'panel'      => 'aemi_panel',
             'title'      => esc_html__('Comments', 'aemi'),
@@ -32,24 +37,19 @@ if (!function_exists('aemi_customizer_panels'))
             'title'      => esc_html__('Custom Scripts', 'aemi'),
         ]);
 
-        $wp_customize->add_section('aemi_features', [
-            'panel'      => 'aemi_panel',
-            'title'      => esc_html__('Features', 'aemi'),
-        ]);
-
-        $wp_customize->add_section('aemi_advanced_features', [
-            'panel'      => 'aemi_panel',
-            'title'      => esc_html__('Features: Advanced', 'aemi'),
-        ]);
-
-        $wp_customize->add_section('aemi_critical_features', [
-            'panel'      => 'aemi_panel',
-            'title'      => esc_html__('Features: Critical', 'aemi'),
-        ]);
-
         $wp_customize->add_section('aemi_header', [
             'panel'      => 'aemi_panel',
             'title'      => esc_html__('Header', 'aemi'),
+        ]);
+
+        $wp_customize->add_section('aemi_identity', [
+            'panel'      => 'aemi_panel',
+            'title'      => esc_html__('Identity', 'aemi'),
+        ]);
+
+        $wp_customize->add_section('aemi_performance', [
+            'panel'      => 'aemi_panel',
+            'title'      => esc_html__('Performance', 'aemi'),
         ]);
 
         $wp_customize->add_section('aemi_search', [
@@ -57,11 +57,16 @@ if (!function_exists('aemi_customizer_panels'))
             'title'      => esc_html__('Search', 'aemi'),
         ]);
 
-        $wp_customize->add_section('aemi_site_identity', [
+        $wp_customize->add_section('aemi_security', [
             'panel'      => 'aemi_panel',
-            'title'      => esc_html__('Site Identity', 'aemi'),
+            'title'      => esc_html__('Security', 'aemi'),
         ]);
 
+
+        $wp_customize->add_section('aemi_technical', [
+            'panel'      => 'aemi_panel',
+            'title'      => esc_html__('Technical', 'aemi'),
+        ]);
 
         foreach (get_post_types(['public' => true], 'objects') as $post_type)
         {
@@ -70,11 +75,7 @@ if (!function_exists('aemi_customizer_panels'))
             $wp_customize->add_section(('aemi_type_' . $post_name), [
                 'panel'     =>  'aemi_panel',
                 'title'     =>  esc_html__( 'Type', 'aemi') . ': ' . $post_type->label,
-            ]);
-            
+            ]);   
         }
-
-
     }
 }
-add_action('customize_register', 'aemi_customizer_panels');

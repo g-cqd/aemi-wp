@@ -5,14 +5,17 @@ if ( ! function_exists( 'aemi_posts_pagination' ) )
 	function aemi_posts_pagination()
 	{
 		global $wp_query;
-		if ( $wp_query->max_num_pages > 1 ) {
+		if ( $wp_query->max_num_pages > 1 )
+		{
 			?><nav id="site-navigation" class="pagination"><?php
-			if ( get_next_posts_link() ) {
+			if ( get_next_posts_link() )
+			{
 				?><div class="nav-previous"><?php
 				next_posts_link( '<span class="nav-title">&larr; ' . __( 'old', 'aemi' ) . '</span>' );
 				?></div><?php
 			}
-			if ( get_previous_posts_link() ) {
+			if ( get_previous_posts_link() )
+			{
 				?><div class="nav-next"><?php
 				previous_posts_link( '<span class="nav-title">' . __( 'new', 'aemi' ) . ' &rarr;</span>' );
 				?></div><?php

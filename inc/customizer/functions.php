@@ -1,33 +1,5 @@
 <?php
 
-if (!function_exists('aemi_header_script'))
-{
-	function aemi_header_script()
-	{
-		$header_script = get_theme_mod('aemi_header_js_code');
-		if ($header_script)
-		{
-			?><script id="aemi-custom-header-script" type="text/javascript"><?= $header_script ?></script><?php
-		}
-	}
-}
-add_action('wp_head', 'aemi_header_script');
-
-
-if (!function_exists('aemi_footer_script'))
-{
-	function aemi_footer_script()
-	{
-		$footer_script = get_theme_mod('aemi_footer_js_code');
-		if ($footer_script)
-		{
-			?><script id="aemi-custom-footer-script" type="text/javascript"><?= $footer_script ?></script><?php
-		}
-	}
-}
-add_action('wp_footer', 'aemi_footer_script');
-
-
 if (!function_exists('aemi_type_setting'))
 {
 	function aemi_setting($type,$tag)
@@ -38,7 +10,7 @@ if (!function_exists('aemi_type_setting'))
 
 if (!function_exists('aemi_add_setting_checkbox'))
 {
-	function aemi_add_setting_checkbox($wp_customize,$setting,$default,$critical = false)
+	function aemi_add_setting_checkbox($wp_customize, $setting, $default, $critical = false)
 	{
 		if ($critical)
 		{
@@ -62,7 +34,7 @@ if (!function_exists('aemi_add_setting_checkbox'))
 
 if (!function_exists('aemi_add_setting_radio'))
 {
-	function aemi_add_setting_radio($wp_customize,$setting,$default,$critical = false)
+	function aemi_add_setting_radio($wp_customize, $setting, $default, $critical = false)
 	{
 		if ($critical)
 		{
@@ -81,5 +53,42 @@ if (!function_exists('aemi_add_setting_radio'))
 				'transport'			=> 'refresh',
 			]);
 		}
+	}
+}
+
+if (!function_exists('aemi_add_settings'))
+{
+	function aemi_add_settings($settings,$wp_customize)
+	{
+		foreach ($settings as $setting) {
+
+			switch ($setting['type']) {
+				case 'radio':
+					aemi_add_setting_radio(
+						$wp_customize,
+						$setting['name'],
+						$setting['default']
+					);
+					break;
+				case 'checkbox':
+					aemi_add_setting_checkbox(
+						$wp_customize,
+						$setting['name'],
+						$setting['default'],
+						isset($setting['critical']) ? $setting['critical'] : false
+					);
+					break;
+				default:
+					break;
+			}
+		}
+	}
+}
+
+if (!function_exists('aemi_load_customize_controls'))
+{
+	function aemi_load_customize_controls()
+	{
+		require_once( trailingslashit( get_template_directory() ) . 'inc/customizer/custom-controls/index.php' );
 	}
 }

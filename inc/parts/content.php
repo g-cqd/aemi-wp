@@ -10,6 +10,8 @@ if (is_sticky())
 
 post_class($classes);
 
-?> >
-	<?php do_action('aemi_loop_post'); ?>
-</article>
+?> ><?php
+
+do_action('aemi_loop_post');
+
+?></article>

@@ -1,6 +1,26 @@
 <?php
 
 
+/*'function aemi_html_tag_schema()
+{
+	$schema 	= 'http://schema.org/';
+	$type 		= 'WebPage';
+	if ( is_singular( 'post' ) )
+	{
+		$type 	= 'Article';
+	}
+	else if ( is_author() )
+	{
+		$type 	= 'ProfilePage';
+	}
+	else if ( is_search() )
+	{
+		$type 	= 'SearchResultsPage';
+	}
+	echo 'itemscope="itemscope" itemtype="' . esc_attr( $schema ) . esc_attr( $type ) . '"';
+}*/
+
+
 if (!function_exists('aemi_type'))
 {
 	function aemi_type($string)
@@ -259,7 +279,7 @@ if (!function_exists('aemi_meta_header'))
 }
 
 
-if (!function_exists('aemi_exists_post_meta'))
+if (!function_exists('aemi_get_post_meta'))
 {
 	function aemi_get_post_meta()
 	{

@@ -7,15 +7,7 @@ if (!function_exists('aemi_aside_search'))
         if (get_theme_mod('aemi_search_button_display', 1) == 1)
         {
             ?><div id="search-wrapper" class="wrapper">
-		    	<form role="search" method="get" class="search-form" action="<?= home_url('/') ?>">
-		    		<div id="search-container">
-						<label class="screen-reader-text"><?= esc_html__('Search for &hellip;', 'aemi') ?></label>
-	    				<input type="search" id="search-input" class="search-input" placeholder="<?= esc_attr__('Search for &hellip;', 'aemi') ?>" value="<?= get_search_query() ?>" name="s" title="<?= esc_attr__('Search for &hellip;', 'aemi') ?>" />
-	    				<button type="submit" class="search-submit no-style" title="<?= esc_attr__('Search','aemi') ?>">
-	    					<span class="search-icon"></span>
-	    				</button>
-	    			</div>
-                </form>
+		    	<?php get_search_form(); ?>
             </div><?php
         }
     }
@@ -26,12 +18,6 @@ if (!function_exists('aemi_aside_wrapper_menu'))
     function aemi_aside_wrapper_menu()
     {
 		?><nav id="navigation-wrapper" class="wrapper"><?php
-
-		?><div class="header-section"><?php
-
-    		printf('<div><pre><code>%s</code></pre></div>',get_browser());
-
-		?></div><?php
 
             if (has_nav_menu('header-menu'))
             {

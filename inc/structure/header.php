@@ -66,6 +66,8 @@ if (!function_exists('aemi_header_branding'))
 			)
 		);
 
+		$home = is_home();
+
 		printf(
 			'<%1$s id="site-title" class="site-title%2$s %3$s">%4$s</%1$s>',
 			$home ? 'h1' : 'strong',
@@ -133,7 +135,7 @@ if (!function_exists('aemi_header_search'))
 {
 	function aemi_header_search()
 	{
-		if (get_theme_mod('aemi_search_button_display', 1) == 1)
+		if (is_enabled('aemi_search_button_display', 1))
 		{
 			?><button id="search-toggle" title="<?= esc_attr__('Search', 'aemi') ?>" class="no-style toggle" data-target="search-wrapper">
 				<span class="search-icon"></span>

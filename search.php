@@ -16,7 +16,7 @@ if (have_posts())
                 printf(
                     '<div class="archive-details search">%s</div>',
                     esc_html__(
-                        'Is looking for anything, whatever it is, useful?',
+                        'Is looking for "anything" useful?',
                         'aemi'
                     )
                 );

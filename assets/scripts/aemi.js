@@ -28,7 +28,7 @@ aemi.parallel([
 	aemi.set('first-header', byClass('post-header')[0]),
 	aemi.set('nav-toggle', byId('navigation-toggle')),
 	aemi.set('sea-toggle', byId('search-toggle')),
-	aemi.set('sea-input', [...byClass('search-input')].pop()),
+	aemi.set('sea-input', byId('search-input-0')),
 	aemi.set('pro-bar', byId('site-progress-bar')),
 	aemi.set('csh-sel', byId('color-scheme-selector')),
 	aemi.set('csh-light', byId('light-scheme-option')),
