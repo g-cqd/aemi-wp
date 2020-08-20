@@ -1,5 +1,13 @@
 <?php
 
+if (!function_exists('aemi_log'))
+{
+	function aemi_log(...$params)
+	{
+		?><script>console.log(<?= json_encode( $params ) ?>);</script><?php
+	}
+}
+
 if (!function_exists('aemi_category_transient_flusher'))
 {
 	function aemi_category_transient_flusher()
@@ -12,252 +20,260 @@ if (!function_exists('aemi_category_transient_flusher'))
 	}
 }
 
-if (!function_exists('aemi_remove_jquery'))
+if (!function_exists('aemi_format_title'))
 {
-	function aemi_remove_jquery() { 
- 		if ( !is_admin() ) {
- 			wp_deregister_script('jquery');
- 		}
-	}	
-}
-
-if (!function_exists('aemi_remove_jquery_migrate'))
-{
-	function aemi_remove_jquery_migrate($scripts)
+	function aemi_format_title($title,$desc_class = '',$desc_content = '')
 	{
-		if (!is_admin() && isset($scripts->registered['jquery']))
+		$markup_title = '';
+		$markup_desc = '';
+
+		if (is_string($title) && $title != '')
 		{
-			$script = $scripts->registered['jquery'];
-			if ($script->deps)
-			{
-				$script->deps = array_diff($script->deps, array('jquery-migrate'));
-			}
+			$markup_title = '<h1 class="post-title">' . esc_html($title) . '</h1>';
 		}
+		if (is_string($desc_class) && is_string($desc_content) && $desc_class != '' && $desc_content != '')
+		{
+			$markup_desc = '<div class="archive-type ' . esc_attr($desc_class) . '">' . esc_html($desc_content) . '</div>';
+		}
+		else if (is_string($desc_content) && $desc_content != '')
+		{
+			$markup_desc = '<span class="screen-reader-text"> • ' . esc_html($desc_content) . '</span>';
+		}
+
+		return $markup_title . $markup_desc;
 	}
 }
 
-
-if (!function_exists('aemi_async_scripts'))
+if (!function_exists('aemi_archive_title'))
 {
-	function aemi_async_scripts($scripts_tag)
+	function aemi_archive_title($bool = true)
 	{
-		global $async_scripts;
-		if (!isset($async_scripts))
+		$raw_title = '';
+		$desc_class = '';
+		$desc_content = '';
+
+		if (is_category())
 		{
-			$async_scripts = [];
+			$raw_title = single_cat_title('', false);
+			$desc_class = 'cat';
+			$desc_content = __('Category', 'aemi');
 		}
-		foreach ($scripts_tag as $script)
+		else if (is_tag())
 		{
-			$async_scripts[] = $script;
+			$raw_title = single_tag_title('', false);
+			$desc_class = 'tag';
+			$desc_content = __('Tag', 'aemi');
 		}
+		else if (is_author())
+		{
+			$raw_title = get_the_author();
+			$desc_class = 'author';
+			$desc_content = __('Author', 'aemi');
+		}
+		else if (is_year())
+		{
+			$raw_title = get_the_date('Y');
+			$desc_class = 'year';
+			$desc_content = __('Year', 'aemi');
+		}
+		else if (is_month())
+		{
+			$raw_title = get_the_date('F Y');
+			$desc_class = 'month';
+			$desc_content = __('Month', 'aemi');
+		}
+		else if (is_day())
+		{
+			$raw_title = get_the_date('j F Y');
+			$desc_class = 'day';
+			$desc_content = __('Day', 'aemi');
+		}
+		else if (is_tax('post_format', 'post-format-aside'))
+		{
+			$raw_title = __('Asides','aemi');
+		}
+		else if (is_tax('post_format', 'post-format-gallery'))
+		{
+			$raw_title = __('Galleries','aemi');
+		}
+		else if (is_tax('post_format', 'post-format-image'))
+		{
+			$raw_title = __('Images','aemi');
+		}
+		else if (is_tax('post_format', 'post-format-video'))
+		{
+			$raw_title = __('Videos','aemi');
+		}
+		else if (is_tax('post_format', 'post-format-quote'))
+		{
+			$raw_title = __('Quotes','aemi');
+		}
+		else if (is_tax('post_format', 'post-format-link'))
+		{
+			$raw_title = __('Links','aemi');
+		}
+		else if (is_tax('post_format', 'post-format-status'))
+		{
+			$raw_title = __('Statuses','aemi');
+		}
+		else if (is_tax('post_format', 'post-format-audio'))
+		{
+			$raw_title = __('Audios','aemi');
+		}
+		else if (is_tax('post_format', 'post-format-chat'))
+		{
+			$raw_title = __('Chats','aemi');
+		}
+		else if (is_post_type_archive())
+		{
+			$raw_title = post_type_archive_title('', false);
+		}
+		else if (is_tax())
+		{
+			$tax = get_taxonomy(get_queried_object()->taxonomy);
+			$raw_title = single_term_title('', false);
+			$desc_class = $tax->labels->singular_name;
+			$desc_content = $tax->labels->singular_name;
+		}
+		else
+		{
+			$raw_title = __('Archives', 'aemi');
+		}
+		if ($bool)
+		{
+			return aemi_format_title( $raw_title, $desc_class, $desc_content );
+		}
+		return wp_strip_all_tags( aemi_format_title( $raw_title, null, $desc_content ) );
 	}
 }
 
-
-if (!function_exists('aemi_async_scripts_filter'))
+if (!function_exists('aemi_get_the_archive_title'))
 {
-	function aemi_async_scripts_filter($tag, $handle)
+	function aemi_get_the_archive_title($title)
 	{
-		global $async_scripts;
-
-		if (!isset($async_scripts))
-		{
-			$async_scripts = [];
-		}
-
-		foreach ($async_scripts as $script)
-		{
-			if ($script === $handle)
-			{
-				return str_replace(' src', ' async src', $tag);
-			}
-		}
-		return $tag;
+		return aemi_archive_title();
 	}
 }
 
-
-if (!function_exists('aemi_defer_scripts'))
+if (!function_exists('aemi_get_title'))
 {
-	function aemi_defer_scripts($scripts_tag)
+	function aemi_get_title($post = null)
 	{
-		global $defer_scripts;
-		if (!isset($defer_scripts))
-		{
-			$defer_scripts = [];
-		}
-		foreach ($scripts_tag as $script)
-		{
-			$defer_scripts[] = $script;
-		}
-	}
-}
+		$title = '';
 
-
-if (!function_exists('aemi_defer_scripts_filter'))
-{
-	function aemi_defer_scripts_filter($tag, $handle)
-	{
-		global $defer_scripts;
-		if (!isset($defer_scripts))
+		switch (true)
 		{
-			$defer_scripts = [];
-		}
-		foreach ($defer_scripts as $script)
-		{
-			if ($script === $handle)
-			{
-				return str_replace(' src', ' defer src', $tag);
-			}
-		}
-		return $tag;
-	}
-}
-
-
-if (!function_exists('aemi_custom_archive_title')) {
-	function aemi_custom_archive_title($title)
-	{
-		switch (true) {
-			case is_category(): {
-				$title = sprintf(
-					'<h1 class="post-title">%1$s</h1><div class="archive-type cat">%2$s</div>',
-					single_cat_title('', false),
-					__('Category', 'aemi')
-				);
+			case is_search():
+				$query = get_search_query();
+				if ($query == '')
+				{
+					$title = __('What are you looking for?', 'aemi');
+				}
+				else
+				{
+					if (have_posts())
+					{
+						$title = esc_html( $query ) . ' • ' . __('Search Results','aemi');
+					}
+					else {
+						$title = __('Nothing Found','aemi');
+					}
+				}
 				break;
-			}
-			case is_tag(): {
-				$title = sprintf(
-					'<h1 class="post-title">%1$s</h1><div class="archive-type tag">%2$s</div>',
-					single_tag_title('', false),
-					__('Tag', 'aemi')
-				);
+			case is_archive():
+				$title = aemi_archive_title(false);
 				break;
-			}
-			case is_author(): {
-				$title = sprintf(
-					'<h1 class="post-title">%1$s</h1><div class="archive-type author">%2$s</div>',
-					get_the_author(),
-					__('Author', 'aemi')
-				);
+			case is_404():
+				$title = __('Code 404','aemi') . ' • ' . __('Page not Found','aemi');
 				break;
-			}
-			case is_year(): {
-				$title = sprintf(
-					'<h1 class="post-title">%1$s</h1><div class="archive-type year">%2$s</div>',
-					get_the_date('Y'),
-					__('Year', 'aemi')
-				);
+			case is_home() && is_front_page():
+			case is_front_page():
+				$title = get_bloginfo('name');
 				break;
-			}
-			case is_month(): {
-				$title = sprintf(
-					'<h1 class="post-title">%1$s</h1><div class="archive-type month">%2$s</div>',
-					get_the_date('F Y'),
-					__('Month', 'aemi')
-				);
+			case is_home():
+				$title = __('Latest Posts', 'aemi');
 				break;
-			}
-			case is_day(): {
-				$title = sprintf(
-					'<h1 class="post-title">%1$s</h1><div class="archive-type day">%2$s</div>',
-					get_the_date('j F Y'),
-					__('Day', 'aemi')
-				);
-				break;
-			}
-			case is_tax('post_format', 'post-format-aside'): {
-				$title = sprintf(
-					'<h1 class="post-title">%1$s</h1>',
-					__('Asides', 'aemi')
-				);
-				break;
-			}
-			case is_tax('post_format', 'post-format-gallery'): {
-				$title = sprintf(
-					'<h1 class="post-title">%1$s</h1>',
-					__('Galleries', 'aemi')
-				);
-				break;
-			}
-			case is_tax('post_format', 'post-format-image'): {
-				$title = sprintf(
-					'<h1 class="post-title">%1$s</h1>',
-					__('Images', 'aemi')
-				);
-				break;
-			}
-			case is_tax('post_format', 'post-format-video'): {
-				$title = sprintf(
-					'<h1 class="post-title">%1$s</h1>',
-					__('Videos', 'aemi')
-				);
-				break;
-			}
-			case is_tax('post_format', 'post-format-quote'): {
-				$title = sprintf(
-					'<h1 class="post-title">%1$s</h1>',
-					__('Quotes', 'aemi')
-				);
-				break;
-			}
-			case is_tax('post_format', 'post-format-link'): {
-				$title = sprintf(
-					'<h1 class="post-title">%1$s</h1>',
-					__('Links', 'aemi')
-				);
-				break;
-			}
-			case is_tax('post_format', 'post-format-status'): {
-				$title = sprintf(
-					'<h1 class="post-title">%1$s</h1>',
-					__('Statuses', 'aemi')
-				);
-				break;
-			}
-			case is_tax('post_format', 'post-format-audio'): {
-				$title = sprintf(
-					'<h1 class="post-title">%1$s</h1>',
-					__('Audios', 'aemi')
-				);
-				break;
-			}
-			case is_tax('post_format', 'post-format-chat'): {
-				$title = sprintf(
-					'<h1 class="post-title">%1$s</h1>',
-					__('Chats', 'aemi')
-				);
-				break;
-			}
-			case is_post_type_archive(): {
-				$title = sprintf(
-					'<h1 class="post-title">%1$s</h1>',
-					post_type_archive_title('', false)
-				);
-				break;
-			}
-			case is_tax(): {
-				$tax = get_taxonomy(get_queried_object()->taxonomy);
-				$title = sprintf(
-					'<h1 class="post-title">%1$s</h1><div class="archive-type %2$s">%3$s</div>',
-					single_term_title('', false),
-					$tax->labels->singular_name,
-					$tax->labels->singular_name
-				);
-				break;
-			}
-			default: {
-				$title = sprintf(
-					'<h1 class="post-title">%s</h1>',
-					__('Archives', 'aemi')
-				);
-				break;
-			}
+			default:
+				$title = single_post_title('',false);
+			break;
 		}
 		return $title;
 	}
 }
+
+if (!function_exists('aemi_get_the_content'))
+{
+	function aemi_get_the_content($wp_post)
+	{
+		if (!isset($wp_post))
+		{
+			global $post;
+			$wp_post = $post;
+		}
+		$content = $wp_post->post_content;
+		$content = apply_filters('the_content', $content);
+		$content = str_replace(']]>', ']]&gt;', $content);
+		return $content;
+	}
+}
+
+if (!function_exists('aemi_get_meta_desc'))
+{
+	function aemi_get_meta_desc($wp_post)
+	{
+		if (!isset($wp_post))
+		{
+			global $post;
+			$wp_post = $post;
+		}
+
+		$meta_desc = '';
+
+		switch (true) {
+			case is_archive():
+			$meta_desc = get_the_archive_description();
+			case is_search():
+			$query = get_search_query();
+			if ($query == '')
+			{
+				$meta_desc = __('The search is not precise enough to display a relevant result.', 'aemi');
+			}
+			else
+			{
+				if (have_posts())
+				{
+					$meta_desc = __('Here are the search results for','aemi') . ': "' . esc_html( $query ) . '".';
+				}
+				else {
+					$meta_desc = __('Nothing Found','aemi');
+				}
+			}
+			break;
+			case is_404():
+			$meta_desc = __('The page you are looking for is no longer available or never existed.','aemi');
+			break;
+			case is_home() && is_front_page():
+			case is_front_page():
+			case is_home():
+			$meta_desc = get_bloginfo('description');
+			default:
+			if (is_enabled('aemi_add_meta_tags',0))
+			{
+				$meta_desc = wp_trim_words( get_post_meta( $wp_post->ID, 'aemi_meta_desc', true ), 25, '...' );
+			}
+			break;
+		}
+		if ( $meta_desc == '' )
+		{
+			$meta_desc = wp_trim_words( aemi_get_the_content($wp_post), 25, '...' );
+		}
+
+		return wp_strip_all_tags( $meta_desc );
+	}
+}
+
+
+
 
 
 if (!function_exists('aemi_filter_comment_text'))
@@ -265,33 +281,33 @@ if (!function_exists('aemi_filter_comment_text'))
 	function aemi_filter_comment_text($comment)
 	{
 		$allowed_html = [
-        	'a' => [
-        		'href'	=>	[],
-        		'title'	=>	[]
-        	],
-      		'br'	=>		[],
-      		'em'	=>		[],
-      		'i'		=>		[],
-      		'strong'	=>	[],
-      		'b'		=>		[],
-      		'del'	=>		[],
-      		's'		=>		[],
-      		'u'		=>		[],
-      		'pre'	=>		[],
-      		'code'	=>		[],
-      		'kbd'	=>		[],
-      		'big'	=>		[],
-      		'small'	=>		[],
-      		'acronym'	=>	[],
-      		'abbr'	=>		[],
-      		'ins'	=>		[],
-      		'sup'	=>		[],
-      		'sub'	=>		[],
-      		'ol'	=>		[],
-      		'ul'	=>		[],
-      		'li'	=>		[]
-    	];
-    	return wp_kses($comment, $allowed_html);
+			'a' => [
+				'href'	=>	[],
+				'title'	=>	[]
+			],
+			'br'	=>		[],
+			'em'	=>		[],
+			'i'		=>		[],
+			'strong'	=>	[],
+			'b'		=>		[],
+			'del'	=>		[],
+			's'		=>		[],
+			'u'		=>		[],
+			'pre'	=>		[],
+			'code'	=>		[],
+			'kbd'	=>		[],
+			'big'	=>		[],
+			'small'	=>		[],
+			'acronym'	=>	[],
+			'abbr'	=>		[],
+			'ins'	=>		[],
+			'sup'	=>		[],
+			'sub'	=>		[],
+			'ol'	=>		[],
+			'ul'	=>		[],
+			'li'	=>		[]
+		];
+		return wp_kses($comment, $allowed_html);
 	}
 }
 
@@ -349,161 +365,6 @@ if (!function_exists('aemi_svg_allow_svg_upload'))
 	}
 }
 
-
-if (!function_exists('aemi_disable_tinymce_emojis'))
-{
-	function aemi_disable_tinymce_emojis($plugins) {
-		if (is_array($plugins))
-		{
-			return array_diff($plugins, array('wpemoji'));
-		}
-		else
-		{
-			return array();
-		}
-	}
-}
-
-
-if (!function_exists('aemi_remove_emojis'))
-{
-	function aemi_remove_emojis() {
-		if (is_enabled('aemi_remove_emojis',0))
-		{
-			remove_action( 'wp_head',				'print_emoji_detection_script', 7 );
-			remove_action( 'admin_print_scripts',	'print_emoji_detection_script' );
-			remove_action( 'wp_print_styles',		'print_emoji_styles' );
-			remove_action( 'admin_print_styles',	'print_emoji_styles' );	
-			remove_filter( 'the_content_feed',		'wp_staticize_emoji' );
-			remove_filter( 'comment_text_rss',		'wp_staticize_emoji' );	
-			remove_filter( 'wp_mail',				'wp_staticize_emoji_for_email' );
-			add_filter( 'tiny_mce_plugins',			'aemi_disable_tinymce_emojis' );
-			add_filter( 'emoji_svg_url', '__return_false' );
-		}
-	}
-}
-
-if (!function_exists('aemi_disable_tinymce_plugin_embeds'))
-{
-	function aemi_disable_tinymce_plugin_embeds($plugins)
-	{
-    	return array_diff($plugins, array('wpembed'));
-	}
-}
-
-if (!function_exists('aemi_disable_embeds_rewrites'))
-{
-	function aemi_disable_embeds_rewrites($rules) {
-    	foreach($rules as $rule => $rewrite) {
-    	    if(false !== strpos($rewrite, 'embed=true')) {
-    	        unset($rules[$rule]);
-    	    }
-    	}
-    	return $rules;
-	}
-}
-
-
-if (!function_exists('aemi_remove_wpembeds'))
-{
-	function aemi_remove_wpembeds()
-	{
-		remove_action( 'rest_api_init', 'wp_oembed_register_route' );
-		add_filter( 'embed_oembed_discover', '__return_false' );
-		remove_filter( 'oembed_dataparse', 'wp_filter_oembed_result', 10 );
-		remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
-		remove_action( 'wp_head', 'wp_oembed_add_host_js' );
-		add_filter( 'tiny_mce_plugins', 'aemi_disable_tinymce_plugin_embeds' );
-		add_filter( 'rewrite_rules_array', 'aemi_disable_embeds_rewrites' );
-		remove_filter( 'pre_oembed_result', 'wp_filter_pre_oembed_result', 10 );
-	}
-}
-
-if (!function_exists('aemi_disable_comment_post_types_support'))
-{
-	function aemi_disable_comment_post_types_support()
-	{
-    	$post_types = get_post_types();
-   		foreach ($post_types as $post_type)
-   		{
-      		if(post_type_supports($post_type, 'comments'))
-      		{
-        		remove_post_type_support($post_type, 'comments');
-        		remove_post_type_support($post_type, 'trackbacks');
-      		}
-   		}
-	}
-}
-
-if (!function_exists('aemi_remove_recent_comments_style'))
-{
-	function aemi_remove_recent_comments_style()
-	{
-		global $wp_widget_factory;
-		remove_action('wp_head', array(
-			$wp_widget_factory->widgets['WP_Widget_Recent_Comments'],
-			'recent_comments_style'
-		));
-	}
-
-}
-
-if (!function_exists('aemi_remove_comments'))
-{
-	function aemi_remove_comments()
-	{
-		global $pagenow;
-    
-    	if ($pagenow === 'edit-comments.php')
-    	{
-    	    wp_redirect(admin_url());
-    	    exit;
-    	}
-    	add_action('init', function ()
-			{
-    			if (is_admin_bar_showing())
-    			{
-    			    remove_action('admin_bar_menu', 'wp_admin_bar_comments_menu', 60);
-    			}
-			}
-		);
-		add_action('admin_init', 'aemi_disable_comment_post_types_support');
-		add_filter('comments_open', '__return_false', 20, 2);
-		add_filter('pings_open', '__return_false', 20, 2);
-		add_filter('comments_array', '__return_empty_array', 10, 2);
-		add_action('admin_menu', function ()
-			{
-    			remove_menu_page('edit-comments.php');
-			}
-		);
-		add_action('wp_before_admin_bar_render', function()
-			{
-    			global $wp_admin_bar;
-    			$wp_admin_bar->remove_menu('comments');
-			}
-		);
-		add_action('widgets_init', 'aemi_remove_recent_comments_style');
-	}
-}
-
-if (!function_exists('aemi_deregister_wpembed'))
-{
-	function aemi_deregister_wpembed()
-	{
-		wp_dequeue_script( 'wp-embed' );
-	}
-}
-
-if (!function_exists('aemi_remove_apiworg'))
-{
-	function aemi_remove_apiworg()
-	{
-		remove_action('wp_head', 'rest_output_link_wp_head', 10);
-		remove_action('wp_head', 'wp_oembed_add_discovery_links', 10);
-		remove_action('template_redirect', 'rest_output_link_header', 11, 0);
-	}
-}
-
 if (!function_exists('aemi_ensure_https'))
 {
 	function aemi_ensure_https($string) {
@@ -515,34 +376,24 @@ if (!function_exists('aemi_ensure_https'))
 	}
 }
 
-if (!function_exists('aemi_header_script'))
+if (!function_exists('aemi_title_parts'))
 {
-	function aemi_header_script()
+	function aemi_title_parts($parts)
 	{
-		$header_script = get_theme_mod('aemi_header_js_code');
-		
-		?><script id="aemi-custom-header-script" type="text/javascript"><?= $header_script ?></script><?php
-		
+		$parts['title'] = aemi_get_title();
+		return $parts;
 	}
 }
 
-if (get_theme_mod('aemi_header_js_code','') != '')
+if (!function_exists('aemi_title_separator'))
 {
-	add_action('wp_head', 'aemi_header_script');
-}
-
-
-if (!function_exists('aemi_footer_script'))
-{
-	function aemi_footer_script()
+	function aemi_title_separator($sep)
 	{
-		$footer_script = get_theme_mod('aemi_footer_js_code');
-
-		?><script id="aemi-custom-footer-script" type="text/javascript"><?= $footer_script ?></script><?php
-
+		$mod = get_theme_mod('aemi_title_separator','•');
+		if ($mod == '')
+		{
+			return '•';
+		}
+		return $mod;
 	}
-}
-if (get_theme_mod('aemi_footer_js_code','') != '')
-{
-	add_action('wp_head', 'aemi_header_script');
 }

@@ -24,10 +24,6 @@ if (!function_exists('aemi_body_classes'))
 		{
 			$classes[] = 'has-post-thumbnail';
 		}
-		if (is_active_sidebar('sidebar-widget-area'))
-		{
-			$classes[] = 'sidebar';
-		}
 
 		$stickyness = get_theme_mod('aemi_header_stickyness', 'adaptative');
 

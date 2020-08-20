@@ -12,7 +12,7 @@ class Aemi_Dropdown_Options extends WP_Customize_Control {
 	public function enqueue() {
 		if (!wp_script_is('aemi-dropdown-options','enqueue'))
 		{
-			wp_enqueue_script( 'aemi-dropdown-options', trailingslashit( get_template_directory_uri() ) . 'inc/customizer/custom-controls/dropdown-options.js', array( 'jquery' ) );
+			wp_enqueue_script( 'aemi-dropdown-options', trailingslashit( get_template_directory_uri() ) . 'inc/customizer/custom-controls/js/dropdown-options.js', array( 'jquery' ) );
 
 			aemi_defer_scripts(['aemi-dropdown-options']);
 		}

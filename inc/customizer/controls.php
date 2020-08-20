@@ -599,3 +599,62 @@ if (!function_exists('aemi_customizer_controls__security'))
         ]);
     }
 }
+
+if (!function_exists('aemi_customizer_controls__seo'))
+{
+    function aemi_customizer_controls__seo($wp_customize)
+    {
+        $wp_customize->add_control( 'aemi_add_meta_tags', [
+            'label'     =>      esc_html__('Enable Meta Tags', 'aemi'),
+            'description'   =>  esc_html__('Be able to fill author, description and keywords informations to define your content to search engines.', 'aemi'),
+            'section'   =>      'aemi_seo',
+            'settings'  =>      'aemi_add_meta_tags',
+            'type'      =>      'checkbox'
+        ]);
+
+        $wp_customize->add_control( 'aemi_add_meta_og', [
+            'label'     =>      esc_html__('Enable Open Graph', 'aemi'),
+            'description'   =>  esc_html__('Open Graph is an internet protocol that was originally created by Facebook to standardize the use of metadata within a webpage to represent the content of a page. – from freeCodeCamp', 'aemi'),
+            'section'   =>      'aemi_seo',
+            'settings'  =>      'aemi_add_meta_og',
+            'type'      =>      'checkbox'
+        ]);
+
+        $wp_customize->add_control( 'aemi_add_meta_twitter', [
+            'label'     =>      esc_html__('Enable Twitter Cards', 'aemi'),
+            'description'   =>  esc_html__('Add Twitter-specific informations to your content.', 'aemi'),
+            'section'   =>      'aemi_seo',
+            'settings'  =>      'aemi_add_meta_twitter',
+            'type'      =>      'checkbox'
+        ]);
+
+        $wp_customize->add_control(new Aemi_Dropdown_Options(
+            $wp_customize,
+            'aemi_meta_twitter_card', [
+             'label'     =>      esc_html__('Twitter Card Type', 'aemi'),
+             'description'   =>  esc_html__('How would you like your content to be displayed in tweets.', 'aemi'),
+             'section'   =>      'aemi_seo',
+             'settings'  =>      'aemi_meta_twitter_card',
+             'choices'  => [
+                'summary'                       => __('Summary Card', 'aemi'),
+                'summary_large_image'           => __('Summary Card with Large Image', 'aemi'),  
+             ]
+        ]));
+
+        $wp_customize->add_control('aemi_meta_twitter_site', [
+            'label'     =>      esc_html__('Twitter: Site Information', 'aemi'),
+            'description'   =>  esc_html__('Enter your @username for the website used in the card footer.', 'aemi'),
+            'section'   =>      'aemi_seo',
+            'settings'  =>      'aemi_meta_twitter_site',
+            'type'      =>      'input'
+        ]);
+
+        $wp_customize->add_control('aemi_meta_twitter_creator', [
+            'label'     =>      esc_html__('Twitter: Creator Information', 'aemi'),
+            'description'   =>  esc_html__('Enter your @username for the content creator / author.', 'aemi'),
+            'section'   =>      'aemi_seo',
+            'settings'  =>      'aemi_meta_twitter_creator',
+            'type'      =>      'input'
+        ]);
+    }
+}

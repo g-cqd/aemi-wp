@@ -17,6 +17,7 @@ add_action( 'customize_register',			'aemi_customizer_settings__performance' );
 add_action( 'customize_register',			'aemi_customizer_settings__post_types' );
 add_action( 'customize_register',			'aemi_customizer_settings__search' );
 add_action( 'customize_register',			'aemi_customizer_settings__security' );
+add_action( 'customize_register',			'aemi_customizer_settings__seo' );
 // -- Register Aemi Customizer -- Controls -- //
 add_action( 'customize_register', 			'aemi_customizer_controls__analytics' );
 add_action( 'customize_register', 			'aemi_customizer_controls__colors' );
@@ -29,6 +30,7 @@ add_action( 'customize_register', 			'aemi_customizer_controls__performance' );
 add_action( 'customize_register', 			'aemi_customizer_controls__post_types' );
 add_action( 'customize_register', 			'aemi_customizer_controls__search' );
 add_action( 'customize_register', 			'aemi_customizer_controls__security' );
+add_action( 'customize_register', 			'aemi_customizer_controls__seo' );
 
 // -- General -- //
 add_action( 'admin_init',					'aemi_update_htaccess_rules' );
@@ -45,12 +47,13 @@ add_filter( 'wp_tag_cloud',					'aemi_tagcount_filter' );
 add_action( 'edit_category',				'aemi_category_transient_flusher' );
 add_action( 'save_post',					'aemi_category_transient_flusher' );
 add_action( 'enqueue_block_editor_assets',	'aemi_gutenberg_editor_style' );
+add_filter( 'document_title_parts',			'aemi_title_parts' );
+add_filter( 'document_title_separator',		'aemi_title_separator' );
 
 // -- Head -- //
 add_action( 'aemi_head', 					'aemi_ga_script', 10 );
 add_action( 'aemi_head', 					'aemi_bing_meta_tag', 20 );
 add_action( 'aemi_head',					'aemi_pingback_header' );
-
 
 // -- Header -- //
 add_filter( 'wp_nav_menu_objects',			'aemi_header_menu_filter', 10, 2 );
@@ -86,7 +89,7 @@ add_action( 'aemi_page', 					'aemi_page_content',	20 );
 add_action( 'aemi_page_after',				'aemi_post_meta_footer', 10 );
 
 // -- Archive -- //
-add_filter( 'get_the_archive_title',		'aemi_custom_archive_title' );
+add_filter( 'get_the_archive_title',		'aemi_get_the_archive_title' );
 
 
 // -- Comments -- //
@@ -124,6 +127,13 @@ if (is_enabled('aemi_remove_script_version', 0))
 	add_filter('script_loader_src',			'aemi_remove_script_version', 15, 1);
 	add_filter('style_loader_src',			'aemi_remove_script_version', 15, 1);
 }
+
+
+
+
+
+
+
 
 if (is_enabled('aemi_enable_svg_support', 0))
 {

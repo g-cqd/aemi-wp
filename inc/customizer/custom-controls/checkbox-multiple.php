@@ -12,7 +12,7 @@ class Aemi_Checkbox_Multiple extends WP_Customize_Control {
 	public function enqueue() {
 		if (!wp_script_is('aemi-checkbox-multiple','enqueue'))
 		{
-			wp_enqueue_script( 'aemi-checkbox-multiple', trailingslashit( get_template_directory_uri() ) . 'inc/customizer/custom-controls/checkbox-multiple.js', array( 'jquery' ) );
+			wp_enqueue_script( 'aemi-checkbox-multiple', trailingslashit( get_template_directory_uri() ) . 'inc/customizer/custom-controls/js/checkbox-multiple.js', array( 'jquery' ) );
 
 			aemi_defer_scripts(['aemi-checkbox-multiple']);
 		}

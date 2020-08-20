@@ -89,6 +89,17 @@ Source: https://github.com/originecode/AeMi
 
 ## Changelog
 
+### 2.0-beta15 :
+	- Added : Meta Tags Support
+	- Added : Open Graph Tags Support
+	- Added : Twitter Tags Support
+	- Removed : Sidebar
+		- Sidebar has been dumped for everyone's sake.
+		- Sidebar and Overlay Wrapper become one: Overlay.
+	- Improved : Titles Rewrite
+	- Improved : Better handling of descriptions
+	- Improved : Better handling of custom logos
+	- Improved : Performance & SEO
 ### 2.0-beta14 :
 	- Improved & Fixed : Customizer Settings
 ### 2.0-beta13 :

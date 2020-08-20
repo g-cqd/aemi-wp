@@ -43,26 +43,24 @@ if (!function_exists('aemi_header_branding'))
 	function aemi_header_branding()
 	{
 
-		global $has_custom_logo;
-		global $has_jetpack_custom_logo;
-		global $has_logo;
+		global $has_custom_logo, $has_jetpack_logo, $has_aemi_logo, $has_logo;
 
-		$has_custom_logo = function_exists('the_custom_logo') && has_custom_logo();
-		$has_jetpack_custom_logo = function_exists('jetpack_has_site_logo') && jetpack_has_site_logo();
 		
 		$light_scheme_logo = get_theme_mod('aemi_light_scheme_logo');
 		$dark_scheme_logo = get_theme_mod('aemi_dark_scheme_logo');
+		$has_light_scheme_logo = $light_scheme_logo != '';
+		$has_dark_scheme_logo = $dark_scheme_logo != '';
 		
 		$color_scheme = get_theme_mod('aemi_color_scheme','auto');
 		$scheme_user_pref = is_enabled('aemi_color_scheme_user',0);
+
 		$lazy_load = $scheme_user_pref || $color_scheme == 'auto';
 
-		$has_light_scheme_logo = $light_scheme_logo != '';
-		$has_dark_scheme_logo = $dark_scheme_logo != '';
-
-		$has_aemi_custom_logo = $has_light_scheme_logo || $has_dark_scheme_logo;
+		$has_aemi_logo = $has_light_scheme_logo || $has_dark_scheme_logo;
+		$has_custom_logo = function_exists('the_custom_logo') ? has_custom_logo() : false;
+		$has_jetpack_logo = function_exists('jetpack_has_site_logo') ? jetpack_has_site_logo() : false;
 		
-		$has_logo = $has_custom_logo || $has_jetpack_custom_logo || $has_dark_scheme_logo || $has_light_scheme_logo;
+		$has_logo = $has_custom_logo || $has_jetpack_logo || $has_aemi_logo;
 
 		printf(
 			'<div id="site-branding">%1$s',
@@ -86,10 +84,10 @@ if (!function_exists('aemi_header_branding'))
 
 		if ($has_logo)
 		{
-			if ($has_custom_logo || $has_aemi_custom_logo)
+			if ($has_custom_logo || $has_jetpack_logo || $has_aemi_logo)
 			{
 				?><div id="site-logo"><?php
-				if ($has_light_scheme_logo && $color_scheme == 'light' || $color_scheme != 'dark' || $scheme_user_pref)
+				if ($has_light_scheme_logo && ($color_scheme != 'dark' || $scheme_user_pref))
 				{
 
 					?><div class="light-scheme-logo"><?php
@@ -106,11 +104,30 @@ if (!function_exists('aemi_header_branding'))
 					?></div><?php
 
 				}
-				else if ($has_custom_logo)
+				else if ($has_custom_logo || $has_jetpack_logo)
 				{
-					?><div class="light-scheme-logo"><?php the_custom_logo(); ?></div><?php
+					$scheme_class = '';
+					if ($has_aemi_logo)
+					{
+						$scheme_class = ' class="' . ($has_light_scheme_logo ? 'dark' : 'light') . '"';
+					}
+
+					$logo_src = '';
+					if ($has_custom_logo)
+					{
+						$logo_src = $has_custom_logo ? wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'aemi-logo' ) : jetpack_get_site_logo();
+					}
+
+					?><div<?= $scheme_class ?>><?= sprintf(
+						'<a href="%1$s" class="custom-logo-link" title="%2$s - %3$s" rel="home"><img src="%4$s" alt="%2$s Logo for Dark Scheme" height="40"></a>',
+						esc_url(home_url()),
+						esc_attr(get_bloginfo('name')),
+						esc_attr__('Home', 'aemi'),
+						esc_url(aemi_ensure_https($logo_src))
+
+					) ?></div><?php
 				}
-				if ($has_dark_scheme_logo && $color_scheme == 'dark' || $color_scheme != 'light' || $scheme_user_pref)
+				if ($has_dark_scheme_logo && ($color_scheme != 'light' || $scheme_user_pref))
 				{
 					?><div class="dark-scheme-logo"><?php
 
@@ -126,10 +143,6 @@ if (!function_exists('aemi_header_branding'))
 					?></div><?php
 				}
 				?></div><?php
-			}
-			else if ($has_jetpack_custom_logo)
-			{
-				jetpack_the_site_logo();
 			}
 		}
 

@@ -157,19 +157,10 @@ if (!function_exists('aemi_widgets_init'))
 	function aemi_widgets_init()
 	{
 		register_sidebar([
-			'name'			=>	__('Header Widget Area', 'aemi'),
-			'id'			=>	'header-widget-area',
-			'description'	=>	__('Add widgets in this area to display them on header area.', 'aemi'),
+			'name'			=>	__('Overlay Widget Area', 'aemi'),
+			'id'			=>	'overlay-widget-area',
+			'description'	=>	__('Add widgets in this area to display them on overlay area.', 'aemi'),
 			'before_widget'	=>	'<div id="w-%1$s" class="w-cont header-section %2$s">',
-			'after_widget'	=>	'</div>',
-			'before_title'	=>	'<h4 class="widget-title">',
-			'after_title'	=>	'</h4>',
-		]);
-		register_sidebar([
-			'name'			=>	__('Sidebar Widget Area', 'aemi'),
-			'id'			=>	'sidebar-widget-area',
-			'description'	=>	__('Add widgets in this area to display them on sidebar area.', 'aemi'),
-			'before_widget'	=>	'<div id="w-%1$s" class="w-cont %2$s">',
 			'after_widget'	=>	'</div>',
 			'before_title'	=>	'<h4 class="widget-title">',
 			'after_title'	=>	'</h4>',

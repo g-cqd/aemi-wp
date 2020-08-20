@@ -400,3 +400,40 @@ if (!function_exists('aemi_customizer_settings__security'))
 	}
 }
 
+if (!function_exists('aemi_customizer_settings__seo'))
+{
+	function aemi_customizer_settings__seo($wp_customize)
+	{
+
+		aemi_add_settings([
+			[
+				'name' => 'aemi_add_meta_tags',
+				'type' => 'checkbox',
+				'default' => 0,
+			],
+			[
+				'name' => 'aemi_add_meta_og',
+				'type' => 'checkbox',
+				'default' => 0,
+			],
+			[
+				'name' => 'aemi_add_meta_twitter',
+				'type' => 'checkbox',
+				'default' => 0,
+			],
+		], $wp_customize);
+
+		$wp_customize->add_setting('aemi_meta_twitter_card', [
+			'default' => 'summary',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
+
+		$wp_customize->add_setting('aemi_meta_twitter_site', [
+			'sanitize_callback' => 'sanitize_text_field',
+		]);
+
+		$wp_customize->add_setting('aemi_meta_twitter_creator', [
+			'sanitize_callback' => 'sanitize_text_field',
+		]);
+	}
+}

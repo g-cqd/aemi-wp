@@ -55,11 +55,11 @@ if (!function_exists('aemi_aside_wrapper_menu'))
 				aemi_theme_switcher();
 			}
 
-			if (is_active_sidebar('header-widget-area'))
+			if (is_active_sidebar('overlay-widget-area'))
 			{
-				?><div class="toggle" data-target="header-widgets"></div>
-				<div id="header-widgets"><?php
-					dynamic_sidebar('header-widget-area');
+				?><div class="toggle" data-target="overlay-widgets"></div>
+				<div id="overlay-widgets"><?php
+					dynamic_sidebar('overlay-widget-area');
 				?></div><?php
 			}
 		?>
