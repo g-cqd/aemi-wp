@@ -21,9 +21,9 @@ if (!function_exists('aemi_customizer_controls__analytics'))
                 'section'   =>      'aemi_analytics',
                 'settings'  =>      'aemi_ga_type',
                 'choices'   =>      [
-                    'none'  => __('None','aemi'),
-                    'gtag'  => __('gtag.js','aemi'),
-               'analytics'  => __('analytics.js','aemi')
+                    'none'  => esc_html__('None','aemi'),
+                    'gtag'  => esc_html__('gtag.js','aemi'),
+               'analytics'  => esc_html__('analytics.js','aemi')
                 ]
             ])
         );
@@ -58,9 +58,9 @@ if (!function_exists('aemi_customizer_controls__colors'))
             'section'   =>      'aemi_colors',
             'settings'  =>      'aemi_color_scheme',
             'choices'   => [
-                'light' =>  __('Light', 'aemi'),
-                'dark'  =>  __('Dark', 'aemi'),
-                'auto'  =>  __('Auto', 'aemi')
+                'light' =>  esc_html__('Light', 'aemi'),
+                'dark'  =>  esc_html__('Dark', 'aemi'),
+                'auto'  =>  esc_html__('Auto', 'aemi')
             ]
         ]));
 
@@ -186,9 +186,9 @@ if (!function_exists('aemi_customizer_controls__header'))
             'settings'  =>      'aemi_header_stickyness',
             'type'      =>      'radio',
             'choices'   =>      [
-                'no'    =>      __('Do not keep in view','aemi'),
-                'top'   =>      __('Keep the header to the top of the view','aemi'),
-                'adaptative'   =>   __('Keep the header more accessible on mobile devices','aemi'),
+                'no'    =>      esc_html__('Do not keep in view','aemi'),
+                'top'   =>      esc_html__('Keep the header to the top of the view','aemi'),
+                'adaptative'   =>   esc_html__('Keep the header more accessible on mobile devices','aemi'),
             ]
         ]);
 
@@ -202,25 +202,81 @@ if (!function_exists('aemi_customizer_controls__header'))
     }
 }
 
+if (!function_exists('aemi_customizer_controls__homepage'))
+{
+    function aemi_customizer_controls__homepage($wp_customize)
+    {
+        $wp_customize->add_control( 'aemi_homepage_before', array(
+            'type' => 'dropdown-pages',
+            'settings' => 'aemi_homepage_before',
+            'section' => 'aemi_homepage',
+            'label' => __( 'Homepage - Before Main Content', 'aemi' ),
+            'description' => __( 'Use this to add content before the main content of homepage. Another page can be integrated before blog post listing or before front page content for example.', 'aemi' ),
+        ) );
+
+        $wp_customize->add_control( 'aemi_homepage_after', array(
+            'type' => 'dropdown-pages',
+            'settings' => 'aemi_homepage_after',
+            'section' => 'aemi_homepage',
+            'label' => __( 'Homepage - After Main Content', 'aemi' ),
+            'description' => __( 'Use this to add content after the main content of homepage. Another page can be integrated after blog post listing or after front page content.', 'aemi' ),
+        ) );
+
+        $wp_customize->add_control('aemi_homepage_header', [
+            'label'     =>      esc_html__('Add a Page-Like Header to Homepage', 'aemi'),
+            'description'   =>  esc_html__('', 'aemi'),
+            'section'   =>      'aemi_homepage',
+            'settings'  =>      'aemi_homepage_header',
+            'type'      =>      'checkbox'
+        ]);
+
+        $wp_customize->add_control('aemi_homepage_header_custom_title', [
+            'label'     =>      esc_html__('Customize Homepage Displayed Title', 'aemi'),
+            'description'   =>  esc_html__('', 'aemi'),
+            'section'   =>      'aemi_homepage',
+            'settings'  =>      'aemi_homepage_header_custom_title',
+            'type'      =>      'textarea'
+        ]);
+        $wp_customize->add_control('aemi_homepage_header_custom_subtitle', [
+            'label'     =>      esc_html__('Customize Homepage Subtitle', 'aemi'),
+            'description'   =>  esc_html__('', 'aemi'),
+            'section'   =>      'aemi_homepage',
+            'settings'  =>      'aemi_homepage_header_custom_subtitle',
+            'type'      =>      'textarea'
+        ]);
+    }
+}
+
 if (!function_exists('aemi_customizer_controls__identity'))
 {
     function aemi_customizer_controls__identity($wp_customize)
     {
         $wp_customize->add_control(
             new WP_Customize_Image_Control($wp_customize, 'aemi_light_scheme_logo', [
-            'label'     => __('Add Light for Light Scheme', 'aemi'),
-            'description'   => __('It is recommanded to set up this setting. If used, it replaces native logo setting.', 'aemi'),
+            'label'     => esc_html__('Add Light for Light Scheme', 'aemi'),
+            'description'   => esc_html__('It is recommanded to set up this setting. If used, it replaces native logo setting.', 'aemi'),
             'settings'  => 'aemi_light_scheme_logo',
             'section'   => 'aemi_identity'
         ]));
 
         $wp_customize->add_control(
             new WP_Customize_Image_Control($wp_customize, 'aemi_dark_scheme_logo', [
-            'label'     => __('Add Logo for Dark Scheme', 'aemi'),
-            'description'   => __('It is recommanded to set up this setting.', 'aemi'),
+            'label'     => esc_html__('Add Logo for Dark Scheme', 'aemi'),
+            'description'   => esc_html__('It is recommanded to set up this setting.', 'aemi'),
             'settings'  => 'aemi_dark_scheme_logo',
             'section'   => 'aemi_identity'
         ]));
+
+        $wp_customize->add_control( 'aemi_site_description', [
+            'label'     => esc_html__('Site Description', 'aemi'),
+            'description'   => esc_html__('Site Description differs from Tagline. Site description can be used in meta tags and by search engines.', 'aemi'),
+            'settings'  => 'aemi_site_description',
+            'section'   => 'aemi_identity',
+            'type'      => 'textarea',
+            'input_attrs' => [
+                'placeholder' => esc_attr__( 'Description should not exceed 180 characters.', 'aemi' ),
+            ]
+        ]);
     }
 }
 
@@ -235,9 +291,9 @@ if (!function_exists('aemi_customizer_controls__performance'))
             'settings'  =>      'aemi_remove_jquery',
             'type'      =>      'radio',
             'choices'   =>      [
-                'all'   =>      __('Remove every jQuery-related resources.','aemi'),
-                'migrate'   =>  __('Remove only jQuery Migrate','aemi'),
-                'keep'  =>      __('Do not remove and keep them all')
+                'all'   =>      esc_html__('Remove every jQuery-related resources.','aemi'),
+                'migrate'   =>  esc_html__('Remove only jQuery Migrate','aemi'),
+                'keep'  =>      esc_html__('Do not remove and keep them all')
             ]
         ]);
 
@@ -313,10 +369,10 @@ if (!function_exists('aemi_customizer_controls__performance'))
             'section'   =>      'aemi_performance',
             'settings'  =>      'aemi_add_compression',
             'choices'   =>      [
-                'none'  =>  __('None','aemi'),
-                'gzip'  =>  __('GZip','aemi'),
-                'brotli'  =>  __('Brotli','aemi'),
-                'all'  =>  __('All','aemi'),
+                'none'  =>  esc_html__('None','aemi'),
+                'gzip'  =>  esc_html__('GZip','aemi'),
+                'brotli'  =>  esc_html__('Brotli','aemi'),
+                'all'  =>  esc_html__('All','aemi'),
             ]
         ]));
 
@@ -327,10 +383,10 @@ if (!function_exists('aemi_customizer_controls__performance'))
             'settings'  =>      'aemi_remove_apiworg',
             'type'      =>      'radio',
             'choices'   =>      [
-                'all'   => __('Remove for All Users','aemi'),
-                'non-admins'     => __('Remove for Non-Admins Users'),
-                'public'     => __('Remove for Public Users'),
-                'keep'     => __('Keep it enabled')
+                'all'   => esc_html__('Remove for All Users','aemi'),
+                'non-admins'     => esc_html__('Remove for Non-Admins Users'),
+                'public'     => esc_html__('Remove for Public Users'),
+                'keep'     => esc_html__('Keep it enabled')
             ]
         ]);
 
@@ -357,15 +413,15 @@ if (!function_exists('aemi_customizer_controls__post_types'))
             $default_metas = [
                 'author'            => [
                     'name' => 'author',
-                    'label' => __('Author', 'aemi')
+                    'label' => esc_html__('Author', 'aemi')
                 ],
                 'published_date'    => [
                     'name' => 'published_date',
-                    'label' => __('Published Date', 'aemi')
+                    'label' => esc_html__('Published Date', 'aemi')
                 ],
                 'updated_date'      => [
                     'name' => 'updated_date',
-                    'label' => __('Updated Date', 'aemi')
+                    'label' => esc_html__('Updated Date', 'aemi')
                 ]
             ];
 
@@ -393,21 +449,21 @@ if (!function_exists('aemi_customizer_controls__post_types'))
                         $wp_customize,
                         $setting, [
                         'label'         =>  esc_html__($m_label, 'aemi'),
-                        'description'   =>  esc_html(
+                        'description'   =>  esc_html__(
                             sprintf(
                                 '%1$s %2$s %3$s.',
-                                __('Choose to display', 'aemi'),
+                                esc_html__('Choose to display', 'aemi'),
                                 $meta->label,
-                                __('information in single page, content loop, both or none', 'aemi')
+                                esc_html__('information in single page, content loop, both or none', 'aemi')
                             )
                         ),
                         'section'   =>      'aemi_type_' . $p_name,
                         'settings'  =>      $setting,
                         'choices'   =>      [
-                            'both'  => __('Both','aemi'),
-                            'single'  => __('Single Page Only','aemi'),
-                            'loop'  => __('Content Loop Only','aemi'),
-                            'none'  => __('None','aemi')
+                            'both'  => esc_html__('Both','aemi'),
+                            'single'  => esc_html__('Single Page Only','aemi'),
+                            'loop'  => esc_html__('Content Loop Only','aemi'),
+                            'none'  => esc_html__('None','aemi')
                         ]
                     ]));
                 }
@@ -415,12 +471,12 @@ if (!function_exists('aemi_customizer_controls__post_types'))
                 {
                     $wp_customize->add_control($setting, [
                         'label'     =>      esc_html__($m_label, 'aemi'),
-                        'description'   =>  esc_html(
+                        'description'   =>  esc_html__(
                             sprintf(
                                 '%1$s %2$s %3$s %4$s.',
-                                __('Display', 'aemi'),
+                                esc_html__('Display', 'aemi'),
                                 $m_label,
-                                __('in', 'aemi'),
+                                esc_html__('in', 'aemi'),
                                 $p_name
                             )
                         ),
@@ -442,10 +498,10 @@ if (!function_exists('aemi_customizer_controls__post_types'))
                     'section'   =>      'aemi_type_post',
                     'settings'  =>      $setting,
                     'choices'   =>      [
-                        'both'  => __('Both','aemi'),
-                        'sticky_only'  => __('Featured Only','aemi'),
-                        'non_sticky_only'  => __('Not Featured Only','aemi'),
-                        'none'  => __('None','aemi')
+                        'both'  => esc_html__('Both','aemi'),
+                        'sticky_only'  => esc_html__('Featured Only','aemi'),
+                        'non_sticky_only'  => esc_html__('Not Featured Only','aemi'),
+                        'none'  => esc_html__('None','aemi')
                     ]
                 ]));
                 $setting = aemi_setting($p_name,'show_sticky_badge');
@@ -457,10 +513,10 @@ if (!function_exists('aemi_customizer_controls__post_types'))
                     'section'   =>      'aemi_type_post',
                     'settings'  =>      $setting,
                     'choices'   =>      [
-                        'both'  => __('Both','aemi'),
-                        'single'  => __('Single Page Only','aemi'),
-                        'loop'  => __('Content Loop Only','aemi'),
-                        'none'  => __('None','aemi')
+                        'both'  => esc_html__('Both','aemi'),
+                        'single'  => esc_html__('Single Page Only','aemi'),
+                        'loop'  => esc_html__('Content Loop Only','aemi'),
+                        'none'  => esc_html__('None','aemi')
                     ]
                 ]));
             }
@@ -524,9 +580,9 @@ if (!function_exists('aemi_customizer_controls__security'))
             'section'   =>      'aemi_security',
             'settings'  =>      'aemi_add_xframe_options',
             'choices'   =>      [
-                'not-set'   =>  __('Not set','aemi'),
-                'deny'      =>  __('Deny','aemi'),
-                'sameorigin'   =>  __('Same Origin','aemi')
+                'not-set'   =>  esc_html__('Not set','aemi'),
+                'deny'      =>  esc_html__('Deny','aemi'),
+                'sameorigin'   =>  esc_html__('Same Origin','aemi')
             ]
         ]));
 
@@ -570,15 +626,15 @@ if (!function_exists('aemi_customizer_controls__security'))
              'section'   =>      'aemi_security',
              'settings'  =>      'aemi_add_referer',
              'choices'  => [
-                'not-set'                        => __('Not set','aemi'),
-                'no-referrer'                       => __('No Referrer', 'aemi'),
-                'no-referrer-when-downgrade'        => __('No Referrer when Downgrade', 'aemi'),
-                'same-origin'                       => __('Same Origin', 'aemi'),
-                'origin'                            => __('Origin', 'aemi'),
-                'strict-origin'                     => __('Strict Origin', 'aemi'),
-                'origin-when-cross-origin'          => __('Origin when Cross Origin', 'aemi'),
-                'strict-origin-when-cross-origin'   => __('Strict Origin when Cross-Origin', 'aemi'),
-                'unsafe-url'                        => __('Unsafe URL', 'aemi'),
+                'not-set'                        => esc_html__('Not set','aemi'),
+                'no-referrer'                       => esc_html__('No Referrer', 'aemi'),
+                'no-referrer-when-downgrade'        => esc_html__('No Referrer when Downgrade', 'aemi'),
+                'same-origin'                       => esc_html__('Same Origin', 'aemi'),
+                'origin'                            => esc_html__('Origin', 'aemi'),
+                'strict-origin'                     => esc_html__('Strict Origin', 'aemi'),
+                'origin-when-cross-origin'          => esc_html__('Origin when Cross Origin', 'aemi'),
+                'strict-origin-when-cross-origin'   => esc_html__('Strict Origin when Cross-Origin', 'aemi'),
+                'unsafe-url'                        => esc_html__('Unsafe URL', 'aemi'),
              ]
         ]));
 
@@ -636,8 +692,8 @@ if (!function_exists('aemi_customizer_controls__seo'))
              'section'   =>      'aemi_seo',
              'settings'  =>      'aemi_meta_twitter_card',
              'choices'  => [
-                'summary'                       => __('Summary Card', 'aemi'),
-                'summary_large_image'           => __('Summary Card with Large Image', 'aemi'),  
+                'summary'                       => esc_html__('Summary Card', 'aemi'),
+                'summary_large_image'           => esc_html__('Summary Card with Large Image', 'aemi'),  
              ]
         ]));
 

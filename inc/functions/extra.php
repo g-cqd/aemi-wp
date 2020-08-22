@@ -255,12 +255,17 @@ if (!function_exists('aemi_get_meta_desc'))
 			case is_home() && is_front_page():
 			case is_front_page():
 			case is_home():
-			$meta_desc = get_bloginfo('description');
+				$meta_desc = get_theme_mod('aemi_site_description','');
+				if ($meta_desc == '')
+				{
+					$meta_desc = get_bloginfo('description');
+				}
+				break;
 			default:
-			if (is_enabled('aemi_add_meta_tags',0))
-			{
-				$meta_desc = wp_trim_words( get_post_meta( $wp_post->ID, 'aemi_meta_desc', true ), 25, '...' );
-			}
+				if (is_enabled('aemi_add_meta_tags',0))
+				{
+					$meta_desc = wp_trim_words( get_post_meta( $wp_post->ID, 'aemi_meta_desc', true ), 25, '...' );
+				}
 			break;
 		}
 		if ( $meta_desc == '' )
@@ -370,7 +375,7 @@ if (!function_exists('aemi_ensure_https'))
 	function aemi_ensure_https($string) {
 		if (is_ssl())
 		{
-			return preg_replace('/http\:/', 'https:', $string);
+			return preg_replace('/http\:/', '', $string);
 		}
 		return $string;
 	}

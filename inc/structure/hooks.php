@@ -12,6 +12,7 @@ add_action( 'customize_register',			'aemi_customizer_settings__comments' );
 add_action( 'customize_register',			'aemi_customizer_settings__content_loop' );
 add_action( 'customize_register',			'aemi_customizer_settings__custom_scripts' );
 add_action( 'customize_register',			'aemi_customizer_settings__header' );
+add_action( 'customize_register',			'aemi_customizer_settings__homepage' );
 add_action( 'customize_register',			'aemi_customizer_settings__identity' );
 add_action( 'customize_register',			'aemi_customizer_settings__performance' );
 add_action( 'customize_register',			'aemi_customizer_settings__post_types' );
@@ -25,6 +26,7 @@ add_action( 'customize_register', 			'aemi_customizer_controls__comments' );
 add_action( 'customize_register', 			'aemi_customizer_controls__content_loop' );
 add_action( 'customize_register', 			'aemi_customizer_controls__custom_scripts' );
 add_action( 'customize_register', 			'aemi_customizer_controls__header' );
+add_action( 'customize_register', 			'aemi_customizer_controls__homepage' );
 add_action( 'customize_register', 			'aemi_customizer_controls__identity' );
 add_action( 'customize_register', 			'aemi_customizer_controls__performance' );
 add_action( 'customize_register', 			'aemi_customizer_controls__post_types' );
@@ -62,13 +64,16 @@ add_action( 'aemi_header', 					'aemi_header_menu', 20 );
 add_action( 'aemi_header', 					'aemi_overlay_menu', 30 );
 add_action( 'aemi_header', 					'aemi_header_search', 40 );
 
+add_action( 'aemi_content_before',			'aemi_homepage_header', 0 );
+add_action( 'aemi_content_before',			'aemi_before_main_content', 20 );
+add_action( 'aemi_content_after',			'aemi_after_main_content' );
+
 // -- Aside -- //
 add_action( 'aemi_aside', 					'aemi_aside_wrapper_menu', 30 );
 add_action( 'aemi_aside', 					'aemi_aside_search', 30 );
 add_action( 'aemi_aside', 					'aemi_aside_progress_bar', 40 );
 
 // -- Footer -- //
-add_action( 'aemi_footer_before', 			'aemi_sidebar_widgets', 10 );
 add_action( 'aemi_footer', 					'aemi_footer_widgets', 10 );
 add_action( 'aemi_footer', 					'aemi_footer_site_description', 20 );
 add_action( 'aemi_footer', 					'aemi_footer_menu', 30 );
@@ -127,13 +132,6 @@ if (is_enabled('aemi_remove_script_version', 0))
 	add_filter('script_loader_src',			'aemi_remove_script_version', 15, 1);
 	add_filter('style_loader_src',			'aemi_remove_script_version', 15, 1);
 }
-
-
-
-
-
-
-
 
 if (is_enabled('aemi_enable_svg_support', 0))
 {

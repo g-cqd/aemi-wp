@@ -81,6 +81,24 @@ Alignment
 	width: 100vw;
 }
 
+@media (max-width: 740px)
+{
+	.alignfull,
+	* .alignfull,
+	.alignwide,
+	* .alignwide {
+		border-radius: 0;
+		clear: both;
+		float: none;
+		margin-top: 2rem;
+		margin-left: calc(-50vw + 50%);
+		margin-right: calc(-50vw + 50%);
+		margin-bottom: 2rem;
+		max-width: 100vw;
+		width: 100vw;
+	}
+}
+
 .alignwide *,
 .alignfull * {
 	border-radius: 0;

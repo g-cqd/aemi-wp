@@ -6,16 +6,11 @@ if (!function_exists('aemi_body_classes'))
 	{
 
 		// Color Scheme Preferences
-		$scheme = get_theme_mod('aemi_color_scheme', 'auto');
-		$user_pref_scheme = is_disabled('aemi_color_scheme_user', 0);
-		$scheme_class = 'color-scheme';
-		if ($user_pref_scheme && $scheme != 'auto') {
-			$classes[] = $scheme_class . '-' . $scheme;
-			$classes[] = 'force-color-scheme';
-		}
-		else if ($scheme == 'auto')
+		$classes[] = 'color-scheme-' . get_theme_mod('aemi_color_scheme', 'auto');
+
+		if (is_enabled('aemi_homepage_header',0))
 		{
-			$classes[] = 'auto-color-scheme';
+			$classes[] = 'homepage-custom-header';
 		}
 
 		$classes[] = is_singular() ? 'singular' : 'not-singular';

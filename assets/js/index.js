@@ -527,26 +527,24 @@ class Cookies {
 	}
 	static set(cookieName, cookieValue, options) {
 		options = is(options) && isObject(options) ? options : {};
-
 		let { expiration, sameSite } = options;
-
 		if (!is(expiration)) {
 			const newDate = new Date();
-			const year = 365.25 * 24 * 3600 * 1000;
+			const year = 365.244 * 24 * 3600 * 1000;
 			newDate.setTime(newDate.getTime() + year);
-			expiration = newDate.toUTCString();
+			expiration = newDate.toGMTString();
 		}
 		const expirationString = `expires=${expiration}`;
-		const sameSiteString = `SameSite=${sameSite||'Strict'}${sameSite==='None'?';Secure':''}`;
+		const sameSiteString = `SameSite=${sameSite||'Strict'};Secure`;
 		document.cookie =
-			`${cookieName}=${encodeURIComponent(cookieValue)};${expirationString};${sameSiteString}`;
+			`${cookieName}=${encodeURIComponent(cookieValue)};path=/;${expirationString};${sameSiteString}`;
 	}
 	static delete(cookieName) {
 		const newDate = new Date();
-		newDate.setTime(newDate.getTime() - 1);
-		const expirationString = `expires=${newDate.toUTCString()}`;
-		const sameSiteString = `SameSite=strict`;
-		document.cookie = `${cookieName}=;${expirationString};${sameSiteString};`;
+		const year = 365.244 * 24 * 3600 * 1000;
+		newDate.setTime(newDate.getTime() - year);
+		const expirationString = `expires=${newDate.toGMTString()}`;
+		document.cookie = `${cookieName}=${''};${expirationString};`;
 	}
 }
 class PromiseWorker {

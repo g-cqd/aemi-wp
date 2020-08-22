@@ -2,6 +2,7 @@
 
 require get_template_directory() . '/inc/structure/hooks.php';
 require get_template_directory() . '/inc/structure/body.php';
+require get_template_directory() . '/inc/structure/home.php';
 require get_template_directory() . '/inc/structure/loop.php';
 require get_template_directory() . '/inc/structure/header.php';
 require get_template_directory() . '/inc/structure/aside.php';

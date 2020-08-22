@@ -52,6 +52,14 @@ if (!function_exists('aemi_sanitize_radio'))
     }
 }
 
+if (!function_exists('aemi_sanitize_dropdown_pages'))
+{
+    function aemi_sanitize_dropdown_pages($id,$setting)
+    {
+        $id = absint( $id );
+        return ( 'publish' == get_post_status( $id ) ? $id : $setting->default );
+    }
+}
 
 if (!function_exists('aemi_raw_js_code'))
 {

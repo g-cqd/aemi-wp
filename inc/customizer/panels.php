@@ -42,6 +42,11 @@ if (!function_exists('aemi_customizer_panels'))
             'title'      => esc_html__('Header', 'aemi'),
         ]);
 
+        $wp_customize->add_section('aemi_homepage', [
+            'panel'      => 'aemi_panel',
+            'title'      => esc_html__('Homepage', 'aemi'),
+        ]);
+
         $wp_customize->add_section('aemi_identity', [
             'panel'      => 'aemi_panel',
             'title'      => esc_html__('Identity', 'aemi'),

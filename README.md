@@ -4,9 +4,9 @@
 
 * Contributors: @guizillanet
 * Requires at least: 4.9
-* Tested up to: 5.4.2
+* Tested up to: 5.5
 * Requires PHP: 7.2
-* Version: 2.0-beta14
+* Version: 2.0-beta16
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -89,6 +89,12 @@ Source: https://github.com/originecode/AeMi
 
 ## Changelog
 
+### 2.0-beta16 :
+	- Fixed : Bugs with Meta Tags, Open Graph & Twitter Tags
+	- Improved : Titling in Meta tags
+	- Fixed : F*cking Color Scheme Feature
+	- Improved : Overlay Design
+	- Added : Customize Home Page - Front and Blog Page (you will love it)
 ### 2.0-beta15 :
 	- Added : Meta Tags Support
 	- Added : Open Graph Tags Support
