@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.5
 * Requires PHP: 7.2
-* Version: 2.0-beta17
+* Version: 2.0.0
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -76,16 +76,18 @@ Source: http://jslightbox.felixhagspiel.de
 ```
 Bundled screenshot.jpg, Copyright (c) 2018 Guillaume COQUARD
 License: CC0 1.0 Universal (CC0 1.0)
-Source: https://github.com/aemi-dev/Aemi
+Source: https://github.com/aemi-dev/aemi
 ```
 ```
 Bundled Images in screenshot.jpg, Copyright (c) 2018-2020 Guillaume COQUARD
 License: CC0 1.0 Universal (CC0 1.0)
-Source: https://github.com/aemi-dev/Aemi
+Source: https://github.com/aemi-dev/aemi
 ```
 
 ## Changelog
 
+### 2.0.0 :
+	- Release Version
 ### 2.0-beta17 :
 	- Added : Widgets Layout Settings
 	- Added : Post Loop Layout Settings
