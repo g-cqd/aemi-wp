@@ -175,6 +175,43 @@ if (!function_exists('aemi_customizer_controls__custom_scripts'))
     }
 }
 
+if (!function_exists('aemi_customizer_controls__footer'))
+{
+    function aemi_customizer_controls__footer($wp_customize)
+    {
+
+        $wp_customize->add_control(new Aemi_Dropdown_Options(
+            $wp_customize,
+            'aemi_footer_width', [
+             'label'     =>      esc_html__('Footer Width', 'aemi'),
+             'description'   =>  esc_html__('', 'aemi'),
+             'section'   =>      'aemi_footer',
+             'settings'  =>      'aemi_footer_width',
+             'choices'  => [
+                'default_width'                => esc_html__('Default Width', 'aemi'),
+                'wider_width'                   => esc_html__('Wider Width', 'aemi'),
+                'near_width'                   => esc_html__('Near Full Width', 'aemi'),
+                'full_width'                  => esc_html__('Full Width', 'aemi')
+             ]
+        ]));
+
+        $wp_customize->add_control(new Aemi_Dropdown_Options(
+            $wp_customize,
+            'aemi_footer_column_layout', [
+             'label'     =>      esc_html__('Footer Column Layout', 'aemi'),
+             'description'   =>  esc_html__('Choose maximum number of column to display widgets in Footer.', 'aemi'),
+             'section'   =>      'aemi_footer',
+             'settings'  =>      'aemi_footer_column_layout',
+             'choices'  => [
+                'one_column'       => esc_html__('Single Column', 'aemi'),
+                'two_columns'       => esc_html__('Two Columns', 'aemi'),
+                'three_columns'     => esc_html__('Three Columns', 'aemi'),
+                'four_columns'     => esc_html__('Four Columns', 'aemi')
+             ]
+        ]));
+    }
+}
+
 if (!function_exists('aemi_customizer_controls__header'))
 {
     function aemi_customizer_controls__header($wp_customize)
@@ -712,5 +749,143 @@ if (!function_exists('aemi_customizer_controls__seo'))
             'settings'  =>      'aemi_meta_twitter_creator',
             'type'      =>      'input'
         ]);
+    }
+}
+
+if (!function_exists('aemi_customizer_controls__post'))
+{
+    function aemi_customizer_controls__post($wp_customize)
+    {
+        $wp_customize->add_control(new Aemi_Dropdown_Options(
+            $wp_customize,
+            'aemi_post_layout', [
+             'label'     =>      esc_html__('Post Listing Layout', 'aemi'),
+             'description'   =>  esc_html__('How would you like your post listings to be displayed.', 'aemi'),
+             'section'   =>      'aemi_post',
+             'settings'  =>      'aemi_post_layout',
+             'choices'  => [
+                'no_img'                 => esc_html__('Cards without Image', 'aemi'),
+                'stack'                  => esc_html__('Cards with Image', 'aemi'),
+                'cover'                  => esc_html__('Cards with Background Image', 'aemi'),
+             ]
+        ]));
+
+        $wp_customize->add_control(new Aemi_Dropdown_Options(
+            $wp_customize,
+            'aemi_post_width', [
+             'label'     =>      esc_html__('Post Listing Width', 'aemi'),
+             'description'   =>  esc_html__('', 'aemi'),
+             'section'   =>      'aemi_post',
+             'settings'  =>      'aemi_post_width',
+             'choices'  => [
+                'default_width'                => esc_html__('Default Width', 'aemi'),
+                'wider_width'                   => esc_html__('Wider Width', 'aemi'),
+                'near_width'                   => esc_html__('Near Full Width', 'aemi'),
+                'full_width'                  => esc_html__('Full Width', 'aemi')
+             ]
+        ]));
+
+        $wp_customize->add_control(new Aemi_Dropdown_Options(
+            $wp_customize,
+            'aemi_post_column_layout', [
+             'label'     =>      esc_html__('Post Listing Column Layout', 'aemi'),
+             'description'   =>  esc_html__('Choose maximum number of column to display post in near-full-width and full width.', 'aemi'),
+             'section'   =>      'aemi_post',
+             'settings'  =>      'aemi_post_column_layout',
+             'choices'  => [
+                'one_column'       => esc_html__('Single Column', 'aemi'),
+                'two_columns'       => esc_html__('Two Columns', 'aemi'),
+                'three_columns'     => esc_html__('Three Columns', 'aemi')
+             ]
+        ]));
+
+        $wp_customize->add_control(new Aemi_Dropdown_Options(
+            $wp_customize,
+            'aemi_post_sticky_width', [
+             'label'     =>      esc_html__('Sticky Post Layout in Listing ', 'aemi'),
+             'description'   =>  esc_html__('Choose maximum number of column to display post in near-full-width and full width.', 'aemi'),
+             'section'   =>      'aemi_post',
+             'settings'  =>      'aemi_post_sticky_width',
+             'choices'  => [
+                'span_1'       => esc_html__('One Column', 'aemi'),
+                'span_2'       => esc_html__('Two Columns', 'aemi'),
+                'span_full'     => esc_html__('Full Width', 'aemi')
+             ]
+        ]));
+
+        $wp_customize->add_control( 'aemi_post_single_attachment', [
+            'label'     =>      esc_html__('Display Attachment on Single Content Page', 'aemi'),
+            'description'   =>  esc_html__('', 'aemi'),
+            'section'   =>      'aemi_post',
+            'settings'  =>      'aemi_post_single_attachment',
+            'type'      =>      'checkbox'
+        ]);
+    }
+}
+
+if (!function_exists('aemi_customizer_controls__widgets'))
+{
+    function aemi_customizer_controls__widgets($wp_customize)
+    {
+
+        $wp_customize->add_control(new Aemi_Dropdown_Options(
+            $wp_customize,
+            'aemi_widget_footer_width', [
+             'label'     =>      esc_html__('Footer Widget Area Width', 'aemi'),
+             'description'   =>  esc_html__('', 'aemi'),
+             'section'   =>      'aemi_widgets',
+             'settings'  =>      'aemi_widget_footer_width',
+             'choices'  => [
+                'default_width'                => esc_html__('Default Width', 'aemi'),
+                'wider_width'                   => esc_html__('Wider Width', 'aemi'),
+                'near_width'                   => esc_html__('Near Full Width', 'aemi'),
+                'full_width'                  => esc_html__('Full Width', 'aemi')
+             ]
+        ]));
+
+        $wp_customize->add_control(new Aemi_Dropdown_Options(
+            $wp_customize,
+            'aemi_widget_footer_column_layout', [
+             'label'     =>      esc_html__('Footer Widget Area Column Layout', 'aemi'),
+             'description'   =>  esc_html__('Choose maximum number of column for footer widget area.', 'aemi'),
+             'section'   =>      'aemi_widgets',
+             'settings'  =>      'aemi_widget_footer_column_layout',
+             'choices'  => [
+                'one_column'       => esc_html__('Single Column', 'aemi'),
+                'two_columns'       => esc_html__('Two Columns', 'aemi'),
+                'three_columns'     => esc_html__('Three Columns', 'aemi'),
+                'four_columns'     => esc_html__('Four Columns', 'aemi')
+             ]
+        ]));
+
+        $wp_customize->add_control(new Aemi_Dropdown_Options(
+            $wp_customize,
+            'aemi_widget_overlay_width', [
+             'label'     =>      esc_html__('Overlay Widget Area Width', 'aemi'),
+             'description'   =>  esc_html__('', 'aemi'),
+             'section'   =>      'aemi_widgets',
+             'settings'  =>      'aemi_widget_overlay_width',
+             'choices'  => [
+                'default_width'                => esc_html__('Default Width', 'aemi'),
+                'wider_width'                   => esc_html__('Wider Width', 'aemi'),
+                'near_width'                   => esc_html__('Near Full Width', 'aemi'),
+                'full_width'                  => esc_html__('Full Width', 'aemi')
+             ]
+        ]));
+
+        $wp_customize->add_control(new Aemi_Dropdown_Options(
+            $wp_customize,
+            'aemi_widget_overlay_column_layout', [
+             'label'     =>      esc_html__('Overlay Widget Area Column Layout', 'aemi'),
+             'description'   =>  esc_html__('Choose maximum number of column for overlay widget area.', 'aemi'),
+             'section'   =>      'aemi_widgets',
+             'settings'  =>      'aemi_widget_overlay_column_layout',
+             'choices'  => [
+                'one_column'       => esc_html__('Single Column', 'aemi'),
+                'two_columns'       => esc_html__('Two Columns', 'aemi'),
+                'three_columns'     => esc_html__('Three Columns', 'aemi'),
+                'four_columns'     => esc_html__('Four Columns', 'aemi')
+             ]
+        ]));
     }
 }

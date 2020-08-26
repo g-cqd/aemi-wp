@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.5
 * Requires PHP: 7.2
-* Version: 2.0-beta16
+* Version: 2.0-beta17
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -84,11 +84,12 @@ License: CC0 1.0 Universal (CC0 1.0)
 Source: https://github.com/originecode/AeMi
 ```
 
-## Coming
-	[ ] Blog Page header message
-
 ## Changelog
 
+### 2.0-beta17 :
+	- Added : Widgets Layout Settings
+	- Added : Post Loop Layout Settings
+	- Improved : Gutenberg Support
 ### 2.0-beta16 :
 	- Fixed : Bugs with Meta Tags, Open Graph & Twitter Tags
 	- Improved : Titling in Meta tags

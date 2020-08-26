@@ -6,7 +6,7 @@ if (!function_exists('aemi_theme_switcher'))
 	{
 		$scheme = get_theme_mod('aemi_color_scheme', 'auto');
 		$s = ' checked';
-		?><div id="header-settings" class="header-section">
+		?><div id="header-settings" class="header-block">
 			<form class="settings-set" id="color-scheme-selector">
 				<div class="color-scheme-option">
 					<input type="radio" id="light-scheme-option" class="color-scheme-input" name="color-scheme-option"<?= $scheme == 'light' ? $s : '' ?>>
@@ -30,7 +30,16 @@ if (!function_exists('aemi_overlay_menu'))
 {
 	function aemi_overlay_menu()
 	{
-		?><button id="navigation-toggle" title="<?= esc_attr__('Menu', 'aemi') ?>" data-target="navigation-wrapper" class="no-style toggle">
+		
+		$scheme_selector = is_enabled('aemi_color_scheme_user', 0);
+		$has_overlay_menu = has_nav_menu('overlay-menu');
+		$sidebar_id = 'overlay-widget-area';
+		$total_widgets = wp_get_sidebars_widgets();
+		$overlay_widgets = count($total_widgets[$sidebar_id]) > 0;
+
+		$just_mobile = !($scheme_selector || $has_overlay_menu || $overlay_widgets);
+
+		?><button id="navigation-toggle" title="<?= esc_attr__('Menu', 'aemi') ?>" data-target="navigation-wrapper" class="no-style toggle <?= esc_attr( $just_mobile ? 'just-mobile' : '') ?>">
 			<span class="top-bar" ></span>
 			<span class="middle-bar" ></span>
 			<span class="bottom-bar" ></span>
@@ -117,7 +126,7 @@ if (!function_exists('aemi_header_branding'))
 					?><div class="light-scheme-logo"><?php
 
 					printf(
-						'<a href="%1$s" class="custom-logo-link" title="%2$s - %3$s" rel="home"><img src="%4$s" alt="%2$s Logo for Light Scheme" height="40"%5$s></a>',
+						'<a href="%1$s" class="custom-logo-link" title="%2$s • %3$s" rel="home"><img src="%4$s" alt="%2$s Logo for Light Scheme" height="40"%5$s></a>',
 						esc_url(home_url()),
 						esc_attr(get_bloginfo('name')),
 						esc_attr__('Home', 'aemi'),
@@ -143,7 +152,7 @@ if (!function_exists('aemi_header_branding'))
 					}
 
 					?><div<?= $scheme_class ?>><?= sprintf(
-						'<a href="%1$s" class="custom-logo-link" title="%2$s - %3$s" rel="home"><img src="%4$s" alt="%2$s Logo for Dark Scheme" height="40"></a>',
+						'<a href="%1$s" class="custom-logo-link" title="%2$s • %3$s" rel="home"><img src="%4$s" alt="%2$s Logo for Dark Scheme" height="40"></a>',
 						esc_url(home_url()),
 						esc_attr(get_bloginfo('name')),
 						esc_attr__('Home', 'aemi'),
@@ -156,7 +165,7 @@ if (!function_exists('aemi_header_branding'))
 					?><div class="dark-scheme-logo"><?php
 
 					printf(
-						'<a href="%1$s" class="custom-logo-link" title="%2$s - %3$s" rel="home"><img src="%4$s" alt="%2$s Logo for Dark Scheme" height="40"%5$s></a>',
+						'<a href="%1$s" class="custom-logo-link" title="%2$s • %3$s" rel="home"><img src="%4$s" alt="%2$s Logo for Dark Scheme" height="40"%5$s></a>',
 						esc_url(home_url()),
 						esc_attr(get_bloginfo('name')),
 						esc_attr__('Home', 'aemi'),

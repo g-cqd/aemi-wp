@@ -84,7 +84,7 @@ if (!function_exists('aemi_scripts'))
 		wp_register_style( 'aemi-fonts', get_template_directory_uri() . '/assets/css/public/fonts.css' );
 		wp_register_style( 'aemi-standard', get_template_directory_uri() . '/assets/css/public/standard.css' );
 		wp_register_style( 'aemi-styles', get_stylesheet_uri() );
-		wp_register_style( 'aemi-gutenberg', get_template_directory_uri() . '/assets/css/public/gutenberg.css' );
+		wp_register_style( 'aemi-wordpress', get_template_directory_uri() . '/assets/css/public/wordpress.css' );
 		// -- Register Scripts -- //
 		wp_register_script( 'aemi-index', get_template_directory_uri() . '/assets/js/index.js', false, false, false );
 		wp_register_script( 'aemi-script', get_template_directory_uri() . '/assets/js/aemi.js', false, false, false );
@@ -92,7 +92,7 @@ if (!function_exists('aemi_scripts'))
 		wp_enqueue_style( 'aemi-fonts' );
 		wp_enqueue_style( 'aemi-standard' );
 		wp_enqueue_style( 'aemi-styles' );
-		wp_enqueue_style( 'aemi-gutenberg' );
+		wp_enqueue_style( 'aemi-wordpress' );
 		// -- Enqueue Scripts -- //
 		wp_enqueue_script( 'aemi-index' );
 		wp_enqueue_script( 'aemi-script' );

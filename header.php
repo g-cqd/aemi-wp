@@ -14,7 +14,8 @@
         <header id="site-header"<?= is_singular() & has_post_thumbnail() ? ' class="color-scheme-dark"' : '' ?>>
             <?php
             printf(
-                '<a class="skip-link screen-reader-text" href="#main-content">%s</a>',
+                '<a class="skip-link focusable screen-reader-text button" href="#%1$s" tabindex="0">%2$s</a>',
+                is_singular() ? 'post-content' : 'site-loop',
                 esc_html__('Skip to content', 'aemi')
             );
             ?>

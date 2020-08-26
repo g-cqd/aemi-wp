@@ -1,28 +1,25 @@
 <?php
 
-if (!function_exists('aemi_sidebar_widgets'))
-{
-	function aemi_sidebar_widgets()
-	{
-		if (is_active_sidebar('sidebar-widget-area'))
-		{
-			?><aside id="sidebar"><?php
-				dynamic_sidebar('sidebar-widget-area');
-			?></aside><?php
-		}
-	}
-}
-
 
 if (!function_exists('aemi_footer_widgets'))
 {
 	function aemi_footer_widgets()
 	{
-		if (is_active_sidebar('footer-widget-area'))
+		$sidebar_id = 'footer-widget-area';
+
+		$total_widgets = wp_get_sidebars_widgets();
+		
+		if (is_active_sidebar($sidebar_id) && count($total_widgets[$sidebar_id]) > 0)
 		{
-			?><div id="footer-widgets"><?php
-				dynamic_sidebar('footer-widget-area');
-			?></div><?php
+
+			$width = preg_replace( '/_/', '-', get_theme_mod('aemi_widget_footer_width','default_width'));
+			$columns = preg_replace( '/_/', '-', get_theme_mod('aemi_widget_footer_column_layout','two_columns'));
+
+			?><div id="footer-widgets">
+				<div class="widget-area <?= esc_attr( "$width $columns" ) ?>"><?php
+					dynamic_sidebar( 'footer-widget-area' );
+				?></div>
+			</div><?php
 		}
 	}
 }
@@ -64,14 +61,14 @@ if (!function_exists('aemi_footer_credit'))
 {
 	function aemi_footer_credit()
 	{
-		?><p id="copyright"><?php
+		?><span id="site-credit"><?php
 			printf(
 				__('%1$s %2$s %3$s. All Rights Reserved.', 'aemi'),
 				'&copy;',
 				date('Y'),
 				esc_html(get_bloginfo('name'))
 			);
-		?></p><?php
+		?></span><?php
 	}
 }
 

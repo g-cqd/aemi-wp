@@ -402,3 +402,93 @@ if (!function_exists('aemi_title_separator'))
 		return $mod;
 	}
 }
+
+class Aemi_Widget_RSS_Custom extends WP_Widget_RSS {
+    public function widget($args, $instance) {
+        if ( isset( $instance['error'] ) && $instance['error'] ) {
+			return;
+		}
+
+		$url = ! empty( $instance['url'] ) ? $instance['url'] : '';
+		while ( stristr( $url, 'http' ) !== $url ) {
+			$url = substr( $url, 1 );
+		}
+
+		if ( empty( $url ) ) {
+			return;
+		}
+
+		// Self-URL destruction sequence.
+		if ( in_array( untrailingslashit( $url ), array( site_url(), home_url() ), true ) ) {
+			return;
+		}
+
+		$rss   = fetch_feed( $url );
+		$title = $instance['title'];
+		$desc  = '';
+		$link  = '';
+
+		if ( ! is_wp_error( $rss ) ) {
+			$desc = esc_attr( strip_tags( html_entity_decode( $rss->get_description(), ENT_QUOTES, get_option( 'blog_charset' ) ) ) );
+			if ( empty( $title ) ) {
+				$title = strip_tags( $rss->get_title() );
+			}
+			$link = strip_tags( $rss->get_permalink() );
+			while ( stristr( $link, 'http' ) !== $link ) {
+				$link = substr( $link, 1 );
+			}
+		}
+
+		if ( empty( $title ) ) {
+			$title = ! empty( $desc ) ? $desc : __( 'Unknown Feed' );
+		}
+
+		/** This filter is documented in wp-includes/widgets/class-wp-widget-pages.php */
+		$title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
+
+		$url  = strip_tags( $url );
+		if ( $title ) {
+			$title = '<a class="rsswidget" href="' . esc_url( $url ) . '"><a class="rsswidget" href="' . esc_url( $link ) . '">' . esc_html( $title ) . '</a>';
+		}
+
+		echo $args['before_widget'];
+		if ( $title ) {
+			echo $args['before_title'] . $title . $args['after_title'];
+		}
+
+		$format = current_theme_supports( 'html5', 'navigation-widgets' ) ? 'html5' : 'xhtml';
+
+		/** This filter is documented in wp-includes/widgets/class-wp-nav-menu-widget.php */
+		$format = apply_filters( 'navigation_widgets_format', $format );
+
+		if ( 'html5' === $format ) {
+			// The title may be filtered: Strip out HTML and make sure the aria-label is never empty.
+			$title      = trim( strip_tags( $title ) );
+			$aria_label = $title ? $title : __( 'RSS Feed' );
+			echo '<nav role="navigation" aria-label="' . esc_attr( $aria_label ) . '">';
+		}
+
+		wp_widget_rss_output( $rss, $instance );
+
+		if ( 'html5' === $format ) {
+			echo '</nav>';
+		}
+
+		echo $args['after_widget'];
+
+		if ( ! is_wp_error( $rss ) ) {
+			$rss->__destruct();
+		}
+		unset( $rss );
+    }
+}
+
+
+if (!function_exists('aemi_custom_rss_init'))
+{
+	function aemi_custom_rss_init()
+	{
+    	unregister_widget('WP_Widget_RSS');
+    	register_widget('Aemi_Widget_RSS_Custom');
+	}
+}

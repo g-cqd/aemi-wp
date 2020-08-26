@@ -43,23 +43,31 @@ if (!function_exists('aemi_featured_image'))
 {
 	function aemi_featured_image()
 	{
-		if (has_post_thumbnail())
+		$single_attachment = is_enabled('aemi_post_single_attachment',1);
+		$no_img = get_theme_mod('aemi_post_layout','cover') == 'no_img';
+		if (has_post_thumbnail() && (is_singular() && $single_attachment || !$no_img))
 		{
 			?><div class="post-attachment"><?php
 			if (!is_singular())
 			{
-				if (is_sticky())
+				if (!$no_img)
 				{
-					aemi_post_thumbnail('aemi-mid');
-				}
-				else
-				{
-					aemi_post_thumbnail('aemi-small');
+					if (is_sticky())
+					{
+						aemi_post_thumbnail('aemi-mid');
+					}
+					else
+					{
+						aemi_post_thumbnail('aemi-small');
+					}
 				}
 			}
 			else
 			{
-				aemi_post_thumbnail('aemi-large');
+				if ($single_attachment)
+				{
+					aemi_post_thumbnail('aemi-large');
+				}
 			}
 			?></div><?php
 		}
@@ -263,69 +271,94 @@ if (!function_exists('aemi_meta_header'))
 						<?= esc_html__( 'Categories', 'aemi' ) ?>
 					</div>
 					<div class="meta-item-list">
-						<span class="meta-item-list-item">
-							<?php the_category( '</span><span class="meta-item-list-item"> ' ); ?>
+						<span class="meta-item-list-item button">
+							<?php the_category( '</span><span class="meta-item-list-item button"> ' ); ?>
 						</span>
 					</div>
-				</div><?php
-			}
-			if ($edit_link)
-			{
-				edit_post_link(esc_html__('Edit', 'aemi'), '<div class="post-edit">', '</div>');
-			}
-			?></div><?php
-		}		
-	}
-}
-
-
-if (!function_exists('aemi_get_post_meta'))
-{
-	function aemi_get_post_meta()
-	{
-		$metas = [];
-		foreach (get_post_taxonomies() as $tax)
-		{
-			if (get_theme_mod(aemi_type($tax), 1) == 1)
-			{
-				if (($tax === 'post_tag') || ($tax !== 'category' && $tax !== 'post_format'))
-				{
-					$metas[] = $tax;
+					</div><?php
 				}
-			}
-		}
-		return $metas;
-	}
-}
-
-
-if (!function_exists('aemi_post_meta_footer'))
-{
-	function aemi_post_meta_footer()
-	{
-		global $post;
-		$metas = aemi_get_post_meta();
-		if (is_singular() && count($metas) > 0)
-		{
-			?><div class="post-meta"><?php
-			foreach ($metas as $meta)
-			{
-				if ($meta === 'post_tag')
+				if ($edit_link)
 				{
-					the_tags('<div class="post-tags">', '', '</div>');
+					edit_post_link(esc_html__('Edit', 'aemi'), '<div class="post-edit">', '</div>');
 				}
-				else if ($meta !== 'category' && $meta !== 'post_format')
-				{
-					the_terms(
-						$post->ID,
-						$meta,
-						'<div class="post-custom-post-type-taxonomy-' . $meta . '"><h3>' . $meta . '</h3><div>',
-						'',
-						'</div></div>'
-					);
-				}
-			}
-			?></div><?php
+				?></div><?php
+			}		
 		}
 	}
-}
+
+
+	if (!function_exists('aemi_get_post_meta'))
+	{
+		function aemi_get_post_meta()
+		{
+			$metas = [];
+			foreach (get_post_taxonomies() as $tax)
+			{
+				if (get_theme_mod(aemi_type($tax), 1) == 1)
+				{
+					if (($tax === 'post_tag') || ($tax !== 'category' && $tax !== 'post_format'))
+					{
+						$metas[] = $tax;
+					}
+				}
+			}
+			return $metas;
+		}
+	}
+
+
+	if (!function_exists('aemi_post_meta_footer'))
+	{
+		function aemi_post_meta_footer()
+		{
+			global $post;
+			$metas = aemi_get_post_meta();
+			if (is_singular() && count($metas) > 0)
+			{
+				$meta_occ = [];
+				$one_meta = false;
+				foreach ($metas as $meta) {
+					if (get_the_term_list($post->ID,$meta) != '' ) {
+						$one_meta = true;
+						$meta_occ[$meta] = true;
+					}
+				}
+				if ($one_meta) {
+					?><div class="post-meta"><?php
+					foreach ($metas as $meta)
+					{
+						if ($meta_occ[$meta]) {
+							if ($meta === 'post_tag')
+							{
+								?><div class="meta-tags meta-item">
+									<div class="meta-item-title h2">
+										<?= esc_html__( 'Tags', 'aemi' ) ?>
+									</div>
+									<div class="meta-item-list">
+										<span class="meta-item-list-item button">
+											<?php the_tags( '', '</span><span class="meta-item-list-item button">', '' ); ?>
+										</span>
+									</div>
+									</div><?php
+								}
+								else if ($meta !== 'category' && $meta !== 'post_format')
+								{
+									?><div class="custom-post-type-taxonomy=<?= esc_attr( $meta ) ?> meta-item">
+										<div class="meta-item-title h2">
+											<?= esc_html( $meta ) ?>
+										</div>
+										<div class="meta-item-list">
+											<span class="meta-item-list-item button">
+												<?php the_terms( $post->ID, $meta, '', '</span><span class="meta-item-list-item button">', '' ); ?>
+											</span>
+										</div>
+										</div><?php
+										
+									}
+								}
+							}
+							?></div><?php
+						}
+					}
+				}
+			}

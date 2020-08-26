@@ -160,19 +160,19 @@ if (!function_exists('aemi_widgets_init'))
 			'name'			=>	__('Overlay Widget Area', 'aemi'),
 			'id'			=>	'overlay-widget-area',
 			'description'	=>	__('Add widgets in this area to display them on overlay area.', 'aemi'),
-			'before_widget'	=>	'<div id="w-%1$s" class="w-cont header-section %2$s">',
-			'after_widget'	=>	'</div>',
-			'before_title'	=>	'<h4 class="widget-title">',
-			'after_title'	=>	'</h4>',
+			'before_widget'	=>	'<div class="header-block"><div id="widget-%1$s" class="widget-container %2$s">',
+			'after_widget'	=>	'</div></div>',
+			'before_title'	=>	'<strong class="widget-title h4">',
+			'after_title'	=>	'</strong>',
 		]);
 		register_sidebar([
 			'name'			=>	__('Footer Widget Area', 'aemi'),
 			'id'			=>	'footer-widget-area',
 			'description'	=>	__('Add widgets in this area to display them on footer area.', 'aemi'),
-			'before_widget'	=>	'<div id="w-%1$s" class="w-cont %2$s">',
+			'before_widget'	=>	'<div id="widget-%1$s" class="widget-container %2$s">',
 			'after_widget'	=>	'</div>',
-			'before_title'	=>	'<h4 class="widget-title">',
-			'after_title'	=>	'</h4>',
+			'before_title'	=>	'<strong class="widget-title h4">',
+			'after_title'	=>	'</strong>',
 		]);
 	}
 }
@@ -181,21 +181,19 @@ if (!function_exists('aemi_custom_comment_fields_order'))
 {
 	function aemi_custom_comment_fields_order($fields)
 	{
-		
-		$comment_field = $fields['comment'];
-		$author_field = $fields['author'];
-		$email_field = $fields['email'];
-		$url_field = $fields['url'];
 
-		unset($fields['comment']);
-		unset($fields['author']);
-		unset($fields['email']);
-		unset($fields['url']);
-		
-		$fields['author'] = $author_field;
-		$fields['email'] = $email_field;
-		$fields['url'] = $url_field;
-		$fields['comment'] = $comment_field;
+		$new_fields = [];
+
+		$types = ['author','email','url','comment'];
+
+		foreach ($types as $type) {
+			$new_fields[$type] = $fields[$type];
+			unset($fields[$type]);
+		}
+
+		foreach ($types as $type) {
+			$fields[$type] = $new_fields[$type];
+		}
 		
 		return $fields;
 	}

@@ -140,6 +140,11 @@
 	--light-select-arrows: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTE4IDExOCIgZmlsbD0iYmxhY2siIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxwYXRoIGQ9Ik02My4xNDIsOTAuMjMxbC0xNi4wMTUsLTI0LjYwM2wzMi4wMjksMGwtMTYuMDE0LDI0LjYwM1oiLz48cGF0aCBkPSJNNjMuMTQyLDI3LjIzMWwxNi4wMTQsMjQuNjAzbC0zMi4wMjksMGwxNi4wMTUsLTI0LjYwM1oiLz48L3N2Zz4=);
 
 	--dark-select-arrows: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTE4IDExOCIgZmlsbD0id2hpdGUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxwYXRoIGQ9Ik02My4xNDIsOTAuMjMxbC0xNi4wMTUsLTI0LjYwM2wzMi4wMjksMGwtMTYuMDE0LDI0LjYwM1oiLz48cGF0aCBkPSJNNjMuMTQyLDI3LjIzMWwxNi4wMTQsMjQuNjAzbC0zMi4wMjksMGwxNi4wMTUsLTI0LjYwM1oiLz48L3N2Zz4=);
+
+	--tr-short: 200ms;
+	--tr-mid: 300ms;
+	--tr-long: 500ms;
+	--tr-func: ease-in-out;
 }
 
 @supports (font-variation-settings: normal) {
@@ -150,6 +155,15 @@
 			'Inter Display', 'Inter Var', 'Inter', var(--system-stack);
 		--mono-stack: 'JetBrains Mono', 'Fira Code Var', 'Fira Code', 'Hack',
 			var(--mono-system-stack);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	:root {
+		--tr-short: 0ms;
+		--tr-mid: 0ms;
+		--tr-long: 0ms;
+		--tr-func: linear;
 	}
 }
 
@@ -384,7 +398,6 @@ body {
 }
 
 html {
-	--transition-timing-function: ease-in-out;
 	font-size: 1rem;
 }
 
@@ -395,12 +408,12 @@ body {
 
 ::placeholder {
 	color: var(--text-optional);
-	transition: color 200ms var(--transition-timing-function);
+	transition: color var(--tr-short) var(--tr-func);
 }
 
 ::-moz-placeholder {
 	color: var(--text-optional);
-	transition: color 200ms var(--transition-timing-function);
+	transition: color var(--tr-short) var(--tr-func);
 }
 
 [hidden] {
@@ -424,25 +437,25 @@ a:visited {
 	text-decoration: none;
 	opacity: 1;
 	outline: none;
-	transition: color 200ms var(--transition-timing-function);
-	will-change: color;
+	transition: color var(--tr-short) var(--tr-func);
 }
 
 a:hover,
+.\:hover a,
+a.\:hover,
 a:visited:hover {
 	color: var(--text-important-hover);
-	transition: color 200ms var(--transition-timing-function);
-	will-change: color;
+	transition: color var(--tr-short) var(--tr-func);
 }
 
 a img {
 	opacity: 1;
-	transition: opacity 200ms var(--transition-timing-function);
+	transition: opacity var(--tr-short) var(--tr-func);
 }
 a:hover img,
 a:visited:hover img {
 	opacity: 0.7;
-	transition: opacity 200ms var(--transition-timing-function);
+	transition: opacity var(--tr-short) var(--tr-func);
 }
 
 img {
@@ -454,7 +467,7 @@ img {
 	margin-bottom: 0;
 	max-width: 100%;
 	opacity: 1;
-	transition: opacity 200ms var(--transition-timing-function);
+	transition: opacity var(--tr-short) var(--tr-func);
 }
 
 abbr,
@@ -542,36 +555,9 @@ blockquote {
 	font-size: 1.1em;
 	font-weight: normal;
 	hyphens: none;
-	padding-top: 1.5rem;
-	padding-right: 2rem;
-	padding-bottom: 1.5rem;
-	padding-left: calc(2rem + 3px);
+	padding: 2rem;
 	position: relative;
 	text-align: left;
-}
-
-blockquote::before,
-blockquote::after {
-	background-color: var(--border);
-	content: '';
-	display: block;
-	height: 100%;
-	position: absolute;
-	width: 3px;
-	top: 0;
-}
-blockquote::before {
-	left: 0;
-}
-blockquote::after {
-	right: 0;
-}
-blockquote::after {
-	display: none;
-}
-
-blockquote::after {
-	display: none;
 }
 
 blockquote:not([class*='align']) {
@@ -862,7 +848,7 @@ select {
 	border-style: solid;
 	border-width: 2px;
 	color: initial;
-	font-family: var(--font-stack-std);
+	font-family: var(--font-stack);
 	font-size: 1rem;
 	letter-spacing: -0.011em;
 	line-height: 1.5;
@@ -896,7 +882,6 @@ textarea {
 	border-color: var(--element-border);
 	box-shadow: 0 5px 10px -5px var(--inherit-box-shadow);
 	color: var(--text-color);
-	will-change: background, border-color, color;
 }
 
 input:-webkit-autofill,
@@ -937,51 +922,52 @@ textarea {
 }
 
 button:not(.no-style),
-.button > a,
-a.button,
-input[type='button'],
-input[type='submit'],
-input[type='reset'] {
+.button > a:not(.no-style),
+a.button:not(.no-style),
+input[type='button']:not(.no-style),
+input[type='submit']:not(.no-style),
+input[type='reset']:not(.no-style) {
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	user-select: none;
 	background-color: var(--text-color);
-	border-color: var(--text-color);
+	border: 2px solid var(--text-color);
 	border-radius: var(--radius);
 	color: var(--page-color);
 	cursor: pointer;
-	font-weight: bolder;
+	font-weight: 700;
 	margin: 0;
 	padding: 0.75ex 1.25ch;
-	box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 2px 10px 2px var(--input-shadow-alpha);
 	transition-property: background-color, border-color, color, box-shadow,
 		transform;
-	transition-duration: 150ms;
-	transition-timing-function: ease;
+	transition-duration: var(--tr-short);
+	transition-timing-function: var(--tr-func);
 	vertical-align: baseline;
-	will-change: background-color, border-color, color, box-shadow, transform;
 }
 
 button:not(:disabled):not(.no-style):hover,
-.button > a:not(:disabled):not(.no-style):hover,
-a.button:not(:disabled):not(.no-style):hover,
-input[type='button']:not(:disabled):hover,
-input[type='submit']:not(:disabled):hover,
-input[type='reset']:not(:disabled):hover {
+.button > a:not(.no-style):hover,
+.button > a:not(.no-style):visited:hover,
+a.button:not(.no-style):hover,
+a.button:not(.no-style):visited:hover,
+input[type='button']:not(:disabled):not(.no-style):hover,
+input[type='submit']:not(:disabled):not(.no-style):hover,
+input[type='reset']:not(:disabled):not(.no-style):hover {
 	background-color: var(--text-important);
 	border-color: var(--text-important);
-	box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 5px 0 var(--input-shadow-alpha);
 	transform: scale(1);
 	transition-property: background-color, border-color, color, box-shadow,
 		transform;
-	transition-duration: 150ms;
-	transition-timing-function: ease;
+	transition-duration: var(--tr-short);
+	transition-timing-function: var(--tr-func);
 }
 
 button:not(:disabled):not(.no-style):active,
 button:not(:disabled):not(.no-style):hover:active,
-.button > a:not(:disabled):active,
-.button > a:not(:disabled):hover:active,
+.button > a:not(.no-style):active,
+.button > a:not(.no-style):hover:active,
 a.button:not(:disabled):active,
 a.button:not(:disabled):hover:active,
 input[type='button']:not(:disabled):active,
@@ -992,12 +978,12 @@ input[type='reset']:not(:disabled):active,
 input[type='reset']:not(:disabled):hover:active {
 	background-color: var(--text-important-hover);
 	border-color: var(--input-border);
-	box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 5px 0 var(--input-shadow-alpha);
 	transform: scale(0.975);
 	transition-property: background-color, border-color, color, box-shadow,
 		transform;
-	transition-duration: 150ms;
-	transition-timing-function: ease;
+	transition-duration: var(--tr-short);
+	transition-timing-function: var(--tr-func);
 }
 
 ::-webkit-input-placeholder {

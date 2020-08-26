@@ -13,7 +13,7 @@ else {
 ?><form role="search" method="get" class="search-form" action="<?= home_url('/'); ?>">
 	<div id="search-container">
 		<label class="screen-reader-text" for="search-input<?= esc_html('-' . $aemi_search_form_id) ?>"><?= esc_html__('Search for &hellip;', 'aemi') ?></label>
-		<input type="search" id="search-input<?= esc_html('-' . $aemi_search_form_id) ?>" class="search-input" placeholder="<?= esc_attr__('Search for &hellip;', 'aemi') ?>" value="<?= get_search_query() ?>" name="s" title="<?= esc_attr__('Search for &hellip;', 'aemi') ?>" />
+		<input type="search" id="search-input<?= esc_html('-' . $aemi_search_form_id) ?>" class="search-input" placeholder="<?= esc_attr__('Search for &hellip;', 'aemi') ?>" value="<?= get_search_query() ?>" name="s" title="<?= esc_attr__('Search for &hellip;', 'aemi') ?>" required/>
 		<button type="submit" class="search-submit no-style" title="<?= esc_attr__('Search', 'aemi')?>">
 			<span class="search-icon"></span>
 		</button>

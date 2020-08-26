@@ -25,6 +25,7 @@ const aemi = new Environment();
 aemi.parallel([
 	aemi.set('global', getGlobal()),
 	aemi.set('site-header', byId('site-header')),
+	aemi.set('site-loop', byId('site-loop')),
 	aemi.set('first-header', byClass('post-header')[0]),
 	aemi.set('nav-toggle', byId('navigation-toggle')),
 	aemi.set('sea-toggle', byId('search-toggle')),
@@ -1091,6 +1092,48 @@ try {
 		}
 	});
 }
+
+try {
+	if (isFunction(aemi_loop)) {
+		aemi.push(aemi_loop);
+	}
+}
+catch (_) {
+	aemi.push(() => {
+		if (aemi.assert('site-loop')) {
+			const loop = aemi.get('site-loop');
+			const entries = loop.getElementsByClassName('entry');
+			for ( const entry of entries ) {
+				const anchor = entry.getElementsByTagName('a')[0];
+				if (is(anchor)) {
+					entry.addEventListener('click',() => {
+						anchor.click();
+					});
+					entry.addEventListener('mouseenter',() => {
+						addClass(entry,':hover');
+					});
+					entry.addEventListener('mouseleave',() => {
+						removeClass(entry,':hover');
+					});
+				}
+			}
+		}
+	});
+}
+
+try {
+	if (isFunction(aemi_form_fix)) {
+		aemi.push(aemi_form_fix);
+	}
+}
+catch (_) {
+	aemi.push(() => {
+		for (const form of document.getElementsByClassName('comment-form')) {
+			form.removeAttribute('novalidate');
+		}
+	});
+}
+
 try {
 	if (isFunction(aemi_toggle)) {
 		aemi.push(aemi_toggle);

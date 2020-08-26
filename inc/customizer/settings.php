@@ -126,6 +126,32 @@ if (!function_exists('aemi_customizer_settings__custom_scripts'))
 	}
 }
 
+if (!function_exists('aemi_customizer_settings__widgets'))
+{
+	function aemi_customizer_settings__widgets($wp_customize)
+	{
+		$wp_customize->add_setting('aemi_widget_overlay_column_layout', [
+			'default' => 'one_column',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
+
+		$wp_customize->add_setting('aemi_widget_overlay_width', [
+			'default' => 'default_width',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
+
+		$wp_customize->add_setting('aemi_widget_footer_column_layout', [
+			'default' => 'one_column',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
+
+		$wp_customize->add_setting('aemi_widget_footer_width', [
+			'default' => 'default_width',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
+	}
+}
+
 if (!function_exists('aemi_customizer_settings__header'))
 {
 	function aemi_customizer_settings__header($wp_customize)
@@ -277,6 +303,60 @@ if (!function_exists('aemi_customizer_settings__performance'))
 			'capability'		=> 'edit_theme_options',
 			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
 		]);
+	}
+}
+
+if (!function_exists('aemi_customizer_settings__post'))
+{
+	function aemi_customizer_settings__post($wp_customize)
+	{
+
+		$wp_customize->add_setting('aemi_post_layout', [
+			'default' => 'cover',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
+
+		$wp_customize->add_setting('aemi_post_column_layout', [
+			'default' => 'one_column',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
+
+		$wp_customize->add_setting('aemi_post_width', [
+			'default' => 'default_width',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
+
+		$wp_customize->add_setting('aemi_post_sticky_width', [
+			'default' => 'span_full',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
+
+		/*
+		 * For a future Update
+		 *
+
+		$wp_customize->add_setting('aemi_post_font_heading', [
+			'default' => 'unset',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
+
+		$wp_customize->add_setting('aemi_post_font_heading', [
+			'default' => 'unset',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
+
+		 *
+		 *
+		 */
+
+		aemi_add_settings([
+			[
+				'name' => 'aemi_post_single_attachment',
+				'type' => 'checkbox',
+				'default' => 1,
+			]
+		], $wp_customize);
+
 	}
 }
 

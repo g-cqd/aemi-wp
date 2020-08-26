@@ -1,4 +1,4 @@
-# AeMi
+# Aemi
 
 
 
@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.5
 * Requires PHP: 7.2
-* Version: 2.0-beta16
+* Version: 2.0-beta17
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -16,28 +16,28 @@
 
 ## Description
 
-AeMi is designed to be an aesthetic minimalist WordPress theme. It provides a highly legible, clean, clear and really minimalist theme. AeMi is also a really fast and efficient theme. AeMi is Gutenberg-ready.
+Aemi is designed to be an aesthetic minimalist WordPress theme. It provides a highly legible, clean, clear and really minimalist theme. Aemi is also a really fast and efficient theme. Aemi is Gutenberg-ready.
 
 
 
 ## Installation
 
 1. In your admin panel, go to Appearance -> Themes and click the 'Add New' button.
-2. Type in AeMi in the search form and press the 'Enter' key on your keyboard.
+2. Type in Aemi in the search form and press the 'Enter' key on your keyboard.
 3. Click on the 'Install' button then click on the 'Activate' button to use your new theme right away.
 
 
 
 ## Copyright
 
-AeMi WordPress Theme, Copyright (c) 2020 Guillaume COQUARD.
+Aemi WordPress Theme, Copyright (c) 2020 Guillaume COQUARD.
 
-AeMi is distributed under the terms of the GNU General Public License v3.0.
+Aemi is distributed under the terms of the GNU General Public License v3.0.
 
 
 ## License - GNU GPL 3.0 License
 
-### AeMi WordPress Theme Copyright (c) 2018-2020 Guillaume COQUARD
+### Aemi WordPress Theme Copyright (c) 2018-2020 Guillaume COQUARD
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
@@ -46,7 +46,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 
-### AeMi uses the following third-party resources:
+### Aemi uses the following third-party resources:
 
 ```
 Inter Typeface, Copyright (c) 2016-2020 The Inter Project Authors
@@ -76,19 +76,20 @@ Source: http://jslightbox.felixhagspiel.de
 ```
 Bundled screenshot.jpg, Copyright (c) 2018 Guillaume COQUARD
 License: CC0 1.0 Universal (CC0 1.0)
-Source: https://github.com/originecode/AeMi
+Source: https://github.com/aemi-dev/Aemi
 ```
 ```
-Bundled Images in screenshot.jpg, Copyright (c) 2018 Guillaume COQUARD
+Bundled Images in screenshot.jpg, Copyright (c) 2018-2020 Guillaume COQUARD
 License: CC0 1.0 Universal (CC0 1.0)
-Source: https://github.com/originecode/AeMi
+Source: https://github.com/aemi-dev/Aemi
 ```
-
-## Coming
-	[ ] Blog Page header message
 
 ## Changelog
 
+### 2.0-beta17 :
+	- Added : Widgets Layout Settings
+	- Added : Post Loop Layout Settings
+	- Improved : Gutenberg Support
 ### 2.0-beta16 :
 	- Fixed : Bugs with Meta Tags, Open Graph & Twitter Tags
 	- Improved : Titling in Meta tags

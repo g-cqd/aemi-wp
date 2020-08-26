@@ -15,10 +15,12 @@ add_action( 'customize_register',			'aemi_customizer_settings__header' );
 add_action( 'customize_register',			'aemi_customizer_settings__homepage' );
 add_action( 'customize_register',			'aemi_customizer_settings__identity' );
 add_action( 'customize_register',			'aemi_customizer_settings__performance' );
+add_action( 'customize_register',			'aemi_customizer_settings__post' );
 add_action( 'customize_register',			'aemi_customizer_settings__post_types' );
 add_action( 'customize_register',			'aemi_customizer_settings__search' );
 add_action( 'customize_register',			'aemi_customizer_settings__security' );
 add_action( 'customize_register',			'aemi_customizer_settings__seo' );
+add_action( 'customize_register',			'aemi_customizer_settings__widgets' );
 // -- Register Aemi Customizer -- Controls -- //
 add_action( 'customize_register', 			'aemi_customizer_controls__analytics' );
 add_action( 'customize_register', 			'aemi_customizer_controls__colors' );
@@ -29,10 +31,12 @@ add_action( 'customize_register', 			'aemi_customizer_controls__header' );
 add_action( 'customize_register', 			'aemi_customizer_controls__homepage' );
 add_action( 'customize_register', 			'aemi_customizer_controls__identity' );
 add_action( 'customize_register', 			'aemi_customizer_controls__performance' );
+add_action( 'customize_register', 			'aemi_customizer_controls__post' );
 add_action( 'customize_register', 			'aemi_customizer_controls__post_types' );
 add_action( 'customize_register', 			'aemi_customizer_controls__search' );
 add_action( 'customize_register', 			'aemi_customizer_controls__security' );
 add_action( 'customize_register', 			'aemi_customizer_controls__seo' );
+add_action( 'customize_register', 			'aemi_customizer_controls__widgets' );
 
 // -- General -- //
 add_action( 'admin_init',					'aemi_update_htaccess_rules' );
@@ -51,6 +55,7 @@ add_action( 'save_post',					'aemi_category_transient_flusher' );
 add_action( 'enqueue_block_editor_assets',	'aemi_gutenberg_editor_style' );
 add_filter( 'document_title_parts',			'aemi_title_parts' );
 add_filter( 'document_title_separator',		'aemi_title_separator' );
+add_action( 'widget_init',					'aemi_custom_rss_init' );
 
 // -- Head -- //
 add_action( 'aemi_head', 					'aemi_ga_script', 10 );

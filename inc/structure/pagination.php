@@ -11,13 +11,13 @@ if ( ! function_exists( 'aemi_posts_pagination' ) )
 			if ( get_next_posts_link() )
 			{
 				?><div class="nav-previous"><?php
-				next_posts_link( '<span class="nav-title">&larr; ' . __( 'old', 'aemi' ) . '</span>' );
+				next_posts_link( '<span class="nav-title">&larr; ' . __( 'older', 'aemi' ) . '</span>' );
 				?></div><?php
 			}
 			if ( get_previous_posts_link() )
 			{
 				?><div class="nav-next"><?php
-				previous_posts_link( '<span class="nav-title">' . __( 'new', 'aemi' ) . ' &rarr;</span>' );
+				previous_posts_link( '<span class="nav-title">' . __( 'newer', 'aemi' ) . ' &rarr;</span>' );
 				?></div><?php
 			}
 			?></nav><?php

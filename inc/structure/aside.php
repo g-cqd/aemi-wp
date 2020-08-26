@@ -17,11 +17,15 @@ if (!function_exists('aemi_aside_wrapper_menu'))
 {
     function aemi_aside_wrapper_menu()
     {
+
+		$has_header_menu = has_nav_menu('header-menu');
+		$has_overlay_menu = has_nav_menu('overlay-menu');
+
 		?><nav id="navigation-wrapper" class="wrapper"><?php
 
             if (has_nav_menu('header-menu'))
             {
-				?><div class="header-section"><?php
+				?><div class="header-block<?= esc_attr( $has_overlay_menu ? '' : ' no-overlay-menu' ) ?>"><?php
                 wp_nav_menu([
                     'theme_location'	=>	'header-menu',
                     'container'	=>	'',
@@ -47,7 +51,7 @@ if (!function_exists('aemi_aside_wrapper_menu'))
 					'theme_location'	=>	'social-menu',
 					'container'	=>	'',
 					'menu_id'	=>	'header-social',
-                    'menu_class'	=>	'header-section',
+                    'menu_class'	=>	'header-block',
                     'depth'	=>	'1'
 				]);
 			}
@@ -57,12 +61,23 @@ if (!function_exists('aemi_aside_wrapper_menu'))
 				aemi_theme_switcher();
 			}
 
-			if (is_active_sidebar('overlay-widget-area'))
+			$sidebar_id = 'overlay-widget-area';
+
+			$total_widgets = wp_get_sidebars_widgets();
+
+			$overlay_widgets = count($total_widgets[$sidebar_id]) > 0;
+		
+			if (is_active_sidebar($sidebar_id) && $overlay_widgets)
 			{
-				?><div class="toggle" data-target="overlay-widgets"></div>
-				<div id="overlay-widgets"><?php
-					dynamic_sidebar('overlay-widget-area');
-				?></div><?php
+
+				$width = preg_replace( '/_/', '-', get_theme_mod('aemi_widget_overlay_width','default_width'));
+				$columns = preg_replace( '/_/', '-', get_theme_mod('aemi_widget_overlay_column_layout','one_column'));
+
+				?><div id="overlay-widgets">
+					<div class="widget-area <?= esc_attr( "$width $columns" ) ?>"><?php
+						dynamic_sidebar( 'overlay-widget-area' );
+					?></div>
+				</div><?php
 			}
 		?>
 		</nav><?php
