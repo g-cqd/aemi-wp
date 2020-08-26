@@ -65,13 +65,9 @@ if (!function_exists('aemi_setup'))
 
 		add_theme_support(
 			'custom-background',
-			apply_filters(
-				'aemi_custom_background_args',
-				[
-					'default-color' => '#ffffff',
-					'default-image' => ''
-				]
-			)
+			[
+				'default-color' => '',
+			]
 		);
 
 		add_theme_support('custom-header', [

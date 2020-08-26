@@ -4,7 +4,7 @@ get_header();
 
 ?><article id="entry-head" class="entry">
     <header class="post-header">
-        <div class="post-info"><?= get_the_archive_title() ?><?php
+        <div class="post-info"><?php echo get_the_archive_title() ?><?php
 			the_archive_description('<div class="archive-details">', '</div>');
 		?></div>
     </header>

@@ -60,20 +60,20 @@ if (!function_exists('aemi_meta_tags_callback'))
 
 		?><fieldset>
 			<label for="aemi_meta_author">
-				<?= esc_html__('Meta Tag: Author','aemi') ?>
-				<input type="text" id="aemi_meta_author" name="aemi_meta_author" value="<?= esc_attr( $opt['author']['value'] ) ?>">
+				<?php echo esc_html__('Meta Tag: Author','aemi') ?>
+				<input type="text" id="aemi_meta_author" name="aemi_meta_author" value="<?php echo esc_attr( $opt['author']['value'] ) ?>">
 			</label>
 		</fieldset>
 		<fieldset>
 			<label for="aemi_meta_description">
-				<?= esc_html__('Meta Tag: Description','aemi') ?>
-				<textarea id="aemi_meta_description" name="aemi_meta_description"><?= esc_textarea( $opt['description']['value'] ) ?></textarea>
+				<?php echo esc_html__('Meta Tag: Description','aemi') ?>
+				<textarea id="aemi_meta_description" name="aemi_meta_description"><?php echo esc_textarea( $opt['description']['value'] ) ?></textarea>
 			</label>	
 		</fieldset>
 		<fieldset>
 			<label for="aemi_meta_keywords">
-				<?= esc_html__('Meta Tag: Keywords','aemi') ?>
-				<textarea id="aemi_meta_keywords" name="aemi_meta_keywords"><?= esc_textarea( $opt['keywords']['value'] ) ?></textarea>
+				<?php echo esc_html__('Meta Tag: Keywords','aemi') ?>
+				<textarea id="aemi_meta_keywords" name="aemi_meta_keywords"><?php echo esc_textarea( $opt['keywords']['value'] ) ?></textarea>
 			</label>
 		</fieldset><?php
 	}
@@ -123,7 +123,7 @@ if (!function_exists('aemi_meta_tags__action'))
 
 		foreach (aemi_meta_tags_data($post) as $k => $v) {
 			if (isset($v['value']) && $v['value']!='') {
-				?><meta name="<?= esc_attr( $k ) ?>" content="<?= esc_attr( $v['value'] ) ?>"><?php
+				?><meta name="<?php echo esc_attr( $k ) ?>" content="<?php echo esc_attr( $v['value'] ) ?>"><?php
 			}
 		}
 

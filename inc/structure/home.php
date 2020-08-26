@@ -21,12 +21,12 @@ if (!function_exists('aemi_homepage_header'))
 	?><article id="entry-head" class="entry">
     	<header class="post-header">
         	<div class="post-info">
-        		<h1 class="post-title"><?= $title ?></h1>
+        		<h1 class="post-title"><?php echo $title ?></h1>
         		<?php
         		$subtitle = get_theme_mod('aemi_homepage_header_custom_subtitle','');
         		if ($subtitle != '')
         		{
-        			?><h2 class="post-subtitle h2"><?= $subtitle ?></h2><?php
+        			?><h2 class="post-subtitle h2"><?php echo $subtitle ?></h2><?php
         		}
         		?>
 			</div>
@@ -50,7 +50,7 @@ if (!function_exists('aemi_before_main_content'))
 				$the_content = apply_filters('the_content', $post->post_content);
 				if ( !empty($the_content) ) {
 	  				?><div id="pre-content">
-						<?= $the_content ?>
+						<?php echo $the_content ?>
 					</div><?php
 				}
 			}
@@ -72,7 +72,7 @@ if (!function_exists('aemi_after_main_content'))
 				$the_content = apply_filters('the_content', $post->post_content);
 				if ( !empty($the_content) ) {
 					?><div id="post-content">
-						<?= $the_content ?>
+						<?php echo $the_content ?>
 					</div><?php
 				}
 			}

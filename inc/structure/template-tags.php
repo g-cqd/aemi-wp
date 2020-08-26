@@ -258,17 +258,17 @@ if (!function_exists('aemi_meta_header'))
 			?><div class="post-meta"><?php
 			if ($sticky)
 			{
-				?><div class="meta-sticky"><?= esc_html__('Featured', 'aemi') ?></div><?php
+				?><div class="meta-sticky"><?php echo esc_html__('Featured', 'aemi') ?></div><?php
 			}
 			if ($excerpt)
 			{
-				?><p class="meta-excerpt"><?= get_the_excerpt() ?></p><?php
+				?><p class="meta-excerpt"><?php echo get_the_excerpt() ?></p><?php
 			}
 			if ($categories)
 			{
 				?><div class="meta-categories meta-item">
 					<div class="meta-item-title">
-						<?= esc_html__( 'Categories', 'aemi' ) ?>
+						<?php echo esc_html__( 'Categories', 'aemi' ) ?>
 					</div>
 					<div class="meta-item-list">
 						<span class="meta-item-list-item button">
@@ -332,7 +332,7 @@ if (!function_exists('aemi_meta_header'))
 							{
 								?><div class="meta-tags meta-item">
 									<div class="meta-item-title h2">
-										<?= esc_html__( 'Tags', 'aemi' ) ?>
+										<?php echo esc_html__( 'Tags', 'aemi' ) ?>
 									</div>
 									<div class="meta-item-list">
 										<span class="meta-item-list-item button">
@@ -343,9 +343,9 @@ if (!function_exists('aemi_meta_header'))
 								}
 								else if ($meta !== 'category' && $meta !== 'post_format')
 								{
-									?><div class="custom-post-type-taxonomy=<?= esc_attr( $meta ) ?> meta-item">
+									?><div class="custom-post-type-taxonomy=<?php echo esc_attr( $meta ) ?> meta-item">
 										<div class="meta-item-title h2">
-											<?= esc_html( $meta ) ?>
+											<?php echo esc_html( $meta ) ?>
 										</div>
 										<div class="meta-item-list">
 											<span class="meta-item-list-item button">

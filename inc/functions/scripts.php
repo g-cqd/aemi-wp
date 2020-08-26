@@ -134,7 +134,7 @@ if (!function_exists('aemi_header_script'))
 	{
 		$header_script = get_theme_mod('aemi_header_js_code');
 		
-		?><script id="aemi-custom-header-script" type="text/javascript"><?= $header_script ?></script><?php
+		?><script id="aemi-custom-header-script" type="text/javascript"><?php echo $header_script ?></script><?php
 		
 	}
 }
@@ -151,7 +151,7 @@ if (!function_exists('aemi_footer_script'))
 	{
 		$footer_script = get_theme_mod('aemi_footer_js_code');
 
-		?><script id="aemi-custom-footer-script" type="text/javascript"><?= $footer_script ?></script><?php
+		?><script id="aemi-custom-footer-script" type="text/javascript"><?php echo $footer_script ?></script><?php
 
 	}
 }

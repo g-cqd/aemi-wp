@@ -16,7 +16,7 @@ if (!function_exists('aemi_footer_widgets'))
 			$columns = preg_replace( '/_/', '-', get_theme_mod('aemi_widget_footer_column_layout','two_columns'));
 
 			?><div id="footer-widgets">
-				<div class="widget-area <?= esc_attr( "$width $columns" ) ?>"><?php
+				<div class="widget-area <?php echo esc_attr( "$width $columns" ) ?>"><?php
 					dynamic_sidebar( 'footer-widget-area' );
 				?></div>
 			</div><?php

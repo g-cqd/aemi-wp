@@ -25,7 +25,7 @@ if (!function_exists('aemi_aside_wrapper_menu'))
 
             if (has_nav_menu('header-menu'))
             {
-				?><div class="header-block<?= esc_attr( $has_overlay_menu ? '' : ' no-overlay-menu' ) ?>"><?php
+				?><div class="header-block<?php echo esc_attr( $has_overlay_menu ? '' : ' no-overlay-menu' ) ?>"><?php
                 wp_nav_menu([
                     'theme_location'	=>	'header-menu',
                     'container'	=>	'',
@@ -74,7 +74,7 @@ if (!function_exists('aemi_aside_wrapper_menu'))
 				$columns = preg_replace( '/_/', '-', get_theme_mod('aemi_widget_overlay_column_layout','one_column'));
 
 				?><div id="overlay-widgets">
-					<div class="widget-area <?= esc_attr( "$width $columns" ) ?>"><?php
+					<div class="widget-area <?php echo esc_attr( "$width $columns" ) ?>"><?php
 						dynamic_sidebar( 'overlay-widget-area' );
 					?></div>
 				</div><?php
@@ -92,7 +92,7 @@ if (!function_exists('aemi_aside_progress_bar'))
 			get_theme_mod(aemi_setting(get_post_type(), 'progress_bar'), 1) == 1 &&
 			is_singular())
 		{
-			?><div id="site-progress-bar"<?= has_post_thumbnail() ? ' class="color-scheme-dark"' : '' ?>></div><?php
+			?><div id="site-progress-bar"<?php echo has_post_thumbnail() ? ' class="color-scheme-dark"' : '' ?>></div><?php
 		}
 	}
 }

@@ -7,7 +7,7 @@ if (!function_exists('aemi_post_header'))
 
 		$singular = is_singular();
 
-		?><header class="post-header<?= has_post_thumbnail() ? ' color-scheme-dark' : '' ?>"><?php
+		?><header class="post-header<?php echo has_post_thumbnail() ? ' color-scheme-dark' : '' ?>"><?php
 		
 			aemi_featured_image();
 
@@ -17,7 +17,7 @@ if (!function_exists('aemi_post_header'))
 			}
 			else
 			{
-				?><a class="post-info" href="<?= esc_url(get_permalink()) ?>" rel="bookmark"><?php
+				?><a class="post-info" href="<?php echo esc_url(get_permalink()) ?>" rel="bookmark"><?php
 			}
 
 				// Date

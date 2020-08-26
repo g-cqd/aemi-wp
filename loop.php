@@ -10,7 +10,7 @@ $columns = preg_replace( '/_/', '-', get_theme_mod('aemi_post_column_layout','tw
 $no_img_class = preg_match('/no_img/', $layout) ? 'no-img' : '';
 $img_behav = preg_match('/cover/', $layout) ? 'cover' : '';
 
-?><div id="site-loop" class="site-loop <?= esc_attr("$sticky_span $no_img_class $img_behav $width $columns") ?>"><?php
+?><div id="site-loop" class="site-loop <?php echo esc_attr("$sticky_span $no_img_class $img_behav $width $columns") ?>"><?php
 
 while (have_posts())
 {

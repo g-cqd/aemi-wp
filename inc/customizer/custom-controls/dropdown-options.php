@@ -24,23 +24,23 @@ class Aemi_Dropdown_Options extends WP_Customize_Control {
 			return; ?>
 
 		<?php if ( !empty( $this->label ) ) : ?>
-			<span class="customize-control-title"><?= esc_html( $this->label ); ?></span>
+			<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 		<?php endif; ?>
 
 		<?php if ( !empty( $this->description ) ) : ?>
-			<span class="description customize-control-description"><?= $this->description; ?></span>
+			<span class="description customize-control-description"><?php echo $this->description; ?></span>
 		<?php endif; ?>
 
 		<?php $current_value = $this->value(); ?>
 
 		<select>
 			<?php foreach ( $this->choices as $value => $label ) : ?>
-				<option value="<?= esc_attr( $value ); ?>" <?php selected( $value, $current_value ); ?>>
-					<?= esc_html( $label ); ?>
+				<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $value, $current_value ); ?>>
+					<?php echo esc_html( $label ); ?>
 				</option>
 			<?php endforeach; ?>
 		</select>
 
-		<input type="hidden" <?php $this->link(); ?> value="<?= esc_attr( $this->value ); ?>" />
+		<input type="hidden" <?php $this->link(); ?> value="<?php echo esc_attr( $this->value ); ?>" />
 	<?php }
 }

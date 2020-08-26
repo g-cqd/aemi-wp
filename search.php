@@ -9,7 +9,7 @@ if (have_posts())
     ?><article id="entry-head" class="entry">
     <header class="post-header">
         <div class="post-info">
-            <h1 class="post-title"><?= $query === '' ? esc_html__('What are you looking for?', 'aemi') : $query ?></h1>
+            <h1 class="post-title"><?php echo $query === '' ? esc_html__('What are you looking for?', 'aemi') : $query ?></h1>
             <?php
             if ($query === '')
             {

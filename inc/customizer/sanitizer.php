@@ -68,3 +68,11 @@ if (!function_exists('aemi_raw_js_code'))
         return $input;
     }
 }
+
+if (!function_exists('aemi_sanitize_media'))
+{
+    function aemi_sanitize_media($filename)
+    {
+        return in_array(mime_content_type($filename),wp_get_allowed_mime_types()) ? $filename : null;
+    }
+}

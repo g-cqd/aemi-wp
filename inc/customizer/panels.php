@@ -22,11 +22,6 @@ if (!function_exists('aemi_customizer_panels'))
             'title'      => __('Colors', 'aemi'),
         ]);
 
-        $wp_customize->add_section('aemi_comments', [
-            'panel'      => 'aemi_panel',
-            'title'      => __('Comments', 'aemi'),
-        ]);
-
         $wp_customize->add_section('aemi_loop', [
             'panel'      => 'aemi_panel',
             'title'      => __('Content Loop', 'aemi'),
@@ -52,29 +47,14 @@ if (!function_exists('aemi_customizer_panels'))
             'title'      => __('Identity', 'aemi'),
         ]);
 
-        $wp_customize->add_section('aemi_performance', [
-            'panel'      => 'aemi_panel',
-            'title'      => __('Performance', 'aemi'),
-        ]);
-
         $wp_customize->add_section('aemi_search', [
             'panel'      => 'aemi_panel',
             'title'      => __('Search', 'aemi'),
         ]);
 
-        $wp_customize->add_section('aemi_security', [
-            'panel'      => 'aemi_panel',
-            'title'      => __('Security', 'aemi'),
-        ]);
-
         $wp_customize->add_section('aemi_seo', [
             'panel'      => 'aemi_panel',
             'title'      => __('SEO', 'aemi'),
-        ]);
-
-        $wp_customize->add_section('aemi_post', [
-            'panel'      => 'aemi_panel',
-            'title'      => __('Posts', 'aemi'),
         ]);
 
         $wp_customize->add_section('aemi_widgets', [

@@ -92,3 +92,11 @@ if (!function_exists('aemi_load_customize_controls'))
 		require_once( trailingslashit( get_template_directory() ) . 'inc/customizer/custom-controls/index.php' );
 	}
 }
+
+if (!function_exists('aemi_sanitize_media'))
+{
+	function aemi_sanitize_media( $filename )
+	{
+		return in_array(mime_content_type($filename), wp_get_allowed_mime_types()) ? $filename : null;
+	}
+}

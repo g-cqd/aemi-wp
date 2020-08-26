@@ -86,46 +86,46 @@ if (!function_exists('aemi_meta_twitter_callback'))
 		?>
 		<fieldset>
 			<label for="aemi_meta_twitter_card">
-				<?= esc_html__('Twitter: Card Type','aemi') ?>
+				<?php echo esc_html__('Twitter: Card Type','aemi') ?>
 				<select id="aemi_meta_twitter_card" name="aemi_meta_twitter_card">
 					<?php foreach ($types as $value => $text) : ?>
-					<option value="<? esc_attr($value) ?>" <?= selected($value,$opt['card']['value']) ?>><?= esc_html($text) ?></option>
+					<option value="<?php echo esc_attr($value); ?>" <?php echo selected($value,$opt['card']['value']); ?>><?php echo esc_html($text) ?></option>
 					<?php endforeach; ?>
 				</select>
 			</label>
 		</fieldset>
 		<fieldset>
 			<label for="aemi_meta_twitter_site">
-				<?= esc_html__('Twitter: Site Account','aemi') ?>
-				<input type="text" id="aemi_meta_twitter_site" name="aemi_meta_twitter_site" value="<?= esc_attr( $opt['site']['value'] ) ?>">
+				<?php echo esc_html__('Twitter: Site Account','aemi') ?>
+				<input type="text" id="aemi_meta_twitter_site" name="aemi_meta_twitter_site" value="<?php echo esc_attr( $opt['site']['value'] ); ?>">
 			</label>
 		</fieldset>
 		<fieldset>
 			<label for="aemi_meta_twitter_creator">
-				<?= esc_html__('Twitter: Creator Account','aemi') ?>
-				<input type="text" id="aemi_meta_twitter_creator" name="aemi_meta_twitter_creator" value="<?= esc_attr( $opt['creator']['value'] ) ?>">
+				<?php echo esc_html__('Twitter: Creator Account','aemi') ?>
+				<input type="text" id="aemi_meta_twitter_creator" name="aemi_meta_twitter_creator" value="<?php echo esc_attr( $opt['creator']['value'] ); ?>">
 			</label>
 		</fieldset>
 		<?php if (!is_enabled('aemi_add_meta_og',0)): ?>
 		<fieldset>
 			<label for="aemi_meta_twitter_title">
-				<?= esc_html__('Twitter: Content Title','aemi') ?>
-				<input type="text" id="aemi_meta_twitter_title" name="aemi_meta_twitter_title" value="<?= esc_attr( $opt['title']['value'] ) ?>">
+				<?php echo esc_html__('Twitter: Content Title','aemi') ?>
+				<input type="text" id="aemi_meta_twitter_title" name="aemi_meta_twitter_title" value="<?php echo esc_attr( $opt['title']['value'] ); ?>">
 			</label>
 		</fieldset>
 		<fieldset>
 			<label for="aemi_meta_twitter_description">
-				<?= esc_html__('Twitter: Content Description','aemi') ?>
-				<input type="text" id="aemi_meta_twitter_description" name="aemi_meta_twitter_description" value="<?= esc_attr( $opt['description']['value'] ) ?>">
+				<?php echo esc_html__('Twitter: Content Description','aemi') ?>
+				<input type="text" id="aemi_meta_twitter_description" name="aemi_meta_twitter_description" value="<?php echo esc_attr( $opt['description']['value'] ); ?>">
 			</label>
 		</fieldset>
 		<fieldset>
 			<label for="aemi_meta_twitter_image">
-				<?= esc_html__('Twitter: Content Image','aemi') ?>
+				<?php echo esc_html__('Twitter: Content Image','aemi') ?>
 
-				<button class="button aemi_meta_twitter_media_button" data-custom-plugin-media-uploader-target=".aemi_meta_twitter_image"><?= esc_html__( 'Upload File', 'aemi' ) ?></button>
+				<button class="button aemi_meta_twitter_media_button" data-custom-plugin-media-uploader-target=".aemi_meta_twitter_image"><?php echo esc_html__( 'Upload File', 'aemi' ) ?></button>
 
-				<input id="aemi_meta_twitter_image" name="aemi_meta_twitter_image" class="aemi_meta_twitter_image" type="hidden" value="<?= esc_attr( $opt['image']['value'] ) ?>">
+				<input id="aemi_meta_twitter_image" name="aemi_meta_twitter_image" class="aemi_meta_twitter_image" type="hidden" value="<?php echo esc_attr( $opt['image']['value'] ) ?>">
 			</label>
 		</fieldset><?php
 		endif;
@@ -182,29 +182,29 @@ if (!function_exists('aemi_meta_twitter__action'))
 
 		if ($data['card']['value'] != '')
 		{
-			?><meta property="twitter:card" content="<?= esc_attr( $data['card']['value'] ) ?>"><?php
+			?><meta property="twitter:card" content="<?php echo esc_attr( $data['card']['value'] ) ?>"><?php
 		}
 		if ($data['site']['value'] != '')
 		{
-			?><meta property="twitter:site" content="<?= esc_attr( $data['site']['value'] ) ?>"><?php
+			?><meta property="twitter:site" content="<?php echo esc_attr( $data['site']['value'] ) ?>"><?php
 		}
 		if ($data['creator']['value'] != '')
 		{
-			?><meta property="twitter:creator" content="<?= esc_attr( $data['creator']['value'] ) ?>"><?php
+			?><meta property="twitter:creator" content="<?php echo esc_attr( $data['creator']['value'] ) ?>"><?php
 		}
 		if (!is_enabled('aemi_add_meta_og',0))
 		{
 			if ($data['title']['value'] != '')
 			{
-				?><meta property="twitter:title" content="<?= esc_attr( $data['title']['value'] ) ?>"><?php
+				?><meta property="twitter:title" content="<?php echo esc_attr( $data['title']['value'] ) ?>"><?php
 			}
 			if ($data['description']['value'] != '')
 			{
-				?><meta property="twitter:description" content="<?= esc_attr( $data['description']['value'] ) ?>"><?php
+				?><meta property="twitter:description" content="<?php echo esc_attr( $data['description']['value'] ) ?>"><?php
 			}
 			if ($data['image']['value'] != '')
 			{
-				?><meta property="twitter:image" content="<?= esc_attr( $data['image']['value'] ) ?>"><?php
+				?><meta property="twitter:image" content="<?php echo esc_attr( $data['image']['value'] ) ?>"><?php
 			}
 		}
 	}

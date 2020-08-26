@@ -88,6 +88,7 @@ Source: https://github.com/aemi-dev/aemi
 
 ### 2.0.0 :
 	- Release Version
+	- Edit #1 : Due to Theme Check Guidelines, Security and Performance Features have been removed from Aemi Theme. These features will be available through the future Aemi Companion Plugin. Sorry for the inconvenience.
 ### 2.0-beta17 :
 	- Added : Widgets Layout Settings
 	- Added : Post Loop Layout Settings

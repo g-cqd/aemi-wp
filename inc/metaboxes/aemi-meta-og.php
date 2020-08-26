@@ -41,7 +41,7 @@ if (!function_exists('aemi_get_meta_data'))
 
 		$data = [
 			'site_name'		=>	[ 'value' => get_bloginfo('name') ],
-			'url'			=>	[ 'value' => home_url( $wp->request ) ],
+			'url'			=>	[ 'value' => esc_url(home_url( $wp->request )) ],
 		];
 
 		if (isset($wp_post))
@@ -158,31 +158,31 @@ if (!function_exists('aemi_meta_og_callback'))
 		?>
 		<fieldset>
 			<label for="aemi_meta_og_title">
-				<?= esc_html__('Open Graph: Title','aemi') ?>
-				<input type="text" id="aemi_meta_og_title" name="aemi_meta_og_title" value="<?= esc_attr( $opt['title']['value'] ) ?>">
+				<?php echo esc_html__('Open Graph: Title','aemi') ?>
+				<input type="text" id="aemi_meta_og_title" name="aemi_meta_og_title" value="<?php echo esc_attr( $opt['title']['value'] ) ?>">
 			</label>
 		</fieldset>
 		<fieldset>
 			<label for="aemi_meta_og_description">
-				<?= esc_html__('Open Graph: Description','aemi') ?>
-				<input type="text" id="aemi_meta_og_description" name="aemi_meta_og_description" value="<?= esc_attr( $opt['description']['value'] ) ?>">
+				<?php echo esc_html__('Open Graph: Description','aemi') ?>
+				<input type="text" id="aemi_meta_og_description" name="aemi_meta_og_description" value="<?php echo esc_attr( $opt['description']['value'] ) ?>">
 			</label>
 		</fieldset>
 		<fieldset>
 			<label for="aemi_meta_og_image">
-				<?= esc_html__('Open Graph: Image','aemi') ?>
+				<?php echo esc_html__('Open Graph: Image','aemi') ?>
 				
-				<button class="button aemi_meta_og_media_button" data-custom-plugin-media-uploader-target=".aemi_meta_og_image"><?= esc_html__( 'Upload File', 'aemi' ) ?></button>
+				<button class="button aemi_meta_og_media_button" data-custom-plugin-media-uploader-target=".aemi_meta_og_image"><?php echo esc_html__( 'Upload File', 'aemi' ) ?></button>
 
-				<input id="aemi_meta_og_image" name="aemi_meta_og_image" class="aemi_meta_og_image" type="hidden" value="<?= esc_attr( $opt['image']['value'] ) ?>">
+				<input id="aemi_meta_og_image" name="aemi_meta_og_image" class="aemi_meta_og_image" type="hidden" value="<?php echo esc_attr( $opt['image']['value'] ) ?>">
 			</label>
 		</fieldset>
 		<fieldset>
 			<label for="aemi_meta_og_type">
-				<?= esc_html__('Open Graph: Type','aemi') ?>
+				<?php echo esc_html__('Open Graph: Type','aemi'); ?>
 				<select id="aemi_meta_og_type" name="aemi_meta_og_type">
 					<?php foreach ($types as $val) : ?>
-					<option value="<? esc_attr($val) ?>" <?= selected($val,$opt['type']['value']) ?>><?= esc_html($val) ?></option>
+					<option value="<?php echo esc_attr($val); ?>" <?php echo selected($val,$opt['type']['value']); ?>><?php echo esc_html($val) ?></option>
 					<?php endforeach; ?>
 				</select>
 			</label>
@@ -235,27 +235,27 @@ if (!function_exists('aemi_meta_og__action'))
 
 		if ($data['site_name']['value'] != '')
 		{
-			?><meta property="og:site_name" content="<?= esc_attr( $data['site_name']['value'] ) ?>"><?php
+			?><meta property="og:site_name" content="<?php echo esc_attr( $data['site_name']['value'] ) ?>"><?php
 		}
 		if ($data['url']['value'] != '')
 		{
-			?><meta property="og:url" content="<?= esc_attr( $data['url']['value'] ) ?>"><?php
+			?><meta property="og:url" content="<?php echo esc_attr( $data['url']['value'] ) ?>"><?php
 		}
 		if ($data['title']['value'] != '')
 		{
-			?><meta property="og:title" content="<?= esc_attr( $data['title']['value'] ) ?>"><?php
+			?><meta property="og:title" content="<?php echo esc_attr( $data['title']['value'] ) ?>"><?php
 		}
 		if ($data['description']['value'] != '')
 		{
-			?><meta property="og:description" content="<?= esc_attr( $data['description']['value'] ) ?>"><?php
+			?><meta property="og:description" content="<?php echo esc_attr( $data['description']['value'] ) ?>"><?php
 		}
 		if ($data['image']['value'] != '')
 		{
-			?><meta property="og:image" content="<?= esc_attr( $data['image']['value'] ) ?>"><?php
+			?><meta property="og:image" content="<?php echo esc_attr( $data['image']['value'] ) ?>"><?php
 		}
 		if ($data['type']['value'] != '')
 		{
-			?><meta property="og:type" content="<?= esc_attr( $data['type']['value'] ) ?>"><?php
+			?><meta property="og:type" content="<?php echo esc_attr( $data['type']['value'] ) ?>"><?php
 		}
 	}
 }

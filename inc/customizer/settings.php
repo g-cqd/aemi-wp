@@ -74,6 +74,52 @@ if (!function_exists('aemi_customizer_settings__content_loop'))
 	function aemi_customizer_settings__content_loop($wp_customize)
 	{
 
+		$wp_customize->add_setting('aemi_post_layout', [
+			'default' => 'cover',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
+
+		$wp_customize->add_setting('aemi_post_column_layout', [
+			'default' => 'one_column',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
+
+		$wp_customize->add_setting('aemi_post_width', [
+			'default' => 'default_width',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
+
+		$wp_customize->add_setting('aemi_post_sticky_width', [
+			'default' => 'span_full',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
+
+		/*
+		 * For a future Update
+		 *
+
+		$wp_customize->add_setting('aemi_post_font_heading', [
+			'default' => 'unset',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
+
+		$wp_customize->add_setting('aemi_post_font_heading', [
+			'default' => 'unset',
+			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
+		]);
+
+		 *
+		 *
+		 */
+
+		aemi_add_settings([
+			[
+				'name' => 'aemi_post_single_attachment',
+				'type' => 'checkbox',
+				'default' => 1,
+			]
+		], $wp_customize);
+
 		aemi_add_settings([
 			[
 				'name' => 'aemi_loop_cat_filtering',
@@ -211,152 +257,17 @@ if (!function_exists('aemi_customizer_settings__identity'))
 	function aemi_customizer_settings__identity($wp_customize)
 	{
 		$wp_customize->add_setting('aemi_light_scheme_logo', [
-
+			'sanitize_callback'	=> 'aemi_sanitize_media'
 		]);
 
 		$wp_customize->add_setting('aemi_dark_scheme_logo', [
-			
+			'sanitize_callback'	=> 'aemi_sanitize_media'
 		]);
 
 		$wp_customize->add_setting('aemi_site_description', [
 			'capability'		=> 'edit_theme_options',
 			'sanitize_callback' => 'sanitize_textarea_field',
 		]);
-	}
-}
-
-if (!function_exists('aemi_customizer_settings__performance'))
-{
-	function aemi_customizer_settings__performance($wp_customize)
-	{
-		aemi_add_settings([
-			[
-				'name' => 'aemi_remove_jquery',
-				'type' => 'radio',
-				'default' => 'all',
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_remove_script_version',
-				'type' => 'checkbox',
-				'default' => 0,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_remove_emojis',
-				'type' => 'checkbox',
-				'default' => 0,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_remove_wpembeds',
-				'type' => 'checkbox',
-				'default' => 0,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_remove_generator',
-				'type' => 'checkbox',
-				'default' => 0,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_remove_rsd_link',
-				'type' => 'checkbox',
-				'default' => 1,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_remove_wlwmanifest_link',
-				'type' => 'checkbox',
-				'default' => 1,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_remove_shortlink',
-				'type' => 'checkbox',
-				'default' => 1,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_add_expire_headers',
-				'type' => 'checkbox',
-				'default' => 0,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_remove_apiworg',
-				'type' => 'radio',
-				'default' => 'non-admins',
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_add_keep_alive',
-				'type' => 'checkbox',
-				'default' => 0,
-				'critical' => true
-			]
-		], $wp_customize);
-
-		$wp_customize->add_setting('aemi_add_compression',[
-			'default' => 'none',
-			'capability'		=> 'edit_theme_options',
-			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
-		]);
-	}
-}
-
-if (!function_exists('aemi_customizer_settings__post'))
-{
-	function aemi_customizer_settings__post($wp_customize)
-	{
-
-		$wp_customize->add_setting('aemi_post_layout', [
-			'default' => 'cover',
-			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
-		]);
-
-		$wp_customize->add_setting('aemi_post_column_layout', [
-			'default' => 'one_column',
-			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
-		]);
-
-		$wp_customize->add_setting('aemi_post_width', [
-			'default' => 'default_width',
-			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
-		]);
-
-		$wp_customize->add_setting('aemi_post_sticky_width', [
-			'default' => 'span_full',
-			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
-		]);
-
-		/*
-		 * For a future Update
-		 *
-
-		$wp_customize->add_setting('aemi_post_font_heading', [
-			'default' => 'unset',
-			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
-		]);
-
-		$wp_customize->add_setting('aemi_post_font_heading', [
-			'default' => 'unset',
-			'sanitize_callback' => 'aemi_sanitize_dropdown_options',
-		]);
-
-		 *
-		 *
-		 */
-
-		aemi_add_settings([
-			[
-				'name' => 'aemi_post_single_attachment',
-				'type' => 'checkbox',
-				'default' => 1,
-			]
-		], $wp_customize);
-
 	}
 }
 
@@ -454,69 +365,6 @@ if (!function_exists('aemi_customizer_settings__search'))
 				'default' => 0
 			]
 		], $wp_customize);
-	}
-}
-
-if (!function_exists('aemi_customizer_settings__security'))
-{
-	function aemi_customizer_settings__security($wp_customize)
-	{
-		aemi_add_settings([
-			[
-				'name' => 'aemi_add_content_nosniff',
-				'type' => 'checkbox',
-				'default' => 0,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_add_csph',
-				'type' => 'checkbox',
-				'default' => 0,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_add_hsts',
-				'type' => 'checkbox',
-				'default' => 0,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_add_xss',
-				'type' => 'checkbox',
-				'default' => 0,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_add_expect_ct',
-				'type' => 'checkbox',
-				'default' => 0,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_enable_svg_support',
-				'type' => 'checkbox',
-				'default' => 0,
-				'critical' => true
-			],
-			[
-				'name' => 'aemi_add_powered_by',
-				'type' => 'checkbox',
-				'default' => 0,
-				'critical' => true
-			]
-		], $wp_customize);
-		
-		$wp_customize->add_setting('aemi_add_xframe_options',[
-			'default' => 'not-set',
-			'capability'		=> 'edit_theme_options',
-			'sanitize_callback' => 'aemi_sanitize_dropdown_options'
-		]);
-
-		$wp_customize->add_setting('aemi_add_referer',[
-			'default' => 'not-set',
-			'capability'		=> 'edit_theme_options',
-			'sanitize_callback' => 'aemi_sanitize_dropdown_options'
-		]);
 	}
 }
 

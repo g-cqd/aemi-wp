@@ -1,7 +1,7 @@
 <article id="entry-head" class="entry post no-results not-found">
 	<header class="post-header">
 		<div class="post-info">
-			<h1 class="post-title"><?= esc_html__('Nothing Found', 'aemi') ?></h1>
+			<h1 class="post-title"><?php echo esc_html__('Nothing Found', 'aemi') ?></h1>
 			<div class="archive-details not-found"><?php
 				if (is_home() && current_user_can('publish_posts'))
 				{

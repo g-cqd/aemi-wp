@@ -9,16 +9,16 @@ if (!function_exists('aemi_theme_switcher'))
 		?><div id="header-settings" class="header-block">
 			<form class="settings-set" id="color-scheme-selector">
 				<div class="color-scheme-option">
-					<input type="radio" id="light-scheme-option" class="color-scheme-input" name="color-scheme-option"<?= $scheme == 'light' ? $s : '' ?>>
-					<label for="light-scheme-option" class="color-scheme-label"><?= esc_html__('Light', 'aemi'); ?></label>
+					<input type="radio" id="light-scheme-option" class="color-scheme-input" name="color-scheme-option"<?php echo $scheme == 'light' ? $s : '' ?>>
+					<label for="light-scheme-option" class="color-scheme-label"><?php echo esc_html__('Light', 'aemi'); ?></label>
 				</div>
 				<div class="color-scheme-option">
-					<input type="radio" id="dark-scheme-option" class="color-scheme-input" name="color-scheme-option"<?= $scheme == 'dark' ? $s : '' ?>>
-					<label for="dark-scheme-option" class="color-scheme-label"><?= esc_html__('Dark', 'aemi'); ?></label>
+					<input type="radio" id="dark-scheme-option" class="color-scheme-input" name="color-scheme-option"<?php echo $scheme == 'dark' ? $s : '' ?>>
+					<label for="dark-scheme-option" class="color-scheme-label"><?php echo esc_html__('Dark', 'aemi'); ?></label>
 				</div>
 				<div class="color-scheme-option">
-					<input type="radio" id="auto-scheme-option" class="color-scheme-input" name="color-scheme-option"<?= $scheme == 'auto' ? $s : '' ?>>
-					<label for="auto-scheme-option" class="color-scheme-label"><?= esc_html__('Auto', 'aemi'); ?></label>
+					<input type="radio" id="auto-scheme-option" class="color-scheme-input" name="color-scheme-option"<?php echo $scheme == 'auto' ? $s : '' ?>>
+					<label for="auto-scheme-option" class="color-scheme-label"><?php echo esc_html__('Auto', 'aemi'); ?></label>
 				</div>
 			</form>
 		</div><?php
@@ -39,7 +39,7 @@ if (!function_exists('aemi_overlay_menu'))
 
 		$just_mobile = !($scheme_selector || $has_overlay_menu || $overlay_widgets);
 
-		?><button id="navigation-toggle" title="<?= esc_attr__('Menu', 'aemi') ?>" data-target="navigation-wrapper" class="no-style toggle <?= esc_attr( $just_mobile ? 'just-mobile' : '') ?>">
+		?><button id="navigation-toggle" title="<?php echo esc_attr__('Menu', 'aemi') ?>" data-target="navigation-wrapper" class="no-style toggle <?php echo esc_attr( $just_mobile ? 'just-mobile' : '') ?>">
 			<span class="top-bar" ></span>
 			<span class="middle-bar" ></span>
 			<span class="bottom-bar" ></span>
@@ -151,7 +151,7 @@ if (!function_exists('aemi_header_branding'))
 						$logo_src = $has_custom_logo ? wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'aemi-logo' ) : jetpack_get_site_logo();
 					}
 
-					?><div<?= $scheme_class ?>><?= sprintf(
+					?><div<?php echo $scheme_class ?>><?php echo sprintf(
 						'<a href="%1$s" class="custom-logo-link" title="%2$s • %3$s" rel="home"><img src="%4$s" alt="%2$s Logo for Dark Scheme" height="40"></a>',
 						esc_url(home_url()),
 						esc_attr(get_bloginfo('name')),
@@ -194,7 +194,7 @@ if (!function_exists('aemi_header_search'))
 	{
 		if (is_enabled('aemi_search_button_display', 1))
 		{
-			?><button id="search-toggle" title="<?= esc_attr__('Search', 'aemi') ?>" class="no-style toggle" data-target="search-wrapper">
+			?><button id="search-toggle" title="<?php echo esc_attr__('Search', 'aemi') ?>" class="no-style toggle" data-target="search-wrapper">
 				<span class="search-icon"></span>
 			</button><?php
 		}

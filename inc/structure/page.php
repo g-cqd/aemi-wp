@@ -6,7 +6,7 @@ if (!function_exists('aemi_page_header'))
 	{
 		if (!is_front_page())
 		{
-			?><header class="post-header<?= has_post_thumbnail() ? ' color-scheme-dark' : '' ?>"><?php
+			?><header class="post-header<?php echo has_post_thumbnail() ? ' color-scheme-dark' : '' ?>"><?php
 
 				aemi_featured_image();
 

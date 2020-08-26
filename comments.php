@@ -18,7 +18,7 @@ if (have_comments())
         $comment_count = count($comments_by_type['comment'])
         
         ?><div id="comments-section" class="reaction-section">
-            <h3 class="comments-title h1"><?= sprintf(
+            <h3 class="comments-title h1"><?php echo sprintf(
                 esc_html(
                     _nx(
                         'One Comment',

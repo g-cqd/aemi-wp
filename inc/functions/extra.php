@@ -4,7 +4,7 @@ if (!function_exists('aemi_log'))
 {
 	function aemi_log(...$params)
 	{
-		?><script>console.log(<?= json_encode( $params ) ?>);</script><?php
+		?><script>console.log(<?php echo json_encode( $params ) ?>);</script><?php
 	}
 }
 
@@ -316,60 +316,6 @@ if (!function_exists('aemi_filter_comment_text'))
 	}
 }
 
-
-if (!function_exists('aemi_add_svg_support'))
-{
-	function aemi_add_svg_support($mimes = array())
-	{
-		if (current_user_can('administrator'))
-		{
-			$mimes['svg'] = 'image/svg+xml';
-			$mimes['svgz'] = 'image/svg+xml';
-		}
-		return $mimes;
-	}	
-}
-
-
-if (!function_exists('aemi_svg_upload_check'))
-{
-	function aemi_svg_upload_check($checked, $file, $filename, $mimes)
-	{
-		if (!$checked['type'])
-		{
-			$check_filetype		= wp_check_filetype($filename, $mimes);
-			$ext				= $check_filetype['ext'];
-			$type				= $check_filetype['type'];
-			$proper_filename	= $filename;
-			if ($type && 0 === strpos($type, 'image/') && $ext !== 'svg')
-			{
-				$ext = $type = false;
-			}
-			$checked = compact('ext','type','proper_filename');
-		}
-		return $checked;
-	}
-}
-
-
-if (!function_exists('aemi_svg_allow_svg_upload'))
-{
-	function aemi_svg_allow_svg_upload($data, $file, $filename, $mimes)
-	{
-		global $wp_version;
-		if ($wp_version !== '4.7.1' || $wp_version !== '4.7.2')
-		{
-			return $data;
-		}
-		$filetype = wp_check_filetype($filename, $mimes);
-		return [
-			'ext'				=> $filetype['ext'],
-			'type'				=> $filetype['type'],
-			'proper_filename'	=> $data['proper_filename']
-		];
-	}
-}
-
 if (!function_exists('aemi_ensure_https'))
 {
 	function aemi_ensure_https($string) {
@@ -400,95 +346,5 @@ if (!function_exists('aemi_title_separator'))
 			return '•';
 		}
 		return $mod;
-	}
-}
-
-class Aemi_Widget_RSS_Custom extends WP_Widget_RSS {
-    public function widget($args, $instance) {
-        if ( isset( $instance['error'] ) && $instance['error'] ) {
-			return;
-		}
-
-		$url = ! empty( $instance['url'] ) ? $instance['url'] : '';
-		while ( stristr( $url, 'http' ) !== $url ) {
-			$url = substr( $url, 1 );
-		}
-
-		if ( empty( $url ) ) {
-			return;
-		}
-
-		// Self-URL destruction sequence.
-		if ( in_array( untrailingslashit( $url ), array( site_url(), home_url() ), true ) ) {
-			return;
-		}
-
-		$rss   = fetch_feed( $url );
-		$title = $instance['title'];
-		$desc  = '';
-		$link  = '';
-
-		if ( ! is_wp_error( $rss ) ) {
-			$desc = esc_attr( strip_tags( html_entity_decode( $rss->get_description(), ENT_QUOTES, get_option( 'blog_charset' ) ) ) );
-			if ( empty( $title ) ) {
-				$title = strip_tags( $rss->get_title() );
-			}
-			$link = strip_tags( $rss->get_permalink() );
-			while ( stristr( $link, 'http' ) !== $link ) {
-				$link = substr( $link, 1 );
-			}
-		}
-
-		if ( empty( $title ) ) {
-			$title = ! empty( $desc ) ? $desc : __( 'Unknown Feed' );
-		}
-
-		/** This filter is documented in wp-includes/widgets/class-wp-widget-pages.php */
-		$title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
-
-		$url  = strip_tags( $url );
-		if ( $title ) {
-			$title = '<a class="rsswidget" href="' . esc_url( $url ) . '"><a class="rsswidget" href="' . esc_url( $link ) . '">' . esc_html( $title ) . '</a>';
-		}
-
-		echo $args['before_widget'];
-		if ( $title ) {
-			echo $args['before_title'] . $title . $args['after_title'];
-		}
-
-		$format = current_theme_supports( 'html5', 'navigation-widgets' ) ? 'html5' : 'xhtml';
-
-		/** This filter is documented in wp-includes/widgets/class-wp-nav-menu-widget.php */
-		$format = apply_filters( 'navigation_widgets_format', $format );
-
-		if ( 'html5' === $format ) {
-			// The title may be filtered: Strip out HTML and make sure the aria-label is never empty.
-			$title      = trim( strip_tags( $title ) );
-			$aria_label = $title ? $title : __( 'RSS Feed' );
-			echo '<nav role="navigation" aria-label="' . esc_attr( $aria_label ) . '">';
-		}
-
-		wp_widget_rss_output( $rss, $instance );
-
-		if ( 'html5' === $format ) {
-			echo '</nav>';
-		}
-
-		echo $args['after_widget'];
-
-		if ( ! is_wp_error( $rss ) ) {
-			$rss->__destruct();
-		}
-		unset( $rss );
-    }
-}
-
-
-if (!function_exists('aemi_custom_rss_init'))
-{
-	function aemi_custom_rss_init()
-	{
-    	unregister_widget('WP_Widget_RSS');
-    	register_widget('Aemi_Widget_RSS_Custom');
 	}
 }
