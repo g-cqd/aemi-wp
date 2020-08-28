@@ -14,9 +14,9 @@ if (!function_exists('aemi_customizer_controls__analytics')) {
 
         $wp_customize->add_control(
             new Aemi_Dropdown_Options(
-            $wp_customize,
-            'aemi_ga_type',
-            [
+                $wp_customize,
+                'aemi_ga_type',
+                [
                 'label'     =>      __('Google Analytics Method', 'aemi'),
                 'description'   =>  __('Choose the method to set up Google Analytics. If "gtag.js" or "analytics.js" is selected, please fill your Google Analytics ID.', 'aemi'),
                 'section'   =>      'aemi_analytics',
@@ -27,7 +27,7 @@ if (!function_exists('aemi_customizer_controls__analytics')) {
                'analytics'  => __('analytics.js', 'aemi')
                 ]
             ]
-        )
+            )
         );
 
         $wp_customize->add_control('aemi_bing_meta_tag', [
@@ -493,7 +493,7 @@ if (!function_exists('aemi_customizer_controls__post_types')) {
                         __('Show a short excerpt of', 'aemi'),
                         $p_name,
                         __('s in lists of', 'aemi'),
-                        __('s', 'aemi'),
+                        __('s', 'aemi')
                     ),
                     'section'   =>      'aemi_type_' . $p_name,
                     'settings'  =>      $setting,
