@@ -146,7 +146,7 @@ if (!function_exists('aemi_info_dates'))
 					'%1$s %2$s',
 					esc_attr__('Updated on', 'aemi'),
 					esc_attr(get_the_modified_time('j F Y - g:i a'))
-				),
+				)
 			);
 		}
 	}
