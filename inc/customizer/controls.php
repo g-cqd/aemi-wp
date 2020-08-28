@@ -1,7 +1,6 @@
 <?php
 
-if (!function_exists('aemi_customizer_controls__analytics'))
-{
+if (!function_exists('aemi_customizer_controls__analytics')) {
     function aemi_customizer_controls__analytics($wp_customize)
     {
         $wp_customize->add_control('aemi_ga_id', [
@@ -13,19 +12,22 @@ if (!function_exists('aemi_customizer_controls__analytics'))
         ]);
 
 
-        $wp_customize->add_control( new Aemi_Dropdown_Options(
+        $wp_customize->add_control(
+            new Aemi_Dropdown_Options(
             $wp_customize,
-            'aemi_ga_type', [
+            'aemi_ga_type',
+            [
                 'label'     =>      __('Google Analytics Method', 'aemi'),
                 'description'   =>  __('Choose the method to set up Google Analytics. If "gtag.js" or "analytics.js" is selected, please fill your Google Analytics ID.', 'aemi'),
                 'section'   =>      'aemi_analytics',
                 'settings'  =>      'aemi_ga_type',
                 'choices'   =>      [
-                    'none'  => __('None','aemi'),
-                    'gtag'  => __('gtag.js','aemi'),
-               'analytics'  => __('analytics.js','aemi')
+                    'none'  => __('None', 'aemi'),
+                    'gtag'  => __('gtag.js', 'aemi'),
+               'analytics'  => __('analytics.js', 'aemi')
                 ]
-            ])
+            ]
+        )
         );
 
         $wp_customize->add_control('aemi_bing_meta_tag', [
@@ -46,13 +48,13 @@ if (!function_exists('aemi_customizer_controls__analytics'))
     }
 }
 
-if (!function_exists('aemi_customizer_controls__colors'))
-{
+if (!function_exists('aemi_customizer_controls__colors')) {
     function aemi_customizer_controls__colors($wp_customize)
     {
         $wp_customize->add_control(new Aemi_Dropdown_Options(
             $wp_customize,
-            'aemi_color_scheme', [
+            'aemi_color_scheme',
+            [
             'label'     =>      __('Color Scheme', 'aemi'),
             'description'   =>  __('Choose to display dark or light color scheme or make it switch automatically.', 'aemi'),
             'section'   =>      'aemi_colors',
@@ -62,7 +64,8 @@ if (!function_exists('aemi_customizer_controls__colors'))
                 'dark'  =>  __('Dark', 'aemi'),
                 'auto'  =>  __('Auto', 'aemi')
             ]
-        ]));
+        ]
+        ));
 
         $wp_customize->add_control('aemi_color_scheme_user', [
             'label'     =>      __('Color Scheme User Preference', 'aemi'),
@@ -74,14 +77,13 @@ if (!function_exists('aemi_customizer_controls__colors'))
     }
 }
 
-if (!function_exists('aemi_customizer_controls__content_loop'))
-{
+if (!function_exists('aemi_customizer_controls__content_loop')) {
     function aemi_customizer_controls__content_loop($wp_customize)
     {
-
         $wp_customize->add_control(new Aemi_Dropdown_Options(
             $wp_customize,
-            'aemi_post_layout', [
+            'aemi_post_layout',
+            [
              'label'     =>      __('Post Listing Layout', 'aemi'),
              'description'   =>  __('How would you like your post listings to be displayed.', 'aemi'),
              'section'   =>      'aemi_loop',
@@ -91,11 +93,13 @@ if (!function_exists('aemi_customizer_controls__content_loop'))
                 'stack'                  => __('Cards with Image', 'aemi'),
                 'cover'                  => __('Cards with Background Image', 'aemi'),
              ]
-        ]));
+        ]
+        ));
 
         $wp_customize->add_control(new Aemi_Dropdown_Options(
             $wp_customize,
-            'aemi_post_width', [
+            'aemi_post_width',
+            [
              'label'     =>      __('Post Listing Width', 'aemi'),
              'description'   =>  __('Change post listing (content loop layout) width.', 'aemi'),
              'section'   =>      'aemi_loop',
@@ -106,11 +110,13 @@ if (!function_exists('aemi_customizer_controls__content_loop'))
                 'near_width'                   => __('Near Full Width', 'aemi'),
                 'full_width'                  => __('Full Width', 'aemi')
              ]
-        ]));
+        ]
+        ));
 
         $wp_customize->add_control(new Aemi_Dropdown_Options(
             $wp_customize,
-            'aemi_post_column_layout', [
+            'aemi_post_column_layout',
+            [
              'label'     =>      __('Post Listing Column Layout', 'aemi'),
              'description'   =>  __('Choose maximum number of column to display post in near-full-width and full width.', 'aemi'),
              'section'   =>      'aemi_loop',
@@ -120,11 +126,13 @@ if (!function_exists('aemi_customizer_controls__content_loop'))
                 'two_columns'       => __('Two Columns', 'aemi'),
                 'three_columns'     => __('Three Columns', 'aemi')
              ]
-        ]));
+        ]
+        ));
 
         $wp_customize->add_control(new Aemi_Dropdown_Options(
             $wp_customize,
-            'aemi_post_sticky_width', [
+            'aemi_post_sticky_width',
+            [
              'label'     =>      __('Sticky Post Layout in Listing ', 'aemi'),
              'description'   =>  __('Choose maximum number of column to display post in near-full-width and full width.', 'aemi'),
              'section'   =>      'aemi_loop',
@@ -134,9 +142,10 @@ if (!function_exists('aemi_customizer_controls__content_loop'))
                 'span_2'       => __('Two Columns', 'aemi'),
                 'span_full'     => __('Full Width', 'aemi')
              ]
-        ]));
+        ]
+        ));
 
-        $wp_customize->add_control( 'aemi_post_single_attachment', [
+        $wp_customize->add_control('aemi_post_single_attachment', [
             'label'     =>      __('Display Attachment on Single Content Page', 'aemi'),
             'description'   =>  __('Choose to display a featured image for your single-page content.', 'aemi'),
             'section'   =>      'aemi_loop',
@@ -168,9 +177,10 @@ if (!function_exists('aemi_customizer_controls__content_loop'))
             $cat_labels[$cat->cat_ID] = $cat->name;
         }
 
-        $wp_customize->add_control( new Aemi_Checkbox_Multiple(
+        $wp_customize->add_control(new Aemi_Checkbox_Multiple(
             $wp_customize,
-            'aemi_loop_cat_filters', [
+            'aemi_loop_cat_filters',
+            [
                 'label'     =>      __('Content Loop Post Category Filter', 'aemi'),
                 'description'   =>  __('Choose post categories that will be shown in content loop.', 'aemi'),
                 'section'   =>      'aemi_loop',
@@ -181,14 +191,14 @@ if (!function_exists('aemi_customizer_controls__content_loop'))
 
         $custom_types = [];
 
-        foreach( get_post_types(['public' => true], 'objects') as $post_type )
-        {
+        foreach (get_post_types(['public' => true], 'objects') as $post_type) {
             $custom_types[$post_type->name] = $post_type->label;
-        } 
+        }
 
-        $wp_customize->add_control( new Aemi_Checkbox_Multiple(
+        $wp_customize->add_control(new Aemi_Checkbox_Multiple(
             $wp_customize,
-            'aemi_loop_added_types', [
+            'aemi_loop_added_types',
+            [
                 'label'     =>      __('Custom Post Types to add', 'aemi'),
                 'description'   =>  __('Choose custom post types that will be added to the content loop.', 'aemi'),
                 'section'   =>      'aemi_loop',
@@ -199,8 +209,7 @@ if (!function_exists('aemi_customizer_controls__content_loop'))
     }
 }
 
-if (!function_exists('aemi_customizer_controls__custom_scripts'))
-{
+if (!function_exists('aemi_customizer_controls__custom_scripts')) {
     function aemi_customizer_controls__custom_scripts($wp_customize)
     {
         $wp_customize->add_control('aemi_header_js_code', [
@@ -219,14 +228,13 @@ if (!function_exists('aemi_customizer_controls__custom_scripts'))
     }
 }
 
-if (!function_exists('aemi_customizer_controls__footer'))
-{
+if (!function_exists('aemi_customizer_controls__footer')) {
     function aemi_customizer_controls__footer($wp_customize)
     {
-
         $wp_customize->add_control(new Aemi_Dropdown_Options(
             $wp_customize,
-            'aemi_footer_width', [
+            'aemi_footer_width',
+            [
              'label'     =>      __('Footer Width', 'aemi'),
              'description'   =>  __('Change footer width.', 'aemi'),
              'section'   =>      'aemi_footer',
@@ -237,11 +245,13 @@ if (!function_exists('aemi_customizer_controls__footer'))
                 'near_width'                   => __('Near Full Width', 'aemi'),
                 'full_width'                  => __('Full Width', 'aemi')
              ]
-        ]));
+        ]
+        ));
 
         $wp_customize->add_control(new Aemi_Dropdown_Options(
             $wp_customize,
-            'aemi_footer_column_layout', [
+            'aemi_footer_column_layout',
+            [
              'label'     =>      __('Footer Column Layout', 'aemi'),
              'description'   =>  __('Choose maximum number of column to display widgets in Footer.', 'aemi'),
              'section'   =>      'aemi_footer',
@@ -252,12 +262,12 @@ if (!function_exists('aemi_customizer_controls__footer'))
                 'three_columns'     => __('Three Columns', 'aemi'),
                 'four_columns'     => __('Four Columns', 'aemi')
              ]
-        ]));
+        ]
+        ));
     }
 }
 
-if (!function_exists('aemi_customizer_controls__header'))
-{
+if (!function_exists('aemi_customizer_controls__header')) {
     function aemi_customizer_controls__header($wp_customize)
     {
         $wp_customize->add_control('aemi_header_stickyness', [
@@ -267,9 +277,9 @@ if (!function_exists('aemi_customizer_controls__header'))
             'settings'  =>      'aemi_header_stickyness',
             'type'      =>      'radio',
             'choices'   =>      [
-                'no'    =>      __('Do not keep in view','aemi'),
-                'top'   =>      __('Keep the header to the top of the view','aemi'),
-                'adaptative'   =>   __('Keep the header more accessible on mobile devices','aemi'),
+                'no'    =>      __('Do not keep in view', 'aemi'),
+                'top'   =>      __('Keep the header to the top of the view', 'aemi'),
+                'adaptative'   =>   __('Keep the header more accessible on mobile devices', 'aemi'),
             ]
         ]);
 
@@ -283,25 +293,24 @@ if (!function_exists('aemi_customizer_controls__header'))
     }
 }
 
-if (!function_exists('aemi_customizer_controls__homepage'))
-{
+if (!function_exists('aemi_customizer_controls__homepage')) {
     function aemi_customizer_controls__homepage($wp_customize)
     {
-        $wp_customize->add_control( 'aemi_homepage_before', array(
+        $wp_customize->add_control('aemi_homepage_before', array(
             'type' => 'dropdown-pages',
             'settings' => 'aemi_homepage_before',
             'section' => 'aemi_homepage',
-            'label' => __( 'Homepage - Before Main Content', 'aemi' ),
-            'description' => __( 'Use this to add content before the main content of homepage. Another page can be integrated before blog post listing or before front page content for example.', 'aemi' ),
-        ) );
+            'label' => __('Homepage - Before Main Content', 'aemi'),
+            'description' => __('Use this to add content before the main content of homepage. Another page can be integrated before blog post listing or before front page content for example.', 'aemi'),
+        ));
 
-        $wp_customize->add_control( 'aemi_homepage_after', array(
+        $wp_customize->add_control('aemi_homepage_after', array(
             'type' => 'dropdown-pages',
             'settings' => 'aemi_homepage_after',
             'section' => 'aemi_homepage',
-            'label' => __( 'Homepage - After Main Content', 'aemi' ),
-            'description' => __( 'Use this to add content after the main content of homepage. Another page can be integrated after blog post listing or after front page content.', 'aemi' ),
-        ) );
+            'label' => __('Homepage - After Main Content', 'aemi'),
+            'description' => __('Use this to add content after the main content of homepage. Another page can be integrated after blog post listing or after front page content.', 'aemi'),
+        ));
 
         $wp_customize->add_control('aemi_homepage_header', [
             'label'     =>      __('Add a Page-Like Header to Homepage', 'aemi'),
@@ -328,8 +337,7 @@ if (!function_exists('aemi_customizer_controls__homepage'))
     }
 }
 
-if (!function_exists('aemi_customizer_controls__identity'))
-{
+if (!function_exists('aemi_customizer_controls__identity')) {
     function aemi_customizer_controls__identity($wp_customize)
     {
         $wp_customize->add_control(
@@ -338,7 +346,8 @@ if (!function_exists('aemi_customizer_controls__identity'))
             'description'   => __('It is recommanded to set up this setting. If used, it replaces native logo setting.', 'aemi'),
             'settings'  => 'aemi_light_scheme_logo',
             'section'   => 'aemi_identity'
-        ]));
+        ])
+        );
 
         $wp_customize->add_control(
             new WP_Customize_Image_Control($wp_customize, 'aemi_dark_scheme_logo', [
@@ -346,27 +355,26 @@ if (!function_exists('aemi_customizer_controls__identity'))
             'description'   => __('It is recommanded to set up this setting.', 'aemi'),
             'settings'  => 'aemi_dark_scheme_logo',
             'section'   => 'aemi_identity'
-        ]));
+        ])
+        );
 
-        $wp_customize->add_control( 'aemi_site_description', [
+        $wp_customize->add_control('aemi_site_description', [
             'label'     => __('Site Description', 'aemi'),
             'description'   => __('Site Description differs from Tagline. Site description can be used in meta tags and by search engines.', 'aemi'),
             'settings'  => 'aemi_site_description',
             'section'   => 'aemi_identity',
             'type'      => 'textarea',
             'input_attrs' => [
-                'placeholder' => esc_attr__( 'Description should not exceed 180 characters.', 'aemi' ),
+                'placeholder' => esc_attr__('Description should not exceed 180 characters.', 'aemi'),
             ]
         ]);
     }
 }
 
-if (!function_exists('aemi_customizer_controls__post_types'))
-{
+if (!function_exists('aemi_customizer_controls__post_types')) {
     function aemi_customizer_controls__post_types($wp_customize)
     {
-        foreach (get_post_types(['public' => true], 'objects') as $post_type)
-        {
+        foreach (get_post_types(['public' => true], 'objects') as $post_type) {
             $p_name = $post_type->name;
 
             $post_type_object = (object) ['post_type' => $p_name];
@@ -388,27 +396,24 @@ if (!function_exists('aemi_customizer_controls__post_types'))
 
             $array_of_metas = [];
 
-            foreach (@get_object_taxonomies($post_type_object, 'objects') as $taxonomy)
-            {
+            foreach (@get_object_taxonomies($post_type_object, 'objects') as $taxonomy) {
                 $array_of_metas[] = $taxonomy;
             }
-            foreach ($default_metas as $meta)
-            {
+            foreach ($default_metas as $meta) {
                 $array_of_metas[] = (object) $meta;
             }
 
-            foreach ($array_of_metas as $meta)
-            {
+            foreach ($array_of_metas as $meta) {
                 $m_name = $meta->name;
                 $m_label = $meta->label;
 
-                $setting = aemi_setting($p_name,$m_name);
+                $setting = aemi_setting($p_name, $m_name);
 
-                if (in_array($m_name, ['author','published_date','updated_date']))
-                {
+                if (in_array($m_name, ['author','published_date','updated_date'])) {
                     $wp_customize->add_control(new Aemi_Dropdown_Options(
                         $wp_customize,
-                        $setting, [
+                        $setting,
+                        [
                         'label' =>  $m_label,
                         'description'   =>  sprintf(
                             '%1$s %2$s %3$s.',
@@ -419,19 +424,18 @@ if (!function_exists('aemi_customizer_controls__post_types'))
                         'section'   =>  'aemi_type_' . $p_name,
                         'settings'  =>  $setting,
                         'choices'   =>  [
-                            'both'  => __('Both','aemi'),
-                            'single'  => __('Single Page Only','aemi'),
-                            'loop'  => __('Content Loop Only','aemi'),
-                            'none'  => __('None','aemi')
+                            'both'  => __('Both', 'aemi'),
+                            'single'  => __('Single Page Only', 'aemi'),
+                            'loop'  => __('Content Loop Only', 'aemi'),
+                            'none'  => __('None', 'aemi')
                         ]
-                    ]));
-                }
-                else
-                {
+                    ]
+                    ));
+                } else {
                     $wp_customize->add_control($setting, [
                         'label'     =>      $m_label,
                         'description'   =>  sprintf(
-                                '%1$s %2$s %3$s %4$s.',
+                            '%1$s %2$s %3$s %4$s.',
                             __('Display', 'aemi'),
                             $m_label,
                             __('in', 'aemi'),
@@ -444,52 +448,52 @@ if (!function_exists('aemi_customizer_controls__post_types'))
                 }
             }
 
-            if ($p_name == "post")
-            {
-                $setting = aemi_setting($p_name,'show_excerpt');
+            if ($p_name == "post") {
+                $setting = aemi_setting($p_name, 'show_excerpt');
                 $wp_customize->add_control(new Aemi_Dropdown_Options(
                     $wp_customize,
-                    $setting, [
+                    $setting,
+                    [
                     'label'     =>      __('Show Excerpt', 'aemi'),
                     'description'   =>  __('Choose to display a short excerpt of featured, non-featured, both or none of the posts.', 'aemi'),
                     'section'   =>      'aemi_type_post',
                     'settings'  =>      $setting,
                     'choices'   =>      [
-                        'both'  => __('Both','aemi'),
-                        'sticky_only'  => __('Featured Only','aemi'),
-                        'non_sticky_only'  => __('Not Featured Only','aemi'),
-                        'none'  => __('None','aemi')
+                        'both'  => __('Both', 'aemi'),
+                        'sticky_only'  => __('Featured Only', 'aemi'),
+                        'non_sticky_only'  => __('Not Featured Only', 'aemi'),
+                        'none'  => __('None', 'aemi')
                     ]
-                ]));
-                $setting = aemi_setting($p_name,'show_sticky_badge');
+                ]
+                ));
+                $setting = aemi_setting($p_name, 'show_sticky_badge');
                 $wp_customize->add_control(new Aemi_Dropdown_Options(
                     $wp_customize,
-                    $setting, [
+                    $setting,
+                    [
                     'label'     =>      __('Show Featured Badge', 'aemi'),
                     'description'   =>  __('Choose to display a "Featured" badge on single page, content loop, both or none of the featured posts.', 'aemi'),
                     'section'   =>      'aemi_type_post',
                     'settings'  =>      $setting,
                     'choices'   =>      [
-                        'both'  => __('Both','aemi'),
-                        'single'  => __('Single Page Only','aemi'),
-                        'loop'  => __('Content Loop Only','aemi'),
-                        'none'  => __('None','aemi')
+                        'both'  => __('Both', 'aemi'),
+                        'single'  => __('Single Page Only', 'aemi'),
+                        'loop'  => __('Content Loop Only', 'aemi'),
+                        'none'  => __('None', 'aemi')
                     ]
-                ]));
-            }
-            else {
-
-                $setting = aemi_setting($p_name,'show_excerpt');
+                ]
+                ));
+            } else {
+                $setting = aemi_setting($p_name, 'show_excerpt');
 
                 $wp_customize->add_control($setting, [
                     'label'     =>      __('Show Excerpt', 'aemi'),
                     'description'   =>  sprintf(
                         '%1$s %2$s%3$s %2$s %4$s.',
-                        __('Show a short excerpt of','aemi'),
+                        __('Show a short excerpt of', 'aemi'),
                         $p_name,
-                        __('s in lists of','aemi'),
-                        $p_name,
-                        __('s','aemi'),
+                        __('s in lists of', 'aemi'),
+                        __('s', 'aemi'),
                     ),
                     'section'   =>      'aemi_type_' . $p_name,
                     'settings'  =>      $setting,
@@ -497,7 +501,7 @@ if (!function_exists('aemi_customizer_controls__post_types'))
                 ]);
             }
 
-            $setting = aemi_setting($p_name,'progress_bar');
+            $setting = aemi_setting($p_name, 'progress_bar');
 
             $wp_customize->add_control($setting, [
                 'label'     =>      __('Progress Bar', 'aemi'),
@@ -510,8 +514,7 @@ if (!function_exists('aemi_customizer_controls__post_types'))
     }
 }
 
-if (!function_exists('aemi_customizer_controls__search'))
-{
+if (!function_exists('aemi_customizer_controls__search')) {
     function aemi_customizer_controls__search($wp_customize)
     {
         $wp_customize->add_control('aemi_search_button_display', [
@@ -525,11 +528,10 @@ if (!function_exists('aemi_customizer_controls__search'))
 }
 
 
-if (!function_exists('aemi_customizer_controls__seo'))
-{
+if (!function_exists('aemi_customizer_controls__seo')) {
     function aemi_customizer_controls__seo($wp_customize)
     {
-        $wp_customize->add_control( 'aemi_add_meta_tags', [
+        $wp_customize->add_control('aemi_add_meta_tags', [
             'label'     =>      __('Enable Meta Tags', 'aemi'),
             'description'   =>  __('Be able to fill author, description and keywords informations to define your content to search engines.', 'aemi'),
             'section'   =>      'aemi_seo',
@@ -537,7 +539,7 @@ if (!function_exists('aemi_customizer_controls__seo'))
             'type'      =>      'checkbox'
         ]);
 
-        $wp_customize->add_control( 'aemi_add_meta_og', [
+        $wp_customize->add_control('aemi_add_meta_og', [
             'label'     =>      __('Enable Open Graph', 'aemi'),
             'description'   =>  __('Open Graph is an internet protocol that was originally created by Facebook to standardize the use of metadata within a webpage to represent the content of a page. – from freeCodeCamp', 'aemi'),
             'section'   =>      'aemi_seo',
@@ -545,7 +547,7 @@ if (!function_exists('aemi_customizer_controls__seo'))
             'type'      =>      'checkbox'
         ]);
 
-        $wp_customize->add_control( 'aemi_add_meta_twitter', [
+        $wp_customize->add_control('aemi_add_meta_twitter', [
             'label'     =>      __('Enable Twitter Cards', 'aemi'),
             'description'   =>  __('Add Twitter-specific informations to your content.', 'aemi'),
             'section'   =>      'aemi_seo',
@@ -555,16 +557,18 @@ if (!function_exists('aemi_customizer_controls__seo'))
 
         $wp_customize->add_control(new Aemi_Dropdown_Options(
             $wp_customize,
-            'aemi_meta_twitter_card', [
+            'aemi_meta_twitter_card',
+            [
              'label'     =>      __('Twitter Card Type', 'aemi'),
              'description'   =>  __('How would you like your content to be displayed in tweets.', 'aemi'),
              'section'   =>      'aemi_seo',
              'settings'  =>      'aemi_meta_twitter_card',
              'choices'  => [
                 'summary'   => __('Summary Card', 'aemi'),
-                'summary_large_image'   => __('Summary Card with Large Image', 'aemi'),  
+                'summary_large_image'   => __('Summary Card with Large Image', 'aemi'),
              ]
-        ]));
+        ]
+        ));
 
         $wp_customize->add_control('aemi_meta_twitter_site', [
             'label'     =>      __('Twitter: Site Information', 'aemi'),
@@ -584,14 +588,13 @@ if (!function_exists('aemi_customizer_controls__seo'))
     }
 }
 
-if (!function_exists('aemi_customizer_controls__widgets'))
-{
+if (!function_exists('aemi_customizer_controls__widgets')) {
     function aemi_customizer_controls__widgets($wp_customize)
     {
-
         $wp_customize->add_control(new Aemi_Dropdown_Options(
             $wp_customize,
-            'aemi_widget_footer_width', [
+            'aemi_widget_footer_width',
+            [
              'label'     =>      __('Footer Widget Area Width', 'aemi'),
              'description'   =>  __('Change footer widget area width.', 'aemi'),
              'section'   =>      'aemi_widgets',
@@ -602,11 +605,13 @@ if (!function_exists('aemi_customizer_controls__widgets'))
                 'near_width'    => __('Near Full Width', 'aemi'),
                 'full_width'    => __('Full Width', 'aemi')
              ]
-        ]));
+        ]
+        ));
 
         $wp_customize->add_control(new Aemi_Dropdown_Options(
             $wp_customize,
-            'aemi_widget_footer_column_layout', [
+            'aemi_widget_footer_column_layout',
+            [
              'label'     =>      __('Footer Widget Area Column Layout', 'aemi'),
              'description'   =>  __('Choose maximum number of column for footer widget area.', 'aemi'),
              'section'   =>      'aemi_widgets',
@@ -617,11 +622,13 @@ if (!function_exists('aemi_customizer_controls__widgets'))
                 'three_columns'     => __('Three Columns', 'aemi'),
                 'four_columns'     => __('Four Columns', 'aemi')
              ]
-        ]));
+        ]
+        ));
 
         $wp_customize->add_control(new Aemi_Dropdown_Options(
             $wp_customize,
-            'aemi_widget_overlay_width', [
+            'aemi_widget_overlay_width',
+            [
              'label'     =>      __('Overlay Widget Area Width', 'aemi'),
              'description'   =>  __('Change Overlay Widget Area Width.', 'aemi'),
              'section'   =>      'aemi_widgets',
@@ -632,11 +639,13 @@ if (!function_exists('aemi_customizer_controls__widgets'))
                 'near_width'                   => __('Near Full Width', 'aemi'),
                 'full_width'                  => __('Full Width', 'aemi')
              ]
-        ]));
+        ]
+        ));
 
         $wp_customize->add_control(new Aemi_Dropdown_Options(
             $wp_customize,
-            'aemi_widget_overlay_column_layout', [
+            'aemi_widget_overlay_column_layout',
+            [
              'label'     =>      __('Overlay Widget Area Column Layout', 'aemi'),
              'description'   =>  __('Choose maximum number of column for overlay widget area.', 'aemi'),
              'section'   =>      'aemi_widgets',
@@ -647,6 +656,7 @@ if (!function_exists('aemi_customizer_controls__widgets'))
                 'three_columns'     => __('Three Columns', 'aemi'),
                 'four_columns'     => __('Four Columns', 'aemi')
              ]
-        ]));
+        ]
+        ));
     }
 }

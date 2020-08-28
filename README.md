@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.5
 * Requires PHP: 7.2
-* Version: 2.0.0
+* Version: 2.0.1
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -86,6 +86,8 @@ Source: https://github.com/aemi-dev/aemi
 
 ## Changelog
 
+### 2.0.1 :
+	- Fixed : Error with sprintf
 ### 2.0.0 :
 	- Release Version
 	- Edit #1 : Due to Theme Check Guidelines, Security and Performance Features have been removed from Aemi Theme. These features will be available through the future Aemi Companion Plugin. Sorry for the inconvenience.
