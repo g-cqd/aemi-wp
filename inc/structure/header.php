@@ -76,10 +76,10 @@ if (!function_exists('aemi_header_branding'))
 
 
 		
-		$light_scheme_logo = get_theme_mod('aemi_light_scheme_logo');
-		$dark_scheme_logo = get_theme_mod('aemi_dark_scheme_logo');
-		$has_light_scheme_logo = $light_scheme_logo != '';
-		$has_dark_scheme_logo = $dark_scheme_logo != '';
+		$light_scheme_logo = wp_get_attachment_url( get_theme_mod('aemi_light_scheme_logo') );
+		$dark_scheme_logo = wp_get_attachment_url( get_theme_mod('aemi_dark_scheme_logo') );
+		$has_light_scheme_logo = isset($light_scheme_logo) && $light_scheme_logo != '';
+		$has_dark_scheme_logo = isset($dark_scheme_logo) && $dark_scheme_logo != '';
 		
 		$color_scheme = get_theme_mod('aemi_color_scheme','auto');
 		$scheme_user_pref = is_enabled('aemi_color_scheme_user',0);

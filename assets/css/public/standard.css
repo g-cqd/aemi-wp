@@ -621,6 +621,8 @@ details {
 
 details:not(:first-child) {
 	margin-top: 2em;
+	padding-left: 1rem;
+	padding-right: 1rem;
 }
 
 details[open] {

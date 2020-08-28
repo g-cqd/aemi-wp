@@ -341,20 +341,22 @@ if (!function_exists('aemi_customizer_controls__identity')) {
     function aemi_customizer_controls__identity($wp_customize)
     {
         $wp_customize->add_control(
-            new WP_Customize_Image_Control($wp_customize, 'aemi_light_scheme_logo', [
+            new WP_Customize_Media_Control($wp_customize, 'aemi_light_scheme_logo', [
             'label'     => __('Add Light for Light Scheme', 'aemi'),
             'description'   => __('It is recommanded to set up this setting. If used, it replaces native logo setting.', 'aemi'),
             'settings'  => 'aemi_light_scheme_logo',
-            'section'   => 'aemi_identity'
+            'section'   => 'aemi_identity',
+            'mime_type' => 'image'
         ])
         );
 
         $wp_customize->add_control(
-            new WP_Customize_Image_Control($wp_customize, 'aemi_dark_scheme_logo', [
+            new WP_Customize_Media_Control($wp_customize, 'aemi_dark_scheme_logo', [
             'label'     => __('Add Logo for Dark Scheme', 'aemi'),
             'description'   => __('It is recommanded to set up this setting.', 'aemi'),
             'settings'  => 'aemi_dark_scheme_logo',
-            'section'   => 'aemi_identity'
+            'section'   => 'aemi_identity',
+            'mime_type' => 'image'
         ])
         );
 

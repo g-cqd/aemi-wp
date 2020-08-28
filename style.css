@@ -4,7 +4,7 @@ Theme URI: https://github.com/aemi-dev/aemi/
 Author: Guillaume COQUARD
 Author URI: https://aemi.dev/
 Description: AeMi is designed to be an aesthetic minimalist wordpress theme. It provides a highly legible, clean, clear and really minimalist theme.
-Version: 2.0.3
+Version: 2.0.4
 Tested up to: 5.5
 Requires PHP: 7.2
 License: GPL-3.0
@@ -835,8 +835,9 @@ body:not(.header-hidden) #site-progress-bar {
 }
 
 #site-branding #site-logo {
-	display: block;
-	height: auto;
+	display: flex;
+	align-items: center;
+	height: 100%;
 	left: 0;
 	max-height: 4.5rem;
 	padding: 0;
@@ -844,6 +845,7 @@ body:not(.header-hidden) #site-progress-bar {
 	top: 50%;
 	transform: translateY(-50%);
 	min-width: 2.5rem;
+	width: auto;
 }
 #site-branding #site-logo a {
 	display: block;
@@ -851,14 +853,12 @@ body:not(.header-hidden) #site-progress-bar {
 #site-branding #site-logo img {
 	border-radius: 0;
 	display: block;
-	left: 50%;
+	height: 2rem;
 	max-height: 4.5rem;
 	padding: 0;
-	position: absolute;
-	top: 50%;
-	transform: translate(-50%, -50%);
 	transition: opacity var(--tr-short) var(--tr-func);
-	width: 100%;
+	width: auto;
+	max-width: auto;
 }
 
 .color-scheme-dark #site-header:not(.color-scheme-dark) .light-scheme-logo:not(:only-child) img,

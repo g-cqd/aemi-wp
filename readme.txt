@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.5
 * Requires PHP: 7.2
-* Version: 2.0.3
+* Version: 2.0.4
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -86,6 +86,8 @@ Source: https://github.com/aemi-dev/aemi
 
 ## Changelog
 
+### 2.0.4 :
+	- Fixed : Bug with Custom Logos and Details Tag
 ### 2.0.3 :
 	- Fixed : Error with commas in printf/sprintf
 ### 2.0.2 :
