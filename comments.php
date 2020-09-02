@@ -1,6 +1,6 @@
 <?php
 
-if (post_password_required() && is_disabled('aemi_display_comments',1))
+if (post_password_required())
 {
     return;
 }

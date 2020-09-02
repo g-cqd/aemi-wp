@@ -54,18 +54,18 @@ if (!function_exists('aemi_customizer_settings__comments'))
 {
 	function aemi_customizer_settings__comments($wp_customize)
 	{
-		aemi_add_settings([
-			[
-				'name' => 'aemi_display_comments',
-				'type' => 'checkbox',
-				'default' => 1
-			],
-			[
-				'name' => 'aemi_remove_recent_comments_style',
-				'type' => 'checkbox',
-				'default' => 0
-			]
-		], $wp_customize);
+		// aemi_add_settings([
+		// 	[
+		// 		'name' => 'aemi_display_comments',
+		// 		'type' => 'checkbox',
+		// 		'default' => 1
+		// 	],
+		// 	[
+		// 		'name' => 'aemi_remove_recent_comments_style',
+		// 		'type' => 'checkbox',
+		// 		'default' => 0
+		// 	]
+		// ], $wp_customize);
 	}
 }
 

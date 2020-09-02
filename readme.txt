@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.5
 * Requires PHP: 7.2
-* Version: 2.0.6
+* Version: 2.0.7
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -30,7 +30,7 @@ Aemi is designed to be an aesthetic minimalist WordPress theme. It provides a hi
 
 ## Copyright
 
-Aemi WordPress Theme, Copyright (c) 2020 Guillaume COQUARD.
+Aemi WordPress Theme, Copyright (c) 2018-2020 Guillaume COQUARD.
 
 Aemi is distributed under the terms of the GNU General Public License v3.0.
 
@@ -74,7 +74,7 @@ License: MIT
 Source: http://jslightbox.felixhagspiel.de
 ```
 ```
-Bundled screenshot.jpg, Copyright (c) 2018 Guillaume COQUARD
+Bundled screenshot.jpg, Copyright (c) 2018-2020 Guillaume COQUARD
 License: CC0 1.0 Universal (CC0 1.0)
 Source: https://github.com/aemi-dev/aemi
 ```
@@ -86,6 +86,9 @@ Source: https://github.com/aemi-dev/aemi
 
 ## Changelog
 
+### 2.0.7 :
+	- Fixed : Comments not displaying
+	- Fixed : Details Tag Style
 ### 2.0.6 :
 	- Fixed : Style fix (#main-content)
 ### 2.0.5 :

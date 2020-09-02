@@ -25,7 +25,7 @@ if (!function_exists('aemi_display_comments'))
 		{
 			return;
 		}
-		if (comments_open() || comments_open() || '0' != get_comments_number())
+		if (comments_open() || '0' != get_comments_number())
 		{
 			comments_template('/comments.php');
 		}

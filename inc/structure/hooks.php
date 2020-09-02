@@ -88,6 +88,12 @@ add_action( 'aemi_page', 					'aemi_page_header', 10 );
 add_action( 'aemi_page', 					'aemi_page_content',	20 );
 add_action( 'aemi_page_after',				'aemi_post_meta_footer', 10 );
 
+// -- Comments -- //
+add_action( 'aemi_single_post_after',		'aemi_display_comments', 20 );		
+add_action( 'aemi_page_after',				'aemi_display_comments', 20 );		
+add_filter( 'comment_form_fields',			'aemi_custom_comment_fields_order' );		
+add_filter( 'comment_text',					'aemi_filter_comment_text' );
+
 // -- Archive -- //
 add_filter( 'get_the_archive_title',		'aemi_get_the_archive_title' );
 

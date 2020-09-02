@@ -616,7 +616,7 @@ details {
 	border-radius: var(--radius);
 	margin-bottom: 1em;
 	margin-top: 1em;
-	padding: 0 0.8em;
+	padding: 0 1rem;
 }
 
 details:not(:first-child) {
@@ -677,9 +677,7 @@ summary::before {
 }
 
 summary + * {
-	border: 0 !important;
-	margin-top: 0.5rem !important;
-	padding: 0.5rem !important;
+	margin-top: 0.5rem;
 }
 
 dfn {
