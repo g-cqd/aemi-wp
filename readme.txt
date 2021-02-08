@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.5
 * Requires PHP: 7.2
-* Version: 2.0.7
+* Version: 2.0.8
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -30,14 +30,14 @@ Aemi is designed to be an aesthetic minimalist WordPress theme. It provides a hi
 
 ## Copyright
 
-Aemi WordPress Theme, Copyright (c) 2018-2020 Guillaume COQUARD.
+Aemi WordPress Theme, Copyright (c) 2018-2021 Guillaume COQUARD.
 
 Aemi is distributed under the terms of the GNU General Public License v3.0.
 
 
 ## License - GNU GPL 3.0 License
 
-### Aemi WordPress Theme Copyright (c) 2018-2020 Guillaume COQUARD
+### Aemi WordPress Theme Copyright (c) 2018-2021 Guillaume COQUARD
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
@@ -50,6 +50,7 @@ You should have received a copy of the GNU General Public License along with thi
 
 ```
 Inter Typeface, Copyright (c) 2016-2020 The Inter Project Authors
+"Inter" is trademark of Rasmus Andersson.
 License: SIL Open Font License 1.1
 Source: https://rsms.me/inter/
 ```
@@ -74,18 +75,25 @@ License: MIT
 Source: http://jslightbox.felixhagspiel.de
 ```
 ```
-Bundled screenshot.jpg, Copyright (c) 2018-2020 Guillaume COQUARD
+Bundled screenshot.jpg, Copyright (c) 2018-2021 Guillaume COQUARD
 License: CC0 1.0 Universal (CC0 1.0)
 Source: https://github.com/aemi-dev/aemi
 ```
 ```
-Bundled Images in screenshot.jpg, Copyright (c) 2018-2020 Guillaume COQUARD
+Bundled Images in screenshot.jpg, Copyright (c) 2018-2021 Guillaume COQUARD
 License: CC0 1.0 Universal (CC0 1.0)
 Source: https://github.com/aemi-dev/aemi
 ```
 
 ## Changelog
 
+### 2.0.8 :
+	- Fixed : Script Tag was displaying under comment form
+    - Fixed : Auto-switch between color themes was not working
+    - Fixed : Post-meta was overflowing when used with multi-column layout
+    - Improved : aemi.js : ES-Linted + Formatted
+    - Improved : index.js : ES-Linted + Formatted + Fix
+    - Updated : fonts.css : Updated Path to JetBrains Mono
 ### 2.0.7 :
 	- Fixed : Comments not displaying
 	- Fixed : Details Tag Style
