@@ -4,7 +4,7 @@ Theme URI: https://github.com/aemi-dev/aemi/
 Author: Guillaume COQUARD
 Author URI: https://aemi.dev/
 Description: AeMi is designed to be an aesthetic minimalist wordpress theme. It provides a highly legible, clean, clear and really minimalist theme.
-Version: 2.0.10
+Version: 2.0.11
 Tested up to: 5.5
 Requires PHP: 7.2
 License: GPL-3.0
@@ -1290,8 +1290,14 @@ a.post-info {
 	transition: opacity var(--tr-short) var(--tr-func);
 }
 
-:hover > a.post-info,
+.\:hover a.post-info,
 a.post-info:hover {
+	opacity: 0.6;
+	transition: opacity var(--tr-short) var(--tr-func);
+}
+
+.cover .\:hover .post-attachment + a.post-info,
+.cover .post-attachment + a.post-info:hover {
 	opacity: 0;
 	transition: opacity var(--tr-short) var(--tr-func);
 }
@@ -1404,7 +1410,14 @@ body:not(.singular) .post-header .post-meta > * {
 	margin-bottom: 1rem;
 }
 
-.post-header:hover .meta-excerpt {
+.\:hover .post-attachment + a.post-info + .post-meta > .meta-excerpt,
+.post-header:hover .post-attachment + a.post-info + .post-meta > .meta-excerpt {
+	opacity: 0.6;
+	transition: opacity var(--tr-short) var(--tr-func);
+}
+
+.cover .\:hover .post-attachment + a.post-info + .post-meta > .meta-excerpt,
+.cover .post-header:hover .post-attachment + a.post-info + .post-meta > .meta-excerpt {
 	opacity: 0;
 	transition: opacity var(--tr-short) var(--tr-func);
 }
@@ -2752,3 +2765,4 @@ a .nav-previous,
 .lightbox-prev::before {
 	content: '\2190';
 }
+

@@ -6,7 +6,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.5
 * Requires PHP: 7.2
-* Version: 2.0.10
+* Version: 2.0.11
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: https://opensource.org/licenses/GPL-3.0
@@ -87,6 +87,9 @@ Source: https://github.com/aemi-dev/aemi
 
 ## Changelog
 
+### 2.0.11 :
+    - Fixed : Invalid behavior when using light scheme and Stacked-Card
+    - Fixed : Bug with Post Info Transparency (.2)
 ### 2.0.10 :
     - Updated : FiraCode Font updated to FiraCode 5
 ### 2.0.9 :

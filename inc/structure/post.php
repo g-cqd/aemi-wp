@@ -6,8 +6,11 @@ if (!function_exists('aemi_post_header'))
 	{
 
 		$singular = is_singular();
+		$has_thumbnail = has_post_thumbnail();
 
-		?><header class="post-header<?php echo has_post_thumbnail() ? ' color-scheme-dark' : '' ?>"><?php
+        $to_dark = $singular == false && get_theme_mod('aemi_post_layout','cover') == 'cover' && $has_thumbnail || $singular && $has_thumbnail ;
+
+		?><header class="post-header<?php echo $to_dark ? ' color-scheme-dark' : '' ?>"><?php
 		
 			aemi_featured_image();
 
