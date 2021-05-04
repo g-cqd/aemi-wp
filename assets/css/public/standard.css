@@ -779,7 +779,7 @@ pre {
 
 pre > code {
 	overflow-x: auto;
-	white-space: nowrap;
+	white-space: pre;
 }
 
 sub,

@@ -1,0 +1,13 @@
+{
+    "scripts": {
+        "clean": "rm aemi.bundle.js aemi.min.js",
+        "bundle": "rollup aemi.js --file aemi.bundle.js --format iife",
+        "minify": "terser aemi.bundle.js -o aemi.min.js --compress --mangle --ecma 2021 && rm aemi.bundle.js",
+        "pack": "npm run bundle && npm run minify"
+    },
+    "devDependencies": {
+        "eslint": "^7.25.0",
+        "rollup": "^2.45.2",
+        "terser": "^5.6.1"
+    }
+}

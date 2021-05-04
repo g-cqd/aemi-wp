@@ -1,0 +1,4 @@
+[submodule "ext"]
+	path = ext
+	url = https://github.com/aemi-dev/aemijs.git
+	branch = es-module

@@ -37,6 +37,7 @@ add_action( 'widgets_init',					'aemi_widgets_init' );
 add_action( 'wp_enqueue_scripts',			'aemi_scripts', 10 );
 add_filter( 'script_loader_tag',			'aemi_async_scripts_filter', 10, 2);
 add_filter( 'script_loader_tag',			'aemi_defer_scripts_filter', 10, 2);
+add_filter( 'script_loader_tag',			'aemi_module_scripts_filter', 10, 2);
 add_filter( 'body_class',					'aemi_body_classes' );
 add_filter( 'use_default_gallery_style',	'__return_false' );
 add_filter( 'wp_tag_cloud',					'aemi_tagcount_filter' );

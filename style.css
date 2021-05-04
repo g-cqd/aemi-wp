@@ -1290,6 +1290,10 @@ a.post-info {
 	transition: opacity var(--tr-short) var(--tr-func);
 }
 
+.\:hover .post-edit:not(:hover) > a {
+    color: var(--text-important);
+}
+
 .\:hover a.post-info,
 a.post-info:hover {
 	opacity: 0.6;
@@ -1443,18 +1447,31 @@ body:not(.singular) .post-header .post-meta > * {
 }
 
 .post-edit {
-	background-color: var(--element-background-alpha);
-	border-radius: var(--radius);
 	margin: 1rem;
-	padding: 0.2em 0.75em;
+    opacity: 1;
 	position: absolute;
 	right: 0;
-	top: 0;
+	bottom: 0;
 	z-index: 8;
 }
 
 .sticky .post-edit {
 	top: 1.75rem;
+    bottom: unset;
+}
+
+.post-edit .post-edit-link {
+    display:block;
+    background-color: var(--element-background-alpha);
+    border: 1px solid var(--element-border-alpha);
+	border-radius: var(--radius);
+    padding: .2em .75em;
+    position: relative;
+    width: 100%;
+}
+
+.\:hover .post-edit:not(:hover) > a {
+    color: var(--text-important);
 }
 
 .post-meta .meta-item:first-child .meta-item-title {
@@ -1572,6 +1589,10 @@ body:not(.singular) .post-header .post-meta > * {
 .post-summary,
 .post-content,
 .comment-content {
+    -webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	-ms-hyphens: auto;
+	hyphens: auto;
 	margin: 0;
 	padding: 0;
 	max-width: 100%;
@@ -1625,19 +1646,22 @@ body:not(.singular) .post-header .post-meta > * {
 	margin-bottom: 4rem;
 }
 
-.comments-list {
+.comments-list,
+.pingbacks-list,
+.trackbacks-list {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
 .comment,
-.comment-body {
+.pingback,
+.trackback {
+	margin-bottom: 1.5rem;
 	position: relative;
 }
 
-.comment {
-	margin-bottom: 1.5rem;
+.comment-body {
 	position: relative;
 }
 
@@ -1660,7 +1684,9 @@ body:not(.singular) .post-header .post-meta > * {
 	height: auto;
 }
 
-.comment .comment-meta {
+.comment .comment-meta,
+.pingback .comment-meta,
+.trackback .comment-meta {
 	border-bottom: 1px solid var(--input-border);
 	border-radius: var(--radius) var(--radius) 0 0;
 	display: block;
@@ -1668,11 +1694,17 @@ body:not(.singular) .post-header .post-meta > * {
 	width: 100%;
 }
 
-.comment .comment-author.vcard cite.fn {
+.comment .comment-author.vcard cite.fn,
+.pingback .comment-author.vcard cite.fn,
+.trackback .comment-author.vcard cite.fn {
 	height: 1rem;
 }
 .comment .comment-author.vcard img.photo,
-.comment .comment-author.vcard img.avatar {
+.pingback .comment-author.vcard img.photo,
+.trackback .comment-author.vcard img.photo,
+.comment .comment-author.vcard img.avatar,
+.pingback .comment-author.vcard img.avatar,
+.trackback .comment-author.vcard img.avatar {
 	border-radius: calc(var(--radius) / 2);
 	display: inline-block;
 	height: 1rem;
@@ -1680,20 +1712,28 @@ body:not(.singular) .post-header .post-meta > * {
 	width: 1rem;
 }
 
-.comment .comment-metadata {
+.comment .comment-metadata,
+.pingback .comment-metadata,
+.trackback .comment-metadata {
 	display: block;
 	text-transform: uppercase;
 	margin-top: .25rem;
 }
 
 .comment .comment-metadata,
-.comment .comment-metadata a {
+.pingback .comment-metadata,
+.trackback .comment-metadata,
+.comment .comment-metadata a,
+.pingback .comment-metadata a,
+.trackback .comment-metadata a {
 	color: var(--text-optional);
 	font-size: .75rem;
 	font-weight: normal;
 }
 
-.comment .comment-metadata a:hover {
+.comment .comment-metadata a:hover,
+.pingback .comment-metadata a:hover,
+.trackback .comment-metadata a:hover {
 	color: var(--text-important);
 }
 .comment .reply {
@@ -1705,7 +1745,9 @@ body:not(.singular) .post-header .post-meta > * {
 	width: 100%;
 }
 
-.comment .children {
+.comment .children,
+.pingback .children,
+.trackback .children {
 	display: block;
 	list-style: none;
 	margin-top: 1rem;
@@ -1714,7 +1756,9 @@ body:not(.singular) .post-header .post-meta > * {
 	position: relative;
 }
 
-.comment .children::before {
+.comment .children::before,
+.pingback .children::before,
+.trackback .children::before {
 	background-color: var(--input-border);
 	content: '';
 	display: block;
@@ -1727,18 +1771,26 @@ body:not(.singular) .post-header .post-meta > * {
 	z-index: 2;
 }
 
-.comment .comment-content {
+.comment .comment-content,
+.pingback .comment-content,
+.trackback .comment-content {
 	line-height: 1.2;
 	padding: .75rem;
 	position: relative;
 }
-.comment .comment-content:last-child {
+.comment .comment-content:last-child,
+.pingback .comment-content:last-child,
+.trackback .comment-content:last-child {
 	border-bottom: 0;
 }
-.comment .comment-content > :first-child {
+.comment .comment-content > :first-child,
+.pingback .comment-content > :first-child,
+.trackback .comment-content > :first-child {
 	margin-top: 0;
 }
-.comment .comment-content > :last-child {
+.comment .comment-content > :last-child,
+.pingback .comment-content > :last-child,
+.trackback .comment-content > :last-child {
 	margin-bottom: 0;
 }
 
