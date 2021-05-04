@@ -1,0 +1,4 @@
+[submodule "assets/js"]
+	path = assets/js
+	url = https://github.com/aemi-dev/aemi-wp-js
+	branch = main
