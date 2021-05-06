@@ -122,35 +122,40 @@ if (!function_exists('aemi_scripts'))
 		/**
          * Register Styles
          */
-		wp_register_style( 'aemi-fonts', get_template_directory_uri() . '/assets/css/public/fonts.css' );
-		wp_register_style( 'aemi-standard', get_template_directory_uri() . '/assets/css/public/standard.css' );
-		wp_register_style( 'aemi-styles', get_stylesheet_uri() );
-		wp_register_style( 'aemi-wordpress', get_template_directory_uri() . '/assets/css/public/wordpress.css' );
+        wp_register_style( 'aemi-style-debug', get_template_directory_uri() . '/assets/css/style.css');
+		wp_register_style( 'aemi-style', get_template_directory_uri() . '/assets/css/style.min.css' );
 		/**
          * Register Aemi Script
          */
 		wp_register_script( 'aemi-script-debug', get_template_directory_uri() . '/assets/js/aemi.js', false, false, false );
 		wp_register_script( 'aemi-script', get_template_directory_uri() . '/assets/js/aemi.min.js', false, false, false );
 		/**
-         * Enqueue Styles
-         */
-		wp_enqueue_style( 'aemi-fonts' );
-		wp_enqueue_style( 'aemi-standard' );
-		wp_enqueue_style( 'aemi-styles' );
-		wp_enqueue_style( 'aemi-wordpress' );
-		/**
          * Dequeue Default Style
          */
 		wp_dequeue_style( 'wp-block-library' );
         /**
-         * Mark Aemi Scrips as Modules
+         * Enqueue Styles and Scripts depending on debug mode
          */
 		if ( WP_DEBUG ) {
+            /**
+             * Enqueue Styles
+             */
+            wp_enqueue_style( 'aemi-style-debug' );
+            /**
+             * Enqueue Scripts
+             */
             wp_enqueue_script( 'aemi-script-debug' );
             aemi_defer_scripts( ['aemi-script-debug'] );
             aemi_module_scripts( ['aemi-script-debug'] );
         }
         else {
+            /**
+             * Enqueue Styles
+             */
+            wp_enqueue_style( 'aemi-style' );
+            /**
+             * Enqueue Scripts
+             */
             wp_enqueue_script( 'aemi-script' );
             aemi_defer_scripts( ['aemi-script' ]);
             aemi_module_scripts( ['aemi-script' ]);

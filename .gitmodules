@@ -1,4 +1,8 @@
-[submodule "assets/js"]
-	path = assets/js
+[submodule "src/assets/js"]
+	path = src/assets/js
 	url = https://github.com/aemi-dev/aemi-wp-js
+	branch = main
+[submodule "src/assets/css"]
+	path = src/assets/css
+	url = https://github.com/aemi-dev/aemi-wp-css
 	branch = main
