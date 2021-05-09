@@ -1,11 +1,4 @@
-# Change Log
-
-## 2.1.0
-
-* JS & CSS Code Refactored
-* Repository splitted in submodules to ease code usage for others
-* [ ] Bugs Fixed
-* [ ] Features Added
+# Changelog
 
 ## 2.0.11
 
