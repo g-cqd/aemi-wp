@@ -1,5 +1,13 @@
 # Changelog
 
+
+## 2.1.0
+
+* JS & CSS Code Refactored
+* Repository splitted in submodules to ease code usage for others
+* [ ] Bugs Fixed
+* [ ] Features Added
+
 ## 2.0.12
 
 * Fixed : Bug with Preformatted / Code block
