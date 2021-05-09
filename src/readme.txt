@@ -8,7 +8,7 @@
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: <https://opensource.org/licenses/GPL-3.0>
-* Tags: white, responsive-layout, one-column, custom-background, custom-menu, featured-image-header, featured-images, full-width-template, sticky-post, threaded-comments, photoblogging
+* Tags: blog, photography, portfolio, one-column, grid-layout, block-styles, custom-background, custom-menu, custom-logo, featured-image-header, featured-images, full-width-template, sticky-post, theme-options, threaded-comments, translation-ready, wide-blocks
 
 ## Description
 
