@@ -4,7 +4,7 @@
 * Requires at least: 4.9
 * Tested up to: 5.7
 * Requires PHP: 7.2
-* Version: 2.0.11
+* Version: 2.0.12
 * Stable Tag: trunk
 * License: GPL-3.0
 * License URI: <https://opensource.org/licenses/GPL-3.0>

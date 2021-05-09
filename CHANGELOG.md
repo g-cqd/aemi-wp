@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.12
+
+* Fixed : Bug with Preformatted / Code block
+* Improved : Page load, fewer requests, minimized JS/CSS files built-in
+
 ## 2.0.11
 
 * Fixed : Invalid behavior when using light scheme and Stacked-Card
