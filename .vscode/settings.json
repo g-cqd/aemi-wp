@@ -1,0 +1,29 @@
+{
+    "php.suggest.basic": true,
+    "phpcs.executablePath": "vendor/bin/phpcs",
+    "phpcs.standard": "WordPress",
+    "phpformatter.composer": true,
+    "phpformatter.pharPath": "vendor/bin/friendsofphp/php-cs-fixer/php-cs-fixer",
+    "vscode-wordpress-hooks.docBlocks.enable": true,
+    "vscode-wordpress-hooks.typeDeclarations.enable": true,
+    "phpfmt.passes": [
+        "AutoSemicolon",
+        "AutoPreincrement",
+        "GeneratePHPDoc",
+        "ReindentSwitchBlocks",
+        "LongArray",
+        "MergeElseIf",
+        "SpaceAroundExclamationMark",
+        "SpaceAroundParentheses",
+        "SpaceBetweenMethods",
+        "StrictComparison",
+        "TrimSpaceBeforeSemicolon"
+    ],
+    "phpfmt.exclude": [
+        "ShortArray"
+    ],
+    "phpfmt.psr2": false,
+    "phpfmt.yoda": true,
+    "phpfmt.enable_auto_align": true,
+    "phpfmt.indent_with_space": false
+}

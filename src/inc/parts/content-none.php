@@ -1,28 +1,21 @@
+<?php
+/**
+ * Aemi WordPress Theme
+ * No Entry Content Template
+ *
+ * @package  aemi.parts.none
+ * @author   Guillaume COQUARD <contact@aemi.dev>
+ * @license  http://www.gnu.org/licenses/gpl-3.0.txt GNU Public License 3
+ * @link     https://github.com/aemi-dev/aemi-wp/tree/main/src/inc/parts/content-none.php
+ */
+
+?>
+<?php do_action( 'aemi_entry_before' ); ?>
+<?php do_action( 'aemi_none_beforebegin' ); ?>
 <article id="entry-head" class="entry post no-results not-found">
-	<header class="post-header">
-		<div class="post-info">
-			<h1 class="post-title"><?php echo esc_html__('Nothing Found', 'aemi') ?></h1>
-			<div class="archive-details not-found"><?php
-				if (is_home() && current_user_can('publish_posts'))
-				{
-					printf(
-						wp_kses(
-							__('Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'aemi'),
-							[ 'a' => [ 'href' => [] ] ]
-						),
-						esc_url(admin_url('post-new.php'))
-					);
-				}
-				else if (is_search())
-				{
-					esc_html_e('Sorry, nothing matched your search. Please try again.', 'aemi');
-				}
-				else
-				{
-					esc_html_e('Nothing found for the requested page. Try a search instead?', 'aemi');
-				}
-			?></div>
-		</div>
-	</header>
-	<main class="post-content"><?php get_search_form(); ?></main>
+	<?php do_action( 'aemi_none_afterbegin' ); ?>
+	<?php do_action( 'aemi_none' ); ?>
+	<?php do_action( 'aemi_none_beforeend' ); ?>
 </article>
+<?php do_action( 'aemi_none_afterend' ); ?>
+<?php do_action( 'aemi_entry_after' ); ?>

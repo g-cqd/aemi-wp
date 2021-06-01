@@ -1,80 +1,101 @@
 <?php
+/**
+ * Aemi WordPress Theme
+ * Comments Template
+ *
+ * @package  aemi.comments
+ * @author   Guillaume COQUARD <contact@aemi.dev>
+ * @license  http://www.gnu.org/licenses/gpl-3.0.txt GNU Public License 3
+ * @link     https://github.com/aemi-dev/aemi-wp/tree/main/src/comments.php
+ */
 
-if (post_password_required())
-{
-    return;
+if ( post_password_required() ) {
+	return;
 }
 
 global $wp_query;
 
 $comments_by_type = aemi_separate_comments();
 
-?><div id="post-reactions" class="post-reactions"><?php
+?>
+<div id="post-reactions" class="post-reactions">
+<?php
+if ( have_comments() ) {
+	if ( ! empty( $comments_by_type['comment'] ) ) {
+		$comment_count = count( $comments_by_type['comment'] )
+		?>
+<div id="comments-section" class="reaction-section">
+	<h3 class="comments-title h1">
+		<?php
+		echo esc_html(
+			sprintf(
+				_nx(
+					'One Comment',
+					'%1$s Comments',
+					$comment_count,
+					'comment title',
+					'aemi'
+				),
+				number_format_i18n( $comment_count ),
+				'<span>' . esc_html( get_the_title() ) . '</span>'
+			)
+		);
+		?>
+	</h3>
+		<?php
 
-if (have_comments())
-{
-    if (!empty($comments_by_type['comment']))
-    {
-        $comment_count = count($comments_by_type['comment'])
-        
-        ?><div id="comments-section" class="reaction-section">
-            <h3 class="comments-title h1"><?php echo sprintf(
-                esc_html(
-                    _nx(
-                        'One Comment',
-                        '%1$s Comments',
-                        $comment_count,
-                        'comment title',
-                        'aemi'
-                    )
-                ),
-                number_format_i18n($comment_count),
-                '<span>' . get_the_title() . '</span>'
-            );
+		if ( get_comment_pages_count() > 1 ) {
+			?>
+			<nav id="comments-navigation" class="comments-navigation" aria-label="Comments Navigation">
+				<div class="paginated-comments-links"><?php paginate_comments_links(); ?></div>
+			</nav>
+			<?php
+		}
+		?>
+		<ul class="comments-list">
+			<?php wp_list_comments( array( 'type' => 'comment' ) ); ?>
+		</ul>
+		<?php
+		if ( get_comment_pages_count() > 1 ) {
+			?>
+<nav id="comments-navigation" class="comments-navigation" aria-label="Comments Navigation">
+	<div class="paginated-comments-links"><?php paginate_comments_links(); ?></div>
+</nav>
+			<?php
+		}
+		?>
+</div>
+		<?php
+	}
 
-            ?></h3><?php
+	if ( count( $comments_by_type['trackback'] ) > 0 ) {
+		?>
+<div id="trackbacks-section" class="reaction-section">
+	<h3 id="trackbacks-title" class="h1">Trackbacks</h3>
+	<ul class="trackbacks-list">
+		<?php wp_list_comments( 'type=trackback' ); ?>
+	</ul>
+</div>
+		<?php
+	}
 
-            if (get_comment_pages_count() > 1)
-            {
-                ?><nav id="comments-navigation" class="comments-navigation">
-                    <div class="paginated-comments-links"><?php paginate_comments_links(); ?></div>
-                </nav><?php    
-            }
-            ?><ul class="comments-list">
-                <?php wp_list_comments([ 'type' => 'comment' ]); ?>
-            </ul><?php
-            if (get_comment_pages_count() > 1)
-            {
-                ?><nav id="comments-navigation" class="comments-navigation">
-                    <div class="paginated-comments-links"><?php paginate_comments_links(); ?></div>
-                </nav><?php
-            }
-        ?></div><?php
-    }
-
-    if (count($comments_by_type['trackback']) > 0)
-    {
-        ?><div id="trackbacks-section" class="reaction-section">
-            <h3 id="trackbacks-title" class="h1">Trackbacks</h3>
-            <ul class="trackbacks-list"><?php wp_list_comments('type=trackback'); ?></ul>
-        </div><?php
-    }
-
-    if (count($comments_by_type['pingback']) > 0)
-    {
-        ?><div id="pingbacks-section" class="reaction-section">
-            <h3 id="pingbacks-title" class="h1">Pingbacks</h3>
-            <ul class="pingbacks-list"><?php wp_list_comments('type=pingback'); ?></ul>
-        </div><?php
-    }
-
+	if ( count( $comments_by_type['pingback'] ) > 0 ) {
+		?>
+<div id="pingbacks-section" class="reaction-section">
+	<h3 id="pingbacks-title" class="h1">Pingbacks</h3>
+	<ul class="pingbacks-list">
+		<?php wp_list_comments( 'type=pingback' ); ?>
+	</ul>
+</div>
+		<?php
+	}
 }
 
 if (
-    comments_open() ||
-    get_comments_number() && post_type_supports(get_post_type(), 'comments'))
-{
-    comment_form();
+	comments_open() ||
+	get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) {
+	comment_form();
 }
 
-?></div>
+?>
+</div>

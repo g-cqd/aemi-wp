@@ -12,3 +12,8 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 Tags: blog, photography, portfolio, one-column, grid-layout, block-styles, custom-background, custom-menu, custom-logo, featured-image-header, featured-images, full-width-template, sticky-post, theme-options, threaded-comments, translation-ready, wide-blocks
 Text Domain: aemi
 */
+
+@import url("assets/css/public/fonts.css");
+@import url("assets/css/public/standard.css");
+@import url("assets/css/public/wordpress.css");
+@import url("assets/css/public/aemi.css");

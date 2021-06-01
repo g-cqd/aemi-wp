@@ -1,9 +1,9 @@
 jQuery( document ).ready( function() {
 	var CustomPluginMediaUploader = {
 		construct:function(){
-			jQuery('.aemi_meta_og_media_button' ).each(function( index ) {
+			jQuery('.aemi_meta_og_media_button' ).each( function() {
 				CustomPluginMediaUploader.initButton(jQuery(this));
-			});
+			} );
 		},
 		initButton:function(_that){
 			_that.click(function(e){
@@ -26,7 +26,7 @@ jQuery( document ).ready( function() {
 
 				metaImageFrame.on('select', function() {
 
-					var media_attachment = metaImageFrame.state().get('selection').first().toJSON();
+					const media_attachment = metaImageFrame.state().get('selection').first().toJSON();
 
 					jQuery( field ).val(media_attachment.url);
 
